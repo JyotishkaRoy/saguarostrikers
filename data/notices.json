@@ -1,0 +1,50 @@
+[
+  {
+    "noticeId": "n1a2b3c4-d5e6-4789-90ab-cdef12345678",
+    "title": "Upcoming Workshop: Rocket Stability and Flight Dynamics",
+    "content": "Join us for an in-depth workshop on rocket stability principles and flight dynamics. Learn about center of pressure, center of gravity, and how to design stable rocket configurations. Open to all team members. Saturday, February 15th, 2:00 PM - 5:00 PM at the workshop facility.",
+    "type": "general",
+    "competitionId": null,
+    "status": "published",
+    "publishedAt": "2026-01-15T10:00:00.000Z",
+    "createdBy": "6b6ca63f-5ba3-4c78-9f42-7e8f342e2bfb",
+    "createdAt": "2026-01-15T09:45:00.000Z",
+    "updatedAt": "2026-01-15T10:00:00.000Z"
+  },
+  {
+    "noticeId": "n2b3c4d5-e6f7-5890-a1bc-def234567890",
+    "title": "NASA USLI Preliminary Design Review Deadline",
+    "content": "Reminder: The Preliminary Design Review (PDR) for NASA USLI is due on February 1st, 2026. All teams participating in this competition must submit their design documentation by 11:59 PM EST. Please ensure all required sections are complete and technical drawings are included.",
+    "type": "competition",
+    "competitionId": "5dcbe6a0-a755-414f-aa48-ecf7f24992de",
+    "status": "published",
+    "publishedAt": "2026-01-14T14:30:00.000Z",
+    "createdBy": "6b6ca63f-5ba3-4c78-9f42-7e8f342e2bfb",
+    "createdAt": "2026-01-14T14:15:00.000Z",
+    "updatedAt": "2026-01-14T14:30:00.000Z"
+  },
+  {
+    "noticeId": "n3c4d5e6-f7a8-6901-b2cd-ef3456789012",
+    "title": "New Safety Protocols for Launch Operations",
+    "content": "Important: We have updated our safety protocols for all launch operations. All team members must review the new guidelines and sign the updated safety acknowledgment form before participating in any launch activities. The updated protocol includes enhanced range safety procedures and new PPE requirements.",
+    "type": "general",
+    "competitionId": null,
+    "status": "published",
+    "publishedAt": "2026-01-10T09:00:00.000Z",
+    "createdBy": "6b6ca63f-5ba3-4c78-9f42-7e8f342e2bfb",
+    "createdAt": "2026-01-10T08:30:00.000Z",
+    "updatedAt": "2026-01-10T09:00:00.000Z"
+  },
+  {
+    "noticeId": "n4d5e6f7-a8b9-7012-c3de-f45678901234",
+    "title": "Team Building Event - February 22nd",
+    "content": "Join us for a team building event on February 22nd! Activities include team challenges, networking opportunities, and a BBQ lunch. This is a great chance to meet other team members and build camaraderie. Location: Saguaro Park. Time: 11:00 AM - 4:00 PM. RSVP by February 18th.",
+    "type": "general",
+    "competitionId": null,
+    "status": "published",
+    "publishedAt": "2026-01-16T11:00:00.000Z",
+    "createdBy": "6b6ca63f-5ba3-4c78-9f42-7e8f342e2bfb",
+    "createdAt": "2026-01-16T10:45:00.000Z",
+    "updatedAt": "2026-01-16T11:00:00.000Z"
+  }
+]

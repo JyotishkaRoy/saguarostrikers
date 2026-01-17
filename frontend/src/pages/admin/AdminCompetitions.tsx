@@ -1,0 +1,378 @@
+import { useState, useEffect } from 'react';
+import { Trophy, Plus, Edit, Trash2, Eye, Calendar, MapPin, Search } from 'lucide-react';
+import { api, getErrorMessage } from '@/lib/api';
+import toast from 'react-hot-toast';
+
+interface Competition {
+  competitionId: string;
+  title: string;
+  slug: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+  status: 'draft' | 'published' | 'completed' | 'cancelled';
+  imageUrl?: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export default function AdminCompetitions() {
+  const [competitions, setCompetitions] = useState<Competition[]>([]);
+  const [filteredCompetitions, setFilteredCompetitions] = useState<Competition[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [filterStatus, setFilterStatus] = useState<string>('all');
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingCompetition, setEditingCompetition] = useState<Competition | null>(null);
+  const [stats, setStats] = useState({
+    total: 0,
+    published: 0,
+    draft: 0,
+    completed: 0,
+  });
+
+  useEffect(() => {
+    fetchCompetitions();
+  }, []);
+
+  useEffect(() => {
+    let filtered = competitions;
+
+    if (filterStatus !== 'all') {
+      filtered = filtered.filter(c => c.status === filterStatus);
+    }
+
+    if (searchTerm) {
+      filtered = filtered.filter(c =>
+        c.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        c.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        c.location.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+    }
+
+    setFilteredCompetitions(filtered);
+  }, [searchTerm, filterStatus, competitions]);
+
+  const fetchCompetitions = async () => {
+    try {
+      setIsLoading(true);
+      const response = await api.get('/admin/competitions');
+      if (response.success && response.data && Array.isArray(response.data)) {
+        setCompetitions(response.data as Competition[]);
+        setFilteredCompetitions(response.data as Competition[]);
+        calculateStats(response.data as Competition[]);
+      }
+    } catch (error) {
+      toast.error(getErrorMessage(error));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const calculateStats = (data: Competition[]) => {
+    setStats({
+      total: data.length,
+      published: data.filter(c => c.status === 'published').length,
+      draft: data.filter(c => c.status === 'draft').length,
+      completed: data.filter(c => c.status === 'completed').length,
+    });
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    
+    const data = {
+      title: formData.get('title'),
+      description: formData.get('description'),
+      startDate: formData.get('startDate'),
+      endDate: formData.get('endDate'),
+      location: formData.get('location'),
+      status: formData.get('status'),
+    };
+
+    try {
+      if (editingCompetition) {
+        await api.put(`/admin/competitions/${editingCompetition.competitionId}`, data);
+        toast.success('Competition updated successfully');
+      } else {
+        await api.post('/admin/competitions', data);
+        toast.success('Competition created successfully');
+      }
+      setIsModalOpen(false);
+      setEditingCompetition(null);
+      fetchCompetitions();
+    } catch (error) {
+      toast.error(getErrorMessage(error));
+    }
+  };
+
+  const handleDelete = async (id: string) => {
+    if (!window.confirm('Are you sure you want to delete this competition?')) return;
+
+    try {
+      await api.delete(`/admin/competitions/${id}`);
+      toast.success('Competition deleted successfully');
+      fetchCompetitions();
+    } catch (error) {
+      toast.error(getErrorMessage(error));
+    }
+  };
+
+  const getStatusBadge = (status: string) => {
+    const badges: Record<string, string> = {
+      published: 'badge-success',
+      draft: 'badge-warning',
+      completed: 'badge-primary',
+      cancelled: 'badge-danger',
+    };
+    return badges[status] || 'badge-gray';
+  };
+
+  return (
+    <div className="container mx-auto px-4 py-8">
+      {/* Header */}
+      <div className="mb-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Competitions Management</h1>
+        <p className="text-gray-600">Create and manage mission competitions</p>
+      </div>
+
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+        <div className="card">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-600">Total</p>
+              <p className="text-2xl font-bold text-gray-900">{stats.total}</p>
+            </div>
+            <Trophy className="h-8 w-8 text-primary-600" />
+          </div>
+        </div>
+        <div className="card">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-600">Published</p>
+              <p className="text-2xl font-bold text-success-600">{stats.published}</p>
+            </div>
+            <Eye className="h-8 w-8 text-success-600" />
+          </div>
+        </div>
+        <div className="card">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-600">Draft</p>
+              <p className="text-2xl font-bold text-warning-600">{stats.draft}</p>
+            </div>
+            <Edit className="h-8 w-8 text-warning-600" />
+          </div>
+        </div>
+        <div className="card">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-600">Completed</p>
+              <p className="text-2xl font-bold text-primary-600">{stats.completed}</p>
+            </div>
+            <Trophy className="h-8 w-8 text-primary-600" />
+          </div>
+        </div>
+      </div>
+
+      {/* Actions Bar */}
+      <div className="card mb-6">
+        <div className="flex flex-col md:flex-row gap-4 items-start md:items-center justify-between">
+          <div className="flex flex-col md:flex-row gap-4 flex-1 w-full">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+              <input
+                type="text"
+                placeholder="Search competitions..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="input pl-10 w-full"
+              />
+            </div>
+            <select
+              value={filterStatus}
+              onChange={(e) => setFilterStatus(e.target.value)}
+              className="input"
+            >
+              <option value="all">All Status</option>
+              <option value="published">Published</option>
+              <option value="draft">Draft</option>
+              <option value="completed">Completed</option>
+              <option value="cancelled">Cancelled</option>
+            </select>
+          </div>
+          <button
+            onClick={() => {
+              setEditingCompetition(null);
+              setIsModalOpen(true);
+            }}
+            className="btn-primary flex items-center gap-2 whitespace-nowrap"
+          >
+            <Plus className="h-4 w-4" />
+            Create Competition
+          </button>
+        </div>
+      </div>
+
+      {/* Competitions List */}
+      {isLoading ? (
+        <div className="flex items-center justify-center py-12">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
+        </div>
+      ) : filteredCompetitions.length === 0 ? (
+        <div className="card text-center py-12">
+          <Trophy className="h-16 w-16 mx-auto text-gray-400 mb-4" />
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">No competitions found</h3>
+          <p className="text-gray-600 mb-4">Create your first competition to get started</p>
+          <button onClick={() => setIsModalOpen(true)} className="btn-primary">
+            Create Competition
+          </button>
+        </div>
+      ) : (
+        <div className="space-y-4">
+          {filteredCompetitions.map((competition) => (
+            <div key={competition.competitionId} className="card hover:shadow-lg transition-shadow">
+              <div className="flex items-start justify-between">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-2">
+                    <h3 className="text-xl font-bold text-gray-900">{competition.title}</h3>
+                    <span className={`badge ${getStatusBadge(competition.status)}`}>
+                      {competition.status}
+                    </span>
+                  </div>
+                  <p className="text-gray-600 mb-3 line-clamp-2">{competition.description}</p>
+                  <div className="flex flex-wrap gap-4 text-sm text-gray-500">
+                    <div className="flex items-center gap-1">
+                      <Calendar className="h-4 w-4" />
+                      <span>
+                        {new Date(competition.startDate).toLocaleDateString()} - {new Date(competition.endDate).toLocaleDateString()}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <MapPin className="h-4 w-4" />
+                      <span>{competition.location}</span>
+                    </div>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 ml-4">
+                  <button
+                    onClick={() => {
+                      setEditingCompetition(competition);
+                      setIsModalOpen(true);
+                    }}
+                    className="btn-outline text-sm py-1.5 px-3"
+                    title="Edit"
+                  >
+                    <Edit className="h-4 w-4" />
+                  </button>
+                  <button
+                    onClick={() => handleDelete(competition.competitionId)}
+                    className="btn-danger text-sm py-1.5 px-3"
+                    title="Delete"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Create/Edit Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <h2 className="text-2xl font-bold mb-4">
+              {editingCompetition ? 'Edit Competition' : 'Create Competition'}
+            </h2>
+            <form onSubmit={handleSubmit} className="space-y-4">
+              <div>
+                <label className="block text-sm font-medium mb-1">Title</label>
+                <input
+                  type="text"
+                  name="title"
+                  defaultValue={editingCompetition?.title}
+                  required
+                  className="input w-full"
+                  placeholder="NASA USLI 2024"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Description</label>
+                <textarea
+                  name="description"
+                  defaultValue={editingCompetition?.description}
+                  required
+                  rows={4}
+                  className="input w-full"
+                  placeholder="Describe the competition..."
+                ></textarea>
+              </div>
+              <div className="grid grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium mb-1">Start Date</label>
+                  <input
+                    type="date"
+                    name="startDate"
+                    defaultValue={editingCompetition?.startDate?.split('T')[0]}
+                    required
+                    className="input w-full"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium mb-1">End Date</label>
+                  <input
+                    type="date"
+                    name="endDate"
+                    defaultValue={editingCompetition?.endDate?.split('T')[0]}
+                    required
+                    className="input w-full"
+                  />
+                </div>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Location</label>
+                <input
+                  type="text"
+                  name="location"
+                  defaultValue={editingCompetition?.location}
+                  required
+                  className="input w-full"
+                  placeholder="Huntsville, AL"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Status</label>
+                <select name="status" defaultValue={editingCompetition?.status || 'draft'} className="input w-full">
+                  <option value="draft">Draft</option>
+                  <option value="published">Published</option>
+                  <option value="completed">Completed</option>
+                  <option value="cancelled">Cancelled</option>
+                </select>
+              </div>
+              <div className="flex gap-2 pt-4">
+                <button type="submit" className="btn-primary flex-1">
+                  {editingCompetition ? 'Update' : 'Create'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsModalOpen(false);
+                    setEditingCompetition(null);
+                  }}
+                  className="btn-outline flex-1"
+                >
+                  Cancel
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}

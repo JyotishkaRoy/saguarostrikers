@@ -1,0 +1,42 @@
+[
+  {
+    "interestId": "int1a2b3-c4d5-4678-90ab-cdef12345678",
+    "userId": "a1b2c3d4-e5f6-4789-90ab-cdef12345678",
+    "competitionId": "5dcbe6a0-a755-414f-aa48-ecf7f24992de",
+    "message": "I'm very interested in joining the NASA USLI team. I have experience with CAD design and would love to work on the payload system.",
+    "status": "pending",
+    "createdAt": "2026-01-18T10:30:00.000Z"
+  },
+  {
+    "interestId": "int2b3c4-d5e6-5789-a1bc-def234567890",
+    "userId": "b2c3d4e5-f6a7-5890-a1bc-def234567890",
+    "competitionId": "5dcbe6a0-a755-414f-aa48-ecf7f24992de",
+    "message": "I'd like to be part of the propulsion team for NASA USLI. I've worked with solid motors before and understand thrust curves.",
+    "status": "approved",
+    "createdAt": "2026-01-17T14:15:00.000Z"
+  },
+  {
+    "interestId": "int3c4d5-e6f7-6890-b2cd-ef3456789012",
+    "userId": "c3d4e5f6-a7b8-6901-b2cd-ef3456789012",
+    "competitionId": "a8f3d9e1-2b4c-4567-89ab-cdef01234567",
+    "message": "Interested in Spaceport America Cup! I'm experienced with high-power rocketry and have my Level 2 certification.",
+    "status": "approved",
+    "createdAt": "2025-12-20T11:00:00.000Z"
+  },
+  {
+    "interestId": "int4d5e6-f7a8-7901-c3de-f45678901234",
+    "userId": "d4e5f6a7-b8c9-7012-c3de-f45678901234",
+    "competitionId": "a8f3d9e1-2b4c-4567-89ab-cdef01234567",
+    "message": "I would love to work on recovery systems for the Spaceport America team. I have experience with parachute design and deployment.",
+    "status": "approved",
+    "createdAt": "2025-12-22T15:30:00.000Z"
+  },
+  {
+    "interestId": "int5e6f7-a8b9-8012-d4ef-567890123456",
+    "userId": "e5f6a7b8-c9d0-8123-d4ef-567890123456",
+    "competitionId": "b9c4e0f2-3d5e-5678-90bc-def123456789",
+    "message": "Count me in for Battle of the Rockets! I can help with design and testing.",
+    "status": "approved",
+    "createdAt": "2025-11-10T09:20:00.000Z"
+  }
+]

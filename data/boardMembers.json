@@ -1,0 +1,50 @@
+[
+  {
+    "memberId": "bm1a2b3c-d4e5-4678-90ab-cdef12345678",
+    "name": "Dr. Sarah Johnson",
+    "title": "President & Founder",
+    "bio": "Dr. Johnson is an aerospace engineer with over 15 years of experience in rocket propulsion systems. She founded Saguaro Strikers to inspire the next generation of aerospace professionals.",
+    "email": "admin@saguarostrikers.org",
+    "imageUrl": "/images/board/sarah-johnson.jpg",
+    "order": 1,
+    "isActive": true,
+    "createdAt": "2025-01-15T10:00:00.000Z",
+    "updatedAt": "2025-01-15T10:00:00.000Z"
+  },
+  {
+    "memberId": "bm2b3c4d-e5f6-5789-a1bc-def234567890",
+    "name": "James Mitchell",
+    "title": "Vice President",
+    "bio": "James is a mechanical engineer and rocketry enthusiast with expertise in structural design and materials science. He has mentored numerous student teams to competition success.",
+    "email": "james.mitchell@saguarostrikers.org",
+    "imageUrl": "/images/board/james-mitchell.jpg",
+    "order": 2,
+    "isActive": true,
+    "createdAt": "2025-02-20T11:00:00.000Z",
+    "updatedAt": "2025-02-20T11:00:00.000Z"
+  },
+  {
+    "memberId": "bm3c4d5e-f6a7-6890-b2cd-ef3456789012",
+    "name": "Dr. Maria Garcia",
+    "title": "Technical Advisor",
+    "bio": "Dr. Garcia specializes in avionics and flight computer systems. With a PhD in Electrical Engineering, she brings cutting-edge knowledge in embedded systems to our teams.",
+    "email": "maria.garcia@saguarostrikers.org",
+    "imageUrl": "/images/board/maria-garcia.jpg",
+    "order": 3,
+    "isActive": true,
+    "createdAt": "2025-03-10T14:30:00.000Z",
+    "updatedAt": "2025-03-10T14:30:00.000Z"
+  },
+  {
+    "memberId": "bm4d5e6f-a7b8-7901-c3de-f45678901234",
+    "name": "Robert Chen",
+    "title": "Safety Officer",
+    "bio": "Robert is a certified Level 3 rocketry expert and safety specialist. He ensures all activities comply with safety regulations and best practices in high-power rocketry.",
+    "email": "robert.chen@saguarostrikers.org",
+    "imageUrl": "/images/board/robert-chen.jpg",
+    "order": 4,
+    "isActive": true,
+    "createdAt": "2025-03-15T09:00:00.000Z",
+    "updatedAt": "2025-03-15T09:00:00.000Z"
+  }
+]

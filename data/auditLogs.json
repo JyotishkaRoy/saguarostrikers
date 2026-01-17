@@ -1,0 +1,13 @@
+[
+  {
+    "logId": "0d5ecd30-a783-4655-92ed-35be22f1a1a8",
+    "userId": "6b6ca63f-5ba3-4c78-9f42-7e8f342e2bfb",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "6b6ca63f-5ba3-4c78-9f42-7e8f342e2bfb",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-01-09T20:57:12.371Z"
+  }
+]

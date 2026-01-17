@@ -1,0 +1,26 @@
+{
+  "homepage": {
+    "heroImages": [
+      "/images/banner/Banner 1.png",
+      "/images/banner/Banner 2.png",
+      "/images/banner/Banner 3.png"
+    ],
+    "heroHeadline": "Welcome to Saguaro Strikers Rocketry",
+    "heroSubheadline": "Join us in pushing the boundaries of amateur rocketry through innovation, teamwork, and excellence in competition",
+    "heroCTAs": [
+      {
+        "text": "Join Our Team",
+        "link": "/join-mission",
+        "style": "primary"
+      },
+      {
+        "text": "View Missions",
+        "link": "/competitions",
+        "style": "secondary"
+      }
+    ],
+    "aboutUs": "<h2>About Saguaro Strikers</h2><p>Saguaro Strikers is a premier rocketry team dedicated to inspiring the next generation of aerospace engineers and scientists. We participate in national and international rocketry competitions, pushing the boundaries of what's possible in amateur rocketry.</p><p>Our team is composed of passionate students, mentors, and industry professionals who work together to design, build, and launch high-powered rockets. Through hands-on experience and rigorous testing, we develop the skills and knowledge needed to succeed in STEM fields.</p>",
+    "vision": "<p>To be a leading force in amateur rocketry, inspiring innovation and excellence in aerospace education while fostering the next generation of space pioneers.</p>",
+    "mission": "<p>Our mission is to provide students and enthusiasts with hands-on experience in rocket design, engineering, and flight operations while fostering teamwork, problem-solving, and scientific inquiry. We strive to create opportunities for learning, competition, and collaboration in the exciting field of rocketry.</p>"
+  }
+}

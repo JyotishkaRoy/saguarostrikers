@@ -1,0 +1,59 @@
+Saguaro Strikers Website
+
+Basic details :
+Domain Name – www.saguarostrikers.org 
+Hosting zone – US (East or West)
+Email – President (president@saguarostrikers.org) and Admin (admin@saguarostrikers.org)
+Concurrent load – 30
+Data store (including complete website) – Always backed up
+Site security – SSL certificate
+Analytics – Google Analytics 4 or any other web analytics tool integration
+Text area across pages – Each text area must be RTE so that it can hold formatted as well as tabular texts along with hyperlinks
+
+Site Taxonomy:
+	•	Home (this is the landing page)
+	•	Know the Strikers
+	•	Mission Statement from the Mission Director
+	•	Mission Leaders
+	•	Missions (The sub-menu under this will be continuously evolving. As new projects and/or competitions are done, corresponding complete sub-menu should be easy to add. Each page under this sub-menu across projects and/or competition will have exact same page layout & template)
+	•	American Rocketry Challenge 2026
+	•	Mission Overview
+	•	Mission Scientists
+	•	Mission Artifacts
+	•	Mission Gallery
+	•	….
+	•	Mission Calendar
+	•	Join a Mission?
+	•	Future Explorers’ Program (The sub-menu under this will be continuously evolving. As new outreach programs are done, corresponding sub-menu should be easy to add. The page against each outreach program will have exact same page layout & template)
+	•	Discussion Board (Optional)
+	•	Reach Mission Control
+
+Detailed Specification:
+
+	•	Header :: The left corner will have the logo. Followed by Primary Menu. Top right corner will display either “Login” button or “An user icon with name of the logged in user”. Just below this, there will be a carousel with left to right scrolling banner images. Right now there are 4 banner images. But as we go on, more banner images will be added by Admin (or some of the old banner images might be removed by Admin). Overall header (menu + carousel) height should be ~25% of standard page height
+	•	Footer :: A sample footer will be as below. The footer content should be editable by Admin. Overall height of the footer should be ~10% of the page height
+
+	•	Homepage :: It is a 2-column layout. Column 1 is 60% of total width and Column 2 is remaining 40%. Column 1 will be text which will be editable for Admin. Every time Admin makes any change and publishes, the same should be published to the production site immediately. Column 2 will be having a video player frame. The Admin should be able to upload / publish various videos and mark their sequence along with whether the video is active or not. The video frame will show small circular dots at the bottom of the frame so that user will be able to scroll through published and active videos. User should be able to play the video within that video carousel frame itself. (No vertical scrolling for homepage)
+	•	Know the Strikers -> Mission Statement from the Mission Commander :: It is a 2-column layout. Column 1 is 60% of total width and Column 2 is remaining 40%. Column 1 will be text which will be editable for Admin. Every time Admin makes any change and publishes, the same should be published to the production site immediately. Column 2 will be having an image place which can be updated by Admin as & when needed. I can propose something like below, but open to any alternate visualization better than this:
+
+	•	Know the Strikers -> Mission Leaders :: This will be a page like below. Admin should have capability to add or remove each leader’s Name, Photo, Designation and Email. Whatever data will be present in that leaders list (or table), this page will accordingly place those in a layout like below (the layout should automatically decide on number of leader displayed per row with a max of 3 leaders per row).
+
+On click of each photo, it will open an flip that card providing a small bio about that leader.
+
+	•	Missions -> [Mission Name] -> Mission Overview :: It is a 2-column layout. Column 1 is 60% of total width and Column 2 is remaining 40%. Column 1 will be text which will be editable for Admin. Every time Admin makes any change and publishes, the same should be published to the production site immediately. Column 2 will be having a video player frame. The Admin should be able to upload / publish various videos and mark their sequence along with whether the video is active or not. The video frame will show small circular dots at the bottom of the frame so that user will be able to scroll through published and active videos. User should be able to play the video within that video carousel frame itself.
+	•	Missions -> [Mission Name] -> Mission Scientists :: This will be a page like below. Admin should have capability to add or remove each scientist’s Name, Photo, Designation and Email. Whatever data will be present in that scientist list (or table), this page will accordingly place those in a layout like below (the layout should automatically decide on number of scientists displayed per row)
+
+	•	Missions -> [Mission Name] -> Mission Artifacts :: This will be a simple table with 3 columns i.e. Sl.No., Artifact Description and Artifact file name as hyperlink to download. The Admin should be able to manage (add, edit & delete) the table by adding required number of rows along with uploading the artifacts. Once published, users will be able to view
+	•	Missions -> [Mission Name] -> Mission Gallery :: This is a photo gallery with mission photos and videos. User will not be able to download or copy any of those images / videos from the gallery. Please refer https://webflow.com/made-in-webflow/website/webflow-tips-ndegree10-click-and-hover-animation for a sample
+	•	Mission Calendar :: Simple month wise calendar to start from Jan’26. Admin will be able to add, edit & delete event sticker on the calendar and publish. Admin will also add a rich text description for each event when publishing. Users will see non-editable calendar with event stickers. Users will be able to click active / future events. On click of the active event sticker, it will open a small layover with the rich text description that was provided by Admin
+
+	•	Join a Mission? :: This will open a form (Joining Form Template.docx) requesting to join. Once submitted, it will send an email to Admin informing the same along with all the details. It will also send an email to the student as well as parent’s email IDs informing that their request is under review. There will be an Admin page where Admin will be able to see all the active joining requests. Admin can either Approve or Deny and accordingly an email will be sent to student as well as parent email ID along with the justification provided by Admin
+	•	Future Explorers’ Program :: This page will have 2 rows with Row 1 having 2-columns and Row 2 having 1 column spanning across both columns of Row 1. Column 1 of Row 1 is 60% of total width and Column 2 of Row 1 is remaining 40%. Column 1 will be rich text which will be editable for Admin. Every time Admin makes any change and publishes, the same should be published to the production site immediately. Column 2 of Row 1 will be having a image carousel. The Admin should be able to upload / publish various images and mark their sequence along with whether the image is active or not. The image carousel will show small circular dots at the bottom of the frame (or scrolling arrows on both sides) so that user will be able to scroll through published and active images. Row 2 will have a rich text area where Admin can add image or text or combination
+	•	Reach Mission Control :: This will be exactly same as “Contact Us” page of Sanhoti website. Once submitted, it will send an email to Admin email ID with the details
+	•	Discussion Board :: Standard discussion board that will show all discussion threads as listing. When any thread is clicked then it will open the complete discussion on that thread. Discussion thread can only be initiated by Admin, but replied by anyone. However, when anyone is responding in any thread, then the user must provide “Name” along with response
+	•	Web Analytics :: Analytics so that Google Analytics Admin can view various reports on all of the following:
+	•	Visits
+	•	Average visit duration
+	•	Bounce rate (Percentage of visitors who leave after viewing only one page)
+	•	Average time on page
+	•	Page views (Total views of pages on the site)
