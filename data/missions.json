@@ -1,0 +1,15 @@
+[
+  {
+    "missionId": "d11ccJtQ6zjj",
+    "title": "Test",
+    "slug": "test",
+    "description": "Test",
+    "startDate": "2026-01-13",
+    "endDate": "2026-01-30",
+    "location": "The Plains, Virginia",
+    "status": "published",
+    "createdBy": "6b6ca63f-5ba3-4c78-9f42-7e8f342e2bfb",
+    "createdAt": "2026-01-21T02:07:38.896Z",
+    "updatedAt": "2026-01-21T02:07:38.896Z"
+  }
+]

@@ -1,30 +1,30 @@
 const interestDataHelper = require('../dataHelpers/interestDataHelper');
-const competitionDataHelper = require('../dataHelpers/competitionDataHelper');
+const missionDataHelper = require('../dataHelpers/missionDataHelper');
 const userDataHelper = require('../dataHelpers/userDataHelper');
 const auditLogDataHelper = require('../dataHelpers/auditLogDataHelper');
 
 class InterestService {
-  showInterest(userId, competitionId, message, requestInfo = {}) {
-    // Verify competition exists and is published
-    const competition = competitionDataHelper.getCompetitionById(competitionId);
-    if (!competition) {
-      throw new Error('Competition not found');
+  showInterest(userId, missionId, message, requestInfo = {}) {
+    // Verify mission exists and is published
+    const mission = missionDataHelper.getMissionById(missionId);
+    if (!mission) {
+      throw new Error('Mission not found');
     }
 
-    if (competition.status !== 'published') {
-      throw new Error('Cannot show interest in unpublished competition');
+    if (mission.status !== 'published') {
+      throw new Error('Cannot show interest in unpublished mission');
     }
 
     // Check if user already showed interest
-    const existingInterest = interestDataHelper.getInterestByUserAndCompetition(userId, competitionId);
+    const existingInterest = interestDataHelper.getInterestByUserAndMission(userId, missionId);
     if (existingInterest) {
-      throw new Error('You have already shown interest in this competition');
+      throw new Error('You have already shown interest in this mission');
     }
 
     // Create interest
     const newInterest = interestDataHelper.createInterest({
       userId,
-      competitionId,
+      missionId,
       message: message || ''
     });
 
@@ -34,7 +34,7 @@ class InterestService {
       action: 'INTEREST_SHOWN',
       entity: 'interest',
       entityId: newInterest.interestId,
-      changes: { competitionId },
+      changes: { missionId },
       ipAddress: requestInfo.ipAddress || '',
       userAgent: requestInfo.userAgent || ''
     });
@@ -45,23 +45,23 @@ class InterestService {
   getUserInterests(userId) {
     const interests = interestDataHelper.getInterestsByUser(userId);
     return interests.map(interest => {
-      const competition = competitionDataHelper.getCompetitionById(interest.competitionId);
+      const mission = missionDataHelper.getMissionById(interest.missionId);
       return {
         ...interest,
-        competition: competition ? {
-          competitionId: competition.competitionId,
-          title: competition.title,
-          slug: competition.slug,
-          startDate: competition.startDate,
-          endDate: competition.endDate,
-          status: competition.status
+        mission: mission ? {
+          missionId: mission.missionId,
+          title: mission.title,
+          slug: mission.slug,
+          startDate: mission.startDate,
+          endDate: mission.endDate,
+          status: mission.status
         } : null
       };
     });
   }
 
-  getCompetitionInterests(competitionId, adminUserId) {
-    const interests = interestDataHelper.getInterestsByCompetition(competitionId);
+  getMissionInterests(missionId, adminUserId) {
+    const interests = interestDataHelper.getInterestsByMission(missionId);
     return interests.map(interest => {
       const user = userDataHelper.getUserById(interest.userId);
       return {
@@ -114,7 +114,7 @@ class InterestService {
         action: 'INTEREST_DELETED',
         entity: 'interest',
         entityId: interestId,
-        changes: { competitionId: interest.competitionId },
+        changes: { missionId: interest.missionId },
         ipAddress: requestInfo.ipAddress || '',
         userAgent: requestInfo.userAgent || ''
       });

@@ -271,7 +271,7 @@ export default function AdminDiscussions() {
                 <label className="block text-sm font-medium mb-1">Category</label>
                 <select name="category" defaultValue={editingThread?.category || 'general'} className="input w-full">
                   <option value="general">General</option>
-                  <option value="competitions">Competitions</option>
+                  <option value="missions">Missions</option>
                   <option value="technical">Technical Help</option>
                   <option value="events">Events</option>
                   <option value="announcements">Announcements</option>

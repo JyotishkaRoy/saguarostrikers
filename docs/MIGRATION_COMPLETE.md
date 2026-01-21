@@ -14,7 +14,7 @@ Your backend has been completely transformed from JavaScript to TypeScript with 
 
 #### 2. **Type Definitions** ✅
 Created comprehensive type system in `backend/src/models/types.ts`:
-- User, Competition, SubEvent, Team types
+- User, Mission, SubEvent, Team types
 - Notice, BoardMember, ContactMessage types
 - FileUpload, GalleryImage types
 - AuditLog and API response types
@@ -23,7 +23,7 @@ Created comprehensive type system in `backend/src/models/types.ts`:
 #### 3. **Data Layer (Data Helpers)** ✅
 Converted all data helpers to TypeScript classes with inheritance:
 - `BaseDataHelper<T>` - Generic base class with common operations
-- `UserDataHelper`, `CompetitionDataHelper`, `SubEventDataHelper`
+- `UserDataHelper`, `MissionDataHelper`, `SubEventDataHelper`
 - `TeamDataHelper`, `InterestDataHelper`, `NoticeDataHelper`
 - `FileDataHelper`, `GalleryDataHelper`, `SiteContentDataHelper`
 - `BoardMemberDataHelper`, `ContactDataHelper`, `AuditDataHelper`
@@ -32,7 +32,7 @@ Converted all data helpers to TypeScript classes with inheritance:
 All services converted to TypeScript classes (Sanhoti pattern):
 - `AuthService` - Registration, login, profile management
 - `UserService` - User CRUD operations
-- `CompetitionService` - Competition management with slug generation
+- `MissionService` - Mission management with slug generation
 - `SubEventService` - Sub-event management
 - `TeamService` - Team and member management
 - `InterestService` - Interest tracking
@@ -46,7 +46,7 @@ All services converted to TypeScript classes (Sanhoti pattern):
 #### 5. **Controller Layer** ✅
 Class-based controllers following Sanhoti architecture:
 - `AuthController` - Authentication endpoints
-- `CompetitionController` - Competition CRUD
+- `MissionController` - Mission CRUD
 - `UserController` - User management
 - `PublicController` - Public-facing endpoints
 
@@ -87,7 +87,7 @@ backend/
 │   ├── data/
 │   │   ├── BaseDataHelper.ts           # Generic base class
 │   │   ├── UserDataHelper.ts
-│   │   ├── CompetitionDataHelper.ts
+│   │   ├── MissionDataHelper.ts
 │   │   ├── SubEventDataHelper.ts
 │   │   ├── TeamDataHelper.ts
 │   │   ├── InterestDataHelper.ts
@@ -100,7 +100,7 @@ backend/
 │   ├── services/
 │   │   ├── AuthService.ts
 │   │   ├── UserService.ts
-│   │   ├── CompetitionService.ts
+│   │   ├── MissionService.ts
 │   │   ├── SubEventService.ts
 │   │   ├── TeamService.ts
 │   │   ├── InterestService.ts
@@ -112,7 +112,7 @@ backend/
 │   │   └── AuditService.ts
 │   ├── controllers/
 │   │   ├── AuthController.ts
-│   │   ├── CompetitionController.ts
+│   │   ├── MissionController.ts
 │   │   ├── UserController.ts
 │   │   └── PublicController.ts
 │   ├── middleware/
@@ -195,9 +195,9 @@ npm start
 
 ### Public Endpoints
 - `GET /api/public/homepage` - Homepage data
-- `GET /api/public/competitions` - Published competitions
-- `GET /api/public/competitions/upcoming` - Upcoming competitions
-- `GET /api/public/competitions/slug/:slug` - Competition by slug
+- `GET /api/public/missions` - Published missions
+- `GET /api/public/missions/upcoming` - Upcoming missions
+- `GET /api/public/missions/slug/:slug` - Mission by slug
 - `GET /api/public/notices` - Published notices
 - `GET /api/public/board-members` - Active board members
 - `POST /api/public/contact` - Submit contact message
@@ -210,8 +210,8 @@ npm start
 - `PUT /api/auth/change-password` - Change password
 
 ### User Endpoints (Authenticated)
-- `GET /api/user/competitions` - User's competitions
-- `GET /api/user/competitions/:id` - Competition details
+- `GET /api/user/missions` - User's missions
+- `GET /api/user/missions/:id` - Mission details
 
 ### Admin Endpoints (Admin Only)
 - `GET /api/admin/users` - All users
@@ -219,14 +219,14 @@ npm start
 - `PUT /api/admin/users/:id` - Update user
 - `DELETE /api/admin/users/:id` - Delete user
 - `PATCH /api/admin/users/:id/toggle-status` - Toggle user status
-- `GET /api/admin/competitions` - All competitions
-- `POST /api/admin/competitions` - Create competition
-- `PUT /api/admin/competitions/:id` - Update competition
-- `DELETE /api/admin/competitions/:id` - Delete competition
+- `GET /api/admin/missions` - All missions
+- `POST /api/admin/missions` - Create mission
+- `PUT /api/admin/missions/:id` - Update mission
+- `DELETE /api/admin/missions/:id` - Delete mission
 
 ### Utility Endpoints
 - `GET /api/health` - Health check
-- `GET /api/search/competitions?q=query` - Search competitions
+- `GET /api/search/missions?q=query` - Search missions
 
 ## ✅ Backend Testing
 

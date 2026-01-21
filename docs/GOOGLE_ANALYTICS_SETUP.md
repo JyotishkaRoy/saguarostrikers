@@ -87,7 +87,7 @@ window.trackGalleryView('Rocket Launch Photo');
 ### 4. Calendar Events
 ```typescript
 // Tracked when users click calendar events
-window.trackCalendarEvent('Competition');
+window.trackCalendarEvent('Mission');
 ```
 
 ---

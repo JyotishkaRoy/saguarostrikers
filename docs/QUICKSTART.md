@@ -1,6 +1,6 @@
 # Quick Start Guide
 
-Get your Rocketry Competition Platform up and running in 5 minutes!
+Get your Rocketry Mission Platform up and running in 5 minutes!
 
 ## 🚀 Quick Setup
 
@@ -67,21 +67,21 @@ npm run client
 - [ ] Change default password
 - [ ] Edit site content (About, Vision, Mission)
 - [ ] Add board members
-- [ ] Create a competition
-- [ ] Publish the competition
+- [ ] Create a mission
+- [ ] Publish the mission
 - [ ] Create sub-events
 - [ ] Upload files and images
 
 ### As User
 - [ ] Register new account
 - [ ] Login
-- [ ] Browse competitions
-- [ ] Show interest in a competition
+- [ ] Browse missions
+- [ ] Show interest in a mission
 - [ ] View your dashboard
 
 ### Testing Public Pages
 - [ ] Visit homepage
-- [ ] View competitions page
+- [ ] View missions page
 - [ ] Check about page
 - [ ] Submit contact form
 
@@ -172,7 +172,7 @@ SaguaroStrikers/
 
 3. **Test Admin Features**
    - Login as admin
-   - Try creating competition
+   - Try creating mission
    - Check audit logs
 
 4. **Test User Features**
@@ -227,7 +227,7 @@ ls -la data/
    - Login as admin
    - Edit site content
    - Add board members
-   - Create competitions
+   - Create missions
 
 3. **Configure Email**
    - Set up Gmail app password
@@ -242,10 +242,10 @@ ls -la data/
 
 ## 🎉 You're Ready!
 
-Your Rocketry Competition Platform is now running. Start by:
+Your Rocketry Mission Platform is now running. Start by:
 1. Logging in as admin
 2. Customizing site content
-3. Creating your first competition
+3. Creating your first mission
 4. Inviting users to register
 
 For detailed documentation, see `README.md`

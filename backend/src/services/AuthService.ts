@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { v4 as uuidv4 } from 'uuid';
+import { generateId } from '../utils/idGenerator.js';
 import { UserDataHelper } from '../data/UserDataHelper.js';
 import { generateToken } from '../middleware/auth.js';
 import { User, LoginResponse, RegisterUserData } from '../models/types.js';
@@ -26,7 +26,7 @@ export class AuthService {
 
     // Create user
     const user: User = {
-      userId: uuidv4(),
+      userId: generateId(),
       email: data.email.toLowerCase(),
       password: hashedPassword,
       firstName: data.firstName,

@@ -43,7 +43,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   const mainNavItems: NavItem[] = [
     { label: 'Dashboard', path: '/admin', icon: <LayoutDashboard className="h-5 w-5" /> },
-    { label: 'Competitions', path: '/admin/competitions', icon: <Trophy className="h-5 w-5" /> },
+    { label: 'Missions', path: '/admin/missions', icon: <Trophy className="h-5 w-5" /> },
     { label: 'Applications', path: '/admin/applications', icon: <FileText className="h-5 w-5" /> },
     { label: 'Messages', path: '/admin/contact-messages', icon: <MessageSquare className="h-5 w-5" /> },
     { label: 'Users', path: '/admin/users', icon: <Users className="h-5 w-5" /> },

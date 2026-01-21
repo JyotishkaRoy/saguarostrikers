@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+const { generateId } = require('../utils/idGenerator.cjs');
 const { readDB, writeDB, DB_FILES } = require('../config/database');
 
 class InterestDataHelper {
@@ -16,22 +16,22 @@ class InterestDataHelper {
     return interests.filter(interest => interest.userId === userId);
   }
 
-  getInterestsByCompetition(competitionId) {
+  getInterestsByMission(missionId) {
     const interests = this.getAllInterests();
-    return interests.filter(interest => interest.competitionId === competitionId);
+    return interests.filter(interest => interest.missionId === missionId);
   }
 
-  getInterestByUserAndCompetition(userId, competitionId) {
+  getInterestByUserAndMission(userId, missionId) {
     const interests = this.getAllInterests();
     return interests.find(interest => 
-      interest.userId === userId && interest.competitionId === competitionId
+      interest.userId === userId && interest.missionId === missionId
     );
   }
 
   createInterest(interestData) {
     const interests = this.getAllInterests();
     const newInterest = {
-      interestId: uuidv4(),
+      interestId: generateId(),
       ...interestData,
       status: 'pending',
       createdAt: new Date().toISOString()
@@ -66,10 +66,10 @@ class InterestDataHelper {
     return true;
   }
 
-  getPendingInterestsByCompetition(competitionId) {
+  getPendingInterestsByMission(missionId) {
     const interests = this.getAllInterests();
     return interests.filter(interest => 
-      interest.competitionId === competitionId && interest.status === 'pending'
+      interest.missionId === missionId && interest.status === 'pending'
     );
   }
 }

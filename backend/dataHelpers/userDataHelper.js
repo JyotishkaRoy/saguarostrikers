@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+const { generateId } = require('../utils/idGenerator.cjs');
 const { readDB, writeDB, DB_FILES } = require('../config/database');
 
 class UserDataHelper {
@@ -19,7 +19,7 @@ class UserDataHelper {
   createUser(userData) {
     const users = this.getAllUsers();
     const newUser = {
-      userId: uuidv4(),
+      userId: generateId(),
       ...userData,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()

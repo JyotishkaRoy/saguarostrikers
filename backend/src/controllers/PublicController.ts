@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { CompetitionService } from '../services/CompetitionService.js';
+import { MissionService } from '../services/MissionService.js';
 import { SiteContentService } from '../services/SiteContentService.js';
 import { NoticeService } from '../services/NoticeService.js';
 import { ContactService } from '../services/ContactService.js';
@@ -9,7 +9,7 @@ import { FileManagementService } from '../services/FileManagementService.js';
 import { GalleryService } from '../services/GalleryService.js';
 
 export class PublicController {
-  private competitionService: CompetitionService;
+  private missionService: MissionService;
   private siteContentService: SiteContentService;
   private noticeService: NoticeService;
   private contactService: ContactService;
@@ -19,7 +19,7 @@ export class PublicController {
   private galleryService: GalleryService;
 
   constructor() {
-    this.competitionService = new CompetitionService();
+    this.missionService = new MissionService();
     this.siteContentService = new SiteContentService();
     this.noticeService = new NoticeService();
     this.contactService = new ContactService();
@@ -31,9 +31,9 @@ export class PublicController {
 
   async getHomepage(_req: Request, res: Response): Promise<void> {
     try {
-      const [homepage, upcomingCompetitions, notices, boardMembers] = await Promise.all([
+      const [homepage, upcomingMissions, notices, boardMembers] = await Promise.all([
         this.siteContentService.getHomepageContent(),
-        this.competitionService.getUpcomingCompetitions(),
+        this.missionService.getUpcomingMissions(),
         this.noticeService.getPublishedNotices(),
         this.siteContentService.getAllBoardMembers(true)
       ]);
@@ -42,7 +42,7 @@ export class PublicController {
         success: true,
         data: {
           homepage,
-          upcomingCompetitions,
+          upcomingMissions,
           notices: notices.slice(0, 5), // Latest 5 notices
           boardMembers
         }
@@ -163,10 +163,10 @@ export class PublicController {
     }
   }
 
-  async getPublicFilesByCompetition(req: Request, res: Response): Promise<void> {
+  async getPublicFilesByMission(req: Request, res: Response): Promise<void> {
     try {
-      const { competitionId } = req.params;
-      const allFiles = await this.fileService.getFilesByCompetition(competitionId);
+      const { missionId } = req.params;
+      const allFiles = await this.fileService.getFilesByMission(missionId);
       const publicFiles = allFiles.filter(f => f.isPublic);
       res.status(200).json({ success: true, data: publicFiles });
     } catch (error) {
@@ -208,10 +208,10 @@ export class PublicController {
     }
   }
 
-  async getPublicGalleryImagesByCompetition(req: Request, res: Response): Promise<void> {
+  async getPublicGalleryImagesByMission(req: Request, res: Response): Promise<void> {
     try {
-      const { competitionId } = req.params;
-      const allImages = await this.galleryService.getImagesByCompetition(competitionId);
+      const { missionId } = req.params;
+      const allImages = await this.galleryService.getImagesByMission(missionId);
       const publicImages = allImages.filter(i => i.isPublic);
       res.status(200).json({ success: true, data: publicImages });
     } catch (error) {

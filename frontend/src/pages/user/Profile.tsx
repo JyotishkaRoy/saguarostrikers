@@ -245,7 +245,7 @@ export default function Profile() {
                   Administrator Access
                 </h3>
                 <p className="text-primary-700">
-                  You have full administrative privileges to manage users, competitions, content, and all other aspects of the platform.
+                  You have full administrative privileges to manage users, missions, content, and all other aspects of the platform.
                 </p>
               </div>
             </div>

@@ -12,8 +12,8 @@ import AdminRoute from './components/AdminRoute';
 import HomePage from './pages/public/HomePage';
 import AboutPage from './pages/public/AboutPage';
 import ContactPage from './pages/public/ContactPage';
-import CompetitionsPage from './pages/public/CompetitionsPage';
-import CompetitionDetailPage from './pages/public/CompetitionDetailPage';
+import MissionsPage from './pages/public/MissionsPage';
+import MissionDetailPage from './pages/public/MissionDetailPage';
 import MissionLeaders from './pages/public/MissionLeaders';
 import MissionStatement from './pages/public/MissionStatement';
 import MissionCalendar from './pages/public/MissionCalendar';
@@ -29,7 +29,7 @@ import RegisterPage from './pages/auth/RegisterPage';
 
 // User Pages
 import UserDashboard from './pages/user/UserDashboard';
-import UserCompetitions from './pages/user/UserCompetitions';
+import UserMissions from './pages/user/UserMissions';
 import UserTeams from './pages/user/UserTeams';
 import UserFiles from './pages/user/UserFiles';
 import MissionGallery from './pages/user/MissionGallery';
@@ -38,7 +38,7 @@ import Profile from './pages/user/Profile';
 // Admin Pages
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminUsers from './pages/admin/AdminUsers';
-import AdminCompetitions from './pages/admin/AdminCompetitions';
+import AdminMissions from './pages/admin/AdminMissions';
 import AdminTeams from './pages/admin/AdminTeams';
 import AdminNotices from './pages/admin/AdminNotices';
 import AdminSiteContent from './pages/admin/AdminSiteContent';
@@ -77,8 +77,8 @@ function App() {
           <Route path="/discussions" element={<DiscussionBoard />} />
           <Route path="/discussions/:id" element={<DiscussionThread />} />
           <Route path="/contact" element={<ContactPage />} />
-          <Route path="/competitions" element={<CompetitionsPage />} />
-          <Route path="/competitions/:slug" element={<CompetitionDetailPage />} />
+          <Route path="/missions" element={<MissionsPage />} />
+          <Route path="/missions/:slug" element={<MissionDetailPage />} />
 
           {/* Auth Routes */}
           <Route path="/login" element={<LoginPage />} />
@@ -87,7 +87,7 @@ function App() {
           {/* User Routes (Protected) */}
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
           <Route path="/dashboard" element={<PrivateRoute><UserDashboard /></PrivateRoute>} />
-          <Route path="/my-competitions" element={<PrivateRoute><UserCompetitions /></PrivateRoute>} />
+          <Route path="/my-missions" element={<PrivateRoute><UserMissions /></PrivateRoute>} />
           <Route path="/my-teams" element={<PrivateRoute><UserTeams /></PrivateRoute>} />
           <Route path="/my-files" element={<PrivateRoute><UserFiles /></PrivateRoute>} />
           <Route path="/mission-gallery" element={<PrivateRoute><MissionGallery /></PrivateRoute>} />
@@ -95,7 +95,7 @@ function App() {
           {/* Admin Routes (Protected - Admin Only) */}
           <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
           <Route path="/admin/users" element={<AdminRoute><AdminUsers /></AdminRoute>} />
-          <Route path="/admin/competitions" element={<AdminRoute><AdminCompetitions /></AdminRoute>} />
+          <Route path="/admin/missions" element={<AdminRoute><AdminMissions /></AdminRoute>} />
           <Route path="/admin/teams" element={<AdminRoute><AdminTeams /></AdminRoute>} />
           <Route path="/admin/notices" element={<AdminRoute><AdminNotices /></AdminRoute>} />
           <Route path="/admin/site-content" element={<AdminRoute><AdminSiteContent /></AdminRoute>} />

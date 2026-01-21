@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+const { generateId } = require('../utils/idGenerator.cjs');
 const { readDB, writeDB, DB_FILES } = require('../config/database');
 
 class TeamDataHelper {
@@ -11,15 +11,15 @@ class TeamDataHelper {
     return teams.find(team => team.teamId === teamId);
   }
 
-  getTeamsByCompetition(competitionId) {
+  getTeamsByMission(missionId) {
     const teams = this.getAllTeams();
-    return teams.filter(team => team.competitionId === competitionId);
+    return teams.filter(team => team.missionId === missionId);
   }
 
   createTeam(teamData) {
     const teams = this.getAllTeams();
     const newTeam = {
-      teamId: uuidv4(),
+      teamId: generateId(),
       ...teamData,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
@@ -73,7 +73,7 @@ class TeamDataHelper {
   addTeamMember(memberData) {
     const members = this.getAllTeamMembers();
     const newMember = {
-      memberId: uuidv4(),
+      memberId: generateId(),
       ...memberData,
       joinedAt: new Date().toISOString()
     };

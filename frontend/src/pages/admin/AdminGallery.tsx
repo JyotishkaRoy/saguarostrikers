@@ -11,7 +11,7 @@ interface GalleryImage {
   isPublic: boolean;
   viewCount: number;
   tags?: string[];
-  competitionId?: string;
+  missionId?: string;
   uploadedAt: string;
 }
 

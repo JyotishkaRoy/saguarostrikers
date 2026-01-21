@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+const { generateId } = require('../utils/idGenerator.cjs');
 const { readDB, writeDB, DB_FILES } = require('../config/database');
 
 class AuditLogDataHelper {
@@ -14,7 +14,7 @@ class AuditLogDataHelper {
   createLog(logData) {
     const logs = this.getAllLogs();
     const newLog = {
-      logId: uuidv4(),
+      logId: generateId(),
       ...logData,
       timestamp: new Date().toISOString()
     };

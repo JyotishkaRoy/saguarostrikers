@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { GalleryImage, CreateGalleryImageData } from '../models/types';
-import { v4 as uuidv4 } from 'uuid';
+import { generateId } from '../utils/idGenerator.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -47,9 +47,9 @@ export class GalleryDataHelper {
     return images.find(image => image.galleryId === galleryId) || null;
   }
 
-  async getImagesByCompetition(competitionId: string): Promise<GalleryImage[]> {
+  async getImagesByMission(missionId: string): Promise<GalleryImage[]> {
     const images = this.readData();
-    return images.filter(image => image.competitionId === competitionId);
+    return images.filter(image => image.missionId === missionId);
   }
 
   async getImagesBySubEvent(subEventId: string): Promise<GalleryImage[]> {
@@ -69,11 +69,11 @@ export class GalleryDataHelper {
     const now = new Date().toISOString();
 
     const newImage: GalleryImage = {
-      galleryId: uuidv4(),
+      galleryId: generateId(),
       imageUrl: data.imageUrl,
       title: data.title,
       description: data.description,
-      competitionId: data.competitionId,
+      missionId: data.missionId,
       subEventId: data.subEventId,
       isPublic: data.isPublic !== undefined ? data.isPublic : false,
       viewCount: 0,

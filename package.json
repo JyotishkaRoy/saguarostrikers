@@ -1,7 +1,7 @@
 {
-  "name": "rocketry-competition-platform",
+  "name": "rocketry-mission-platform",
   "version": "1.0.0",
-  "description": "Modern platform for managing rocketry competition teams and events",
+  "description": "Modern platform for managing rocketry mission teams and events",
   "main": "backend/server.js",
   "scripts": {
     "start": "node backend/server.js",
@@ -10,7 +10,7 @@
     "dev:full": "concurrently \"npm run dev\" \"npm run client\"",
     "install-all": "npm install && cd frontend && npm install"
   },
-  "keywords": ["rocketry", "competition", "team-management"],
+  "keywords": ["rocketry", "mission", "team-management"],
   "author": "",
   "license": "MIT",
   "dependencies": {

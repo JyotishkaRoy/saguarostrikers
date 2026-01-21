@@ -1,65 +1,86 @@
 [
   {
-    "galleryId": "g1a2b3c4-d5e6-4678-90ab-cdef12345678",
-    "competitionId": "5dcbe6a0-a755-414f-aa48-ecf7f24992de",
+    "galleryId": "R0swpVXuiEGn",
+    "missionId": "TuiHj5p4hpvh",
     "title": "Test Launch - January 2026",
     "description": "Phoenix Flyers team conducting subscale test launch. Successful deployment of dual-deploy recovery system.",
     "imageUrl": "/uploads/galleries/test-launch-jan-2026.jpg",
-    "tags": ["test-launch", "phoenix-flyers", "recovery-system"],
+    "tags": [
+      "test-launch",
+      "phoenix-flyers",
+      "recovery-system"
+    ],
     "isPublic": false,
-    "uploadedBy": "a1b2c3d4-e5f6-4789-90ab-cdef12345678",
+    "uploadedBy": "AKVjArNofHsh",
     "viewCount": 34,
     "createdAt": "2026-01-14T16:00:00.000Z",
     "updatedAt": "2026-01-14T16:00:00.000Z"
   },
   {
-    "galleryId": "g2b3c4d5-e6f7-5789-a1bc-def234567890",
-    "competitionId": "5dcbe6a0-a755-414f-aa48-ecf7f24992de",
+    "galleryId": "urDGOQBjeJwi",
+    "missionId": "TuiHj5p4hpvh",
     "title": "Rocket Assembly Workshop",
     "description": "Team members working on rocket construction. Building the main airframe and installing fin cans.",
     "imageUrl": "/uploads/galleries/assembly-workshop-2026.jpg",
-    "tags": ["workshop", "construction", "teamwork"],
+    "tags": [
+      "workshop",
+      "construction",
+      "teamwork"
+    ],
     "isPublic": true,
-    "uploadedBy": "6b6ca63f-5ba3-4c78-9f42-7e8f342e2bfb",
+    "uploadedBy": "ZYTGOKOUExDF",
     "viewCount": 67,
     "createdAt": "2026-01-12T14:30:00.000Z",
     "updatedAt": "2026-01-12T14:30:00.000Z"
   },
   {
-    "galleryId": "g3c4d5e6-f7a8-6890-b2cd-ef3456789012",
-    "competitionId": "a8f3d9e1-2b4c-4567-89ab-cdef01234567",
+    "galleryId": "vEAQ3JzOdQXs",
+    "missionId": "MPMwgwnXDk73",
     "title": "Desert Storm Rocket - Final Design",
     "description": "Completed rocket for Spaceport America Cup. 10-foot tall SRAD rocket with hybrid propulsion system.",
     "imageUrl": "/uploads/galleries/desert-storm-final.jpg",
-    "tags": ["spaceport", "desert-storm", "final-design", "hybrid-motor"],
+    "tags": [
+      "spaceport",
+      "desert-storm",
+      "final-design",
+      "hybrid-motor"
+    ],
     "isPublic": false,
-    "uploadedBy": "c3d4e5f6-a7b8-6901-b2cd-ef3456789012",
+    "uploadedBy": "7XqjA1AKA4jN",
     "viewCount": 89,
     "createdAt": "2026-01-10T10:15:00.000Z",
     "updatedAt": "2026-01-10T10:15:00.000Z"
   },
   {
-    "galleryId": "g4d5e6f7-a8b9-7901-c3de-f45678901234",
-    "competitionId": null,
+    "galleryId": "HklDJhQiVbUU",
+    "missionId": null,
     "title": "Team Photo - 2026 Season",
     "description": "Saguaro Strikers team photo for the 2026 competition season. All teams and mentors gathered at the workshop facility.",
     "imageUrl": "/uploads/galleries/team-photo-2026.jpg",
-    "tags": ["team", "group-photo", "2026"],
+    "tags": [
+      "team",
+      "group-photo",
+      "2026"
+    ],
     "isPublic": true,
-    "uploadedBy": "6b6ca63f-5ba3-4c78-9f42-7e8f342e2bfb",
+    "uploadedBy": "ZYTGOKOUExDF",
     "viewCount": 145,
     "createdAt": "2026-01-08T15:00:00.000Z",
     "updatedAt": "2026-01-08T15:00:00.000Z"
   },
   {
-    "galleryId": "g5e6f7a8-b9c0-8012-d4ef-567890123456",
-    "competitionId": "b9c4e0f2-3d5e-5678-90bc-def123456789",
+    "galleryId": "ZoIDzgZhDRoT",
+    "missionId": "pTznotoJFFCU",
     "title": "Saguaro Strikers Alpha - Launch Prep",
     "description": "Team preparing rocket on launch rail. Final checks before first launch at Battle of the Rockets qualifier.",
     "imageUrl": "/uploads/galleries/alpha-launch-prep.jpg",
-    "tags": ["launch", "preparation", "battle-of-rockets"],
+    "tags": [
+      "launch",
+      "preparation",
+      "battle-of-rockets"
+    ],
     "isPublic": false,
-    "uploadedBy": "e5f6a7b8-c9d0-8123-d4ef-567890123456",
+    "uploadedBy": "VXG5fHlFwxsv",
     "viewCount": 42,
     "createdAt": "2026-01-06T09:30:00.000Z",
     "updatedAt": "2026-01-06T09:30:00.000Z"

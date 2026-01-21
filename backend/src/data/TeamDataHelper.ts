@@ -22,14 +22,14 @@ export class TeamDataHelper extends BaseDataHelper<Team> {
     return this.deleteById(teamId, 'teamId');
   }
 
-  public getTeamsByCompetition(competitionId: string): Team[] {
-    return this.findWhere(team => team.competitionId === competitionId);
+  public getTeamsByMission(missionId: string): Team[] {
+    return this.findWhere(team => team.missionId === missionId);
   }
 
-  public deleteTeamsByCompetition(competitionId: string): number {
+  public deleteTeamsByMission(missionId: string): number {
     this.loadData();
     const initialLength = this.data.length;
-    this.data = this.data.filter(team => team.competitionId !== competitionId);
+    this.data = this.data.filter(team => team.missionId !== missionId);
     
     if (this.data.length < initialLength) {
       this.saveData();

@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+const { generateId } = require('../utils/idGenerator.cjs');
 const { readDB, writeDB, DB_FILES } = require('../config/database');
 
 class FileDataHelper {
@@ -11,9 +11,9 @@ class FileDataHelper {
     return files.find(file => file.fileId === fileId);
   }
 
-  getFilesByCompetition(competitionId) {
+  getFilesByMission(missionId) {
     const files = this.getAllFiles();
-    return files.filter(file => file.competitionId === competitionId);
+    return files.filter(file => file.missionId === missionId);
   }
 
   getFilesBySubEvent(subEventId) {
@@ -24,7 +24,7 @@ class FileDataHelper {
   createFile(fileData) {
     const files = this.getAllFiles();
     const newFile = {
-      fileId: uuidv4(),
+      fileId: generateId(),
       ...fileData,
       uploadedAt: new Date().toISOString()
     };
@@ -68,9 +68,9 @@ class FileDataHelper {
     return images.find(img => img.galleryId === galleryId);
   }
 
-  getGalleryByCompetition(competitionId) {
+  getGalleryByMission(missionId) {
     const images = this.getAllGalleryImages();
-    return images.filter(img => img.competitionId === competitionId);
+    return images.filter(img => img.missionId === missionId);
   }
 
   getGalleryBySubEvent(subEventId) {
@@ -81,7 +81,7 @@ class FileDataHelper {
   createGalleryImage(imageData) {
     const images = this.getAllGalleryImages();
     const newImage = {
-      galleryId: uuidv4(),
+      galleryId: generateId(),
       ...imageData,
       uploadedAt: new Date().toISOString()
     };

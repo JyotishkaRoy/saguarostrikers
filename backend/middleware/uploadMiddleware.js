@@ -1,7 +1,7 @@
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
-const { v4: uuidv4 } = require('uuid');
+const { generateId } = require('../utils/idGenerator.cjs');
 
 // Ensure upload directories exist
 const UPLOAD_DIR = process.env.UPLOAD_PATH || './uploads';
@@ -31,7 +31,7 @@ const storage = multer.diskStorage({
     cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
-    const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
+    const uniqueName = `${generateId()}${path.extname(file.originalname)}`;
     cb(null, uniqueName);
   }
 });

@@ -1,6 +1,6 @@
-import { v4 as uuidv4 } from 'uuid';
+import { generateId } from '../utils/idGenerator.js';
 import { TeamDataHelper, TeamMemberDataHelper } from '../data/TeamDataHelper.js';
-import { CompetitionDataHelper } from '../data/CompetitionDataHelper.js';
+import { MissionDataHelper } from '../data/MissionDataHelper.js';
 import { UserDataHelper } from '../data/UserDataHelper.js';
 import { Team, TeamMember, CreateTeamData } from '../models/types.js';
 import { createError } from '../middleware/errorHandler.js';
@@ -8,13 +8,13 @@ import { createError } from '../middleware/errorHandler.js';
 export class TeamService {
   private teamDataHelper: TeamDataHelper;
   private teamMemberDataHelper: TeamMemberDataHelper;
-  private competitionDataHelper: CompetitionDataHelper;
+  private missionDataHelper: MissionDataHelper;
   private userDataHelper: UserDataHelper;
 
   constructor() {
     this.teamDataHelper = new TeamDataHelper();
     this.teamMemberDataHelper = new TeamMemberDataHelper();
-    this.competitionDataHelper = new CompetitionDataHelper();
+    this.missionDataHelper = new MissionDataHelper();
     this.userDataHelper = new UserDataHelper();
   }
 
@@ -39,26 +39,26 @@ export class TeamService {
   }
 
   /**
-   * Get teams for a competition
+   * Get teams for a mission
    */
-  async getTeamsByCompetition(competitionId: string): Promise<Team[]> {
-    return this.teamDataHelper.getTeamsByCompetition(competitionId);
+  async getTeamsByMission(missionId: string): Promise<Team[]> {
+    return this.teamDataHelper.getTeamsByMission(missionId);
   }
 
   /**
    * Create team
    */
   async createTeam(data: CreateTeamData, createdBy: string): Promise<Team> {
-    // Verify competition exists
-    const competition = this.competitionDataHelper.getCompetitionById(data.competitionId);
+    // Verify mission exists
+    const mission = this.missionDataHelper.getMissionById(data.missionId);
     
-    if (!competition) {
-      throw createError.notFound('Competition not found');
+    if (!mission) {
+      throw createError.notFound('Mission not found');
     }
 
     const team: Team = {
-      teamId: uuidv4(),
-      competitionId: data.competitionId,
+      teamId: generateId(),
+      missionId: data.missionId,
       teamName: data.teamName,
       description: data.description,
       createdBy,
@@ -144,7 +144,7 @@ export class TeamService {
     }
 
     const teamMember: TeamMember = {
-      memberId: uuidv4(),
+      memberId: generateId(),
       teamId,
       userId,
       role,

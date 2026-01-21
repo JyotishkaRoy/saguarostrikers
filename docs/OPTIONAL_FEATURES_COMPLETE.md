@@ -181,7 +181,7 @@ import RichTextEditor from '@/components/RichTextEditor';
 
 **Thread Management:**
 - ✅ Create/edit/delete threads
-- ✅ Thread categories (General, Competitions, Technical, Events, Announcements)
+- ✅ Thread categories (General, Missions, Technical, Events, Announcements)
 - ✅ Pin important threads
 - ✅ Lock threads to prevent replies
 - ✅ Open/close thread status
@@ -292,7 +292,7 @@ When servers are running at http://localhost:3000:
 // Frontend code
 window.trackEvent('button_click', {
   button_name: 'Join Mission',
-  page: '/competitions'
+  page: '/missions'
 });
 ```
 

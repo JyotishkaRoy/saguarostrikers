@@ -8,7 +8,7 @@ interface CalendarEvent {
   title: string;
   description: string;
   date: string;
-  type: 'launch' | 'meeting' | 'competition' | 'deadline' | 'workshop' | 'other';
+  type: 'launch' | 'meeting' | 'mission' | 'deadline' | 'workshop' | 'other';
   status: 'upcoming' | 'ongoing' | 'completed';
 }
 
@@ -89,7 +89,7 @@ export default function MissionCalendar() {
   const eventTypeColors = {
     launch: 'bg-red-100 text-red-800 border-red-300',
     meeting: 'bg-blue-100 text-blue-800 border-blue-300',
-    competition: 'bg-purple-100 text-purple-800 border-purple-300',
+    mission: 'bg-purple-100 text-purple-800 border-purple-300',
     deadline: 'bg-orange-100 text-orange-800 border-orange-300',
     workshop: 'bg-green-100 text-green-800 border-green-300',
     other: 'bg-gray-100 text-gray-800 border-gray-300',
@@ -205,7 +205,7 @@ export default function MissionCalendar() {
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-4 h-4 bg-purple-100 border border-purple-300 rounded"></div>
-                <span className="text-sm text-gray-700">Competition</span>
+                <span className="text-sm text-gray-700">Mission</span>
               </div>
               <div className="flex items-center space-x-2">
                 <div className="w-4 h-4 bg-orange-100 border border-orange-300 rounded"></div>

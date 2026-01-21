@@ -78,7 +78,7 @@ export default function AdminCalendarEvents() {
   const eventTypeColors = {
     launch: 'bg-red-100 text-red-800 border-red-300',
     meeting: 'bg-blue-100 text-blue-800 border-blue-300',
-    competition: 'bg-purple-100 text-purple-800 border-purple-300',
+    mission: 'bg-purple-100 text-purple-800 border-purple-300',
     deadline: 'bg-orange-100 text-orange-800 border-orange-300',
     workshop: 'bg-green-100 text-green-800 border-green-300',
     other: 'bg-gray-100 text-gray-800 border-gray-300',
@@ -130,7 +130,7 @@ export default function AdminCalendarEvents() {
               <option value="all">All Types</option>
               <option value="launch">Launch</option>
               <option value="meeting">Meeting</option>
-              <option value="competition">Competition</option>
+              <option value="mission">Mission</option>
               <option value="deadline">Deadline</option>
               <option value="other">Other</option>
             </select>
@@ -364,7 +364,7 @@ function EventModal({ event, onClose, onSave }: EventModalProps) {
               >
                 <option value="launch">Launch</option>
                 <option value="meeting">Meeting</option>
-                <option value="competition">Competition</option>
+                <option value="mission">Mission</option>
                 <option value="deadline">Deadline</option>
                 <option value="other">Other</option>
               </select>

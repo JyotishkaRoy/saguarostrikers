@@ -1,6 +1,6 @@
 require('dotenv').config();
 const bcrypt = require('bcryptjs');
-const { v4: uuidv4 } = require('uuid');
+const { generateId } = require('./utils/idGenerator.cjs');
 const { initializeDatabase, writeDB, DB_FILES } = require('../config/database');
 
 // Initial setup script to create default admin user
@@ -18,7 +18,7 @@ async function initialSetup() {
   const hashedPassword = await bcrypt.hash(defaultAdminPassword, 10);
 
   const adminUser = {
-    userId: uuidv4(),
+    userId: generateId(),
     email: defaultAdminEmail,
     password: hashedPassword,
     firstName: 'System',
@@ -48,8 +48,8 @@ async function initialSetup() {
   const defaultContent = {
     homepage: {
       heroImages: [],
-      aboutUs: 'Welcome to our Rocketry Competition Platform. We bring together enthusiasts and teams to participate in exciting rocketry competitions.',
-      vision: 'To foster innovation and excellence in rocketry through collaborative competition.',
+      aboutUs: 'Welcome to our Rocketry Mission Platform. We bring together enthusiasts and teams to participate in exciting rocketry missions.',
+      vision: 'To foster innovation and excellence in rocketry through collaborative mission.',
       mission: 'Our mission is to provide a platform that connects talented individuals with exciting rocketry challenges, promotes teamwork, and advances the field of amateur rocketry.'
     }
   };

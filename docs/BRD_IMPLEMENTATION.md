@@ -69,7 +69,7 @@
 - TypeScript backend with Express
 - React frontend with Vite + TypeScript
 - Authentication & Authorization
-- Competition management (can be adapted for Missions)
+- Mission management (can be adapted for Missions)
 - Team management (can be adapted for Mission Scientists)
 - File uploads (for artifacts)
 - Contact form
@@ -82,7 +82,7 @@
 2. 🔨 Update Navbar with logo and banner carousel
 3. 🔨 Implement Homepage with 2-column layout + video carousel
 4. 🔨 Create Mission Leaders page with flip cards
-5. 🔨 Adapt Competition pages for Mission structure
+5. 🔨 Adapt Mission pages for Mission structure
 6. 🔨 Implement Mission Calendar
 7. 🔨 Create Join a Mission form with email workflow
 8. 🔨 Implement Future Explorers' Program page
@@ -105,7 +105,7 @@
 
 | BRD Requirement | Current Implementation | Adaptation Needed |
 |----------------|----------------------|-------------------|
-| Missions | Competitions | Rename, add Mission-specific fields |
+| Missions | Missions | Rename, add Mission-specific fields |
 | Mission Scientists | Team Members | Adapt for Scientists with bio |
 | Mission Artifacts | File Uploads | Add table view for artifacts |
 | Mission Leaders | Board Members | Add flip card feature |
@@ -123,7 +123,7 @@
 4. Create Mission Leaders page
 
 ### Phase 2: Mission Management
-1. Adapt Competition → Mission
+1. Adapt Mission → Mission
 2. Add Mission Scientists
 3. Implement Mission Artifacts view
 4. Create Mission Gallery

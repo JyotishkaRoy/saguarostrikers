@@ -1,4 +1,4 @@
-import { FileDataHelper } from '../data/FileDataHelper';
+import { FileDataHelper } from '../data/FileDataHelper.js';
 import { FileUpload, CreateFileData } from '../models/types';
 import { unlink } from 'fs/promises';
 import { join } from 'path';
@@ -22,8 +22,8 @@ export class FileManagementService {
     return await this.dataHelper.getFileById(fileId);
   }
 
-  async getFilesByCompetition(competitionId: string): Promise<FileUpload[]> {
-    return await this.dataHelper.getFilesByCompetition(competitionId);
+  async getFilesByMission(missionId: string): Promise<FileUpload[]> {
+    return await this.dataHelper.getFilesByMission(missionId);
   }
 
   async getFilesBySubEvent(subEventId: string): Promise<FileUpload[]> {

@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+const { generateId } = require('../utils/idGenerator.cjs');
 const { readDB, writeDB, DB_FILES } = require('../config/database');
 
 class NoticeDataHelper {
@@ -11,15 +11,15 @@ class NoticeDataHelper {
     return notices.find(notice => notice.noticeId === noticeId);
   }
 
-  getNoticesByCompetition(competitionId) {
+  getNoticesByMission(missionId) {
     const notices = this.getAllNotices();
-    return notices.filter(notice => notice.competitionId === competitionId);
+    return notices.filter(notice => notice.missionId === missionId);
   }
 
   createNotice(noticeData) {
     const notices = this.getAllNotices();
     const newNotice = {
-      noticeId: uuidv4(),
+      noticeId: generateId(),
       ...noticeData,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()

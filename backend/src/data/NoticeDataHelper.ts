@@ -34,18 +34,18 @@ export class NoticeDataHelper extends BaseDataHelper<Notice> {
     return this.findWhere(notice => notice.status === 'published');
   }
 
-  public getNoticesByCompetition(competitionId: string): Notice[] {
+  public getNoticesByMission(missionId: string): Notice[] {
     return this.findWhere(
       notice =>
-        notice.type === 'competition' && notice.competitionId === competitionId
+        notice.type === 'mission' && notice.missionId === missionId
     );
   }
 
-  public getPublishedCompetitionNotices(competitionId: string): Notice[] {
+  public getPublishedMissionNotices(missionId: string): Notice[] {
     return this.findWhere(
       notice =>
-        notice.type === 'competition' &&
-        notice.competitionId === competitionId &&
+        notice.type === 'mission' &&
+        notice.missionId === missionId &&
         notice.status === 'published'
     );
   }
@@ -54,11 +54,11 @@ export class NoticeDataHelper extends BaseDataHelper<Notice> {
     return this.findWhere(notice => notice.type === 'general');
   }
 
-  public deleteNoticesByCompetition(competitionId: string): number {
+  public deleteNoticesByMission(missionId: string): number {
     this.loadData();
     const initialLength = this.data.length;
     this.data = this.data.filter(
-      notice => !(notice.type === 'competition' && notice.competitionId === competitionId)
+      notice => !(notice.type === 'mission' && notice.missionId === missionId)
     );
     
     if (this.data.length < initialLength) {

@@ -1,5 +1,5 @@
 const DatabaseHelper = require('./databaseHelper');
-const { v4: uuidv4 } = require('uuid');
+const { generateId } = require('../utils/idGenerator.cjs');
 
 class DiscussionDataHelper extends DatabaseHelper {
   constructor() {
@@ -9,7 +9,7 @@ class DiscussionDataHelper extends DatabaseHelper {
   // Create a new discussion thread (Admin only)
   async createThread(threadData) {
     const thread = {
-      threadId: uuidv4(),
+      threadId: generateId(),
       ...threadData,
       replies: [],
       replyCount: 0,
@@ -29,7 +29,7 @@ class DiscussionDataHelper extends DatabaseHelper {
     }
 
     const reply = {
-      replyId: uuidv4(),
+      replyId: generateId(),
       ...replyData,
       createdAt: new Date().toISOString(),
     };

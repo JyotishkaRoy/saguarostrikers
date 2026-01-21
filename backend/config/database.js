@@ -11,7 +11,7 @@ if (!fs.existsSync(DATA_DIR)) {
 // Database file paths
 const DB_FILES = {
   USERS: path.join(DATA_DIR, 'users.json'),
-  COMPETITIONS: path.join(DATA_DIR, 'competitions.json'),
+  MISSIONS: path.join(DATA_DIR, 'missions.json'),
   SUB_EVENTS: path.join(DATA_DIR, 'subEvents.json'),
   TEAMS: path.join(DATA_DIR, 'teams.json'),
   TEAM_MEMBERS: path.join(DATA_DIR, 'teamMembers.json'),

@@ -1,22 +1,22 @@
 const teamDataHelper = require('../dataHelpers/teamDataHelper');
-const competitionDataHelper = require('../dataHelpers/competitionDataHelper');
+const missionDataHelper = require('../dataHelpers/missionDataHelper');
 const userDataHelper = require('../dataHelpers/userDataHelper');
 const interestDataHelper = require('../dataHelpers/interestDataHelper');
 const auditLogDataHelper = require('../dataHelpers/auditLogDataHelper');
 
 class TeamService {
   createTeam(teamData, userId, requestInfo = {}) {
-    const { competitionId, teamName, description } = teamData;
+    const { missionId, teamName, description } = teamData;
 
-    // Verify competition exists
-    const competition = competitionDataHelper.getCompetitionById(competitionId);
-    if (!competition) {
-      throw new Error('Competition not found');
+    // Verify mission exists
+    const mission = missionDataHelper.getMissionById(missionId);
+    if (!mission) {
+      throw new Error('Mission not found');
     }
 
     // Create team
     const newTeam = teamDataHelper.createTeam({
-      competitionId,
+      missionId,
       teamName,
       description,
       createdBy: userId
@@ -28,7 +28,7 @@ class TeamService {
       action: 'TEAM_CREATED',
       entity: 'team',
       entityId: newTeam.teamId,
-      changes: { competitionId, teamName },
+      changes: { missionId, teamName },
       ipAddress: requestInfo.ipAddress || '',
       userAgent: requestInfo.userAgent || ''
     });
@@ -113,8 +113,8 @@ class TeamService {
     };
   }
 
-  getTeamsByCompetition(competitionId) {
-    const teams = teamDataHelper.getTeamsByCompetition(competitionId);
+  getTeamsByMission(missionId) {
+    const teams = teamDataHelper.getTeamsByMission(missionId);
     return teams.map(team => this.getTeamById(team.teamId));
   }
 
@@ -144,7 +144,7 @@ class TeamService {
     });
 
     // Update interest status if exists
-    const interest = interestDataHelper.getInterestByUserAndCompetition(userIdToAdd, team.competitionId);
+    const interest = interestDataHelper.getInterestByUserAndMission(userIdToAdd, team.missionId);
     if (interest) {
       interestDataHelper.updateInterest(interest.interestId, { status: 'assigned' });
     }
@@ -211,15 +211,15 @@ class TeamService {
     const memberships = teamDataHelper.getTeamMembersByUser(userId);
     return memberships.map(membership => {
       const team = teamDataHelper.getTeamById(membership.teamId);
-      const competition = competitionDataHelper.getCompetitionById(team.competitionId);
+      const mission = missionDataHelper.getMissionById(team.missionId);
       return {
         ...membership,
         team: {
           ...team,
-          competition: competition ? {
-            competitionId: competition.competitionId,
-            title: competition.title,
-            slug: competition.slug
+          mission: mission ? {
+            missionId: mission.missionId,
+            title: mission.title,
+            slug: mission.slug
           } : null
         }
       };

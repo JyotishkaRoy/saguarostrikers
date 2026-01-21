@@ -1,7 +1,7 @@
 const siteContentService = require('../../services/siteContentService');
 const noticeService = require('../../services/noticeService');
 const contactService = require('../../services/contactService');
-const competitionService = require('../../services/competitionService');
+const missionService = require('../../services/missionService');
 const { getRequestInfo } = require('../../middleware/requestLogger');
 
 class PublicController {
@@ -68,36 +68,36 @@ class PublicController {
     }
   }
 
-  // Get published competitions
-  getPublishedCompetitions(req, res, next) {
+  // Get published missions
+  getPublishedMissions(req, res, next) {
     try {
-      const competitions = competitionService.getPublishedCompetitions();
+      const missions = missionService.getPublishedMissions();
 
       res.json({
         success: true,
-        data: competitions
+        data: missions
       });
     } catch (error) {
       next(error);
     }
   }
 
-  // Get competition by slug
-  getCompetitionBySlug(req, res, next) {
+  // Get mission by slug
+  getMissionBySlug(req, res, next) {
     try {
       const { slug } = req.params;
-      const competition = competitionService.getCompetitionBySlug(slug);
+      const mission = missionService.getMissionBySlug(slug);
 
-      if (!competition) {
+      if (!mission) {
         return res.status(404).json({
           success: false,
-          message: 'Competition not found'
+          message: 'Mission not found'
         });
       }
 
       res.json({
         success: true,
-        data: competition
+        data: mission
       });
     } catch (error) {
       next(error);

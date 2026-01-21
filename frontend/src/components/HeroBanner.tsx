@@ -106,7 +106,7 @@ export default function HeroBanner() {
               className="w-full h-full object-cover"
               onError={(e) => {
                 // Fallback if image fails to load
-                (e.target as HTMLImageElement).src = '/images/banner/Banner 1.png';
+                (e.target as HTMLImageElement).src = '/images/banners/Banner 1.png';
               }}
             />
             <div className="absolute inset-0 bg-black bg-opacity-40" />
@@ -119,21 +119,21 @@ export default function HeroBanner() {
         <>
           <button
             onClick={goToPrevious}
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-900 rounded-full p-2 shadow-lg transition-all z-10"
+            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-900 rounded-full p-2 shadow-lg transition-all z-20"
             aria-label="Previous banner"
           >
             <ChevronLeft className="h-6 w-6" />
           </button>
           <button
             onClick={goToNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-900 rounded-full p-2 shadow-lg transition-all z-10"
+            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-900 rounded-full p-2 shadow-lg transition-all z-20"
             aria-label="Next banner"
           >
             <ChevronRight className="h-6 w-6" />
           </button>
 
           {/* Dots Indicator */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-10">
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
             {bannerImages.map((_, index) => (
               <button
                 key={index}
@@ -153,7 +153,18 @@ export default function HeroBanner() {
       {/* Overlay Content */}
       <div className="absolute inset-0 flex items-center justify-center z-10">
         <div className="text-center text-white px-4 max-w-4xl">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4 drop-shadow-2xl">
+          <h1 
+            className="text-4xl md:text-6xl font-bold mb-4"
+            style={{
+              background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%)',
+              WebkitBackgroundClip: 'text',
+              backgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              textShadow: 'none',
+              filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.3))',
+              WebkitTextStroke: '1.5px rgba(255, 255, 255, 0.4)',
+            }}
+          >
             {headline}
           </h1>
           <p className="text-xl md:text-2xl mb-8 drop-shadow-xl">

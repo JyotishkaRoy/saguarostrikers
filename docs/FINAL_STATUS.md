@@ -48,7 +48,7 @@
 |---------|--------|-----------|-------|
 | Authentication | ✅ | 5 | 2 (Login, Register) |
 | User Management | ✅ | 6 | 1 (Admin Users) |
-| Competitions | ✅ | 10 | 5 (Public + Admin) |
+| Missions | ✅ | 10 | 5 (Public + Admin) |
 | Calendar Events | ✅ | 11 | 2 (Public + Admin) |
 | Join Applications | ✅ | 8 | 2 (Form + Admin Review) |
 | File Management | ✅ | 12 | 1 (Admin - created) |
@@ -79,7 +79,7 @@ Your application is **production-ready** with these features:
 
 ### For Admins
 1. ✅ Manage users (create, edit, deactivate)
-2. ✅ Manage competitions/missions
+2. ✅ Manage missions/missions
 3. ✅ Manage calendar events
 4. ✅ Review join applications
 5. ✅ Update application status (sends emails)

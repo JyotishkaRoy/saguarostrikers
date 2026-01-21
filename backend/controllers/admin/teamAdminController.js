@@ -104,11 +104,11 @@ class TeamAdminController {
     }
   }
 
-  // Get teams by competition
-  getTeamsByCompetition(req, res, next) {
+  // Get teams by mission
+  getTeamsByMission(req, res, next) {
     try {
-      const { competitionId } = req.params;
-      const teams = teamService.getTeamsByCompetition(competitionId);
+      const { missionId } = req.params;
+      const teams = teamService.getTeamsByMission(missionId);
 
       res.json({
         success: true,

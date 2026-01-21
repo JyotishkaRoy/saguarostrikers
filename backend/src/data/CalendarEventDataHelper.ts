@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { CalendarEvent, CreateCalendarEventData, UpdateCalendarEventData } from '../models/types';
-import { v4 as uuidv4 } from 'uuid';
+import { generateId } from '../utils/idGenerator.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -60,9 +60,9 @@ export class CalendarEventDataHelper {
     return events.find(event => event.eventId === eventId) || null;
   }
 
-  async getEventsByCompetition(competitionId: string): Promise<CalendarEvent[]> {
+  async getEventsByMission(missionId: string): Promise<CalendarEvent[]> {
     const events = this.readData();
-    return events.filter(event => event.competitionId === competitionId);
+    return events.filter(event => event.missionId === missionId);
   }
 
   async getUpcomingEvents(limit?: number): Promise<CalendarEvent[]> {
@@ -81,7 +81,7 @@ export class CalendarEventDataHelper {
     const now = new Date().toISOString();
 
     const newEvent: CalendarEvent = {
-      eventId: uuidv4(),
+      eventId: generateId(),
       title: data.title,
       description: data.description,
       date: data.date,
@@ -89,7 +89,7 @@ export class CalendarEventDataHelper {
       endTime: data.endTime,
       type: data.type,
       status: data.status || 'upcoming',
-      competitionId: data.competitionId,
+      missionId: data.missionId,
       location: data.location,
       createdBy,
       createdAt: now,

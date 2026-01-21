@@ -82,7 +82,7 @@
 - `/` - Homepage with hero banner
 - `/mission-statement` - Mission Commander's statement
 - `/mission-leaders` - Team leaders with flip cards
-- `/competitions` - Missions (existing, to be adapted)
+- `/missions` - Missions (existing, to be adapted)
 - `/contact` - Reach Mission Control (existing)
 
 **New Routes Added (Phase 2)**:
@@ -118,7 +118,7 @@
 
 | Requirement | Status | Notes |
 |------------|--------|-------|
-| Mission Overview | 🔨 Adapt | Use existing Competition pages |
+| Mission Overview | 🔨 Adapt | Use existing Mission pages |
 | Mission Scientists | 🔨 Adapt | Similar to Team Members |
 | Mission Artifacts | 🔨 Implement | Table view for downloadable files |
 | Mission Gallery | 🔨 Implement | Protected photo/video gallery |
@@ -232,7 +232,7 @@ frontend/public/images/
 
 ### Immediate (Phase 2)
 1. **Adapt Missions Pages**
-   - Rename "Competitions" to "Missions"
+   - Rename "Missions" to "Missions"
    - Add Mission Overview with video carousel
    - Create Mission Scientists grid
    - Implement Mission Artifacts table
@@ -315,7 +315,7 @@ frontend/public/images/
 
 #### 4. ✅ **Mission Calendar** (BRD Compliant)
 - **Interactive Calendar**: Month-by-month navigation
-- **Color-Coded Events**: Launch, Meeting, Competition, Deadline, Other
+- **Color-Coded Events**: Launch, Meeting, Mission, Deadline, Other
 - **Event Details Modal**: Click any event for full details
 - **Legend**: Clear visual guide for event types
 - **Responsive**: Works on all screen sizes

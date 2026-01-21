@@ -33,6 +33,14 @@ export class SiteContentAdminController {
         ctas: homepageContent.heroCTAs || []
       };
 
+      // Serialize mission commander content as JSON
+      const missionCommanderContent = {
+        message: homepageContent.missionCommanderMessage || '',
+        name: homepageContent.missionCommanderName || 'Mission Commander',
+        title: homepageContent.missionCommanderTitle || 'Team Leader',
+        image: homepageContent.missionCommanderImage || ''
+      };
+
       // Map homepage content to sections format expected by frontend
       const sections: SiteContentSection[] = [
         {
@@ -40,6 +48,14 @@ export class SiteContentAdminController {
           section: 'homepage-hero',
           title: 'Homepage Hero Section',
           content: JSON.stringify(heroContent, null, 2),
+          isPublished: true,
+          lastModified: new Date().toISOString()
+        },
+        {
+          contentId: 'mission-commander',
+          section: 'mission-commander',
+          title: 'Mission Commander Statement',
+          content: JSON.stringify(missionCommanderContent, null, 2),
           isPublished: true,
           lastModified: new Date().toISOString()
         },
@@ -100,6 +116,17 @@ export class SiteContentAdminController {
             updates.heroCTAs = heroData.ctas || [];
           } catch (parseError) {
             throw createError.badRequest('Invalid hero content format. Expected JSON with headline, subheadline, images, and ctas');
+          }
+          break;
+        case 'mission-commander':
+          try {
+            const commanderData = JSON.parse(content);
+            updates.missionCommanderMessage = commanderData.message;
+            updates.missionCommanderName = commanderData.name;
+            updates.missionCommanderTitle = commanderData.title;
+            updates.missionCommanderImage = commanderData.image;
+          } catch (parseError) {
+            throw createError.badRequest('Invalid mission commander content format. Expected JSON with message, name, title, and image');
           }
           break;
         case 'homepage-about':
@@ -178,6 +205,68 @@ export class SiteContentAdminController {
         res.status(error.statusCode).json({ success: false, message: error.message });
       } else {
         res.status(500).json({ success: false, message: 'Failed to update hero images' });
+      }
+    }
+  }
+
+  /**
+   * Upload banner image for hero section
+   */
+  async uploadBannerImage(req: Request, res: Response): Promise<void> {
+    try {
+      if (!req.file) {
+        throw createError.badRequest('No image file uploaded');
+      }
+
+      // Construct the public URL for the uploaded image
+      const imageUrl = `/uploads/banners/${req.file.filename}`;
+
+      res.status(200).json({
+        success: true,
+        message: 'Banner image uploaded successfully',
+        data: {
+          url: imageUrl,
+          filename: req.file.filename,
+          originalName: req.file.originalname,
+          size: req.file.size
+        }
+      });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        res.status(error.statusCode).json({ success: false, message: error.message });
+      } else {
+        res.status(500).json({ success: false, message: 'Failed to upload banner image' });
+      }
+    }
+  }
+
+  /**
+   * Upload mission director image
+   */
+  async uploadMissionDirectorImage(req: Request, res: Response): Promise<void> {
+    try {
+      if (!req.file) {
+        throw createError.badRequest('No image file uploaded');
+      }
+
+      // Construct the public URL for the uploaded image
+      const imageUrl = `/uploads/mission-director/${req.file.filename}`;
+
+      res.status(200).json({
+        success: true,
+        message: 'Mission director image uploaded successfully',
+        data: {
+          url: imageUrl,
+          filename: req.file.filename,
+          originalName: req.file.originalname,
+          size: req.file.size
+        }
+      });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        res.status(error.statusCode).json({ success: false, message: error.message });
+      } else {
+        res.status(500).json({ success: false, message: 'Failed to upload mission director image' });
       }
     }
   }

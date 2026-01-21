@@ -238,7 +238,7 @@ export default function ContactPage() {
               <div>
                 <h3 className="font-semibold text-gray-900 mb-2">How do I join a mission?</h3>
                 <p className="text-sm text-gray-600">
-                  Visit our Missions page, select a competition, and click "Register Interest" or use the "Join a Mission" form.
+                  Visit our Missions page, select a mission, and click "Register Interest" or use the "Join a Mission" form.
                 </p>
               </div>
               <div>

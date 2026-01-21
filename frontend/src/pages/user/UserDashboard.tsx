@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
 
 interface UserStats {
-  competitions: { active: number; completed: number };
+  missions: { active: number; completed: number };
   teams: { current: number };
   applications: { pending: number; approved: number };
   downloads: number;
@@ -15,7 +15,7 @@ interface UserStats {
 
 interface RecentActivity {
   id: string;
-  type: 'competition' | 'team' | 'file' | 'application' | 'event';
+  type: 'mission' | 'team' | 'file' | 'application' | 'event';
   title: string;
   description: string;
   timestamp: string;
@@ -37,7 +37,7 @@ export default function UserDashboard() {
       setIsLoading(true);
       // Mock data - in real app, these would be API calls
       setStats({
-        competitions: { active: 3, completed: 5 },
+        missions: { active: 3, completed: 5 },
         teams: { current: 2 },
         applications: { pending: 1, approved: 2 },
         downloads: 12,
@@ -46,9 +46,9 @@ export default function UserDashboard() {
       setRecentActivity([
         {
           id: '1',
-          type: 'competition',
+          type: 'mission',
           title: 'Registered for NASA USLI 2024',
-          description: 'Successfully registered for the competition',
+          description: 'Successfully registered for the mission',
           timestamp: new Date(Date.now() - 2 * 60 * 60 * 1000).toISOString(),
           status: 'success',
         },
@@ -93,7 +93,7 @@ export default function UserDashboard() {
 
   const getActivityIcon = (type: string) => {
     switch (type) {
-      case 'competition':
+      case 'mission':
         return <Trophy className="h-5 w-5 text-primary-600" />;
       case 'team':
         return <Users className="h-5 w-5 text-success-600" />;
@@ -157,13 +157,13 @@ export default function UserDashboard() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <Link to="/my-competitions" className="card hover:shadow-lg transition-shadow">
+        <Link to="/my-missions" className="card hover:shadow-lg transition-shadow">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm text-gray-600 mb-1">My Competitions</p>
-              <p className="text-3xl font-bold text-gray-900 mb-2">{stats?.competitions.active}</p>
+              <p className="text-sm text-gray-600 mb-1">My Missions</p>
+              <p className="text-3xl font-bold text-gray-900 mb-2">{stats?.missions.active}</p>
               <div className="flex items-center gap-2 text-sm">
-                <span className="text-gray-500">{stats?.competitions.completed} completed</span>
+                <span className="text-gray-500">{stats?.missions.completed} completed</span>
               </div>
             </div>
             <Trophy className="h-10 w-10 text-primary-600" />
@@ -242,9 +242,9 @@ export default function UserDashboard() {
         <div className="card">
           <h2 className="text-xl font-bold text-gray-900 mb-6">Quick Links</h2>
           <div className="space-y-3">
-            <Link to="/competitions" className="btn-outline w-full justify-start">
+            <Link to="/missions" className="btn-outline w-full justify-start">
               <Trophy className="h-5 w-5 mr-2" />
-              Browse Competitions
+              Browse Missions
             </Link>
             <Link to="/mission-calendar" className="btn-outline w-full justify-start">
               <Calendar className="h-5 w-5 mr-2" />

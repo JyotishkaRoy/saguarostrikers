@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import { AuthRequest } from '../../models/types';
-import { JoinMissionService } from '../../services/JoinMissionService';
+import { JoinMissionService } from '../../services/JoinMissionService.js';
 
 export class JoinMissionAdminController {
   private joinMissionService: JoinMissionService;

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 interface DashboardStats {
   users: { total: number; active: number; new: number };
-  competitions: { total: number; active: number; upcoming: number };
+  missions: { total: number; active: number; upcoming: number };
   applications: { total: number; pending: number; approved: number };
   files: { total: number; public: number; downloads: number };
   gallery: { total: number; public: number; views: number };
@@ -31,7 +31,7 @@ export default function AdminDashboard() {
       // For now, using mock data
       setStats({
         users: { total: 150, active: 120, new: 15 },
-        competitions: { total: 25, active: 5, upcoming: 8 },
+        missions: { total: 25, active: 5, upcoming: 8 },
         applications: { total: 45, pending: 12, approved: 30 },
         files: { total: 320, public: 180, downloads: 1250 },
         gallery: { total: 245, public: 190, views: 5420 },
@@ -81,15 +81,15 @@ export default function AdminDashboard() {
           </div>
         </Link>
 
-        {/* Competitions */}
-        <Link to="/admin/competitions" className="card hover:shadow-lg transition-shadow">
+        {/* Missions */}
+        <Link to="/admin/missions" className="card hover:shadow-lg transition-shadow">
           <div className="flex items-start justify-between">
             <div>
-              <p className="text-sm text-gray-600 mb-1">Competitions</p>
-              <p className="text-3xl font-bold text-gray-900 mb-2">{stats?.competitions.total}</p>
+              <p className="text-sm text-gray-600 mb-1">Missions</p>
+              <p className="text-3xl font-bold text-gray-900 mb-2">{stats?.missions.total}</p>
               <div className="flex items-center gap-2 text-sm">
-                <span className="text-primary-600 font-medium">{stats?.competitions.active} active</span>
-                <span className="text-gray-500">• {stats?.competitions.upcoming} upcoming</span>
+                <span className="text-primary-600 font-medium">{stats?.missions.active} active</span>
+                <span className="text-gray-500">• {stats?.missions.upcoming} upcoming</span>
               </div>
             </div>
             <Trophy className="h-12 w-12 text-primary-600" />
@@ -213,9 +213,9 @@ export default function AdminDashboard() {
             <Users className="h-6 w-6 mx-auto mb-2" />
             <span className="text-sm">Manage Users</span>
           </Link>
-          <Link to="/admin/competitions" className="btn-outline text-center py-4">
+          <Link to="/admin/missions" className="btn-outline text-center py-4">
             <Trophy className="h-6 w-6 mx-auto mb-2" />
-            <span className="text-sm">Competitions</span>
+            <span className="text-sm">Missions</span>
           </Link>
           <Link to="/admin/applications" className="btn-outline text-center py-4">
             <Mail className="h-6 w-6 mx-auto mb-2" />

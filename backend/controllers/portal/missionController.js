@@ -1,66 +1,66 @@
-const competitionService = require('../../services/competitionService');
+const missionService = require('../../services/missionService');
 const interestService = require('../../services/interestService');
 const { getRequestInfo } = require('../../middleware/requestLogger');
 
-class CompetitionController {
-  // Get all published competitions (public)
-  getPublishedCompetitions(req, res, next) {
+class MissionController {
+  // Get all published missions (public)
+  getPublishedMissions(req, res, next) {
     try {
-      const competitions = competitionService.getPublishedCompetitions();
+      const missions = missionService.getPublishedMissions();
 
       res.json({
         success: true,
-        data: competitions
+        data: missions
       });
     } catch (error) {
       next(error);
     }
   }
 
-  // Get upcoming competitions (public)
-  getUpcomingCompetitions(req, res, next) {
+  // Get upcoming missions (public)
+  getUpcomingMissions(req, res, next) {
     try {
-      const competitions = competitionService.getUpcomingCompetitions();
+      const missions = missionService.getUpcomingMissions();
 
       res.json({
         success: true,
-        data: competitions
+        data: missions
       });
     } catch (error) {
       next(error);
     }
   }
 
-  // Get competition by slug (public)
-  getCompetitionBySlug(req, res, next) {
+  // Get mission by slug (public)
+  getMissionBySlug(req, res, next) {
     try {
       const { slug } = req.params;
-      const competition = competitionService.getCompetitionBySlug(slug);
+      const mission = missionService.getMissionBySlug(slug);
 
-      if (!competition) {
+      if (!mission) {
         return res.status(404).json({
           success: false,
-          message: 'Competition not found'
+          message: 'Mission not found'
         });
       }
 
       res.json({
         success: true,
-        data: competition
+        data: mission
       });
     } catch (error) {
       next(error);
     }
   }
 
-  // Show interest in competition (authenticated user)
+  // Show interest in mission (authenticated user)
   async showInterest(req, res, next) {
     try {
-      const { competitionId, message } = req.body;
+      const { missionId, message } = req.body;
       const userId = req.user.userId;
       const requestInfo = getRequestInfo(req);
 
-      const interest = interestService.showInterest(userId, competitionId, message, requestInfo);
+      const interest = interestService.showInterest(userId, missionId, message, requestInfo);
 
       res.status(201).json({
         success: true,
@@ -107,5 +107,5 @@ class CompetitionController {
   }
 }
 
-module.exports = new CompetitionController();
+module.exports = new MissionController();
 

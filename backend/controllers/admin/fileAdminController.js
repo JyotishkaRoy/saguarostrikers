@@ -12,7 +12,7 @@ class FileAdminController {
         });
       }
 
-      const { category, competitionId, subEventId, description } = req.body;
+      const { category, missionId, subEventId, description } = req.body;
       const userId = req.user.userId;
       const requestInfo = getRequestInfo(req);
 
@@ -23,7 +23,7 @@ class FileAdminController {
         fileType: req.file.mimetype,
         fileSize: req.file.size,
         category,
-        competitionId,
+        missionId,
         subEventId,
         description
       };
@@ -125,7 +125,7 @@ class FileAdminController {
         });
       }
 
-      const { title, description, competitionId, subEventId } = req.body;
+      const { title, description, missionId, subEventId } = req.body;
       const userId = req.user.userId;
       const requestInfo = getRequestInfo(req);
 
@@ -133,7 +133,7 @@ class FileAdminController {
         imageUrl: req.file.path,
         title,
         description,
-        competitionId,
+        missionId,
         subEventId
       };
 

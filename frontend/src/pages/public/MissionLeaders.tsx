@@ -5,8 +5,8 @@ import type { BoardMember } from '@/types';
 
 export default function MissionLeaders() {
   const [leaders, setLeaders] = useState<BoardMember[]>([]);
-  const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
   const [isLoading, setIsLoading] = useState(true);
+  const [flippedCards, setFlippedCards] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     fetchLeaders();
@@ -25,13 +25,13 @@ export default function MissionLeaders() {
     }
   };
 
-  const toggleCard = (id: string) => {
-    setFlippedCards((prev) => {
+  const handleCardClick = (memberId: string) => {
+    setFlippedCards(prev => {
       const newSet = new Set(prev);
-      if (newSet.has(id)) {
-        newSet.delete(id);
+      if (newSet.has(memberId)) {
+        newSet.delete(memberId);
       } else {
-        newSet.add(id);
+        newSet.add(memberId);
       }
       return newSet;
     });
@@ -39,13 +39,10 @@ export default function MissionLeaders() {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto px-4 py-16">
-        <div className="animate-pulse space-y-8">
-          <div className="h-12 bg-gray-200 rounded w-1/3"></div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[1, 2, 3, 4, 5, 6].map((i) => (
-              <div key={i} className="h-96 bg-gray-200 rounded-lg"></div>
-            ))}
+      <div className="min-h-screen py-16" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
           </div>
         </div>
       </div>
@@ -53,44 +50,49 @@ export default function MissionLeaders() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
+    <div className="min-h-screen py-16" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Mission Leaders
+          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
+            Meet Our Mission Leaders
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Meet the dedicated individuals who guide our team to success. Click on any photo to learn more about their background and expertise.
+          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+            The dedicated team driving innovation and excellence in rocketry
           </p>
         </div>
 
-        {/* Leaders Grid */}
+        {/* Leaders Grid - Responsive: 1 column on mobile, 2 on tablet, 3 on desktop */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {leaders.map((leader) => (
-            <div
-              key={leader.boardMemberId}
-              className="relative h-96 perspective-1000"
-              style={{ perspective: '1000px' }}
-            >
+          {leaders.map((leader) => {
+            const isFlipped = flippedCards.has(leader.boardMemberId);
+
+            return (
               <div
-                className={`relative w-full h-full transition-transform duration-700 transform-style-3d cursor-pointer ${
-                  flippedCards.has(leader.boardMemberId) ? 'rotate-y-180' : ''
-                }`}
-                onClick={() => toggleCard(leader.boardMemberId)}
-                style={{
-                  transformStyle: 'preserve-3d',
-                  transform: flippedCards.has(leader.boardMemberId) ? 'rotateY(180deg)' : 'rotateY(0)',
-                }}
+                key={leader.boardMemberId}
+                className="flip-card-container h-96 cursor-pointer"
+                onClick={() => handleCardClick(leader.boardMemberId)}
+                style={{ perspective: '1000px' }}
               >
-                {/* Front of Card */}
                 <div
-                  className="absolute inset-0 w-full h-full backface-hidden rounded-lg overflow-hidden shadow-lg"
-                  style={{ backfaceVisibility: 'hidden' }}
+                  className={`flip-card-inner relative w-full h-full transition-transform duration-700 transform-style-3d ${
+                    isFlipped ? 'rotate-y-180' : ''
+                  }`}
+                  style={{
+                    transformStyle: 'preserve-3d',
+                    transform: isFlipped ? 'rotateY(180deg)' : 'rotateY(0deg)'
+                  }}
                 >
-                  <div className="relative h-full bg-white">
-                    {/* Image */}
-                    <div className="h-64 bg-gradient-to-br from-primary-400 to-primary-600 overflow-hidden">
+                  {/* Front of Card */}
+                  <div
+                    className="flip-card-front absolute w-full h-full backface-hidden rounded-xl overflow-hidden shadow-2xl"
+                    style={{
+                      backfaceVisibility: 'hidden',
+                      WebkitBackfaceVisibility: 'hidden'
+                    }}
+                  >
+                    {/* Background Image */}
+                    <div className="relative h-full">
                       {leader.imageUrl ? (
                         <img
                           src={leader.imageUrl}
@@ -98,79 +100,126 @@ export default function MissionLeaders() {
                           className="w-full h-full object-cover"
                         />
                       ) : (
-                        <div className="w-full h-full flex items-center justify-center text-white text-6xl font-bold">
-                          {leader.name.split(' ').map(n => n[0]).join('')}
+                        <div className="w-full h-full bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center">
+                          <div className="text-white text-8xl">👤</div>
                         </div>
                       )}
-                    </div>
-                    
-                    {/* Info */}
-                    <div className="p-6">
-                      <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                        {leader.name}
-                      </h3>
-                      <p className="text-primary-600 font-medium mb-3">
-                        {leader.position}
-                      </p>
-                      <p className="text-sm text-gray-500 italic">
-                        Click to see bio
-                      </p>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Back of Card */}
-                <div
-                  className="absolute inset-0 w-full h-full backface-hidden rounded-lg overflow-hidden shadow-lg bg-white"
-                  style={{
-                    backfaceVisibility: 'hidden',
-                    transform: 'rotateY(180deg)',
-                  }}
-                >
-                  <div className="h-full p-6 flex flex-col">
-                    <div className="flex-1 overflow-y-auto">
-                      <h3 className="text-xl font-bold text-gray-900 mb-2">
-                        {leader.name}
-                      </h3>
-                      <p className="text-primary-600 font-medium mb-4">
-                        {leader.position}
-                      </p>
-                      <div className="text-gray-700 text-sm leading-relaxed">
-                        {leader.bio || 'Bio coming soon...'}
+                      
+                      {/* Gradient Overlay */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                      
+                      {/* Content */}
+                      <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+                        <h3 className="text-2xl font-bold mb-2">{leader.name}</h3>
+                        <p className="text-lg text-white/90 mb-3">{leader.position}</p>
+                        <div className="flex items-center gap-2 text-sm text-white/80">
+                          <Mail className="h-4 w-4" />
+                          <span className="truncate">{leader.email}</span>
+                        </div>
+                        <div className="mt-4 text-sm text-white/70 flex items-center gap-2">
+                          <span className="inline-block w-2 h-2 bg-white/70 rounded-full animate-pulse"></span>
+                          Click to see bio
+                        </div>
                       </div>
                     </div>
-                    
-                    {/* Contact */}
-                    <div className="mt-4 pt-4 border-t border-gray-200">
-                      <a
-                        href={`mailto:${leader.name.toLowerCase().replace(/\s+/g, '.')}@saguarostrikers.org`}
-                        className="flex items-center text-primary-600 hover:text-primary-700 text-sm"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <Mail className="h-4 w-4 mr-2" />
-                        Contact
-                      </a>
+                  </div>
+
+                  {/* Back of Card */}
+                  <div
+                    className="flip-card-back absolute w-full h-full backface-hidden rounded-xl overflow-hidden shadow-2xl bg-white"
+                    style={{
+                      backfaceVisibility: 'hidden',
+                      WebkitBackfaceVisibility: 'hidden',
+                      transform: 'rotateY(180deg)'
+                    }}
+                  >
+                    <div className="h-full flex flex-col">
+                      {/* Header with gradient */}
+                      <div className="bg-gradient-to-r from-primary-600 to-primary-800 p-6 text-white">
+                        <h3 className="text-2xl font-bold mb-1">{leader.name}</h3>
+                        <p className="text-lg text-white/90">{leader.position}</p>
+                      </div>
+
+                      {/* Bio Content */}
+                      <div className="flex-1 p-6 overflow-y-auto">
+                        <p className="text-gray-700 leading-relaxed">{leader.bio}</p>
+                      </div>
+
+                      {/* Footer */}
+                      <div className="p-6 border-t border-gray-200 bg-gray-50">
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
+                          <Mail className="h-4 w-4" />
+                          <a
+                            href={`mailto:${leader.email}`}
+                            className="text-primary-600 hover:text-primary-800 hover:underline"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            {leader.email}
+                          </a>
+                        </div>
+                        <div className="mt-3 text-xs text-gray-500 flex items-center gap-2">
+                          <span className="inline-block w-2 h-2 bg-gray-400 rounded-full"></span>
+                          Click to flip back
+                        </div>
+                      </div>
                     </div>
-                    
-                    <p className="text-xs text-gray-400 mt-4 italic">
-                      Click to flip back
-                    </p>
                   </div>
                 </div>
               </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Empty State */}
         {leaders.length === 0 && !isLoading && (
-          <div className="text-center py-16">
-            <p className="text-gray-500 text-lg">
-              No mission leaders found. Check back soon!
-            </p>
+          <div className="text-center py-12">
+            <div className="text-white/70 mb-4">
+              <div className="text-6xl mb-4">👥</div>
+              <p className="text-xl">No leaders to display at this time</p>
+            </div>
           </div>
         )}
       </div>
+
+      {/* Custom CSS for flip animation */}
+      <style>{`
+        .flip-card-container {
+          perspective: 1000px;
+        }
+
+        .flip-card-inner {
+          position: relative;
+          width: 100%;
+          height: 100%;
+          transition: transform 0.7s;
+          transform-style: preserve-3d;
+        }
+
+        .flip-card-front,
+        .flip-card-back {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+
+        .flip-card-back {
+          transform: rotateY(180deg);
+        }
+
+        .rotate-y-180 {
+          transform: rotateY(180deg);
+        }
+
+        .backface-hidden {
+          -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+        }
+
+        .transform-style-3d {
+          transform-style: preserve-3d;
+        }
+      `}</style>
     </div>
   );
 }

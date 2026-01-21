@@ -176,15 +176,15 @@ npm run dev
 - ✅ Token persistence and auto-refresh
 - ✅ Password change functionality
 
-### Competition Management
-- ✅ Create/Edit/Delete competitions
+### Mission Management
+- ✅ Create/Edit/Delete missions
 - ✅ Slug-based URLs
-- ✅ Sub-events for competitions
-- ✅ Competition status workflow
-- ✅ Public competition browsing
+- ✅ Sub-events for missions
+- ✅ Mission status workflow
+- ✅ Public mission browsing
 
 ### Team Management
-- ✅ Create teams for competitions
+- ✅ Create teams for missions
 - ✅ Add/remove team members
 - ✅ Team member roles
 - ✅ User interest tracking
@@ -198,14 +198,14 @@ npm run dev
 ### Content Management
 - ✅ Homepage content editor
 - ✅ Board members management
-- ✅ Notice system (General/Competition)
+- ✅ Notice system (General/Mission)
 - ✅ Priority and status control
 
 ### File Management
 - ✅ File uploads (Multer)
 - ✅ Gallery images
 - ✅ File categorization
-- ✅ Association with competitions/sub-events
+- ✅ Association with missions/sub-events
 
 ### Communication
 - ✅ Contact form (public)
@@ -279,9 +279,9 @@ npm run dev
 
 ### Public Endpoints
 - `GET /api/public/homepage` - Homepage data
-- `GET /api/public/competitions` - All competitions
-- `GET /api/public/competitions/upcoming` - Upcoming only
-- `GET /api/public/competitions/slug/:slug` - By slug
+- `GET /api/public/missions` - All missions
+- `GET /api/public/missions/upcoming` - Upcoming only
+- `GET /api/public/missions/slug/:slug` - By slug
 - `GET /api/public/notices` - Public notices
 - `POST /api/public/contact` - Contact form
 
@@ -293,12 +293,12 @@ npm run dev
 - `PUT /api/auth/change-password` - Change password
 
 ### User Endpoints (Authenticated)
-- `GET /api/user/competitions` - User's competitions
+- `GET /api/user/missions` - User's missions
 - `GET /api/user/teams` - User's teams
 - `GET /api/user/files` - User's files
 
 ### Admin Endpoints (Admin Only)
-- Full CRUD for: Users, Competitions, Teams, Notices, Files
+- Full CRUD for: Users, Missions, Teams, Notices, Files
 - Board members management
 - Contact message responses
 - Audit log viewing
@@ -347,7 +347,7 @@ This project demonstrates:
 - [ ] Implement full login/register forms with validation
 - [ ] Add dashboard statistics and charts
 - [ ] Implement file upload UI
-- [ ] Create competition browsing with filters
+- [ ] Create mission browsing with filters
 - [ ] Build team management interfaces
 
 ### Phase 2: Enhanced Features

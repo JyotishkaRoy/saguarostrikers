@@ -18,8 +18,8 @@ export interface LoginResponse {
   user: User;
 }
 
-export interface Competition {
-  competitionId: string;
+export interface Mission {
+  missionId: string;
   title: string;
   slug: string;
   description: string;
@@ -35,7 +35,7 @@ export interface Competition {
 
 export interface SubEvent {
   subEventId: string;
-  competitionId: string;
+  missionId: string;
   title: string;
   description: string;
   eventDate: string;
@@ -46,7 +46,7 @@ export interface SubEvent {
 
 export interface Team {
   teamId: string;
-  competitionId: string;
+  missionId: string;
   teamName: string;
   description: string;
   createdBy: string;
@@ -61,9 +61,9 @@ export interface CalendarEvent {
   date: string;
   startTime?: string;
   endTime?: string;
-  type: 'launch' | 'meeting' | 'competition' | 'deadline' | 'workshop' | 'other';
+  type: 'launch' | 'meeting' | 'mission' | 'deadline' | 'workshop' | 'other';
   status: 'upcoming' | 'ongoing' | 'completed' | 'cancelled';
-  competitionId?: string;
+  missionId?: string;
   location?: string;
   createdBy: string;
   createdAt: string;
@@ -82,7 +82,7 @@ export interface TeamMember {
 export interface Interest {
   interestId: string;
   userId: string;
-  competitionId: string;
+  missionId: string;
   message?: string;
   status: 'pending' | 'assigned' | 'rejected';
   createdAt: string;
@@ -92,8 +92,8 @@ export interface Notice {
   noticeId: string;
   title: string;
   content: string;
-  type: 'general' | 'competition';
-  competitionId?: string;
+  type: 'general' | 'mission';
+  missionId?: string;
   status: 'draft' | 'published' | 'unpublished';
   priority: 'low' | 'medium' | 'high';
   createdBy: string;
@@ -107,6 +107,7 @@ export interface BoardMember {
   name: string;
   position: string;
   bio: string;
+  email: string;
   imageUrl?: string;
   order: number;
   status: 'active' | 'inactive';
@@ -135,7 +136,7 @@ export interface FileUpload {
   fileType: string;
   fileSize: number;
   category: 'project' | 'document' | 'other';
-  competitionId?: string;
+  missionId?: string;
   subEventId?: string;
   uploadedBy: string;
   uploadedAt: string;
@@ -147,7 +148,7 @@ export interface GalleryImage {
   imageUrl: string;
   title: string;
   description?: string;
-  competitionId?: string;
+  missionId?: string;
   subEventId?: string;
   uploadedBy: string;
   uploadedAt: string;
@@ -158,6 +159,10 @@ export interface HomepageContent {
   aboutUs: string;
   vision: string;
   mission: string;
+  missionCommanderMessage?: string;
+  missionCommanderName?: string;
+  missionCommanderTitle?: string;
+  missionCommanderImage?: string;
 }
 
 export interface ApiResponse<T = any> {

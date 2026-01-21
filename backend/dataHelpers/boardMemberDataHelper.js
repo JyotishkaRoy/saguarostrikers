@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+const { generateId } = require('../utils/idGenerator.cjs');
 const { readDB, writeDB, DB_FILES } = require('../config/database');
 
 class BoardMemberDataHelper {
@@ -20,7 +20,7 @@ class BoardMemberDataHelper {
   createBoardMember(memberData) {
     const members = this.getAllBoardMembers();
     const newMember = {
-      boardMemberId: uuidv4(),
+      boardMemberId: generateId(),
       ...memberData,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()

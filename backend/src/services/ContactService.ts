@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+import { generateId } from '../utils/idGenerator.js';
 import { ContactDataHelper } from '../data/ContactDataHelper.js';
 import { ContactMessage } from '../models/types.js';
 import { createError } from '../middleware/errorHandler.js';
@@ -23,7 +23,7 @@ export class ContactService {
     message: string;
   }): Promise<ContactMessage> {
     const contactMessage: ContactMessage = {
-      messageId: uuidv4(),
+      messageId: generateId(),
       name: data.name,
       email: data.email,
       subject: data.subject,

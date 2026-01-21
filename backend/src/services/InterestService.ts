@@ -1,49 +1,49 @@
-import { v4 as uuidv4 } from 'uuid';
+import { generateId } from '../utils/idGenerator.js';
 import { InterestDataHelper } from '../data/InterestDataHelper.js';
-import { CompetitionDataHelper } from '../data/CompetitionDataHelper.js';
+import { MissionDataHelper } from '../data/MissionDataHelper.js';
 import { UserDataHelper } from '../data/UserDataHelper.js';
 import { Interest } from '../models/types.js';
 import { createError } from '../middleware/errorHandler.js';
 
 export class InterestService {
   private interestDataHelper: InterestDataHelper;
-  private competitionDataHelper: CompetitionDataHelper;
+  private missionDataHelper: MissionDataHelper;
   private userDataHelper: UserDataHelper;
 
   constructor() {
     this.interestDataHelper = new InterestDataHelper();
-    this.competitionDataHelper = new CompetitionDataHelper();
+    this.missionDataHelper = new MissionDataHelper();
     this.userDataHelper = new UserDataHelper();
   }
 
   /**
-   * Show interest in a competition
+   * Show interest in a mission
    */
   async showInterest(
     userId: string,
-    competitionId: string,
+    missionId: string,
     message?: string
   ): Promise<Interest> {
-    // Verify competition exists and is published
-    const competition = this.competitionDataHelper.getCompetitionById(competitionId);
+    // Verify mission exists and is published
+    const mission = this.missionDataHelper.getMissionById(missionId);
     
-    if (!competition) {
-      throw createError.notFound('Competition not found');
+    if (!mission) {
+      throw createError.notFound('Mission not found');
     }
 
-    if (competition.status !== 'published') {
-      throw createError.badRequest('Cannot show interest in unpublished competition');
+    if (mission.status !== 'published') {
+      throw createError.badRequest('Cannot show interest in unpublished mission');
     }
 
     // Check if user already showed interest
-    if (this.interestDataHelper.hasUserShownInterest(userId, competitionId)) {
-      throw createError.conflict('You have already shown interest in this competition');
+    if (this.interestDataHelper.hasUserShownInterest(userId, missionId)) {
+      throw createError.conflict('You have already shown interest in this mission');
     }
 
     const interest: Interest = {
-      interestId: uuidv4(),
+      interestId: generateId(),
       userId,
-      competitionId,
+      missionId,
       message,
       status: 'pending',
       createdAt: new Date().toISOString()
@@ -60,17 +60,17 @@ export class InterestService {
   }
 
   /**
-   * Get interests for a competition (admin only)
+   * Get interests for a mission (admin only)
    */
-  async getCompetitionInterests(competitionId: string): Promise<Interest[]> {
-    return this.interestDataHelper.getInterestsByCompetition(competitionId);
+  async getMissionInterests(missionId: string): Promise<Interest[]> {
+    return this.interestDataHelper.getInterestsByMission(missionId);
   }
 
   /**
    * Get pending interests (admin only)
    */
-  async getPendingInterests(competitionId?: string): Promise<Interest[]> {
-    return this.interestDataHelper.getPendingInterests(competitionId);
+  async getPendingInterests(missionId?: string): Promise<Interest[]> {
+    return this.interestDataHelper.getPendingInterests(missionId);
   }
 
   /**
@@ -120,7 +120,7 @@ export class InterestService {
   async getInterestWithDetails(interestId: string): Promise<{
     interest: Interest;
     user?: Omit<import('../models/types.js').User, 'password'>;
-    competition?: import('../models/types.js').Competition;
+    mission?: import('../models/types.js').Mission;
   }> {
     const interest = this.interestDataHelper.getInterestById(interestId);
     
@@ -129,12 +129,12 @@ export class InterestService {
     }
 
     const user = this.userDataHelper.getUserById(interest.userId);
-    const competition = this.competitionDataHelper.getCompetitionById(interest.competitionId);
+    const mission = this.missionDataHelper.getMissionById(interest.missionId);
 
     return {
       interest,
       user: user ? (() => { const { password: _, ...u } = user; return u; })() : undefined,
-      competition: competition || undefined
+      mission: mission || undefined
     };
   }
 }

@@ -12,7 +12,7 @@ router.post('/teams', validationRules.createTeam, handleValidationErrors, teamAd
 router.get('/teams/:id', teamAdminController.getTeamById);
 router.put('/teams/:id', teamAdminController.updateTeam);
 router.delete('/teams/:id', teamAdminController.deleteTeam);
-router.get('/competitions/:competitionId/teams', teamAdminController.getTeamsByCompetition);
+router.get('/missions/:missionId/teams', teamAdminController.getTeamsByMission);
 
 // Team members
 router.post('/teams/:teamId/members', validationRules.addTeamMember, handleValidationErrors, teamAdminController.addTeamMember);

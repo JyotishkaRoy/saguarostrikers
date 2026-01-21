@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { FileUpload, CreateFileData } from '../models/types';
-import { v4 as uuidv4 } from 'uuid';
+import { generateId } from '../utils/idGenerator.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -47,9 +47,9 @@ export class FileDataHelper {
     return files.find(file => file.fileId === fileId) || null;
   }
 
-  async getFilesByCompetition(competitionId: string): Promise<FileUpload[]> {
+  async getFilesByMission(missionId: string): Promise<FileUpload[]> {
     const files = this.readData();
-    return files.filter(file => file.competitionId === competitionId);
+    return files.filter(file => file.missionId === missionId);
   }
 
   async getFilesBySubEvent(subEventId: string): Promise<FileUpload[]> {
@@ -67,14 +67,14 @@ export class FileDataHelper {
     const now = new Date().toISOString();
 
     const newFile: FileUpload = {
-      fileId: uuidv4(),
+      fileId: generateId(),
       fileName: data.filePath.split('/').pop() || '',
       originalName: data.originalName,
       filePath: data.filePath,
       fileType: data.fileType,
       fileSize: data.fileSize,
       category: data.category,
-      competitionId: data.competitionId,
+      missionId: data.missionId,
       subEventId: data.subEventId,
       description: data.description,
       isPublic: data.isPublic !== undefined ? data.isPublic : false,

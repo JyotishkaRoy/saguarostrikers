@@ -1,7 +1,7 @@
 import { SiteContentDataHelper } from '../data/SiteContentDataHelper.js';
 import { BoardMemberDataHelper } from '../data/BoardMemberDataHelper.js';
 import { HomepageContent, BoardMember } from '../models/types.js';
-import { v4 as uuidv4 } from 'uuid';
+import { generateId } from '../utils/idGenerator.js';
 import { createError } from '../middleware/errorHandler.js';
 
 export class SiteContentService {
@@ -78,6 +78,7 @@ export class SiteContentService {
     name: string;
     position: string;
     bio: string;
+    email: string;
     imageUrl?: string;
     order?: number;
     status?: 'active' | 'inactive';
@@ -86,10 +87,11 @@ export class SiteContentService {
     const maxOrder = members.length > 0 ? Math.max(...members.map(m => m.order)) : -1;
 
     const boardMember: BoardMember = {
-      boardMemberId: uuidv4(),
+      boardMemberId: generateId(),
       name: data.name,
       position: data.position,
       bio: data.bio,
+      email: data.email,
       imageUrl: data.imageUrl,
       order: data.order !== undefined ? data.order : maxOrder + 1,
       status: data.status || 'active',
@@ -109,6 +111,7 @@ export class SiteContentService {
       name?: string;
       position?: string;
       bio?: string;
+      email?: string;
       imageUrl?: string;
       order?: number;
       status?: 'active' | 'inactive';

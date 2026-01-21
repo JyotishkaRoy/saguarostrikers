@@ -2,27 +2,27 @@ import { useEffect, useState } from 'react';
 import HeroBanner from '@/components/HeroBanner';
 import VideoCarousel from '@/components/VideoCarousel';
 import { api } from '@/lib/api';
-import type { HomepageContent, Competition } from '@/types';
+import type { HomepageContent, Mission } from '@/types';
 import { Calendar, MapPin, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 interface Stats {
-  totalCompetitions: number;
+  totalMissions: number;
   totalTeamMembers: number;
   totalEvents: number;
-  completedCompetitions: number;
+  completedMissions: number;
 }
 
 export default function HomePage() {
   const [content, setContent] = useState<HomepageContent | null>(null);
-  const [upcomingCompetitions, setUpcomingCompetitions] = useState<Competition[]>([]);
-  const [stats, setStats] = useState<Stats>({ totalCompetitions: 0, totalTeamMembers: 0, totalEvents: 0, completedCompetitions: 0 });
+  const [upcomingMissions, setUpcomingMissions] = useState<Mission[]>([]);
+  const [stats, setStats] = useState<Stats>({ totalMissions: 0, totalTeamMembers: 0, totalEvents: 0, completedMissions: 0 });
   const [isLoading, setIsLoading] = useState(true);
-  const [isLoadingCompetitions, setIsLoadingCompetitions] = useState(true);
+  const [isLoadingMissions, setIsLoadingMissions] = useState(true);
 
   useEffect(() => {
     fetchHomepageContent();
-    fetchUpcomingCompetitions();
+    fetchUpcomingMissions();
     fetchStats();
   }, []);
 
@@ -39,54 +39,54 @@ export default function HomePage() {
     }
   };
 
-  const fetchUpcomingCompetitions = async () => {
+  const fetchUpcomingMissions = async () => {
     try {
-      const response = await api.get<Competition[]>('/public/competitions/upcoming');
+      const response = await api.get<Mission[]>('/public/missions/upcoming');
       if (response.success && response.data) {
-        // Limit to 3 competitions for the homepage
-        setUpcomingCompetitions(response.data.slice(0, 3));
+        // Limit to 3 missions for the homepage
+        setUpcomingMissions(response.data.slice(0, 3));
       }
     } catch (error) {
-      console.error('Failed to fetch upcoming competitions:', error);
+      console.error('Failed to fetch upcoming missions:', error);
     } finally {
-      setIsLoadingCompetitions(false);
+      setIsLoadingMissions(false);
     }
   };
 
   const fetchStats = async () => {
     try {
-      // Fetch all competitions (published only for public view)
-      const competitionsResponse = await api.get<Competition[]>('/public/competitions');
-      const competitions = competitionsResponse.success && competitionsResponse.data ? competitionsResponse.data : [];
+      // Fetch all missions (published only for public view)
+      const missionsResponse = await api.get<Mission[]>('/public/missions');
+      const missions = missionsResponse.success && missionsResponse.data ? missionsResponse.data : [];
       
       // Fetch upcoming calendar events
       const eventsResponse = await api.get<any[]>('/public/calendar-events/upcoming?limit=100');
       const events = eventsResponse.success && Array.isArray(eventsResponse.data) ? eventsResponse.data : [];
       
-      // Count completed competitions
-      const completed = competitions.filter(c => c.status === 'completed').length;
+      // Count completed missions
+      const completed = missions.filter(c => c.status === 'completed').length;
       
-      // For active missions, count published competitions
-      const activeMissions = competitions.filter(c => c.status === 'published' || c.status === 'draft').length;
+      // For active missions, count published missions
+      const activeMissions = missions.filter(c => c.status === 'published' || c.status === 'draft').length;
       
       // Use a reasonable team member estimate based on our data
       // In production, you'd create a public stats endpoint
       const teamMembersCount = 30; // Estimate based on multiple teams
       
       setStats({
-        totalCompetitions: activeMissions,
+        totalMissions: activeMissions,
         totalTeamMembers: teamMembersCount,
         totalEvents: events.length,
-        completedCompetitions: completed
+        completedMissions: completed
       });
     } catch (error) {
       console.error('Failed to fetch stats:', error);
       // Set default values on error
       setStats({
-        totalCompetitions: 4,
+        totalMissions: 4,
         totalTeamMembers: 30,
         totalEvents: 10,
-        completedCompetitions: 0
+        completedMissions: 0
       });
     }
   };
@@ -138,7 +138,7 @@ export default function HomePage() {
                       <p>
                         Saguaro Strikers is a premier rocketry team dedicated to inspiring the next 
                         generation of aerospace engineers and scientists. We participate in national 
-                        and international rocketry competitions, pushing the boundaries of what's 
+                        and international rocketry missions, pushing the boundaries of what's 
                         possible in amateur rocketry.
                       </p>
                       
@@ -173,7 +173,7 @@ export default function HomePage() {
                           Join Our Team
                         </a>
                         <a
-                          href="/competitions"
+                          href="/missions"
                           className="btn-outline inline-flex items-center"
                         >
                           View Our Missions
@@ -197,7 +197,7 @@ export default function HomePage() {
               {/* Quick Stats */}
               <div className="mt-8 grid grid-cols-2 gap-4">
                 <div className="bg-primary-50 rounded-lg p-4 text-center">
-                  <div className="text-3xl font-bold text-primary-600">{stats.totalCompetitions}</div>
+                  <div className="text-3xl font-bold text-primary-600">{stats.totalMissions}</div>
                   <div className="text-sm text-gray-600 mt-1">Active Missions</div>
                 </div>
                 <div className="bg-primary-50 rounded-lg p-4 text-center">
@@ -209,7 +209,7 @@ export default function HomePage() {
                   <div className="text-sm text-gray-600 mt-1">Events</div>
                 </div>
                 <div className="bg-primary-50 rounded-lg p-4 text-center">
-                  <div className="text-3xl font-bold text-primary-600">{stats.completedCompetitions}</div>
+                  <div className="text-3xl font-bold text-primary-600">{stats.completedMissions}</div>
                   <div className="text-sm text-gray-600 mt-1">Completed Missions</div>
                 </div>
               </div>
@@ -225,7 +225,7 @@ export default function HomePage() {
             Upcoming Missions
           </h2>
           
-          {isLoadingCompetitions ? (
+          {isLoadingMissions ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {[1, 2, 3].map((i) => (
                 <div key={i} className="card animate-pulse">
@@ -236,52 +236,52 @@ export default function HomePage() {
                 </div>
               ))}
             </div>
-          ) : upcomingCompetitions.length > 0 ? (
+          ) : upcomingMissions.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {upcomingCompetitions.map((competition) => (
+              {upcomingMissions.map((mission) => (
                 <Link
-                  key={competition.competitionId}
-                  to={`/competitions/${competition.slug}`}
+                  key={mission.missionId}
+                  to={`/missions/${mission.slug}`}
                   className="card hover:shadow-lg transition-all hover:-translate-y-1 group"
                 >
                   <div className="h-48 bg-gradient-to-br from-primary-400 to-primary-600 rounded-t-lg -mt-6 -mx-6 mb-4 flex items-center justify-center overflow-hidden">
-                    {competition.imageUrl ? (
+                    {mission.imageUrl ? (
                       <img
-                        src={competition.imageUrl}
-                        alt={competition.title}
+                        src={mission.imageUrl}
+                        alt={mission.title}
                         className="w-full h-full object-cover"
                       />
                     ) : (
                       <div className="text-white text-center p-4">
                         <div className="text-4xl font-bold mb-2">🚀</div>
-                        <div className="text-lg font-semibold">{competition.title}</div>
+                        <div className="text-lg font-semibold">{mission.title}</div>
                       </div>
                     )}
                   </div>
                   
                   <h3 className="text-xl font-semibold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
-                    {competition.title}
+                    {mission.title}
                   </h3>
                   
                   <p className="text-gray-600 mb-4 line-clamp-2">
-                    {competition.description}
+                    {mission.description}
                   </p>
                   
                   <div className="space-y-2 text-sm text-gray-500 mb-4">
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4 text-primary-600" />
                       <span>
-                        {new Date(competition.startDate).toLocaleDateString('en-US', {
+                        {new Date(mission.startDate).toLocaleDateString('en-US', {
                           month: 'short',
                           day: 'numeric',
                           year: 'numeric'
                         })}
                       </span>
                     </div>
-                    {competition.location && (
+                    {mission.location && (
                       <div className="flex items-center gap-2">
                         <MapPin className="h-4 w-4 text-primary-600" />
-                        <span>{competition.location}</span>
+                        <span>{mission.location}</span>
                       </div>
                     )}
                   </div>
@@ -298,18 +298,18 @@ export default function HomePage() {
               <div className="text-6xl mb-4">🚀</div>
               <h3 className="text-xl font-semibold text-gray-900 mb-2">No Upcoming Missions</h3>
               <p className="text-gray-600 mb-6">
-                Check back soon for new exciting rocketry competitions!
+                Check back soon for new exciting rocketry missions!
               </p>
-              <Link to="/competitions" className="btn-primary inline-flex items-center">
+              <Link to="/missions" className="btn-primary inline-flex items-center">
                 View All Missions
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Link>
             </div>
           )}
           
-          {upcomingCompetitions.length > 0 && (
+          {upcomingMissions.length > 0 && (
             <div className="text-center mt-8">
-              <Link to="/competitions" className="btn-outline inline-flex items-center">
+              <Link to="/missions" className="btn-outline inline-flex items-center">
                 View All Missions
                 <ArrowRight className="h-5 w-5 ml-2" />
               </Link>

@@ -3,8 +3,8 @@ import { Trophy, Plus, Edit, Trash2, Eye, Calendar, MapPin, Search } from 'lucid
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 
-interface Competition {
-  competitionId: string;
+interface Mission {
+  missionId: string;
   title: string;
   slug: string;
   description: string;
@@ -17,14 +17,14 @@ interface Competition {
   updatedAt: string;
 }
 
-export default function AdminCompetitions() {
-  const [competitions, setCompetitions] = useState<Competition[]>([]);
-  const [filteredCompetitions, setFilteredCompetitions] = useState<Competition[]>([]);
+export default function AdminMissions() {
+  const [missions, setMissions] = useState<Mission[]>([]);
+  const [filteredMissions, setFilteredMissions] = useState<Mission[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [editingCompetition, setEditingCompetition] = useState<Competition | null>(null);
+  const [editingMission, setEditingMission] = useState<Mission | null>(null);
   const [stats, setStats] = useState({
     total: 0,
     published: 0,
@@ -33,11 +33,11 @@ export default function AdminCompetitions() {
   });
 
   useEffect(() => {
-    fetchCompetitions();
+    fetchMissions();
   }, []);
 
   useEffect(() => {
-    let filtered = competitions;
+    let filtered = missions;
 
     if (filterStatus !== 'all') {
       filtered = filtered.filter(c => c.status === filterStatus);
@@ -51,17 +51,17 @@ export default function AdminCompetitions() {
       );
     }
 
-    setFilteredCompetitions(filtered);
-  }, [searchTerm, filterStatus, competitions]);
+    setFilteredMissions(filtered);
+  }, [searchTerm, filterStatus, missions]);
 
-  const fetchCompetitions = async () => {
+  const fetchMissions = async () => {
     try {
       setIsLoading(true);
-      const response = await api.get('/admin/competitions');
+      const response = await api.get('/admin/missions');
       if (response.success && response.data && Array.isArray(response.data)) {
-        setCompetitions(response.data as Competition[]);
-        setFilteredCompetitions(response.data as Competition[]);
-        calculateStats(response.data as Competition[]);
+        setMissions(response.data as Mission[]);
+        setFilteredMissions(response.data as Mission[]);
+        calculateStats(response.data as Mission[]);
       }
     } catch (error) {
       toast.error(getErrorMessage(error));
@@ -70,7 +70,7 @@ export default function AdminCompetitions() {
     }
   };
 
-  const calculateStats = (data: Competition[]) => {
+  const calculateStats = (data: Mission[]) => {
     setStats({
       total: data.length,
       published: data.filter(c => c.status === 'published').length,
@@ -93,28 +93,28 @@ export default function AdminCompetitions() {
     };
 
     try {
-      if (editingCompetition) {
-        await api.put(`/admin/competitions/${editingCompetition.competitionId}`, data);
-        toast.success('Competition updated successfully');
+      if (editingMission) {
+        await api.put(`/admin/missions/${editingMission.missionId}`, data);
+        toast.success('Mission updated successfully');
       } else {
-        await api.post('/admin/competitions', data);
-        toast.success('Competition created successfully');
+        await api.post('/admin/missions', data);
+        toast.success('Mission created successfully');
       }
       setIsModalOpen(false);
-      setEditingCompetition(null);
-      fetchCompetitions();
+      setEditingMission(null);
+      fetchMissions();
     } catch (error) {
       toast.error(getErrorMessage(error));
     }
   };
 
   const handleDelete = async (id: string) => {
-    if (!window.confirm('Are you sure you want to delete this competition?')) return;
+    if (!window.confirm('Are you sure you want to delete this mission?')) return;
 
     try {
-      await api.delete(`/admin/competitions/${id}`);
-      toast.success('Competition deleted successfully');
-      fetchCompetitions();
+      await api.delete(`/admin/missions/${id}`);
+      toast.success('Mission deleted successfully');
+      fetchMissions();
     } catch (error) {
       toast.error(getErrorMessage(error));
     }
@@ -134,8 +134,8 @@ export default function AdminCompetitions() {
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
       <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Competitions Management</h1>
-        <p className="text-gray-600">Create and manage mission competitions</p>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Missions Management</h1>
+        <p className="text-gray-600">Create and manage mission missions</p>
       </div>
 
       {/* Stats Cards */}
@@ -186,7 +186,7 @@ export default function AdminCompetitions() {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
               <input
                 type="text"
-                placeholder="Search competitions..."
+                placeholder="Search missions..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="input pl-10 w-full"
@@ -206,61 +206,61 @@ export default function AdminCompetitions() {
           </div>
           <button
             onClick={() => {
-              setEditingCompetition(null);
+              setEditingMission(null);
               setIsModalOpen(true);
             }}
             className="btn-primary flex items-center gap-2 whitespace-nowrap"
           >
             <Plus className="h-4 w-4" />
-            Create Competition
+            Create Mission
           </button>
         </div>
       </div>
 
-      {/* Competitions List */}
+      {/* Missions List */}
       {isLoading ? (
         <div className="flex items-center justify-center py-12">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
         </div>
-      ) : filteredCompetitions.length === 0 ? (
+      ) : filteredMissions.length === 0 ? (
         <div className="card text-center py-12">
           <Trophy className="h-16 w-16 mx-auto text-gray-400 mb-4" />
-          <h3 className="text-lg font-semibold text-gray-900 mb-2">No competitions found</h3>
-          <p className="text-gray-600 mb-4">Create your first competition to get started</p>
+          <h3 className="text-lg font-semibold text-gray-900 mb-2">No missions found</h3>
+          <p className="text-gray-600 mb-4">Create your first mission to get started</p>
           <button onClick={() => setIsModalOpen(true)} className="btn-primary">
-            Create Competition
+            Create Mission
           </button>
         </div>
       ) : (
         <div className="space-y-4">
-          {filteredCompetitions.map((competition) => (
-            <div key={competition.competitionId} className="card hover:shadow-lg transition-shadow">
+          {filteredMissions.map((mission) => (
+            <div key={mission.missionId} className="card hover:shadow-lg transition-shadow">
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-xl font-bold text-gray-900">{competition.title}</h3>
-                    <span className={`badge ${getStatusBadge(competition.status)}`}>
-                      {competition.status}
+                    <h3 className="text-xl font-bold text-gray-900">{mission.title}</h3>
+                    <span className={`badge ${getStatusBadge(mission.status)}`}>
+                      {mission.status}
                     </span>
                   </div>
-                  <p className="text-gray-600 mb-3 line-clamp-2">{competition.description}</p>
+                  <p className="text-gray-600 mb-3 line-clamp-2">{mission.description}</p>
                   <div className="flex flex-wrap gap-4 text-sm text-gray-500">
                     <div className="flex items-center gap-1">
                       <Calendar className="h-4 w-4" />
                       <span>
-                        {new Date(competition.startDate).toLocaleDateString()} - {new Date(competition.endDate).toLocaleDateString()}
+                        {new Date(mission.startDate).toLocaleDateString()} - {new Date(mission.endDate).toLocaleDateString()}
                       </span>
                     </div>
                     <div className="flex items-center gap-1">
                       <MapPin className="h-4 w-4" />
-                      <span>{competition.location}</span>
+                      <span>{mission.location}</span>
                     </div>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 ml-4">
                   <button
                     onClick={() => {
-                      setEditingCompetition(competition);
+                      setEditingMission(mission);
                       setIsModalOpen(true);
                     }}
                     className="btn-outline text-sm py-1.5 px-3"
@@ -269,7 +269,7 @@ export default function AdminCompetitions() {
                     <Edit className="h-4 w-4" />
                   </button>
                   <button
-                    onClick={() => handleDelete(competition.competitionId)}
+                    onClick={() => handleDelete(mission.missionId)}
                     className="btn-danger text-sm py-1.5 px-3"
                     title="Delete"
                   >
@@ -287,7 +287,7 @@ export default function AdminCompetitions() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg p-6 max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <h2 className="text-2xl font-bold mb-4">
-              {editingCompetition ? 'Edit Competition' : 'Create Competition'}
+              {editingMission ? 'Edit Mission' : 'Create Mission'}
             </h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -295,7 +295,7 @@ export default function AdminCompetitions() {
                 <input
                   type="text"
                   name="title"
-                  defaultValue={editingCompetition?.title}
+                  defaultValue={editingMission?.title}
                   required
                   className="input w-full"
                   placeholder="NASA USLI 2024"
@@ -305,11 +305,11 @@ export default function AdminCompetitions() {
                 <label className="block text-sm font-medium mb-1">Description</label>
                 <textarea
                   name="description"
-                  defaultValue={editingCompetition?.description}
+                  defaultValue={editingMission?.description}
                   required
                   rows={4}
                   className="input w-full"
-                  placeholder="Describe the competition..."
+                  placeholder="Describe the mission..."
                 ></textarea>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -318,7 +318,7 @@ export default function AdminCompetitions() {
                   <input
                     type="date"
                     name="startDate"
-                    defaultValue={editingCompetition?.startDate?.split('T')[0]}
+                    defaultValue={editingMission?.startDate?.split('T')[0]}
                     required
                     className="input w-full"
                   />
@@ -328,7 +328,7 @@ export default function AdminCompetitions() {
                   <input
                     type="date"
                     name="endDate"
-                    defaultValue={editingCompetition?.endDate?.split('T')[0]}
+                    defaultValue={editingMission?.endDate?.split('T')[0]}
                     required
                     className="input w-full"
                   />
@@ -339,7 +339,7 @@ export default function AdminCompetitions() {
                 <input
                   type="text"
                   name="location"
-                  defaultValue={editingCompetition?.location}
+                  defaultValue={editingMission?.location}
                   required
                   className="input w-full"
                   placeholder="Huntsville, AL"
@@ -347,7 +347,7 @@ export default function AdminCompetitions() {
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">Status</label>
-                <select name="status" defaultValue={editingCompetition?.status || 'draft'} className="input w-full">
+                <select name="status" defaultValue={editingMission?.status || 'draft'} className="input w-full">
                   <option value="draft">Draft</option>
                   <option value="published">Published</option>
                   <option value="completed">Completed</option>
@@ -356,13 +356,13 @@ export default function AdminCompetitions() {
               </div>
               <div className="flex gap-2 pt-4">
                 <button type="submit" className="btn-primary flex-1">
-                  {editingCompetition ? 'Update' : 'Create'}
+                  {editingMission ? 'Update' : 'Create'}
                 </button>
                 <button
                   type="button"
                   onClick={() => {
                     setIsModalOpen(false);
-                    setEditingCompetition(null);
+                    setEditingMission(null);
                   }}
                   className="btn-outline flex-1"
                 >

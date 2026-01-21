@@ -28,7 +28,7 @@ Added comprehensive TypeScript interfaces:
 **Files**:
 - `backend/src/data/CalendarEventDataHelper.ts`
   - CRUD operations for calendar events
-  - Query by month, date range, competition
+  - Query by month, date range, mission
   - Search functionality
   - Get upcoming events
 
@@ -107,7 +107,7 @@ Added 18 new routes:
 - Full calendar event management interface
 - Create/Edit/Delete events
 - Search and filter by type
-- Color-coded event types (launch, meeting, competition, deadline, other)
+- Color-coded event types (launch, meeting, mission, deadline, other)
 - Status badges (upcoming, ongoing, completed, cancelled)
 - Modal forms for creating/editing
 - Real-time validation

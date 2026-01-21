@@ -1,16 +1,16 @@
 const noticeDataHelper = require('../dataHelpers/noticeDataHelper');
-const competitionDataHelper = require('../dataHelpers/competitionDataHelper');
+const missionDataHelper = require('../dataHelpers/missionDataHelper');
 const auditLogDataHelper = require('../dataHelpers/auditLogDataHelper');
 
 class NoticeService {
   createNotice(noticeData, userId, requestInfo = {}) {
-    const { title, content, type, competitionId, priority, status } = noticeData;
+    const { title, content, type, missionId, priority, status } = noticeData;
 
-    // If competition notice, verify competition exists
-    if (type === 'competition' && competitionId) {
-      const competition = competitionDataHelper.getCompetitionById(competitionId);
-      if (!competition) {
-        throw new Error('Competition not found');
+    // If mission notice, verify mission exists
+    if (type === 'mission' && missionId) {
+      const mission = missionDataHelper.getMissionById(missionId);
+      if (!mission) {
+        throw new Error('Mission not found');
       }
     }
 
@@ -19,7 +19,7 @@ class NoticeService {
       title,
       content,
       type: type || 'general',
-      competitionId: competitionId || null,
+      missionId: missionId || null,
       priority: priority || 'medium',
       status: status || 'draft',
       createdBy: userId,
@@ -103,8 +103,8 @@ class NoticeService {
     return noticeDataHelper.getPublishedGeneralNotices();
   }
 
-  getNoticesByCompetition(competitionId) {
-    return noticeDataHelper.getNoticesByCompetition(competitionId);
+  getNoticesByMission(missionId) {
+    return noticeDataHelper.getNoticesByMission(missionId);
   }
 
   publishNotice(noticeId, userId, requestInfo = {}) {

@@ -1,6 +1,6 @@
 import { BaseDataHelper } from './BaseDataHelper.js';
 import { AuditLog } from '../models/types.js';
-import { v4 as uuidv4 } from 'uuid';
+import { generateId } from '../utils/idGenerator.js';
 
 interface CreateAuditLogData {
   userId: string;
@@ -23,7 +23,7 @@ export class AuditDataHelper extends BaseDataHelper<AuditLog> {
 
   public createLog(logData: CreateAuditLogData): AuditLog {
     const auditLog: AuditLog = {
-      logId: uuidv4(),
+      logId: generateId(),
       ...logData,
       timestamp: new Date().toISOString()
     };

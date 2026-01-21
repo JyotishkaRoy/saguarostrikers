@@ -1,4 +1,4 @@
-import { GalleryDataHelper } from '../data/GalleryDataHelper';
+import { GalleryDataHelper } from '../data/GalleryDataHelper.js';
 import { GalleryImage, CreateGalleryImageData } from '../models/types';
 import { unlink } from 'fs/promises';
 import { join } from 'path';
@@ -22,8 +22,8 @@ export class GalleryService {
     return await this.dataHelper.getImageById(galleryId);
   }
 
-  async getImagesByCompetition(competitionId: string): Promise<GalleryImage[]> {
-    return await this.dataHelper.getImagesByCompetition(competitionId);
+  async getImagesByMission(missionId: string): Promise<GalleryImage[]> {
+    return await this.dataHelper.getImagesByMission(missionId);
   }
 
   async getImagesBySubEvent(subEventId: string): Promise<GalleryImage[]> {

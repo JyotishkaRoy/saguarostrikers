@@ -4,6 +4,7 @@ import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 import RichTextEditor from '@/components/RichTextEditor';
 import RichTextDisplay from '@/components/RichTextDisplay';
+import axios from 'axios';
 
 interface SiteContent {
   contentId: string;
@@ -75,6 +76,7 @@ export default function AdminSiteContent() {
 
   const sections = [
     { key: 'homepage-hero', label: 'Homepage Hero', type: 'hero' },
+    { key: 'mission-commander', label: 'Mission Director Statement', type: 'commander' },
     { key: 'homepage-about', label: 'About Us', type: 'richtext' },
     { key: 'homepage-mission', label: 'Mission', type: 'richtext' },
     { key: 'homepage-vision', label: 'Vision', type: 'richtext' },
@@ -162,6 +164,13 @@ export default function AdminSiteContent() {
                     onSave={() => handleSave(content.contentId)}
                     onCancel={() => setEditingId(null)}
                   />
+                ) : section.type === 'commander' ? (
+                  <MissionCommanderEditor
+                    content={editContent}
+                    onChange={setEditContent}
+                    onSave={() => handleSave(content.contentId)}
+                    onCancel={() => setEditingId(null)}
+                  />
                 ) : (
                   <div className="space-y-4">
                     <div>
@@ -212,6 +221,8 @@ export default function AdminSiteContent() {
               ) : isPreview ? (
                 section.type === 'hero' ? (
                   <HeroPreview content={content.content} />
+                ) : section.type === 'commander' ? (
+                  <MissionCommanderPreview content={content.content} />
                 ) : (
                   <div className="bg-gray-50 p-6 rounded-lg">
                     <h3 className="text-lg font-semibold mb-4">{content.title}</h3>
@@ -220,8 +231,8 @@ export default function AdminSiteContent() {
                 )
               ) : (
                 <div className="text-gray-600 text-sm">
-                  {section.type === 'hero' ? (
-                    <div className="text-gray-500 italic">Click "Preview" to see hero section content</div>
+                  {section.type === 'hero' || section.type === 'commander' ? (
+                    <div className="text-gray-500 italic">Click "Preview" to see {section.type === 'hero' ? 'hero' : 'mission director'} content</div>
                   ) : (
                     <>
                       <div 
@@ -269,6 +280,7 @@ function HeroEditor({ content, onChange, onSave, onCancel }: HeroEditorProps) {
   });
 
   const [newImage, setNewImage] = useState('');
+  const [uploading, setUploading] = useState(false);
   const [newCTA, setNewCTA] = useState<{ text: string; link: string; style: 'primary' | 'secondary' }>({ 
     text: '', 
     link: '', 
@@ -312,6 +324,59 @@ function HeroEditor({ content, onChange, onSave, onCancel }: HeroEditorProps) {
       ...prev,
       ctas: prev.ctas.filter((_: any, i: number) => i !== index)
     }));
+  };
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    // Validate file type
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file');
+      return;
+    }
+
+    // Validate file size (max 5MB)
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image size must be less than 5MB');
+      return;
+    }
+
+    try {
+      setUploading(true);
+      const formData = new FormData();
+      formData.append('banner', file);
+
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+      const token = localStorage.getItem('token');
+
+      // Use axios directly to properly handle FormData
+      const response = await axios.post(
+        `${API_URL}/admin/site-content/upload-banner`,
+        formData,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            // Don't set Content-Type - let browser set it with boundary
+          },
+        }
+      );
+
+      if (response.data.success && response.data.data) {
+        const imageUrl = response.data.data.url;
+        setHeroData((prev: any) => ({
+          ...prev,
+          images: [...(prev.images || []), imageUrl]
+        }));
+        toast.success('Banner image uploaded successfully');
+      }
+    } catch (error) {
+      toast.error(getErrorMessage(error));
+    } finally {
+      setUploading(false);
+      // Reset file input
+      event.target.value = '';
+    }
   };
 
   return (
@@ -362,17 +427,53 @@ function HeroEditor({ content, onChange, onSave, onCancel }: HeroEditorProps) {
               </button>
             </div>
           ))}
+          
+          {/* Upload Banner Image */}
+          <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 bg-gray-50">
+            <div className="flex flex-col items-center justify-center gap-2">
+              <ImageIcon className="h-8 w-8 text-gray-400" />
+              <p className="text-sm text-gray-600 text-center">
+                Upload a banner image (max 5MB)
+              </p>
+              <label
+                htmlFor="banner-upload"
+                className={`btn-primary cursor-pointer ${uploading ? 'opacity-50 cursor-not-allowed' : ''}`}
+              >
+                <Plus className="h-4 w-4 mr-1" />
+                {uploading ? 'Uploading...' : 'Upload Image'}
+              </label>
+              <input
+                id="banner-upload"
+                type="file"
+                accept="image/*"
+                onChange={handleFileUpload}
+                disabled={uploading}
+                className="hidden"
+              />
+            </div>
+          </div>
+          
+          {/* Or add by URL */}
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <div className="w-full border-t border-gray-300"></div>
+            </div>
+            <div className="relative flex justify-center text-xs">
+              <span className="px-2 bg-white text-gray-500">Or add by URL</span>
+            </div>
+          </div>
+          
           <div className="flex gap-2">
             <input
               type="text"
               value={newImage}
               onChange={(e) => setNewImage(e.target.value)}
               className="input flex-1"
-              placeholder="/images/banner/Banner 1.png"
+              placeholder="/images/banners/Banner 1.png"
             />
             <button onClick={handleAddImage} className="btn-outline">
               <Plus className="h-4 w-4 mr-1" />
-              Add
+              Add URL
             </button>
           </div>
         </div>
@@ -522,6 +623,288 @@ function HeroPreview({ content }: HeroPreviewProps) {
           <p className="text-sm text-gray-500 italic">No CTA buttons</p>
         )}
       </div>
+    </div>
+  );
+}
+
+// Mission Commander Editor Component
+interface MissionCommanderEditorProps {
+  content: string;
+  onChange: (content: string) => void;
+  onSave: () => void;
+  onCancel: () => void;
+}
+
+function MissionCommanderEditor({ content, onChange, onSave, onCancel }: MissionCommanderEditorProps) {
+  const [commanderData, setCommanderData] = useState(() => {
+    try {
+      return JSON.parse(content);
+    } catch {
+      return {
+        message: '',
+        name: 'Mission Director',
+        title: 'Team Leader',
+        image: ''
+      };
+    }
+  });
+
+  const [uploading, setUploading] = useState(false);
+  const [users, setUsers] = useState<Array<{ userId: string; firstName: string; lastName: string; email: string }>>([]);
+  const [loadingUsers, setLoadingUsers] = useState(false);
+
+  // Fetch users list
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        setLoadingUsers(true);
+        const response = await api.get<Array<{ userId: string; firstName: string; lastName: string; email: string }>>('/admin/users');
+        if (response.success && response.data) {
+          setUsers(response.data);
+        }
+      } catch (error) {
+        console.error('Failed to fetch users:', error);
+        toast.error('Failed to load users list');
+      } finally {
+        setLoadingUsers(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  // Update parent when commanderData changes
+  useEffect(() => {
+    onChange(JSON.stringify(commanderData, null, 2));
+  }, [commanderData, onChange]);
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      toast.error('Please select an image file');
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      toast.error('Image size must be less than 5MB');
+      return;
+    }
+
+    try {
+      setUploading(true);
+      const formData = new FormData();
+      formData.append('missionDirector', file);
+
+      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+      const token = localStorage.getItem('token');
+
+      const response = await axios.post(
+        `${API_URL}/admin/site-content/upload-mission-director`,
+        formData,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        }
+      );
+
+      if (response.data.success && response.data.data) {
+        const imageUrl = response.data.data.url;
+        setCommanderData((prev: any) => ({
+          ...prev,
+          image: imageUrl
+        }));
+        toast.success('Director image uploaded successfully');
+      }
+    } catch (error) {
+      toast.error(getErrorMessage(error));
+    } finally {
+      setUploading(false);
+      event.target.value = '';
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      {/* Director Message */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Director's Message
+        </label>
+        <textarea
+          value={commanderData.message || ''}
+          onChange={(e) => setCommanderData({ ...commanderData, message: e.target.value })}
+          className="input w-full"
+          rows={6}
+          placeholder="To the dedicated members of [Organization], your unwavering passion and dedication..."
+        />
+        <p className="text-xs text-gray-500 mt-1">
+          This message will be displayed with quotation marks on the Mission Statement page
+        </p>
+      </div>
+
+      {/* Director Name */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Director's Name
+        </label>
+        {loadingUsers ? (
+          <div className="input w-full flex items-center gap-2">
+            <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-600"></div>
+            <span className="text-sm text-gray-500">Loading users...</span>
+          </div>
+        ) : (
+          <select
+            value={commanderData.name || ''}
+            onChange={(e) => {
+              setCommanderData({ 
+                ...commanderData, 
+                name: e.target.value,
+              });
+            }}
+            className="input w-full"
+          >
+            <option value="">Select a user...</option>
+            {users.map((user) => (
+              <option key={user.userId} value={`${user.firstName} ${user.lastName}`}>
+                {user.firstName} {user.lastName} ({user.email})
+              </option>
+            ))}
+          </select>
+        )}
+        <p className="text-xs text-gray-500 mt-1">
+          Select from registered users or type a custom name
+        </p>
+      </div>
+
+      {/* Director Title */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Director's Title
+        </label>
+        <input
+          type="text"
+          value={commanderData.title || ''}
+          onChange={(e) => setCommanderData({ ...commanderData, title: e.target.value })}
+          className="input w-full"
+          placeholder="Team Leader"
+        />
+      </div>
+
+      {/* Director Image */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Director's Profile Image
+        </label>
+        
+        {commanderData.image && (
+          <div className="mb-4">
+            <div className="w-40 h-40 rounded-full overflow-hidden border-4 border-primary-500 mx-auto">
+              <img
+                src={commanderData.image}
+                alt="Director"
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        )}
+
+        <div className="border-2 border-dashed border-gray-300 rounded-lg p-4 bg-gray-50">
+          <div className="flex flex-col items-center justify-center gap-2">
+            <ImageIcon className="h-8 w-8 text-gray-400" />
+            <p className="text-sm text-gray-600 text-center">
+              Upload director's profile image (max 5MB)
+            </p>
+            <label
+              htmlFor="director-upload"
+              className={`btn-primary cursor-pointer ${uploading ? 'opacity-50 cursor-not-allowed' : ''}`}
+            >
+              <Plus className="h-4 w-4 mr-1" />
+              {uploading ? 'Uploading...' : 'Upload Image'}
+            </label>
+            <input
+              id="director-upload"
+              type="file"
+              accept="image/*"
+              onChange={handleFileUpload}
+              disabled={uploading}
+              className="hidden"
+            />
+          </div>
+        </div>
+
+        {commanderData.image && (
+          <div className="mt-2">
+            <button
+              onClick={() => setCommanderData({ ...commanderData, image: '' })}
+              className="text-sm text-danger-600 hover:text-danger-800"
+            >
+              Remove Image
+            </button>
+          </div>
+        )}
+      </div>
+
+      {/* Actions */}
+      <div className="flex gap-2 pt-4 border-t border-gray-200">
+        <button onClick={onSave} className="btn-primary flex items-center gap-2">
+          <Save className="h-4 w-4" />
+          Save Mission Director Content
+        </button>
+        <button onClick={onCancel} className="btn-outline">
+          Cancel
+        </button>
+      </div>
+    </div>
+  );
+}
+
+// Mission Commander Preview Component
+interface MissionCommanderPreviewProps {
+  content: string;
+}
+
+function MissionCommanderPreview({ content }: MissionCommanderPreviewProps) {
+  const commanderData = (() => {
+    try {
+      return JSON.parse(content);
+    } catch {
+      return {
+        message: '',
+        name: 'Mission Director',
+        title: 'Team Leader',
+        image: ''
+      };
+    }
+  })();
+
+  return (
+    <div className="bg-gray-50 p-6 rounded-lg space-y-4">
+      <div>
+        <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">Director's Message</h3>
+        <p className="text-gray-700 italic">"{commanderData.message || 'No message set'}"</p>
+      </div>
+
+      <div>
+        <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">Director Details</h3>
+        <p className="text-lg font-bold text-gray-900">{commanderData.name || 'No name set'}</p>
+        <p className="text-sm text-primary-600">{commanderData.title || 'No title set'}</p>
+      </div>
+
+      {commanderData.image && (
+        <div>
+          <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">Profile Image</h3>
+          <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-primary-500">
+            <img
+              src={commanderData.image}
+              alt="Director"
+              className="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

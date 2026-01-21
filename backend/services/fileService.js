@@ -1,5 +1,5 @@
 const fileDataHelper = require('../dataHelpers/fileDataHelper');
-const competitionDataHelper = require('../dataHelpers/competitionDataHelper');
+const missionDataHelper = require('../dataHelpers/missionDataHelper');
 const subEventDataHelper = require('../dataHelpers/subEventDataHelper');
 const auditLogDataHelper = require('../dataHelpers/auditLogDataHelper');
 const fs = require('fs');
@@ -7,13 +7,13 @@ const path = require('path');
 
 class FileService {
   uploadFile(fileData, userId, requestInfo = {}) {
-    const { fileName, originalName, filePath, fileType, fileSize, category, competitionId, subEventId, description } = fileData;
+    const { fileName, originalName, filePath, fileType, fileSize, category, missionId, subEventId, description } = fileData;
 
-    // Verify competition if provided
-    if (competitionId) {
-      const competition = competitionDataHelper.getCompetitionById(competitionId);
-      if (!competition) {
-        throw new Error('Competition not found');
+    // Verify mission if provided
+    if (missionId) {
+      const mission = missionDataHelper.getMissionById(missionId);
+      if (!mission) {
+        throw new Error('Mission not found');
       }
     }
 
@@ -32,7 +32,7 @@ class FileService {
       fileType,
       fileSize,
       category: category || 'other',
-      competitionId: competitionId || null,
+      missionId: missionId || null,
       subEventId: subEventId || null,
       uploadedBy: userId,
       description: description || ''
@@ -44,7 +44,7 @@ class FileService {
       action: 'FILE_UPLOADED',
       entity: 'file',
       entityId: newFile.fileId,
-      changes: { fileName: originalName, category, competitionId, subEventId },
+      changes: { fileName: originalName, category, missionId, subEventId },
       ipAddress: requestInfo.ipAddress || '',
       userAgent: requestInfo.userAgent || ''
     });
@@ -56,8 +56,8 @@ class FileService {
     return fileDataHelper.getFileById(fileId);
   }
 
-  getFilesByCompetition(competitionId) {
-    return fileDataHelper.getFilesByCompetition(competitionId);
+  getFilesByMission(missionId) {
+    return fileDataHelper.getFilesByMission(missionId);
   }
 
   getFilesBySubEvent(subEventId) {
@@ -125,13 +125,13 @@ class FileService {
 
   // Gallery methods
   uploadGalleryImage(imageData, userId, requestInfo = {}) {
-    const { imageUrl, title, description, competitionId, subEventId } = imageData;
+    const { imageUrl, title, description, missionId, subEventId } = imageData;
 
     const newImage = fileDataHelper.createGalleryImage({
       imageUrl,
       title,
       description: description || '',
-      competitionId: competitionId || null,
+      missionId: missionId || null,
       subEventId: subEventId || null,
       uploadedBy: userId
     });
@@ -142,7 +142,7 @@ class FileService {
       action: 'GALLERY_IMAGE_UPLOADED',
       entity: 'gallery',
       entityId: newImage.galleryId,
-      changes: { title, competitionId, subEventId },
+      changes: { title, missionId, subEventId },
       ipAddress: requestInfo.ipAddress || '',
       userAgent: requestInfo.userAgent || ''
     });
@@ -150,8 +150,8 @@ class FileService {
     return newImage;
   }
 
-  getGalleryByCompetition(competitionId) {
-    return fileDataHelper.getGalleryByCompetition(competitionId);
+  getGalleryByMission(missionId) {
+    return fileDataHelper.getGalleryByMission(missionId);
   }
 
   getGalleryBySubEvent(subEventId) {

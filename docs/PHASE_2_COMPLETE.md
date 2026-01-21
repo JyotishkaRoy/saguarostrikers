@@ -11,7 +11,7 @@ A fully interactive calendar component that displays mission-related events with
 - **Event Types**: Supports multiple event categories:
   - Launch events (red)
   - Meetings (blue)
-  - Competitions (purple)
+  - Missions (purple)
   - Deadlines (orange)
   - Other events (gray)
 - **Event Details Modal**: Click on any event to view full details
@@ -80,7 +80,7 @@ A comprehensive program showcase page with a two-column layout:
   - Interactive Workshops
   - Mentorship Program
   - Launch Events
-  - Team Competitions
+  - Team Missions
   - Career Guidance
 - **Eligibility**: Grades 6-12, no prior experience required
 - **Call-to-Action Buttons**:

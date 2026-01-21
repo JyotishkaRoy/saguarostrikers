@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import { AuthRequest } from '../../models/types';
-import { FileManagementService } from '../../services/FileManagementService';
+import { FileManagementService } from '../../services/FileManagementService.js';
 
 export class FileManagementAdminController {
   private fileService: FileManagementService;
@@ -34,10 +34,10 @@ export class FileManagementAdminController {
     }
   }
 
-  async getFilesByCompetition(req: AuthRequest, res: Response): Promise<void> {
+  async getFilesByMission(req: AuthRequest, res: Response): Promise<void> {
     try {
-      const { competitionId } = req.params;
-      const files = await this.fileService.getFilesByCompetition(competitionId);
+      const { missionId } = req.params;
+      const files = await this.fileService.getFilesByMission(missionId);
       res.status(200).json({ success: true, data: files });
     } catch (error) {
       res.status(500).json({ success: false, message: 'Failed to fetch files' });

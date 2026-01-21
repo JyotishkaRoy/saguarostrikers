@@ -1,6 +1,6 @@
-import { JoinMissionDataHelper } from '../data/JoinMissionDataHelper';
-import { EmailService } from './EmailService';
-import { CompetitionDataHelper } from '../data/CompetitionDataHelper';
+import { JoinMissionDataHelper } from '../data/JoinMissionDataHelper.js';
+import { EmailService } from './EmailService.js';
+import { MissionDataHelper } from '../data/MissionDataHelper.js';
 import {
   JoinMissionApplication,
   CreateJoinMissionData,
@@ -11,16 +11,16 @@ import {
 export class JoinMissionService {
   private dataHelper: JoinMissionDataHelper;
   private emailService: EmailService;
-  private competitionDataHelper: CompetitionDataHelper;
+  private missionDataHelper: MissionDataHelper;
 
   constructor(
     dataHelper?: JoinMissionDataHelper,
     emailService?: EmailService,
-    competitionDataHelper?: CompetitionDataHelper
+    missionDataHelper?: MissionDataHelper
   ) {
     this.dataHelper = dataHelper || new JoinMissionDataHelper();
     this.emailService = emailService || new EmailService();
-    this.competitionDataHelper = competitionDataHelper || new CompetitionDataHelper();
+    this.missionDataHelper = missionDataHelper || new MissionDataHelper();
   }
 
   async submitApplication(data: CreateJoinMissionData): Promise<JoinMissionApplication> {
@@ -34,7 +34,7 @@ export class JoinMissionService {
     }
 
     // Verify mission exists
-    const mission = await this.competitionDataHelper.getCompetitionById(data.missionId);
+    const mission = await this.missionDataHelper.getMissionById(data.missionId);
     if (!mission) {
       throw new Error('Selected mission not found');
     }
@@ -120,7 +120,7 @@ export class JoinMissionService {
     // Send status update email
     if (data.status === 'approved' || data.status === 'rejected' || data.status === 'waitlisted') {
       try {
-        const mission = await this.competitionDataHelper.getCompetitionById(application.missionId);
+        const mission = await this.missionDataHelper.getMissionById(application.missionId);
         if (mission) {
           await this.emailService.sendApplicationStatusUpdate(
             application.studentEmail,

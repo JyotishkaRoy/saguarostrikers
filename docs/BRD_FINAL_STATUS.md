@@ -67,7 +67,7 @@
 | **Homepage** | 2-column (60/40) + video | ✅ Complete | Editable content via API |
 | **Mission Statement** | 2-column + commander image | ✅ Complete | Rich text support |
 | **Mission Leaders** | Grid with flip cards | ✅ Complete | 3D animations, 3 per row |
-| **Mission Overview** | Competition pages | ✅ Complete | Uses existing system |
+| **Mission Overview** | Mission pages | ✅ Complete | Uses existing system |
 | **Mission Scientists** | Team members grid | ✅ Complete | Uses existing team system |
 | **Mission Calendar** | Interactive calendar | ✅ Complete | Color-coded events |
 | **Join a Mission** | 30+ field form | ✅ Complete | Electronic signatures |
@@ -89,7 +89,7 @@
 |---------|--------|----------------|
 | Dashboard | ✅ Complete | Stats widgets, quick actions |
 | User Management | ✅ Complete | Create/edit/delete/activate |
-| Competition Management | ✅ Complete | Full CRUD operations |
+| Mission Management | ✅ Complete | Full CRUD operations |
 | Team Management | ✅ Complete | Build teams, assign members |
 | Notice Management | ✅ Complete | Create/publish/unpublish |
 | Site Content Editor | ✅ Complete | Homepage content |
@@ -108,7 +108,7 @@
 | Homepage | `/` | ✅ Complete |
 | Mission Statement | `/mission-statement` | ✅ Complete |
 | Mission Leaders | `/mission-leaders` | ✅ Complete |
-| Missions | `/competitions` | ✅ Complete |
+| Missions | `/missions` | ✅ Complete |
 | Mission Calendar | `/mission-calendar` | ✅ Complete |
 | Join a Mission | `/join-mission` | ✅ Complete |
 | Future Explorers | `/future-explorers` | ✅ Complete |
@@ -121,7 +121,7 @@
 | Page | Route | Status |
 |------|-------|--------|
 | User Dashboard | `/dashboard` | ✅ Complete |
-| My Competitions | `/my-competitions` | ✅ Complete |
+| My Missions | `/my-missions` | ✅ Complete |
 | My Teams | `/my-teams` | ✅ Complete |
 | My Files | `/my-files` | ✅ Complete |
 | Mission Gallery | `/mission-gallery` | ✅ Complete |
@@ -132,7 +132,7 @@
 |------|-------|--------|
 | Admin Dashboard | `/admin` | ✅ Complete |
 | Users | `/admin/users` | ✅ Complete |
-| Competitions | `/admin/competitions` | ✅ Complete |
+| Missions | `/admin/missions` | ✅ Complete |
 | Teams | `/admin/teams` | ✅ Complete |
 | Notices | `/admin/notices` | ✅ Complete |
 | Site Content | `/admin/site-content` | ✅ Complete |

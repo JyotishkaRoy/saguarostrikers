@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { Send, CheckCircle } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
-import type { Competition } from '@/types';
+import type { Mission } from '@/types';
 
 interface JoinMissionFormData {
   // Student Details
@@ -48,7 +48,7 @@ interface JoinMissionFormData {
 }
 
 export default function JoinMission() {
-  const [missions, setMissions] = useState<Competition[]>([]);
+  const [missions, setMissions] = useState<Mission[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm<JoinMissionFormData>();
@@ -59,7 +59,7 @@ export default function JoinMission() {
 
   const fetchActiveMissions = async () => {
     try {
-      const response = await api.get<Competition[]>('/public/competitions');
+      const response = await api.get<Mission[]>('/public/missions');
       if (response.success && response.data) {
         setMissions(response.data.filter(m => m.status === 'published'));
       }
@@ -332,7 +332,7 @@ export default function JoinMission() {
               >
                 <option value="">Select a Mission</option>
                 {missions.map(mission => (
-                  <option key={mission.competitionId} value={mission.competitionId}>
+                  <option key={mission.missionId} value={mission.missionId}>
                     {mission.title}
                   </option>
                 ))}

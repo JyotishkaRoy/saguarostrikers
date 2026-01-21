@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
 import { JoinMissionApplication, CreateJoinMissionData, UpdateApplicationStatusData, ApplicationStatus } from '../models/types';
-import { v4 as uuidv4 } from 'uuid';
+import { generateId } from '../utils/idGenerator.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -62,7 +62,7 @@ export class JoinMissionDataHelper {
     const now = new Date().toISOString();
 
     const newApplication: JoinMissionApplication = {
-      applicationId: uuidv4(),
+      applicationId: generateId(),
       ...data,
       status: 'pending',
       createdAt: now,

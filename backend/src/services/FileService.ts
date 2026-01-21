@@ -1,6 +1,6 @@
 import { FileDataHelper } from '../data/FileDataHelper.js';
 import { GalleryDataHelper } from '../data/GalleryDataHelper.js';
-import { CompetitionDataHelper } from '../data/CompetitionDataHelper.js';
+import { MissionDataHelper } from '../data/MissionDataHelper.js';
 import { SubEventDataHelper } from '../data/SubEventDataHelper.js';
 import { FileUpload, GalleryImage, FileCategory } from '../models/types.js';
 import { createError } from '../middleware/errorHandler.js';
@@ -9,13 +9,13 @@ import { deleteFile as deleteFileFromDisk } from '../middleware/upload.js';
 export class FileService {
   private fileDataHelper: FileDataHelper;
   private galleryDataHelper: GalleryDataHelper;
-  private competitionDataHelper: CompetitionDataHelper;
+  private missionDataHelper: MissionDataHelper;
   private subEventDataHelper: SubEventDataHelper;
 
   constructor() {
     this.fileDataHelper = new FileDataHelper();
     this.galleryDataHelper = new GalleryDataHelper();
-    this.competitionDataHelper = new CompetitionDataHelper();
+    this.missionDataHelper = new MissionDataHelper();
     this.subEventDataHelper = new SubEventDataHelper();
   }
 
@@ -26,17 +26,17 @@ export class FileService {
     file: Express.Multer.File,
     data: {
       category: FileCategory;
-      competitionId?: string;
+      missionId?: string;
       subEventId?: string;
       description?: string;
     },
     uploadedBy: string
   ): Promise<FileUpload> {
-    // Verify competition exists if provided
-    if (data.competitionId) {
-      const competition = this.competitionDataHelper.getCompetitionById(data.competitionId);
-      if (!competition) {
-        throw createError.notFound('Competition not found');
+    // Verify mission exists if provided
+    if (data.missionId) {
+      const mission = this.missionDataHelper.getMissionById(data.missionId);
+      if (!mission) {
+        throw createError.notFound('Mission not found');
       }
     }
 
@@ -54,7 +54,7 @@ export class FileService {
       fileType: file.mimetype,
       fileSize: file.size,
       category: data.category,
-      competitionId: data.competitionId,
+      missionId: data.missionId,
       subEventId: data.subEventId,
       description: data.description,
       isPublic: false
@@ -77,10 +77,10 @@ export class FileService {
   }
 
   /**
-   * Get files by competition
+   * Get files by mission
    */
-  async getFilesByCompetition(competitionId: string): Promise<FileUpload[]> {
-    return this.fileDataHelper.getFilesByCompetition(competitionId);
+  async getFilesByMission(missionId: string): Promise<FileUpload[]> {
+    return this.fileDataHelper.getFilesByMission(missionId);
   }
 
   /**
@@ -119,7 +119,7 @@ export class FileService {
     data: {
       title: string;
       description?: string;
-      competitionId?: string;
+      missionId?: string;
       subEventId?: string;
     },
     uploadedBy: string
@@ -132,7 +132,7 @@ export class FileService {
       imageUrl,
       title: data.title,
       description: data.description,
-      competitionId: data.competitionId,
+      missionId: data.missionId,
       subEventId: data.subEventId,
       isPublic: false,
       tags: []
@@ -142,10 +142,10 @@ export class FileService {
   }
 
   /**
-   * Get gallery images by competition
+   * Get gallery images by mission
    */
-  async getGalleryImagesByCompetition(competitionId: string): Promise<GalleryImage[]> {
-    return await this.galleryDataHelper.getImagesByCompetition(competitionId);
+  async getGalleryImagesByMission(missionId: string): Promise<GalleryImage[]> {
+    return await this.galleryDataHelper.getImagesByMission(missionId);
   }
 
   /**

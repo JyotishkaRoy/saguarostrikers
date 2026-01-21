@@ -1,33 +1,33 @@
-# Rocketry Competition Platform
+# Rocketry Mission Platform
 
-A modern, full-featured web platform for managing rocketry competitions, building teams, and connecting enthusiasts. Built with a strict multi-tier architecture, comprehensive audit logging, and modern UI/UX.
+A modern, full-featured web platform for managing rocketry missions, building teams, and connecting enthusiasts. Built with a strict multi-tier architecture, comprehensive audit logging, and modern UI/UX.
 
 ## 🚀 Features
 
 ### Public Features
 - **Modern Homepage** with hero section, features, and upcoming events
-- **Competition Browsing** - View all published competitions
+- **Mission Browsing** - View all published missions
 - **About Us Page** - Organization information, vision, mission, and board members
 - **Contact Form** - Public can send messages to administrators
 - **Responsive Design** - Works beautifully on all devices
 
 ### User Features
 - **User Registration & Login** - Secure authentication with JWT
-- **Show Interest** - Express interest in competitions
+- **Show Interest** - Express interest in missions
 - **Team Management** - View assigned teams and team members
-- **Competition Dashboard** - Track interested competitions and their status
-- **File Access** - Download project files and view galleries for competitions
-- **Sub-Event Tracking** - View and track competition sub-events
+- **Mission Dashboard** - Track interested missions and their status
+- **File Access** - Download project files and view galleries for missions
+- **Sub-Event Tracking** - View and track mission sub-events
 
 ### Admin Features
-- **Competition Management**
-  - Create, edit, publish, and delete competitions
-  - Manage sub-events for each competition
-  - View interested users for each competition
-  - Track competition status (draft, published, completed, cancelled)
+- **Mission Management**
+  - Create, edit, publish, and delete missions
+  - Manage sub-events for each mission
+  - View interested users for each mission
+  - Track mission status (draft, published, completed, cancelled)
 
 - **Team Building**
-  - Create teams for competitions
+  - Create teams for missions
   - Add/remove team members from interested users
   - Assign roles to team members
   - Send emails to entire teams
@@ -40,7 +40,7 @@ A modern, full-featured web platform for managing rocketry competitions, buildin
 - **Notice Management**
   - Create and publish public notices
   - Set notice priority (low, medium, high)
-  - Link notices to specific competitions
+  - Link notices to specific missions
   - Publish/unpublish notices
 
 - **Site Content Management**
@@ -54,7 +54,7 @@ A modern, full-featured web platform for managing rocketry competitions, buildin
   - Archive and delete messages
 
 - **File Management**
-  - Upload files for competitions and sub-events
+  - Upload files for missions and sub-events
   - Organize files by category
   - Upload gallery images
   - Delete files and images
@@ -96,7 +96,7 @@ SaguaroStrikers/
 │   │   └── schemas.js            # Data schemas
 │   ├── controllers/
 │   │   ├── admin/                # Admin controllers
-│   │   │   ├── competitionAdminController.js
+│   │   │   ├── missionAdminController.js
 │   │   │   ├── teamAdminController.js
 │   │   │   ├── userAdminController.js
 │   │   │   ├── noticeAdminController.js
@@ -106,12 +106,12 @@ SaguaroStrikers/
 │   │   │   └── auditLogAdminController.js
 │   │   └── portal/               # Portal controllers
 │   │       ├── authController.js
-│   │       ├── competitionController.js
+│   │       ├── missionController.js
 │   │       ├── fileController.js
 │   │       └── publicController.js
 │   ├── dataHelpers/              # Data access layer
 │   │   ├── userDataHelper.js
-│   │   ├── competitionDataHelper.js
+│   │   ├── missionDataHelper.js
 │   │   ├── subEventDataHelper.js
 │   │   ├── teamDataHelper.js
 │   │   ├── interestDataHelper.js
@@ -135,7 +135,7 @@ SaguaroStrikers/
 │   ├── services/                 # Business logic layer
 │   │   ├── authService.js
 │   │   ├── userService.js
-│   │   ├── competitionService.js
+│   │   ├── missionService.js
 │   │   ├── subEventService.js
 │   │   ├── teamService.js
 │   │   ├── interestService.js
@@ -150,7 +150,7 @@ SaguaroStrikers/
 │   └── server.js                 # Main server file
 ├── data/                         # JSON database files
 │   ├── users.json
-│   ├── competitions.json
+│   ├── missions.json
 │   ├── subEvents.json
 │   ├── teams.json
 │   ├── teamMembers.json
@@ -344,11 +344,11 @@ http://localhost:5000/api
 GET /api/public/homepage
 ```
 
-#### Get Competitions
+#### Get Missions
 ```http
-GET /api/public/competitions
-GET /api/public/competitions/upcoming
-GET /api/public/competitions/:slug
+GET /api/public/missions
+GET /api/public/missions/upcoming
+GET /api/public/missions/:slug
 ```
 
 #### Contact Form
@@ -359,7 +359,7 @@ Content-Type: application/json
 {
   "name": "John Doe",
   "email": "john@example.com",
-  "subject": "Question about competition",
+  "subject": "Question about mission",
   "message": "Your message here"
 }
 ```
@@ -413,14 +413,14 @@ Response:
 
 All user endpoints require `Authorization: Bearer <token>` header
 
-#### Show Interest in Competition
+#### Show Interest in Mission
 ```http
 POST /api/user/interests
 Content-Type: application/json
 Authorization: Bearer <token>
 
 {
-  "competitionId": "uuid",
+  "missionId": "uuid",
   "message": "Optional message"
 }
 ```
@@ -441,14 +441,14 @@ Authorization: Bearer <token>
 
 All admin endpoints require `Authorization: Bearer <admin_token>` header
 
-#### Competition Management
+#### Mission Management
 ```http
-GET    /api/admin/competitions
-POST   /api/admin/competitions
-PUT    /api/admin/competitions/:id
-DELETE /api/admin/competitions/:id
-POST   /api/admin/competitions/:id/publish
-GET    /api/admin/competitions/:id/interests
+GET    /api/admin/missions
+POST   /api/admin/missions
+PUT    /api/admin/missions/:id
+DELETE /api/admin/missions/:id
+POST   /api/admin/missions/:id/publish
+GET    /api/admin/missions/:id/interests
 ```
 
 #### Team Management
@@ -490,10 +490,10 @@ PATCH  /api/admin/users/:id/status
 }
 ```
 
-### Competition Schema
+### Mission Schema
 ```json
 {
-  "competitionId": "UUID",
+  "missionId": "UUID",
   "title": "string",
   "slug": "string (unique, never changes)",
   "description": "string",
@@ -605,7 +605,7 @@ Potential future enhancements:
 - [ ] Document version control
 - [ ] Calendar integration
 - [ ] Video conferencing integration
-- [ ] Payment gateway for competition fees
+- [ ] Payment gateway for mission fees
 
 ---
 

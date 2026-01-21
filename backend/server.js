@@ -11,7 +11,7 @@ const { errorHandler, notFoundHandler } = require('./middleware/errorHandler');
 const authRoutes = require('./routes/authRoutes');
 const publicRoutes = require('./routes/publicRoutes');
 const userRoutes = require('./routes/userRoutes');
-const competitionAdminRoutes = require('./routes/admin/competitionAdminRoutes');
+const missionAdminRoutes = require('./routes/admin/missionAdminRoutes');
 const teamAdminRoutes = require('./routes/admin/teamAdminRoutes');
 const userAdminRoutes = require('./routes/admin/userAdminRoutes');
 const noticeAdminRoutes = require('./routes/admin/noticeAdminRoutes');
@@ -110,7 +110,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/api/auth', authRoutes);
 app.use('/api/public', publicRoutes);
 app.use('/api/user', userRoutes);
-app.use('/api/admin', competitionAdminRoutes);
+app.use('/api/admin', missionAdminRoutes);
 app.use('/api/admin', teamAdminRoutes);
 app.use('/api/admin', userAdminRoutes);
 app.use('/api/admin', noticeAdminRoutes);
@@ -125,7 +125,7 @@ app.use('/api/admin/discussions', discussionAdminRoutes);
 app.get('/api/health', (req, res) => {
   res.json({ 
     success: true, 
-    message: 'Rocketry Competition Platform API is running',
+    message: 'Rocketry Mission Platform API is running',
     timestamp: new Date().toISOString()
   });
 });
@@ -140,7 +140,7 @@ app.use(errorHandler);
 app.listen(PORT, () => {
   console.log(`
 ╔═══════════════════════════════════════════════════════════╗
-║   Rocketry Competition Platform - Server Running         ║
+║   Rocketry Mission Platform - Server Running         ║
 ╠═══════════════════════════════════════════════════════════╣
 ║   Port: ${PORT}                                           ║
 ║   Environment: ${process.env.NODE_ENV || 'development'}   

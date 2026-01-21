@@ -2,15 +2,19 @@ import multer, { MulterError } from 'multer';
 import { Request, Response, NextFunction } from 'express';
 import path from 'path';
 import fs from 'fs';
-import { v4 as uuidv4 } from 'uuid';
+import { generateId } from '../utils/idGenerator.js';
 
-// Upload directory configuration
-const UPLOAD_DIR = process.env.UPLOAD_PATH || './uploads';
+// Upload directory configuration - use absolute path to project root
+// Go up one level from backend to project root
+const UPLOAD_DIR = process.env.UPLOAD_PATH || path.join(process.cwd(), '..', 'uploads');
 
 export const UPLOAD_DIRS = {
   files: path.join(UPLOAD_DIR, 'files'),
   images: path.join(UPLOAD_DIR, 'images'),
-  galleries: path.join(UPLOAD_DIR, 'galleries')
+  banners: path.join(UPLOAD_DIR, 'banners'),
+  galleries: path.join(UPLOAD_DIR, 'galleries'),
+  missionDirector: path.join(UPLOAD_DIR, 'mission-director'),
+  missionLeaders: path.join(UPLOAD_DIR, 'mission-leaders')
 } as const;
 
 // Ensure upload directories exist
@@ -27,7 +31,13 @@ const storage = multer.diskStorage({
   destination: (req, _file, cb) => {
     let uploadPath = UPLOAD_DIRS.files;
     
-    if (req.path && req.path.includes('gallery')) {
+    if (req.path && req.path.includes('upload-banner')) {
+      uploadPath = UPLOAD_DIRS.banners;
+    } else if (req.path && req.path.includes('mission-director')) {
+      uploadPath = UPLOAD_DIRS.missionDirector;
+    } else if (req.path && req.path.includes('upload-leader-image')) {
+      uploadPath = UPLOAD_DIRS.missionLeaders;
+    } else if (req.path && req.path.includes('gallery')) {
       uploadPath = UPLOAD_DIRS.galleries;
     } else if (_file.mimetype.startsWith('image/')) {
       uploadPath = UPLOAD_DIRS.images;
@@ -36,7 +46,7 @@ const storage = multer.diskStorage({
     cb(null, uploadPath);
   },
   filename: (_req, file, cb) => {
-    const uniqueName = `${uuidv4()}${path.extname(file.originalname)}`;
+    const uniqueName = `${generateId()}${path.extname(file.originalname)}`;
     cb(null, uniqueName);
   }
 });

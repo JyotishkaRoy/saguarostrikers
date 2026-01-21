@@ -64,7 +64,7 @@ export const auditLog = (action: string) => {
  */
 function extractEntityFromPath(path: string): string {
   const parts = path.split('/').filter(p => p);
-  // Examples: /api/admin/users => users, /api/competitions => competitions
+  // Examples: /api/admin/users => users, /api/missions => missions
   const entity = parts[parts.length - 1];
   
   // Remove IDs from entity name

@@ -5,10 +5,29 @@ import type { HomepageContent } from '@/types';
 export default function MissionStatement() {
   const [content, setContent] = useState<HomepageContent | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [messageFontSize, setMessageFontSize] = useState('text-xl md:text-2xl');
 
   useEffect(() => {
     fetchContent();
   }, []);
+
+  // Adjust font size based on message length
+  useEffect(() => {
+    if (content?.missionCommanderMessage) {
+      const messageLength = content.missionCommanderMessage.length;
+      
+      // Adjust font size based on character count
+      if (messageLength < 150) {
+        setMessageFontSize('text-2xl md:text-3xl'); // Large for short messages
+      } else if (messageLength < 250) {
+        setMessageFontSize('text-xl md:text-2xl'); // Medium for normal messages
+      } else if (messageLength < 400) {
+        setMessageFontSize('text-lg md:text-xl'); // Smaller for longer messages
+      } else {
+        setMessageFontSize('text-base md:text-lg'); // Smallest for very long messages
+      }
+    }
+  }, [content?.missionCommanderMessage]);
 
   const fetchContent = async () => {
     try {
@@ -24,147 +43,122 @@ export default function MissionStatement() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
+    <div className="min-h-screen py-16" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
       <div className="container mx-auto px-4">
-        {/* 2-Column Layout: 60% / 40% */}
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-7xl mx-auto">
-          {/* Column 1: 60% - Mission Statement Text */}
-          <div className="lg:col-span-3">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
-              Mission Statement from the Mission Commander
-            </h1>
+        {isLoading ? (
+          <div className="flex items-center justify-center py-12">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white"></div>
+          </div>
+        ) : (
+          /* 2-Column Layout: 60% / 40% */
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-7xl mx-auto items-center">
+            {/* Column 1: 60% - Director's Message with Quote */}
+            <div className="lg:col-span-3">
+              <div className="relative h-56 md:h-64 flex items-center">
+                {/* Large Quote Mark - Top Left */}
+                <div className="absolute -top-8 -left-4 text-white/20 text-9xl font-serif leading-none">
+                  "
+                </div>
+                
+                {/* Message Content - Fixed Height Container */}
+                <div className="relative z-10 text-white w-full">
+                  <div className="overflow-y-auto max-h-48 md:max-h-56 pr-2">
+                    <p className={`${messageFontSize} font-light leading-relaxed mb-6 italic`}>
+                      {content?.missionCommanderMessage || 
+                        'To the dedicated members of Saguaro Strikers, your unwavering passion and dedication are the driving forces behind our shared success. Together we are building a brighter future through innovation, teamwork, and excellence in rocketry. Thank you for all you do.'}
+                    </p>
+                  </div>
+                  <div className="text-lg font-medium mt-4">
+                    <p className="mb-1">- {content?.missionCommanderName || 'Mission Director'}</p>
+                    <p className="text-white/80">{content?.missionCommanderTitle || 'Team Leader'}</p>
+                  </div>
+                </div>
 
-            {isLoading ? (
-              <div className="animate-pulse space-y-4">
-                <div className="h-4 bg-gray-200 rounded"></div>
-                <div className="h-4 bg-gray-200 rounded"></div>
-                <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+                {/* Large Quote Mark - Bottom Right */}
+                <div className="absolute -bottom-8 -right-4 text-white/20 text-9xl font-serif leading-none">
+                  "
+                </div>
               </div>
-            ) : (
-              <div className="prose prose-lg max-w-none">
-                <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
-                  <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                    Our Vision
-                  </h2>
-                  <p className="text-gray-700 leading-relaxed">
-                    {content?.vision || 
-                      'To be a leading force in amateur rocketry, inspiring innovation and excellence in aerospace education. We strive to create an environment where students can explore, learn, and push the boundaries of what\'s possible in rocketry and aerospace engineering.'}
-                  </p>
+
+              {/* Mission & Vision Cards */}
+              <div className="mt-16 space-y-6">
+                <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+                  <h2 className="text-2xl font-bold text-white mb-4">Our Vision</h2>
+                  <div 
+                    className="text-white/90 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: content?.vision || '<p>Our vision statement...</p>' }}
+                  />
                 </div>
 
-                <div className="bg-white rounded-lg shadow-sm p-8 mb-8">
-                  <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                    Our Mission
-                  </h2>
-                  <p className="text-gray-700 leading-relaxed">
-                    {content?.mission || 
-                      'To provide students with hands-on experience in rocket design, engineering, and flight operations while fostering teamwork, problem-solving, and scientific inquiry. We aim to develop the next generation of aerospace professionals through practical experience and mentorship.'}
-                  </p>
+                <div className="bg-white/10 backdrop-blur-md rounded-lg p-6 border border-white/20">
+                  <h2 className="text-2xl font-bold text-white mb-4">Our Mission</h2>
+                  <div 
+                    className="text-white/90 leading-relaxed"
+                    dangerouslySetInnerHTML={{ __html: content?.mission || '<p>Our mission statement...</p>' }}
+                  />
                 </div>
+              </div>
+            </div>
 
-                <div className="bg-white rounded-lg shadow-sm p-8">
-                  <h2 className="text-2xl font-semibold text-gray-900 mb-4">
-                    About Us
-                  </h2>
-                  <div className="text-gray-700 leading-relaxed space-y-4">
-                    {content?.aboutUs ? (
-                      <div dangerouslySetInnerHTML={{ __html: content.aboutUs }} />
+            {/* Column 2: 40% - Director Image */}
+            <div className="lg:col-span-2">
+              <div className="sticky top-24">
+                {/* Circular Profile Image with Gold Border */}
+                <div className="relative w-full max-w-md mx-auto">
+                  <div 
+                    className="relative rounded-full overflow-hidden aspect-square shadow-2xl"
+                    style={{ 
+                      border: '8px solid #f59e0b',
+                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'
+                    }}
+                  >
+                    {content?.missionCommanderImage ? (
+                      <img
+                        src={content.missionCommanderImage}
+                        alt={content?.missionCommanderName || 'Mission Director'}
+                        className="w-full h-full object-cover"
+                      />
                     ) : (
-                      <>
-                        <p>
-                          Saguaro Strikers is more than just a rocketry team – we're a community of passionate individuals dedicated to advancing aerospace education and inspiring the next generation of engineers and scientists.
-                        </p>
-                        <p>
-                          Founded with the goal of providing students with real-world engineering experience, we participate in national competitions including the American Rocketry Challenge, Spaceport America Cup, and other prestigious events.
-                        </p>
-                        <p>
-                          Our team members gain invaluable experience in:
-                        </p>
-                        <ul className="list-disc list-inside space-y-2 ml-4">
-                          <li>Rocket design and aerodynamics</li>
-                          <li>Propulsion systems and motor selection</li>
-                          <li>Avionics and flight computers</li>
-                          <li>Recovery systems and parachute deployment</li>
-                          <li>Project management and teamwork</li>
-                          <li>Safety protocols and launch operations</li>
-                        </ul>
-                        <p>
-                          Join us on our journey to reach new heights!
-                        </p>
-                      </>
+                      <div className="w-full h-full flex items-center justify-center text-white">
+                        <div className="text-center">
+                          <div className="text-8xl mb-4">🚀</div>
+                          <p className="text-xl font-semibold">{content?.missionCommanderName || 'Mission Director'}</p>
+                        </div>
+                      </div>
                     )}
                   </div>
                 </div>
 
-                <div className="mt-8">
-                  <a
-                    href="/join-mission"
-                    className="btn-primary inline-flex items-center"
-                  >
-                    Join Our Team
-                  </a>
+                {/* Quick Links Card */}
+                <div className="mt-8 bg-white/10 backdrop-blur-md rounded-lg p-5 border border-white/20">
+                  <h4 className="font-semibold text-white text-lg mb-4">Quick Links</h4>
+                  <ul className="space-y-2.5">
+                    <li>
+                      <a href="/mission-leaders" className="text-white/90 hover:text-white transition-colors flex items-center">
+                        <span className="mr-2">→</span> Meet Our Leaders
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/missions" className="text-white/90 hover:text-white transition-colors flex items-center">
+                        <span className="mr-2">→</span> View Our Missions
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/join-mission" className="text-white/90 hover:text-white transition-colors flex items-center">
+                        <span className="mr-2">→</span> Join the Team
+                      </a>
+                    </li>
+                    <li>
+                      <a href="/contact" className="text-white/90 hover:text-white transition-colors flex items-center">
+                        <span className="mr-2">→</span> Contact Us
+                      </a>
+                    </li>
+                  </ul>
                 </div>
-              </div>
-            )}
-          </div>
-
-          {/* Column 2: 40% - Commander Image */}
-          <div className="lg:col-span-2">
-            <div className="sticky top-24">
-              <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-                <div className="h-96 bg-gradient-to-br from-primary-400 to-primary-600 flex items-center justify-center">
-                  <img
-                    src="/images/commander-placeholder.jpg"
-                    alt="Mission Commander"
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      e.currentTarget.style.display = 'none';
-                      e.currentTarget.parentElement!.innerHTML = '<div class="text-white text-center p-8"><div class="text-8xl mb-4">🚀</div><p class="text-xl font-semibold">Mission Commander</p></div>';
-                    }}
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    Mission Commander
-                  </h3>
-                  <p className="text-primary-600 font-medium mb-4">
-                    Team Leader
-                  </p>
-                  <p className="text-gray-600 text-sm">
-                    Leading the Saguaro Strikers to new heights in rocketry excellence.
-                  </p>
-                </div>
-              </div>
-
-              {/* Quick Links */}
-              <div className="mt-6 bg-white rounded-lg shadow-sm p-6">
-                <h4 className="font-semibold text-gray-900 mb-4">Quick Links</h4>
-                <ul className="space-y-2">
-                  <li>
-                    <a href="/mission-leaders" className="text-primary-600 hover:text-primary-700">
-                      → Meet Our Leaders
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/competitions" className="text-primary-600 hover:text-primary-700">
-                      → View Our Missions
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/join-mission" className="text-primary-600 hover:text-primary-700">
-                      → Join the Team
-                    </a>
-                  </li>
-                  <li>
-                    <a href="/contact" className="text-primary-600 hover:text-primary-700">
-                      → Contact Us
-                    </a>
-                  </li>
-                </ul>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );

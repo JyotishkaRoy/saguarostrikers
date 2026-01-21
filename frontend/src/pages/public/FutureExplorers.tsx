@@ -84,7 +84,7 @@ export default function FutureExplorers() {
                     </li>
                     <li className="flex items-start">
                       <span className="text-primary-600 font-bold mr-3">→</span>
-                      <span><strong>Team Competitions:</strong> Collaborative challenges to build and test rocket designs</span>
+                      <span><strong>Team Missions:</strong> Collaborative challenges to build and test rocket designs</span>
                     </li>
                     <li className="flex items-start">
                       <span className="text-primary-600 font-bold mr-3">→</span>

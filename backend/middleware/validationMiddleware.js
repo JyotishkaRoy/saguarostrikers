@@ -44,8 +44,8 @@ const validationRules = {
     body('status').optional().isIn(['active', 'inactive']).withMessage('Invalid status')
   ],
 
-  // Competition validations
-  createCompetition: [
+  // Mission validations
+  createMission: [
     body('title').notEmpty().withMessage('Title is required'),
     body('description').notEmpty().withMessage('Description is required'),
     body('startDate').isISO8601().withMessage('Valid start date is required'),
@@ -54,7 +54,7 @@ const validationRules = {
     body('status').optional().isIn(['draft', 'published', 'completed', 'cancelled']).withMessage('Invalid status')
   ],
 
-  updateCompetition: [
+  updateMission: [
     body('title').optional().notEmpty().withMessage('Title cannot be empty'),
     body('description').optional().notEmpty().withMessage('Description cannot be empty'),
     body('startDate').optional().isISO8601().withMessage('Valid start date is required'),
@@ -65,7 +65,7 @@ const validationRules = {
 
   // Sub-event validations
   createSubEvent: [
-    body('competitionId').notEmpty().withMessage('Competition ID is required'),
+    body('missionId').notEmpty().withMessage('Mission ID is required'),
     body('title').notEmpty().withMessage('Title is required'),
     body('description').notEmpty().withMessage('Description is required'),
     body('eventDate').isISO8601().withMessage('Valid event date is required')
@@ -73,7 +73,7 @@ const validationRules = {
 
   // Team validations
   createTeam: [
-    body('competitionId').notEmpty().withMessage('Competition ID is required'),
+    body('missionId').notEmpty().withMessage('Mission ID is required'),
     body('teamName').notEmpty().withMessage('Team name is required'),
     body('description').optional()
   ],
@@ -87,7 +87,7 @@ const validationRules = {
   createNotice: [
     body('title').notEmpty().withMessage('Title is required'),
     body('content').notEmpty().withMessage('Content is required'),
-    body('type').isIn(['general', 'competition']).withMessage('Invalid notice type'),
+    body('type').isIn(['general', 'mission']).withMessage('Invalid notice type'),
     body('priority').optional().isIn(['low', 'medium', 'high']).withMessage('Invalid priority')
   ],
 
@@ -109,7 +109,7 @@ const validationRules = {
 
   // Interest validation
   showInterest: [
-    body('competitionId').notEmpty().withMessage('Competition ID is required'),
+    body('missionId').notEmpty().withMessage('Mission ID is required'),
     body('message').optional()
   ]
 };

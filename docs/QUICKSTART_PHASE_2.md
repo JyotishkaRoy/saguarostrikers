@@ -9,7 +9,7 @@ Interactive calendar showing all mission events with color coding.
 
 **Key Features**:
 - Month-by-month navigation
-- 5 event types (Launch, Meeting, Competition, Deadline, Other)
+- 5 event types (Launch, Meeting, Mission, Deadline, Other)
 - Click events to see full details in modal
 - Legend for easy identification
 - Fully responsive
@@ -139,7 +139,7 @@ GET /api/public/calendar-events?month=1&year=2026
       title: string,
       description: string,
       date: string, // "YYYY-MM-DD"
-      type: "launch" | "meeting" | "competition" | "deadline" | "other",
+      type: "launch" | "meeting" | "mission" | "deadline" | "other",
       status: "upcoming" | "ongoing" | "completed"
     }
   ]
@@ -247,7 +247,7 @@ Already installed - no action needed!
 4. Admin approval workflow
 
 ### Frontend Enhancements
-1. Adapt Competitions → Missions
+1. Adapt Missions → Missions
 2. Mission Artifacts page
 3. Mission Gallery with protection
 4. Admin tools for calendar management
@@ -272,7 +272,7 @@ Already installed - no action needed!
 ## 💡 Tips
 
 1. **Calendar Events**: Currently shows sample events. Replace with API call.
-2. **Mission Dropdown**: Fetches from `/public/competitions` - should work if backend is running.
+2. **Mission Dropdown**: Fetches from `/public/missions` - should work if backend is running.
 3. **Success Page**: After form submission, shows confirmation. Click "Submit Another" to reset.
 4. **Responsive**: All pages tested on mobile, tablet, and desktop sizes.
 
@@ -289,7 +289,7 @@ A: Check that backend is running on port 5001. The form expects `POST /api/publi
 A: Sample events are hardcoded for now. Backend endpoint needs implementation.
 
 **Q: Mission dropdown is empty?**
-A: Make sure you have published competitions in your database.
+A: Make sure you have published missions in your database.
 
 ---
 

@@ -38,29 +38,29 @@ export interface LoginResponse {
 }
 
 // ============================================
-// Competition Types
+// Mission Types
 // ============================================
 
-export interface Competition {
-  competitionId: string;
+export interface Mission {
+  missionId: string;
   title: string;
   slug: string; // Never changes once created
   description: string;
   startDate: string; // ISO date
   endDate: string; // ISO date
   location: string;
-  status: CompetitionStatus;
+  status: MissionStatus;
   imageUrl?: string;
   createdBy: string; // userId
   createdAt: string;
   updatedAt: string;
 }
 
-export type CompetitionStatus = 'draft' | 'published' | 'completed' | 'cancelled';
+export type MissionStatus = 'draft' | 'published' | 'completed' | 'cancelled';
 
 export interface SubEvent {
   subEventId: string;
-  competitionId: string;
+  missionId: string;
   title: string;
   description: string;
   eventDate: string; // ISO date
@@ -77,7 +77,7 @@ export type SubEventStatus = 'draft' | 'published' | 'completed';
 
 export interface Team {
   teamId: string;
-  competitionId: string;
+  missionId: string;
   teamName: string;
   description: string;
   createdBy: string; // userId
@@ -96,7 +96,7 @@ export interface TeamMember {
 export interface Interest {
   interestId: string;
   userId: string;
-  competitionId: string;
+  missionId: string;
   message?: string;
   status: InterestStatus;
   createdAt: string;
@@ -113,7 +113,7 @@ export interface Notice {
   title: string;
   content: string;
   type: NoticeType;
-  competitionId?: string;
+  missionId?: string;
   status: PublishStatus;
   priority: Priority;
   createdBy: string; // userId
@@ -122,7 +122,7 @@ export interface Notice {
   publishedAt?: string;
 }
 
-export type NoticeType = 'general' | 'competition';
+export type NoticeType = 'general' | 'mission';
 export type PublishStatus = 'draft' | 'published' | 'unpublished';
 export type Priority = 'low' | 'medium' | 'high';
 
@@ -148,6 +148,10 @@ export interface HomepageContent {
   aboutUs: string;
   vision: string;
   mission: string;
+  missionCommanderMessage?: string;
+  missionCommanderName?: string;
+  missionCommanderTitle?: string;
+  missionCommanderImage?: string;
 }
 
 export interface BoardMember {
@@ -155,6 +159,7 @@ export interface BoardMember {
   name: string;
   position: string;
   bio: string;
+  email: string;
   imageUrl?: string;
   order: number;
   status: 'active' | 'inactive';
@@ -193,7 +198,7 @@ export interface FileUpload {
   fileType: string; // MIME type
   fileSize: number; // Bytes
   category: FileCategory;
-  competitionId?: string;
+  missionId?: string;
   subEventId?: string;
   uploadedBy: string; // userId
   uploadedAt: string;
@@ -209,7 +214,7 @@ export interface GalleryImage {
   imageUrl: string;
   title: string;
   description?: string;
-  competitionId?: string;
+  missionId?: string;
   subEventId?: string;
   uploadedBy: string; // userId
   uploadedAt: string;
@@ -224,7 +229,7 @@ export interface CreateFileData {
   fileType: string;
   fileSize: number;
   category: FileCategory;
-  competitionId?: string;
+  missionId?: string;
   subEventId?: string;
   description?: string;
   isPublic?: boolean;
@@ -234,7 +239,7 @@ export interface CreateGalleryImageData {
   imageUrl: string;
   title: string;
   description?: string;
-  competitionId?: string;
+  missionId?: string;
   subEventId?: string;
   isPublic?: boolean;
   tags?: string[];
@@ -290,28 +295,28 @@ export interface RequestInfo {
 // Service Layer Types
 // ============================================
 
-export interface CreateCompetitionData {
+export interface CreateMissionData {
   title: string;
   description: string;
   startDate: string;
   endDate: string;
   location: string;
-  status?: CompetitionStatus;
+  status?: MissionStatus;
   imageUrl?: string;
 }
 
-export interface UpdateCompetitionData {
+export interface UpdateMissionData {
   title?: string;
   description?: string;
   startDate?: string;
   endDate?: string;
   location?: string;
-  status?: CompetitionStatus;
+  status?: MissionStatus;
   imageUrl?: string;
 }
 
 export interface CreateTeamData {
-  competitionId: string;
+  missionId: string;
   teamName: string;
   description: string;
 }
@@ -342,14 +347,14 @@ export interface CalendarEvent {
   endTime?: string;
   type: CalendarEventType;
   status: CalendarEventStatus;
-  competitionId?: string; // Optional link to competition
+  missionId?: string; // Optional link to mission
   location?: string;
   createdBy: string; // userId
   createdAt: string;
   updatedAt: string;
 }
 
-export type CalendarEventType = 'launch' | 'meeting' | 'competition' | 'deadline' | 'workshop' | 'other';
+export type CalendarEventType = 'launch' | 'meeting' | 'mission' | 'deadline' | 'workshop' | 'other';
 export type CalendarEventStatus = 'upcoming' | 'ongoing' | 'completed' | 'cancelled';
 
 export interface CreateCalendarEventData {
@@ -360,7 +365,7 @@ export interface CreateCalendarEventData {
   endTime?: string;
   type: CalendarEventType;
   status?: CalendarEventStatus;
-  competitionId?: string;
+  missionId?: string;
   location?: string;
 }
 
@@ -372,7 +377,7 @@ export interface UpdateCalendarEventData {
   endTime?: string;
   type?: CalendarEventType;
   status?: CalendarEventStatus;
-  competitionId?: string;
+  missionId?: string;
   location?: string;
 }
 
@@ -398,7 +403,7 @@ export interface JoinMissionApplication {
   studentPhone?: string;
   studentSlack?: string;
   // Mission Selection
-  missionId: string; // competitionId
+  missionId: string;
   fitReason: string;
   studentSignature: string;
   studentSignatureDate: string;

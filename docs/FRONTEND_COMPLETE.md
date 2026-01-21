@@ -33,24 +33,24 @@ frontend/
 │   │   │   ├── HomePage.tsx
 │   │   │   ├── AboutPage.tsx
 │   │   │   ├── ContactPage.tsx
-│   │   │   ├── CompetitionsPage.tsx
-│   │   │   └── CompetitionDetailPage.tsx
+│   │   │   ├── MissionsPage.tsx
+│   │   │   └── MissionDetailPage.tsx
 │   │   ├── auth/
 │   │   │   ├── LoginPage.tsx
 │   │   │   └── RegisterPage.tsx
 │   │   ├── user/
 │   │   │   ├── UserDashboard.tsx
-│   │   │   ├── UserCompetitions.tsx
+│   │   │   ├── UserMissions.tsx
 │   │   │   ├── UserTeams.tsx
 │   │   │   └── UserFiles.tsx
 │   │   └── admin/
 │   │       ├── AdminDashboard.tsx
 │   │       ├── AdminUsers.tsx
-│   │       ├── AdminCompetitions.tsx
+│   │       ├── AdminMissions.tsx
 │   │       └── ... (10 admin pages)
 │   ├── store/
 │   │   ├── authStore.ts          # Zustand auth state
-│   │   └── competitionStore.ts   # Zustand competition state
+│   │   └── missionStore.ts   # Zustand mission state
 │   ├── lib/
 │   │   ├── api.ts                # Type-safe API client
 │   │   └── utils.ts              # Utility functions

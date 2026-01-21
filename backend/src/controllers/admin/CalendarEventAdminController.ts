@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import { AuthRequest } from '../../models/types';
-import { CalendarEventService } from '../../services/CalendarEventService';
+import { CalendarEventService } from '../../services/CalendarEventService.js';
 
 export class CalendarEventAdminController {
   private calendarEventService: CalendarEventService;

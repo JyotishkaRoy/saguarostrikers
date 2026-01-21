@@ -1,11 +1,11 @@
 const fileService = require('../../services/fileService');
 
 class FileController {
-  // Get files by competition
-  getFilesByCompetition(req, res, next) {
+  // Get files by mission
+  getFilesByMission(req, res, next) {
     try {
-      const { competitionId } = req.params;
-      const files = fileService.getFilesByCompetition(competitionId);
+      const { missionId } = req.params;
+      const files = fileService.getFilesByMission(missionId);
 
       res.json({
         success: true,
@@ -31,11 +31,11 @@ class FileController {
     }
   }
 
-  // Get gallery by competition
-  getGalleryByCompetition(req, res, next) {
+  // Get gallery by mission
+  getGalleryByMission(req, res, next) {
     try {
-      const { competitionId } = req.params;
-      const gallery = fileService.getGalleryByCompetition(competitionId);
+      const { missionId } = req.params;
+      const gallery = fileService.getGalleryByMission(missionId);
 
       res.json({
         success: true,

@@ -1,16 +1,16 @@
-import { v4 as uuidv4 } from 'uuid';
+import { generateId } from '../utils/idGenerator.js';
 import { SubEventDataHelper } from '../data/SubEventDataHelper.js';
-import { CompetitionDataHelper } from '../data/CompetitionDataHelper.js';
+import { MissionDataHelper } from '../data/MissionDataHelper.js';
 import { SubEvent } from '../models/types.js';
 import { createError } from '../middleware/errorHandler.js';
 
 export class SubEventService {
   private subEventDataHelper: SubEventDataHelper;
-  private competitionDataHelper: CompetitionDataHelper;
+  private missionDataHelper: MissionDataHelper;
 
   constructor() {
     this.subEventDataHelper = new SubEventDataHelper();
-    this.competitionDataHelper = new CompetitionDataHelper();
+    this.missionDataHelper = new MissionDataHelper();
   }
 
   /**
@@ -27,39 +27,39 @@ export class SubEventService {
   }
 
   /**
-   * Get sub-events for a competition
+   * Get sub-events for a mission
    */
-  async getSubEventsByCompetition(competitionId: string): Promise<SubEvent[]> {
-    return this.subEventDataHelper.getSubEventsByCompetition(competitionId);
+  async getSubEventsByMission(missionId: string): Promise<SubEvent[]> {
+    return this.subEventDataHelper.getSubEventsByMission(missionId);
   }
 
   /**
-   * Get published sub-events for a competition (public)
+   * Get published sub-events for a mission (public)
    */
-  async getPublishedSubEvents(competitionId: string): Promise<SubEvent[]> {
-    return this.subEventDataHelper.getPublishedSubEvents(competitionId);
+  async getPublishedSubEvents(missionId: string): Promise<SubEvent[]> {
+    return this.subEventDataHelper.getPublishedSubEvents(missionId);
   }
 
   /**
    * Create sub-event
    */
   async createSubEvent(data: {
-    competitionId: string;
+    missionId: string;
     title: string;
     description: string;
     eventDate: string;
     status?: 'draft' | 'published' | 'completed';
   }): Promise<SubEvent> {
-    // Verify competition exists
-    const competition = this.competitionDataHelper.getCompetitionById(data.competitionId);
+    // Verify mission exists
+    const mission = this.missionDataHelper.getMissionById(data.missionId);
     
-    if (!competition) {
-      throw createError.notFound('Competition not found');
+    if (!mission) {
+      throw createError.notFound('Mission not found');
     }
 
     const subEvent: SubEvent = {
-      subEventId: uuidv4(),
-      competitionId: data.competitionId,
+      subEventId: generateId(),
+      missionId: data.missionId,
       title: data.title,
       description: data.description,
       eventDate: data.eventDate,

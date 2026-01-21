@@ -14,8 +14,8 @@ const UserSchema = {
   lastLogin: 'ISO datetime (optional)'
 };
 
-const CompetitionSchema = {
-  competitionId: 'string (UUID)',
+const MissionSchema = {
+  missionId: 'string (UUID)',
   title: 'string',
   slug: 'string (unique, auto-generated from title)',
   description: 'string',
@@ -31,7 +31,7 @@ const CompetitionSchema = {
 
 const SubEventSchema = {
   subEventId: 'string (UUID)',
-  competitionId: 'string (foreign key)',
+  missionId: 'string (foreign key)',
   title: 'string',
   description: 'string',
   eventDate: 'ISO date',
@@ -42,7 +42,7 @@ const SubEventSchema = {
 
 const TeamSchema = {
   teamId: 'string (UUID)',
-  competitionId: 'string (foreign key)',
+  missionId: 'string (foreign key)',
   teamName: 'string',
   description: 'string',
   createdBy: 'string (userId)',
@@ -61,7 +61,7 @@ const TeamMemberSchema = {
 const InterestSchema = {
   interestId: 'string (UUID)',
   userId: 'string (foreign key)',
-  competitionId: 'string (foreign key)',
+  missionId: 'string (foreign key)',
   message: 'string (optional)',
   status: 'enum: pending, assigned, rejected',
   createdAt: 'ISO datetime'
@@ -71,8 +71,8 @@ const NoticeSchema = {
   noticeId: 'string (UUID)',
   title: 'string',
   content: 'string',
-  type: 'enum: general, competition',
-  competitionId: 'string (foreign key, optional)',
+  type: 'enum: general, mission',
+  missionId: 'string (foreign key, optional)',
   status: 'enum: draft, published, unpublished',
   priority: 'enum: low, medium, high',
   createdBy: 'string (userId)',
@@ -114,7 +114,7 @@ const FileSchema = {
   fileType: 'string',
   fileSize: 'number',
   category: 'enum: project, document, other',
-  competitionId: 'string (foreign key, optional)',
+  missionId: 'string (foreign key, optional)',
   subEventId: 'string (foreign key, optional)',
   uploadedBy: 'string (userId)',
   uploadedAt: 'ISO datetime',
@@ -126,7 +126,7 @@ const GallerySchema = {
   imageUrl: 'string',
   title: 'string',
   description: 'string (optional)',
-  competitionId: 'string (foreign key, optional)',
+  missionId: 'string (foreign key, optional)',
   subEventId: 'string (foreign key, optional)',
   uploadedBy: 'string (userId)',
   uploadedAt: 'ISO datetime'
@@ -146,7 +146,7 @@ const AuditLogSchema = {
 
 module.exports = {
   UserSchema,
-  CompetitionSchema,
+  MissionSchema,
   SubEventSchema,
   TeamSchema,
   TeamMemberSchema,

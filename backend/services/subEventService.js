@@ -1,20 +1,20 @@
 const subEventDataHelper = require('../dataHelpers/subEventDataHelper');
-const competitionDataHelper = require('../dataHelpers/competitionDataHelper');
+const missionDataHelper = require('../dataHelpers/missionDataHelper');
 const auditLogDataHelper = require('../dataHelpers/auditLogDataHelper');
 
 class SubEventService {
   createSubEvent(subEventData, userId, requestInfo = {}) {
-    const { competitionId, title, description, eventDate, status } = subEventData;
+    const { missionId, title, description, eventDate, status } = subEventData;
 
-    // Verify competition exists
-    const competition = competitionDataHelper.getCompetitionById(competitionId);
-    if (!competition) {
-      throw new Error('Competition not found');
+    // Verify mission exists
+    const mission = missionDataHelper.getMissionById(missionId);
+    if (!mission) {
+      throw new Error('Mission not found');
     }
 
     // Create sub-event
     const newSubEvent = subEventDataHelper.createSubEvent({
-      competitionId,
+      missionId,
       title,
       description,
       eventDate,
@@ -27,7 +27,7 @@ class SubEventService {
       action: 'SUB_EVENT_CREATED',
       entity: 'subEvent',
       entityId: newSubEvent.subEventId,
-      changes: { competitionId, title, status: newSubEvent.status },
+      changes: { missionId, title, status: newSubEvent.status },
       ipAddress: requestInfo.ipAddress || '',
       userAgent: requestInfo.userAgent || ''
     });
@@ -82,8 +82,8 @@ class SubEventService {
     return success;
   }
 
-  getSubEventsByCompetition(competitionId) {
-    return subEventDataHelper.getSubEventsByCompetition(competitionId);
+  getSubEventsByMission(missionId) {
+    return subEventDataHelper.getSubEventsByMission(missionId);
   }
 
   getSubEventById(subEventId) {

@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs';
-import { v4 as uuidv4 } from 'uuid';
+import { generateId } from '../utils/idGenerator.js';
 import { UserDataHelper } from '../data/UserDataHelper.js';
 import { User, CreateUserData } from '../models/types.js';
 import { createError } from '../middleware/errorHandler.js';
@@ -47,7 +47,7 @@ export class UserService {
 
     // Create user
     const user: User = {
-      userId: uuidv4(),
+      userId: generateId(),
       email: data.email.toLowerCase(),
       password: hashedPassword,
       firstName: data.firstName,

@@ -154,8 +154,8 @@ export interface User {
   lastLogin?: string;
 }
 
-export interface Competition {
-  competitionId: string;
+export interface Mission {
+  missionId: string;
   title: string;
   slug: string;
   description: string;
@@ -176,56 +176,56 @@ export interface Competition {
 
 **Before (Functional):**
 ```javascript
-// controllers/admin/competitionAdminController.js
-const competitionService = require('../../services/competitionService');
+// controllers/admin/missionAdminController.js
+const missionService = require('../../services/missionService');
 
-class CompetitionAdminController {
-  getAllCompetitions(req, res, next) {
+class MissionAdminController {
+  getAllMissions(req, res, next) {
     try {
-      const competitions = competitionService.getAllCompetitions(req.user.userId);
-      res.json({ success: true, data: competitions });
+      const missions = missionService.getAllMissions(req.user.userId);
+      res.json({ success: true, data: missions });
     } catch (error) {
       next(error);
     }
   }
 }
 
-module.exports = new CompetitionAdminController();
+module.exports = new MissionAdminController();
 ```
 
 **After (Sanhoti Pattern):**
 ```typescript
-// controllers/CompetitionController.ts
+// controllers/MissionController.ts
 import { Response } from 'express';
 import { AuthRequest } from '../middleware/auth';
-import { CompetitionService } from '../services/CompetitionService';
+import { MissionService } from '../services/MissionService';
 
-export class CompetitionController {
-  private competitionService: CompetitionService;
+export class MissionController {
+  private missionService: MissionService;
 
   constructor() {
-    this.competitionService = new CompetitionService();
+    this.missionService = new MissionService();
   }
 
-  async getAllCompetitions(req: AuthRequest, res: Response): Promise<void> {
+  async getAllMissions(req: AuthRequest, res: Response): Promise<void> {
     try {
-      const competitions = await this.competitionService.getAllCompetitions();
-      res.json({ success: true, data: competitions });
+      const missions = await this.missionService.getAllMissions();
+      res.json({ success: true, data: missions });
     } catch (error) {
       res.status(500).json({ 
         success: false, 
-        error: 'Failed to fetch competitions' 
+        error: 'Failed to fetch missions' 
       });
     }
   }
 
-  async createCompetition(req: AuthRequest, res: Response): Promise<void> {
+  async createMission(req: AuthRequest, res: Response): Promise<void> {
     try {
-      const competition = await this.competitionService.createCompetition(
+      const mission = await this.missionService.createMission(
         req.body,
         req.user!.userId
       );
-      res.status(201).json({ success: true, data: competition });
+      res.status(201).json({ success: true, data: mission });
     } catch (error) {
       res.status(400).json({ 
         success: false, 
@@ -251,7 +251,7 @@ routes/
   ├── publicRoutes.js
   ├── userRoutes.js
   └── admin/
-      ├── competitionAdminRoutes.js
+      ├── missionAdminRoutes.js
       ├── teamAdminRoutes.js
       └── ... (8 more files)
 ```
@@ -271,7 +271,7 @@ import { auditLog } from '../middleware/audit';
 
 // Initialize all controllers
 const authController = new AuthController();
-const competitionController = new CompetitionController();
+const missionController = new MissionController();
 const teamController = new TeamController();
 // ... etc
 
@@ -289,19 +289,19 @@ router.post('/auth/register', bind(authController, 'register'));
 router.post('/auth/login', bind(authController, 'login'));
 router.get('/auth/profile', authenticate, bind(authController, 'getProfile'));
 
-// Public competition routes
-router.get('/competitions', bind(competitionController, 'getPublished'));
-router.get('/competitions/:slug', bind(competitionController, 'getBySlug'));
+// Public mission routes
+router.get('/missions', bind(missionController, 'getPublished'));
+router.get('/missions/:slug', bind(missionController, 'getBySlug'));
 
-// Admin competition routes
-router.get('/admin/competitions', 
+// Admin mission routes
+router.get('/admin/missions', 
   authenticate, requireAdmin, auditLog('VIEW_COMPETITIONS'),
-  bind(competitionController, 'getAllForAdmin')
+  bind(missionController, 'getAllForAdmin')
 );
 
-router.post('/admin/competitions',
+router.post('/admin/missions',
   authenticate, requireAdmin, auditLog('CREATE_COMPETITION'),
-  bind(competitionController, 'create')
+  bind(missionController, 'create')
 );
 
 // ... all other routes
@@ -382,7 +382,7 @@ mv public/index.html .
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rocketry Competition Platform</title>
+    <title>Rocketry Mission Platform</title>
   </head>
   <body>
     <div id="root"></div>

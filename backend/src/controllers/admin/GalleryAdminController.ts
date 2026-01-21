@@ -1,6 +1,6 @@
 import { Response } from 'express';
 import { AuthRequest } from '../../models/types';
-import { GalleryService } from '../../services/GalleryService';
+import { GalleryService } from '../../services/GalleryService.js';
 
 export class GalleryAdminController {
   private galleryService: GalleryService;
@@ -34,10 +34,10 @@ export class GalleryAdminController {
     }
   }
 
-  async getImagesByCompetition(req: AuthRequest, res: Response): Promise<void> {
+  async getImagesByMission(req: AuthRequest, res: Response): Promise<void> {
     try {
-      const { competitionId } = req.params;
-      const images = await this.galleryService.getImagesByCompetition(competitionId);
+      const { missionId } = req.params;
+      const images = await this.galleryService.getImagesByMission(missionId);
       res.status(200).json({ success: true, data: images });
     } catch (error) {
       res.status(500).json({ success: false, message: 'Failed to fetch images' });

@@ -29,37 +29,37 @@ export class InterestDataHelper extends BaseDataHelper<Interest> {
     return this.findWhere(interest => interest.userId === userId);
   }
 
-  public getInterestsByCompetition(competitionId: string): Interest[] {
-    return this.findWhere(interest => interest.competitionId === competitionId);
+  public getInterestsByMission(missionId: string): Interest[] {
+    return this.findWhere(interest => interest.missionId === missionId);
   }
 
   public getInterestsByStatus(status: InterestStatus): Interest[] {
     return this.findWhere(interest => interest.status === status);
   }
 
-  public getPendingInterests(competitionId?: string): Interest[] {
-    if (competitionId) {
+  public getPendingInterests(missionId?: string): Interest[] {
+    if (missionId) {
       return this.findWhere(
         interest =>
-          interest.competitionId === competitionId && interest.status === 'pending'
+          interest.missionId === missionId && interest.status === 'pending'
       );
     }
     return this.getInterestsByStatus('pending');
   }
 
-  public hasUserShownInterest(userId: string, competitionId: string): boolean {
+  public hasUserShownInterest(userId: string, missionId: string): boolean {
     this.loadData();
     return this.data.some(
       interest =>
-        interest.userId === userId && interest.competitionId === competitionId
+        interest.userId === userId && interest.missionId === missionId
     );
   }
 
-  public deleteInterestsByCompetition(competitionId: string): number {
+  public deleteInterestsByMission(missionId: string): number {
     this.loadData();
     const initialLength = this.data.length;
     this.data = this.data.filter(
-      interest => interest.competitionId !== competitionId
+      interest => interest.missionId !== missionId
     );
     
     if (this.data.length < initialLength) {

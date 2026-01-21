@@ -1,16 +1,16 @@
-import { v4 as uuidv4 } from 'uuid';
+import { generateId } from '../utils/idGenerator.js';
 import { NoticeDataHelper } from '../data/NoticeDataHelper.js';
-import { CompetitionDataHelper } from '../data/CompetitionDataHelper.js';
+import { MissionDataHelper } from '../data/MissionDataHelper.js';
 import { Notice } from '../models/types.js';
 import { createError } from '../middleware/errorHandler.js';
 
 export class NoticeService {
   private noticeDataHelper: NoticeDataHelper;
-  private competitionDataHelper: CompetitionDataHelper;
+  private missionDataHelper: MissionDataHelper;
 
   constructor() {
     this.noticeDataHelper = new NoticeDataHelper();
-    this.competitionDataHelper = new CompetitionDataHelper();
+    this.missionDataHelper = new MissionDataHelper();
   }
 
   /**
@@ -41,16 +41,16 @@ export class NoticeService {
   }
 
   /**
-   * Get notices by competition (public shows only published)
+   * Get notices by mission (public shows only published)
    */
-  async getNoticesByCompetition(
-    competitionId: string,
+  async getNoticesByMission(
+    missionId: string,
     publishedOnly: boolean = true
   ): Promise<Notice[]> {
     if (publishedOnly) {
-      return this.noticeDataHelper.getPublishedCompetitionNotices(competitionId);
+      return this.noticeDataHelper.getPublishedMissionNotices(missionId);
     }
-    return this.noticeDataHelper.getNoticesByCompetition(competitionId);
+    return this.noticeDataHelper.getNoticesByMission(missionId);
   }
 
   /**
@@ -73,31 +73,31 @@ export class NoticeService {
     data: {
       title: string;
       content: string;
-      type: 'general' | 'competition';
-      competitionId?: string;
+      type: 'general' | 'mission';
+      missionId?: string;
       status?: 'draft' | 'published' | 'unpublished';
       priority?: 'low' | 'medium' | 'high';
     },
     createdBy: string
   ): Promise<Notice> {
-    // If competition notice, verify competition exists
-    if (data.type === 'competition') {
-      if (!data.competitionId) {
-        throw createError.badRequest('Competition ID required for competition notices');
+    // If mission notice, verify mission exists
+    if (data.type === 'mission') {
+      if (!data.missionId) {
+        throw createError.badRequest('Mission ID required for mission notices');
       }
 
-      const competition = this.competitionDataHelper.getCompetitionById(data.competitionId);
-      if (!competition) {
-        throw createError.notFound('Competition not found');
+      const mission = this.missionDataHelper.getMissionById(data.missionId);
+      if (!mission) {
+        throw createError.notFound('Mission not found');
       }
     }
 
     const notice: Notice = {
-      noticeId: uuidv4(),
+      noticeId: generateId(),
       title: data.title,
       content: data.content,
       type: data.type,
-      competitionId: data.competitionId,
+      missionId: data.missionId,
       status: data.status || 'draft',
       priority: data.priority || 'medium',
       createdBy,

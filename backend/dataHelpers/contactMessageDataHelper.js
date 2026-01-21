@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+const { generateId } = require('../utils/idGenerator.cjs');
 const { readDB, writeDB, DB_FILES } = require('../config/database');
 
 class ContactMessageDataHelper {
@@ -14,7 +14,7 @@ class ContactMessageDataHelper {
   createMessage(messageData) {
     const messages = this.getAllMessages();
     const newMessage = {
-      messageId: uuidv4(),
+      messageId: generateId(),
       ...messageData,
       status: 'new',
       createdAt: new Date().toISOString()

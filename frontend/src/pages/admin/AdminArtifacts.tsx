@@ -14,7 +14,7 @@ interface FileItem {
   description?: string;
   isPublic: boolean;
   downloadCount: number;
-  competitionId?: string;
+  missionId?: string;
   uploadedAt: string;
 }
 

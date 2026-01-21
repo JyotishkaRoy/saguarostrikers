@@ -38,10 +38,10 @@ export class SubEventDataHelper extends BaseDataHelper<SubEvent> {
   }
 
   /**
-   * Get all sub-events for a competition
+   * Get all sub-events for a mission
    */
-  public getSubEventsByCompetition(competitionId: string): SubEvent[] {
-    return this.findWhere(subEvent => subEvent.competitionId === competitionId);
+  public getSubEventsByMission(missionId: string): SubEvent[] {
+    return this.findWhere(subEvent => subEvent.missionId === missionId);
   }
 
   /**
@@ -52,22 +52,22 @@ export class SubEventDataHelper extends BaseDataHelper<SubEvent> {
   }
 
   /**
-   * Get published sub-events for a competition
+   * Get published sub-events for a mission
    */
-  public getPublishedSubEvents(competitionId: string): SubEvent[] {
+  public getPublishedSubEvents(missionId: string): SubEvent[] {
     return this.findWhere(
       subEvent =>
-        subEvent.competitionId === competitionId && subEvent.status === 'published'
+        subEvent.missionId === missionId && subEvent.status === 'published'
     );
   }
 
   /**
-   * Delete all sub-events for a competition
+   * Delete all sub-events for a mission
    */
-  public deleteSubEventsByCompetition(competitionId: string): number {
+  public deleteSubEventsByMission(missionId: string): number {
     this.loadData();
     const initialLength = this.data.length;
-    this.data = this.data.filter(subEvent => subEvent.competitionId !== competitionId);
+    this.data = this.data.filter(subEvent => subEvent.missionId !== missionId);
     
     if (this.data.length < initialLength) {
       this.saveData();
@@ -77,9 +77,9 @@ export class SubEventDataHelper extends BaseDataHelper<SubEvent> {
   }
 
   /**
-   * Count sub-events for a competition
+   * Count sub-events for a mission
    */
-  public countByCompetition(competitionId: string): number {
-    return this.countWhere(subEvent => subEvent.competitionId === competitionId);
+  public countByMission(missionId: string): number {
+    return this.countWhere(subEvent => subEvent.missionId === missionId);
   }
 }

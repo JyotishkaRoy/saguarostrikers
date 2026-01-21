@@ -68,7 +68,7 @@ export default function DiscussionBoard() {
   const categories = [
     { value: 'all', label: 'All Discussions' },
     { value: 'general', label: 'General' },
-    { value: 'competitions', label: 'Competitions' },
+    { value: 'missions', label: 'Missions' },
     { value: 'technical', label: 'Technical Help' },
     { value: 'events', label: 'Events' },
     { value: 'announcements', label: 'Announcements' },

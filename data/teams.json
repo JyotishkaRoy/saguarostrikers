@@ -1,31 +1,31 @@
 [
   {
-    "teamId": "t1a2b3c4-d5e6-4789-90ab-cdef12345678",
-    "competitionId": "5dcbe6a0-a755-414f-aa48-ecf7f24992de",
+    "teamId": "f6tYAKVY7pxt",
+    "missionId": "TuiHj5p4hpvh",
     "name": "Phoenix Flyers",
     "description": "Our team specializes in high-altitude rockets with innovative recovery systems. We focus on precision engineering and reliable deployment mechanisms.",
     "status": "active",
-    "createdBy": "6b6ca63f-5ba3-4c78-9f42-7e8f342e2bfb",
+    "createdBy": "ZYTGOKOUExDF",
     "createdAt": "2026-01-18T10:00:00.000Z",
     "updatedAt": "2026-01-18T10:00:00.000Z"
   },
   {
-    "teamId": "t2b3c4d5-e6f7-5890-a1bc-def234567890",
-    "competitionId": "a8f3d9e1-2b4c-4567-89ab-cdef01234567",
+    "teamId": "H1DpsVQMToLn",
+    "missionId": "MPMwgwnXDk73",
     "name": "Desert Storm Rockets",
     "description": "A dedicated team working on solid propulsion systems with a focus on achieving maximum altitude and stable flight characteristics.",
     "status": "active",
-    "createdBy": "6b6ca63f-5ba3-4c78-9f42-7e8f342e2bfb",
+    "createdBy": "ZYTGOKOUExDF",
     "createdAt": "2025-12-10T14:30:00.000Z",
     "updatedAt": "2026-01-15T09:20:00.000Z"
   },
   {
-    "teamId": "t3c4d5e6-f7a8-6901-b2cd-ef3456789012",
-    "competitionId": "b9c4e0f2-3d5e-5678-90bc-def123456789",
+    "teamId": "iYH5JPH26DHU",
+    "missionId": "pTznotoJFFCU",
     "name": "Saguaro Strikers Alpha",
     "description": "Our flagship team focusing on competition readiness, technical documentation, and innovative payload designs. Strong emphasis on teamwork and project management.",
     "status": "active",
-    "createdBy": "6b6ca63f-5ba3-4c78-9f42-7e8f342e2bfb",
+    "createdBy": "ZYTGOKOUExDF",
     "createdAt": "2025-11-05T11:15:00.000Z",
     "updatedAt": "2026-01-12T16:45:00.000Z"
   }

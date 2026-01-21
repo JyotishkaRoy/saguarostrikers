@@ -1,58 +1,58 @@
-const competitionService = require('../../services/competitionService');
+const missionService = require('../../services/missionService');
 const subEventService = require('../../services/subEventService');
 const interestService = require('../../services/interestService');
 const { getRequestInfo } = require('../../middleware/requestLogger');
 
-class CompetitionAdminController {
-  // Get all competitions
-  getAllCompetitions(req, res, next) {
+class MissionAdminController {
+  // Get all missions
+  getAllMissions(req, res, next) {
     try {
-      const competitions = competitionService.getAllCompetitions(req.user.userId);
+      const missions = missionService.getAllMissions(req.user.userId);
 
       res.json({
         success: true,
-        data: competitions
+        data: missions
       });
     } catch (error) {
       next(error);
     }
   }
 
-  // Get competition by ID
-  getCompetitionById(req, res, next) {
+  // Get mission by ID
+  getMissionById(req, res, next) {
     try {
       const { id } = req.params;
-      const competition = competitionService.getCompetitionById(id);
+      const mission = missionService.getMissionById(id);
 
-      if (!competition) {
+      if (!mission) {
         return res.status(404).json({
           success: false,
-          message: 'Competition not found'
+          message: 'Mission not found'
         });
       }
 
       res.json({
         success: true,
-        data: competition
+        data: mission
       });
     } catch (error) {
       next(error);
     }
   }
 
-  // Create competition
-  createCompetition(req, res, next) {
+  // Create mission
+  createMission(req, res, next) {
     try {
-      const competitionData = req.body;
+      const missionData = req.body;
       const userId = req.user.userId;
       const requestInfo = getRequestInfo(req);
 
-      const competition = competitionService.createCompetition(competitionData, userId, requestInfo);
+      const mission = missionService.createMission(missionData, userId, requestInfo);
 
       res.status(201).json({
         success: true,
-        message: 'Competition created successfully',
-        data: competition
+        message: 'Mission created successfully',
+        data: mission
       });
     } catch (error) {
       res.status(400).json({
@@ -62,27 +62,27 @@ class CompetitionAdminController {
     }
   }
 
-  // Update competition
-  updateCompetition(req, res, next) {
+  // Update mission
+  updateMission(req, res, next) {
     try {
       const { id } = req.params;
       const updateData = req.body;
       const userId = req.user.userId;
       const requestInfo = getRequestInfo(req);
 
-      const competition = competitionService.updateCompetition(id, updateData, userId, requestInfo);
+      const mission = missionService.updateMission(id, updateData, userId, requestInfo);
 
-      if (!competition) {
+      if (!mission) {
         return res.status(404).json({
           success: false,
-          message: 'Competition not found'
+          message: 'Mission not found'
         });
       }
 
       res.json({
         success: true,
-        message: 'Competition updated successfully',
-        data: competition
+        message: 'Mission updated successfully',
+        data: mission
       });
     } catch (error) {
       res.status(400).json({
@@ -92,25 +92,25 @@ class CompetitionAdminController {
     }
   }
 
-  // Delete competition
-  deleteCompetition(req, res, next) {
+  // Delete mission
+  deleteMission(req, res, next) {
     try {
       const { id } = req.params;
       const userId = req.user.userId;
       const requestInfo = getRequestInfo(req);
 
-      const success = competitionService.deleteCompetition(id, userId, requestInfo);
+      const success = missionService.deleteMission(id, userId, requestInfo);
 
       if (!success) {
         return res.status(404).json({
           success: false,
-          message: 'Competition not found'
+          message: 'Mission not found'
         });
       }
 
       res.json({
         success: true,
-        message: 'Competition deleted successfully'
+        message: 'Mission deleted successfully'
       });
     } catch (error) {
       res.status(400).json({
@@ -120,19 +120,19 @@ class CompetitionAdminController {
     }
   }
 
-  // Publish competition
-  publishCompetition(req, res, next) {
+  // Publish mission
+  publishMission(req, res, next) {
     try {
       const { id } = req.params;
       const userId = req.user.userId;
       const requestInfo = getRequestInfo(req);
 
-      const competition = competitionService.publishCompetition(id, userId, requestInfo);
+      const mission = missionService.publishMission(id, userId, requestInfo);
 
       res.json({
         success: true,
-        message: 'Competition published successfully',
-        data: competition
+        message: 'Mission published successfully',
+        data: mission
       });
     } catch (error) {
       res.status(400).json({
@@ -142,13 +142,13 @@ class CompetitionAdminController {
     }
   }
 
-  // Get competition interests
-  getCompetitionInterests(req, res, next) {
+  // Get mission interests
+  getMissionInterests(req, res, next) {
     try {
       const { id } = req.params;
       const userId = req.user.userId;
 
-      const interests = interestService.getCompetitionInterests(id, userId);
+      const interests = interestService.getMissionInterests(id, userId);
 
       res.json({
         success: true,
@@ -240,5 +240,5 @@ class CompetitionAdminController {
   }
 }
 
-module.exports = new CompetitionAdminController();
+module.exports = new MissionAdminController();
 

@@ -1,4 +1,4 @@
-import { CalendarEventDataHelper } from '../data/CalendarEventDataHelper';
+import { CalendarEventDataHelper } from '../data/CalendarEventDataHelper.js';
 import { CalendarEvent, CreateCalendarEventData, UpdateCalendarEventData } from '../models/types';
 
 export class CalendarEventService {
@@ -43,8 +43,8 @@ export class CalendarEventService {
     return await this.dataHelper.getEventById(eventId);
   }
 
-  async getEventsByCompetition(competitionId: string): Promise<CalendarEvent[]> {
-    return await this.dataHelper.getEventsByCompetition(competitionId);
+  async getEventsByMission(missionId: string): Promise<CalendarEvent[]> {
+    return await this.dataHelper.getEventsByMission(missionId);
   }
 
   async getUpcomingEvents(limit?: number): Promise<CalendarEvent[]> {

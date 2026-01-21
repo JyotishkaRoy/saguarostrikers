@@ -1,4 +1,4 @@
-const { v4: uuidv4 } = require('uuid');
+const { generateId } = require('../utils/idGenerator.cjs');
 const { readDB, writeDB, DB_FILES } = require('../config/database');
 
 class SubEventDataHelper {
@@ -11,15 +11,15 @@ class SubEventDataHelper {
     return subEvents.find(event => event.subEventId === subEventId);
   }
 
-  getSubEventsByCompetition(competitionId) {
+  getSubEventsByMission(missionId) {
     const subEvents = this.getAllSubEvents();
-    return subEvents.filter(event => event.competitionId === competitionId);
+    return subEvents.filter(event => event.missionId === missionId);
   }
 
   createSubEvent(subEventData) {
     const subEvents = this.getAllSubEvents();
     const newSubEvent = {
-      subEventId: uuidv4(),
+      subEventId: generateId(),
       ...subEventData,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()
@@ -55,9 +55,9 @@ class SubEventDataHelper {
     return true;
   }
 
-  deleteSubEventsByCompetition(competitionId) {
+  deleteSubEventsByMission(missionId) {
     const subEvents = this.getAllSubEvents();
-    const filteredSubEvents = subEvents.filter(event => event.competitionId !== competitionId);
+    const filteredSubEvents = subEvents.filter(event => event.missionId !== missionId);
     writeDB(DB_FILES.SUB_EVENTS, filteredSubEvents);
     return true;
   }
