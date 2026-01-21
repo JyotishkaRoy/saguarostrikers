@@ -13,10 +13,13 @@ import {
   Folder,
   UsersRound,
   Shield,
-  MessageCircle
+  MessageCircle,
+  ChevronDown,
+  ChevronRight,
+  Package
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { ReactNode } from 'react';
+import { ReactNode, useState } from 'react';
 
 interface AdminLayoutProps {
   children: ReactNode;
@@ -30,6 +33,7 @@ interface NavItem {
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const location = useLocation();
+  const [missionsExpanded, setMissionsExpanded] = useState(true);
 
   const isActive = (path: string) => {
     if (path === '/admin' && location.pathname === '/admin') {
@@ -43,21 +47,23 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   const mainNavItems: NavItem[] = [
     { label: 'Dashboard', path: '/admin', icon: <LayoutDashboard className="h-5 w-5" /> },
-    { label: 'Missions', path: '/admin/missions', icon: <Trophy className="h-5 w-5" /> },
-    { label: 'Applications', path: '/admin/applications', icon: <FileText className="h-5 w-5" /> },
-    { label: 'Messages', path: '/admin/contact-messages', icon: <MessageSquare className="h-5 w-5" /> },
-    { label: 'Users', path: '/admin/users', icon: <Users className="h-5 w-5" /> },
     { label: 'Settings', path: '/admin/site-content', icon: <Settings className="h-5 w-5" /> },
+    { label: 'Board Members', path: '/admin/board-members', icon: <Shield className="h-5 w-5" /> },
+    { label: 'Users', path: '/admin/users', icon: <Users className="h-5 w-5" /> },
+    { label: 'Messages', path: '/admin/contact-messages', icon: <MessageSquare className="h-5 w-5" /> },
+    { label: 'Notices', path: '/admin/notices', icon: <Bell className="h-5 w-5" /> },
     { label: 'Audit Logs', path: '/admin/audit-logs', icon: <FileSearch className="h-5 w-5" /> },
   ];
 
+  const missionSubItems: NavItem[] = [
+    { label: 'Applications', path: '/admin/applications', icon: <FileText className="h-4 w-4" /> },
+    { label: 'Mission Scientists', path: '/admin/scientists', icon: <UsersRound className="h-4 w-4" /> },
+    { label: 'Mission Artifacts', path: '/admin/artifacts', icon: <Package className="h-4 w-4" /> },
+    { label: 'Mission Galleries', path: '/admin/gallery', icon: <Image className="h-4 w-4" /> },
+  ];
+
   const contentNavItems: NavItem[] = [
-    { label: 'Teams', path: '/admin/teams', icon: <UsersRound className="h-5 w-5" /> },
-    { label: 'Notices', path: '/admin/notices', icon: <Bell className="h-5 w-5" /> },
     { label: 'Calendar Events', path: '/admin/calendar-events', icon: <Calendar className="h-5 w-5" /> },
-    { label: 'Board Members', path: '/admin/board-members', icon: <Shield className="h-5 w-5" /> },
-    { label: 'Mission Artifacts', path: '/admin/artifacts', icon: <Folder className="h-5 w-5" /> },
-    { label: 'Mission Gallery', path: '/admin/gallery', icon: <Image className="h-5 w-5" /> },
     { label: 'Discussions', path: '/admin/discussions', icon: <MessageCircle className="h-5 w-5" /> },
   ];
 
@@ -101,6 +107,66 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
             <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-3">
               Content Management
             </p>
+            
+            {/* Missions with Submenu */}
+            <div>
+              <button
+                onClick={() => setMissionsExpanded(!missionsExpanded)}
+                className={cn(
+                  "w-full flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                  (isActive('/admin/missions') || location.pathname.includes('/admin/applications') || 
+                   location.pathname.includes('/admin/scientists') || location.pathname.includes('/admin/artifacts') || 
+                   location.pathname.includes('/admin/gallery'))
+                    ? "bg-primary-50 text-primary-700"
+                    : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                )}
+              >
+                <div className="flex items-center gap-3">
+                  <Trophy className="h-5 w-5" />
+                  <span>Missions</span>
+                </div>
+                {missionsExpanded ? (
+                  <ChevronDown className="h-4 w-4" />
+                ) : (
+                  <ChevronRight className="h-4 w-4" />
+                )}
+              </button>
+              
+              {/* Mission Submenu */}
+              {missionsExpanded && (
+                <div className="ml-6 mt-1 space-y-1">
+                  <Link
+                    to="/admin/missions"
+                    className={cn(
+                      "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                      isActive('/admin/missions')
+                        ? "bg-primary-50 text-primary-700"
+                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                    )}
+                  >
+                    <Trophy className="h-4 w-4" />
+                    <span>All Missions</span>
+                  </Link>
+                  {missionSubItems.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className={cn(
+                        "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                        isActive(item.path)
+                          ? "bg-primary-50 text-primary-700"
+                          : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                      )}
+                    >
+                      {item.icon}
+                      <span>{item.label}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Other Content Items */}
             {contentNavItems.map((item) => (
               <Link
                 key={item.path}

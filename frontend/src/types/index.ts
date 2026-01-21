@@ -8,6 +8,7 @@ export interface User {
   role: 'admin' | 'user';
   status: 'active' | 'inactive';
   phone?: string;
+  profileImageUrl?: string;
   createdAt: string;
   updatedAt: string;
   lastLogin?: string;
@@ -26,7 +27,7 @@ export interface Mission {
   startDate: string;
   endDate: string;
   location: string;
-  status: 'draft' | 'published' | 'completed' | 'cancelled';
+  status: 'draft' | 'published' | 'in-progress' | 'completed' | 'cancelled' | 'archived';
   imageUrl?: string;
   createdBy: string;
   createdAt: string;

@@ -345,8 +345,21 @@ export class EmailService {
             ` : ''}
             
             ${status === 'approved' ? `
+            <h3>🎓 Your Portal Access:</h3>
+            <div class="message-box" style="background: #f0fdf4; border-left-color: #10b981;">
+              <p><strong>A user account has been created for you!</strong> You can now log in to the Saguaro Strikers portal to access mission resources, schedules, and team information.</p>
+              <p><strong>Login Credentials:</strong></p>
+              <ul>
+                <li><strong>Email:</strong> ${studentEmail}</li>
+                <li><strong>Temporary Password:</strong> <code style="background: #e5e7eb; padding: 2px 6px; border-radius: 4px; font-family: monospace;">Saguaro@123</code></li>
+              </ul>
+              <p><strong>⚠️ Important:</strong> Please change your password after your first login for security purposes.</p>
+              <p><a href="${process.env.FRONTEND_URL || 'http://localhost:3000'}/login" style="display: inline-block; background: #10b981; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; margin-top: 10px;">Login to Portal</a></p>
+            </div>
+            
             <h3>Next Steps:</h3>
             <ol>
+              <li><strong>Log in to the portal</strong> and change your password</li>
               <li>You'll receive a welcome packet with detailed information</li>
               <li>Review the mission schedule and requirements</li>
               <li>Attend the orientation session (date to be announced)</li>

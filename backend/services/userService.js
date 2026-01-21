@@ -162,6 +162,55 @@ class UserService {
     const users = userDataHelper.getUsersByStatus(status);
     return users.map(user => this.transformUserData(user));
   }
+
+  async uploadProfileImage(userId, file) {
+    const path = require('path');
+    const fs = require('fs');
+
+    const user = userDataHelper.getUserById(userId);
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    // Base upload directory (project root)
+    const uploadsBase = path.join(process.cwd(), '..', 'uploads');
+    const userDir = path.join(uploadsBase, 'users', userId);
+
+    // Create user directory if it doesn't exist
+    if (!fs.existsSync(userDir)) {
+      fs.mkdirSync(userDir, { recursive: true });
+      console.log(`📁 Created user folder: ${userId}`);
+    }
+
+    // Delete any existing files in the user folder (only keep one profile image)
+    const existingFiles = fs.readdirSync(userDir);
+    existingFiles.forEach(existingFile => {
+      const filePath = path.join(userDir, existingFile);
+      fs.unlinkSync(filePath);
+      console.log(`🗑️  Deleted old profile image: ${existingFile}`);
+    });
+
+    // Save new file
+    const fileExt = path.extname(file.originalname);
+    const fileName = `profile${fileExt}`;
+    const targetPath = path.join(userDir, fileName);
+
+    // Move from temp to user folder
+    fs.renameSync(file.path, targetPath);
+
+    // Generate URL
+    const imageUrl = `/uploads/users/${userId}/${fileName}`;
+    
+    console.log(`✅ Profile image uploaded: ${imageUrl}`);
+
+    // Update user record with image URL
+    userDataHelper.updateUser(userId, {
+      profileImageUrl: imageUrl,
+      updatedAt: new Date().toISOString()
+    });
+
+    return imageUrl;
+  }
 }
 
 module.exports = new UserService();

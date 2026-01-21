@@ -1,9 +1,18 @@
 import { BaseDataHelper } from './BaseDataHelper.js';
-import { BoardMember } from '../models/types.js';
+import { BoardMember, User } from '../models/types.js';
+import { UserDataHelper } from './UserDataHelper.js';
 
 export class BoardMemberDataHelper extends BaseDataHelper<BoardMember> {
+  private userDataHelper: UserDataHelper;
+
   constructor() {
     super('boardMembers.json');
+    this.userDataHelper = new UserDataHelper();
+  }
+
+  public getAll(): BoardMember[] {
+    const members = super.getAll();
+    return this.enrichWithUserProfileImages(members);
   }
 
   public getBoardMemberById(boardMemberId: string): BoardMember | null {
@@ -26,9 +35,25 @@ export class BoardMemberDataHelper extends BaseDataHelper<BoardMember> {
   }
 
   public getActiveBoardMembers(): BoardMember[] {
-    return this.findWhere(member => member.status === 'active').sort(
+    const members = this.findWhere(member => member.status === 'active').sort(
       (a, b) => a.order - b.order
     );
+    return this.enrichWithUserProfileImages(members);
+  }
+
+  // Helper method to enrich board members with user profile pictures
+  private enrichWithUserProfileImages(members: BoardMember[]): BoardMember[] {
+    return members.map(member => {
+      // If board member has no image, try to use user's profile picture
+      if (!member.imageUrl || member.imageUrl.trim() === '') {
+        const users: User[] = this.userDataHelper.getAll();
+        const user = users.find((u: User) => u.email === member.email);
+        if (user?.profileImageUrl) {
+          return { ...member, imageUrl: user.profileImageUrl };
+        }
+      }
+      return member;
+    });
   }
 
   public getBoardMembersByStatus(status: 'active' | 'inactive'): BoardMember[] {

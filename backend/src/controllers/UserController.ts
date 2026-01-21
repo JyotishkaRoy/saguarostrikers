@@ -87,4 +87,112 @@ export class UserController {
       }
     }
   }
+
+  async updateProfile(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      const userId = req.user?.userId;
+      if (!userId) {
+        res.status(401).json({ success: false, message: 'User not authenticated' });
+        return;
+      }
+
+      const user = await this.userService.updateUser(userId, req.body);
+      res.status(200).json({ success: true, message: 'Profile updated successfully', data: user });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        res.status(error.statusCode).json({ success: false, message: error.message });
+      } else {
+        res.status(500).json({ success: false, message: 'Failed to update profile' });
+      }
+    }
+  }
+
+  async changePassword(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      const userId = req.user?.userId;
+      if (!userId) {
+        res.status(401).json({ success: false, message: 'User not authenticated' });
+        return;
+      }
+
+      const { currentPassword, newPassword } = req.body;
+      
+      if (!currentPassword || !newPassword) {
+        res.status(400).json({ success: false, message: 'Current password and new password are required' });
+        return;
+      }
+
+      if (newPassword.length < 6) {
+        res.status(400).json({ success: false, message: 'New password must be at least 6 characters long' });
+        return;
+      }
+
+      await this.userService.changePassword(userId, currentPassword, newPassword);
+      res.status(200).json({ success: true, message: 'Password changed successfully' });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        res.status(error.statusCode).json({ success: false, message: error.message });
+      } else {
+        res.status(500).json({ success: false, message: 'Failed to change password' });
+      }
+    }
+  }
+
+  async uploadProfileImage(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      const userId = req.user?.userId;
+      if (!userId) {
+        res.status(401).json({ success: false, message: 'User not authenticated' });
+        return;
+      }
+
+      if (!req.file) {
+        res.status(400).json({ success: false, message: 'No image uploaded' });
+        return;
+      }
+
+      const imageUrl = await this.userService.uploadProfileImage(userId, req.file);
+      res.status(200).json({
+        success: true,
+        message: 'Profile image uploaded successfully',
+        data: { url: imageUrl }
+      });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        res.status(error.statusCode).json({ success: false, message: error.message });
+      } else {
+        res.status(500).json({ success: false, message: 'Failed to upload profile image' });
+      }
+    }
+  }
+
+  // Admin: Upload profile image for any user
+  async uploadUserProfileImage(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      const { id: userId } = req.params;
+      
+      if (!userId) {
+        res.status(400).json({ success: false, message: 'User ID is required' });
+        return;
+      }
+
+      if (!req.file) {
+        res.status(400).json({ success: false, message: 'No image uploaded' });
+        return;
+      }
+
+      const imageUrl = await this.userService.uploadProfileImage(userId, req.file);
+      res.status(200).json({
+        success: true,
+        message: 'Profile image uploaded successfully',
+        data: { url: imageUrl }
+      });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        res.status(error.statusCode).json({ success: false, message: error.message });
+      } else {
+        res.status(500).json({ success: false, message: 'Failed to upload profile image' });
+      }
+    }
+  }
 }

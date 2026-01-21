@@ -16,6 +16,7 @@ export interface User {
   role: UserRole;
   status: UserStatus;
   phone?: string;
+  profileImageUrl?: string;
   createdAt: string;
   updatedAt: string;
   lastLogin?: string;
@@ -56,7 +57,7 @@ export interface Mission {
   updatedAt: string;
 }
 
-export type MissionStatus = 'draft' | 'published' | 'completed' | 'cancelled';
+export type MissionStatus = 'draft' | 'published' | 'in-progress' | 'completed' | 'cancelled' | 'archived';
 
 export interface SubEvent {
   subEventId: string;
@@ -430,6 +431,7 @@ export interface JoinMissionApplication {
   reviewedBy?: string; // userId of admin who reviewed
   reviewedAt?: string;
   reviewNotes?: string;
+  isDirectAssignment?: boolean; // Flag for admin direct assignments (skips validation)
   createdAt: string;
   updatedAt: string;
 }
@@ -471,6 +473,7 @@ export interface CreateJoinMissionData {
   agreementLiability: boolean;
   parentSignature: string;
   parentSignatureDate: string;
+  isDirectAssignment?: boolean; // Flag for admin direct assignments (skips validation)
 }
 
 export interface UpdateApplicationStatusData {

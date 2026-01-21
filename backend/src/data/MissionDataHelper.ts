@@ -53,11 +53,11 @@ export class MissionDataHelper extends BaseDataHelper<Mission> {
   }
 
   /**
-   * Get published missions (all visible missions - excludes drafts)
+   * Get published missions (all visible missions - excludes drafts and cancelled)
    */
   public getPublishedMissions(): Mission[] {
-    // Return all missions except drafts (published, completed, cancelled, archived are all visible)
-    return this.findWhere(comp => comp.status !== 'draft');
+    // Return all missions except drafts and cancelled (published, in-progress, completed, archived are visible)
+    return this.findWhere(comp => comp.status !== 'draft' && comp.status !== 'cancelled');
   }
 
   /**

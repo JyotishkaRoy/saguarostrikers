@@ -83,7 +83,7 @@ export default function AdminMissions() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     
-    const data = {
+    const data: any = {
       title: formData.get('title'),
       description: formData.get('description'),
       startDate: formData.get('startDate'),
@@ -93,13 +93,67 @@ export default function AdminMissions() {
     };
 
     try {
+      // For editing: upload file first if selected, then update mission
       if (editingMission) {
+        const heroMediaFile = formData.get('heroMedia') as File;
+        
+        // Only upload if a file was actually selected (has a name and size)
+        if (heroMediaFile && heroMediaFile.name && heroMediaFile.size > 0) {
+          try {
+            // Use the dedicated uploadFile method with mission details
+            const uploadResponse = await api.uploadFile('/admin/upload', heroMediaFile, {
+              folder: 'missions',
+              missionTitle: editingMission.title,
+              missionId: editingMission.missionId
+            });
+            
+            if (uploadResponse.success && uploadResponse.data?.url) {
+              data.imageUrl = uploadResponse.data.url;
+            }
+          } catch (uploadError) {
+            console.error('File upload failed:', uploadError);
+            toast.error('Failed to upload media file');
+            return;
+          }
+        }
+
         await api.put(`/admin/missions/${editingMission.missionId}`, data);
         toast.success('Mission updated successfully');
       } else {
-        await api.post('/admin/missions', data);
+        // For creating: create mission first, then upload file if selected
+        const createResponse = await api.post('/admin/missions', data);
+        
+        if (createResponse.success && createResponse.data) {
+          const newMission = createResponse.data as any;
+          const heroMediaFile = formData.get('heroMedia') as File;
+          
+          // Upload file after mission creation if file was selected
+          if (heroMediaFile && heroMediaFile.name && heroMediaFile.size > 0) {
+            try {
+              const uploadResponse = await api.uploadFile('/admin/upload', heroMediaFile, {
+                folder: 'missions',
+                missionTitle: newMission.title,
+                missionId: newMission.missionId
+              });
+              
+              if (uploadResponse.success && uploadResponse.data?.url) {
+                // Update mission with image URL
+                await api.put(`/admin/missions/${newMission.missionId}`, {
+                  ...data,
+                  imageUrl: uploadResponse.data.url
+                });
+              }
+            } catch (uploadError) {
+              console.error('File upload failed:', uploadError);
+              // Mission was created, but file upload failed - still show success
+              toast.warning('Mission created, but media upload failed');
+            }
+          }
+        }
+        
         toast.success('Mission created successfully');
       }
+      
       setIsModalOpen(false);
       setEditingMission(null);
       fetchMissions();
@@ -198,10 +252,12 @@ export default function AdminMissions() {
               className="input"
             >
               <option value="all">All Status</option>
-              <option value="published">Published</option>
               <option value="draft">Draft</option>
+              <option value="published">Published (Upcoming)</option>
+              <option value="in-progress">In Progress</option>
               <option value="completed">Completed</option>
               <option value="cancelled">Cancelled</option>
+              <option value="archived">Archived</option>
             </select>
           </div>
           <button
@@ -346,12 +402,37 @@ export default function AdminMissions() {
                 />
               </div>
               <div>
+                <label className="block text-sm font-medium mb-1">
+                  Hero Image/Video <span className="text-gray-500 font-normal">(Optional)</span>
+                </label>
+                <input
+                  type="file"
+                  name="heroMedia"
+                  accept="image/*,video/*"
+                  className="input w-full"
+                />
+                {editingMission?.imageUrl && (
+                  <p className="text-sm text-gray-600 mt-1">
+                    Current: {editingMission.imageUrl.split('/').pop()}
+                  </p>
+                )}
+                <p className="text-xs text-gray-500 mt-1">
+                  Upload an image or video to display in the mission detail page hero section
+                </p>
+              </div>
+              <div>
                 <label className="block text-sm font-medium mb-1">Status</label>
                 <select name="status" defaultValue={editingMission?.status || 'draft'} className="input w-full">
                   <option value="draft">Draft</option>
-                  <option value="published">Published</option>
-                  <option value="completed">Completed</option>
-                  <option value="cancelled">Cancelled</option>
+                  <option value="published">Published (Upcoming)</option>
+                  <option value="in-progress">In Progress</option>
+                  {editingMission && (
+                    <>
+                      <option value="completed">Completed</option>
+                      <option value="cancelled">Cancelled</option>
+                      <option value="archived">Archived</option>
+                    </>
+                  )}
                 </select>
               </div>
               <div className="flex gap-2 pt-4">

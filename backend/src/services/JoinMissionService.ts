@@ -1,6 +1,7 @@
 import { JoinMissionDataHelper } from '../data/JoinMissionDataHelper.js';
 import { EmailService } from './EmailService.js';
 import { MissionDataHelper } from '../data/MissionDataHelper.js';
+import { UserService } from './UserService.js';
 import {
   JoinMissionApplication,
   CreateJoinMissionData,
@@ -12,26 +13,23 @@ export class JoinMissionService {
   private dataHelper: JoinMissionDataHelper;
   private emailService: EmailService;
   private missionDataHelper: MissionDataHelper;
+  private userService: UserService;
 
   constructor(
     dataHelper?: JoinMissionDataHelper,
     emailService?: EmailService,
-    missionDataHelper?: MissionDataHelper
+    missionDataHelper?: MissionDataHelper,
+    userService?: UserService
   ) {
     this.dataHelper = dataHelper || new JoinMissionDataHelper();
     this.emailService = emailService || new EmailService();
     this.missionDataHelper = missionDataHelper || new MissionDataHelper();
+    this.userService = userService || new UserService();
   }
 
   async submitApplication(data: CreateJoinMissionData): Promise<JoinMissionApplication> {
     // Validate required fields
     this.validateApplicationData(data);
-
-    // Check if student already applied
-    const existingApplication = await this.dataHelper.getApplicationByStudentEmail(data.studentEmail);
-    if (existingApplication) {
-      throw new Error('An application with this student email already exists');
-    }
 
     // Verify mission exists
     const mission = await this.missionDataHelper.getMissionById(data.missionId);
@@ -39,8 +37,25 @@ export class JoinMissionService {
       throw new Error('Selected mission not found');
     }
 
-    if (mission.status !== 'published') {
-      throw new Error('This mission is not currently accepting applications');
+    // Check if student already applied to THIS specific mission
+    const missionApplications = await this.dataHelper.getApplicationsByMission(data.missionId);
+    const existingApplicationForMission = missionApplications.find(
+      app => app.studentEmail.toLowerCase() === data.studentEmail.toLowerCase()
+    );
+    
+    if (existingApplicationForMission) {
+      throw new Error('This student has already applied to this mission');
+    }
+
+    // Check mission status (allow published and in-progress for direct assignments)
+    if (data.isDirectAssignment) {
+      if (mission.status !== 'published' && mission.status !== 'in-progress') {
+        throw new Error('Scientists can only be added to Published or In Progress missions');
+      }
+    } else {
+      if (mission.status !== 'published') {
+        throw new Error('This mission is not currently accepting applications');
+      }
     }
 
     // Create application
@@ -102,10 +117,17 @@ export class JoinMissionService {
     data: UpdateApplicationStatusData,
     reviewedBy: string
   ): Promise<JoinMissionApplication> {
+    console.log(`📝 Updating application status for ${applicationId}`);
+    console.log(`   New status: ${data.status}`);
+    console.log(`   Reviewed by: ${reviewedBy}`);
+    
     const application = await this.dataHelper.getApplicationById(applicationId);
     if (!application) {
       throw new Error('Application not found');
     }
+
+    console.log(`   Current status: ${application.status}`);
+    console.log(`   Student email: ${application.studentEmail}`);
 
     const updatedApplication = await this.dataHelper.updateApplicationStatus(
       applicationId,
@@ -115,6 +137,38 @@ export class JoinMissionService {
 
     if (!updatedApplication) {
       throw new Error('Failed to update application status');
+    }
+
+    console.log(`   ✅ Status updated in data helper`);
+    console.log(`   Updated status: ${updatedApplication.status}`);
+
+    // Create user account when application is approved
+    if (data.status === 'approved') {
+      console.log(`🔐 Application approved, checking user account...`);
+      try {
+        // Check if user already exists
+        const existingUser = await this.userService.getUserByEmail(application.studentEmail);
+        
+        if (!existingUser) {
+          console.log(`   📝 Creating new user account...`);
+          // Create new user account with default password
+          await this.userService.createUser({
+            email: application.studentEmail,
+            password: 'Saguaro@123', // Default password
+            firstName: application.studentFirstName,
+            lastName: application.studentLastName,
+            phone: application.studentPhone || '',
+            role: 'user',
+            status: 'active',
+          });
+          console.log(`   ✅ User account created for ${application.studentEmail}`);
+        } else {
+          console.log(`   ℹ️  User account already exists for ${application.studentEmail}`);
+        }
+      } catch (userError) {
+        console.error('   ❌ Error creating user account:', userError);
+        // Don't fail the approval if user creation fails
+      }
     }
 
     // Send status update email
@@ -168,7 +222,7 @@ export class JoinMissionService {
   }
 
   private validateApplicationData(data: CreateJoinMissionData): void {
-    // Student validation
+    // ALWAYS required: Student basic info
     if (!data.studentFirstName || data.studentFirstName.trim().length === 0) {
       throw new Error('Student first name is required');
     }
@@ -181,16 +235,44 @@ export class JoinMissionService {
       throw new Error('Valid student email is required');
     }
 
+    // ALWAYS required: Mission selection
+    if (!data.missionId || data.missionId.trim().length === 0) {
+      throw new Error('Mission selection is required');
+    }
+
+    // ALWAYS required: Agreements
+    if (!data.agreementFinancial) {
+      throw new Error('Financial responsibility agreement must be accepted');
+    }
+
+    if (!data.agreementPhotograph) {
+      throw new Error('Photograph usage agreement must be accepted');
+    }
+
+    if (!data.agreementLiability) {
+      throw new Error('Liability waiver must be accepted');
+    }
+
+    // Skip detailed validation for admin direct assignments
+    if (data.isDirectAssignment) {
+      console.log('⏭️  Skipping detailed validation for direct assignment');
+      return;
+    }
+
+    // FULL VALIDATION for public applications
+    console.log('✅ Running full validation for public application');
+
+    // Student detailed validation
     if (!data.studentDob) {
       throw new Error('Student date of birth is required');
     }
 
-    // Validate age (must be reasonable for grades 6-12)
+    // Validate age (must be at least 10 years old)
     const dob = new Date(data.studentDob);
     const today = new Date();
     const age = today.getFullYear() - dob.getFullYear();
-    if (age < 10 || age > 20) {
-      throw new Error('Student age must be between 10 and 20 years');
+    if (age < 10) {
+      throw new Error('Participant must be at least 10 years old');
     }
 
     if (!data.schoolName || data.schoolName.trim().length === 0) {
@@ -251,11 +333,7 @@ export class JoinMissionService {
       throw new Error('Parent zip code is required');
     }
 
-    // Mission validation
-    if (!data.missionId || data.missionId.trim().length === 0) {
-      throw new Error('Mission selection is required');
-    }
-
+    // Fit reason validation
     if (!data.fitReason || data.fitReason.trim().length < 50) {
       throw new Error('Please provide at least 50 characters explaining why you are fit for this mission');
     }
@@ -267,19 +345,6 @@ export class JoinMissionService {
 
     if (!data.parentSignature || data.parentSignature.trim().length === 0) {
       throw new Error('Parent signature is required');
-    }
-
-    // Agreement validation
-    if (!data.agreementFinancial) {
-      throw new Error('Financial responsibility agreement must be accepted');
-    }
-
-    if (!data.agreementPhotograph) {
-      throw new Error('Photograph usage agreement must be accepted');
-    }
-
-    if (!data.agreementLiability) {
-      throw new Error('Liability waiver must be accepted');
     }
   }
 

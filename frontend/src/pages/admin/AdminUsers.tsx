@@ -4,7 +4,7 @@ import { User } from '@/types';
 import toast from 'react-hot-toast';
 import Modal from '@/components/Modal';
 import LoadingSpinner from '@/components/LoadingSpinner';
-import { UserPlus, Edit, Trash2, Eye, CheckCircle, XCircle, Search } from 'lucide-react';
+import { UserPlus, Edit, Trash2, Eye, CheckCircle, XCircle, Search, Upload, UserCircle } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 interface UserFormData {
@@ -36,6 +36,8 @@ export default function AdminUsers() {
   const [searchQuery, setSearchQuery] = useState('');
   const [roleFilter, setRoleFilter] = useState<'all' | 'admin' | 'user'>('all');
   const [statusFilter, setStatusFilter] = useState<'all' | 'active' | 'inactive'>('all');
+  const [profileImage, setProfileImage] = useState<File | null>(null);
+  const [profileImagePreview, setProfileImagePreview] = useState<string>('');
 
   useEffect(() => {
     fetchUsers();
@@ -65,6 +67,8 @@ export default function AdminUsers() {
       status: 'active',
       password: '',
     });
+    setProfileImage(null);
+    setProfileImagePreview('');
     setIsModalOpen(true);
   };
 
@@ -78,6 +82,9 @@ export default function AdminUsers() {
       role: user.role,
       status: user.status,
     });
+    setProfileImage(null);
+    // Set preview to existing profile image if available
+    setProfileImagePreview(user.profileImageUrl || '');
     setIsModalOpen(true);
   };
 
@@ -86,15 +93,67 @@ export default function AdminUsers() {
     setIsViewModalOpen(true);
   };
 
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        toast.error('Please select an image file');
+        return;
+      }
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        toast.error('Image size should be less than 5MB');
+        return;
+      }
+      setProfileImage(file);
+      // Create preview URL
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setProfileImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormLoading(true);
 
     try {
+      let userId: string;
+
       if (currentUser) {
         // Update existing user
         const response = await api.put<User>(`/admin/users/${currentUser.userId}`, formData);
         if (response.success) {
+          userId = currentUser.userId;
+          
+          // Upload profile image if one was selected
+          if (profileImage) {
+            try {
+              // Use axios directly for file upload (bypass api wrapper's default headers)
+              const imageFormData = new FormData();
+              imageFormData.append('file', profileImage);
+              
+              const token = localStorage.getItem('token');
+              const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5001/api'}/admin/users/${userId}/upload-profile-image`, {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${token}`,
+                },
+                body: imageFormData,
+              });
+              
+              if (!response.ok) {
+                toast.error('User updated but failed to upload profile image');
+              }
+            } catch (uploadError) {
+              console.error('Image upload error:', uploadError);
+              toast.error('User updated but failed to upload profile image');
+            }
+          }
+          
           toast.success('User updated successfully!');
           setIsModalOpen(false);
           fetchUsers();
@@ -107,7 +166,34 @@ export default function AdminUsers() {
           return;
         }
         const response = await api.post<User>('/admin/users', formData);
-        if (response.success) {
+        if (response.success && response.data) {
+          userId = response.data.userId;
+          
+          // Upload profile image if one was selected
+          if (profileImage) {
+            try {
+              // Use fetch directly for file upload (bypass api wrapper's default headers)
+              const imageFormData = new FormData();
+              imageFormData.append('file', profileImage);
+              
+              const token = localStorage.getItem('token');
+              const uploadResponse = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5001/api'}/admin/users/${userId}/upload-profile-image`, {
+                method: 'POST',
+                headers: {
+                  'Authorization': `Bearer ${token}`,
+                },
+                body: imageFormData,
+              });
+              
+              if (!uploadResponse.ok) {
+                toast.error('User created but failed to upload profile image');
+              }
+            } catch (uploadError) {
+              console.error('Image upload error:', uploadError);
+              toast.error('User created but failed to upload profile image');
+            }
+          }
+          
           toast.success('User created successfully!');
           setIsModalOpen(false);
           fetchUsers();
@@ -456,6 +542,55 @@ export default function AdminUsers() {
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               />
+            </div>
+
+            {/* Profile Image Upload */}
+            <div>
+              <label className="form-label">Profile Picture</label>
+              <div className="flex items-start gap-4">
+                {/* Image Preview */}
+                <div className="flex-shrink-0">
+                  {profileImagePreview ? (
+                    <img
+                      src={profileImagePreview}
+                      alt="Profile preview"
+                      className="w-24 h-24 rounded-full object-cover border-2 border-gray-300"
+                    />
+                  ) : (
+                    <div className="w-24 h-24 rounded-full bg-gray-200 flex items-center justify-center border-2 border-gray-300">
+                      <UserCircle className="h-16 w-16 text-gray-400" />
+                    </div>
+                  )}
+                </div>
+                
+                {/* Upload Button */}
+                <div className="flex-1">
+                  <label
+                    htmlFor="profileImage"
+                    className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-lg cursor-pointer hover:bg-gray-50 transition-colors"
+                  >
+                    <Upload className="h-4 w-4" />
+                    <span className="text-sm font-medium text-gray-700">
+                      {profileImage ? 'Change Image' : 'Upload Image'}
+                    </span>
+                  </label>
+                  <input
+                    type="file"
+                    id="profileImage"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                    className="hidden"
+                  />
+                  <p className="text-xs text-gray-500 mt-2">
+                    JPG, PNG or GIF. Max size 5MB.
+                  </p>
+                  {profileImage && (
+                    <p className="text-xs text-green-600 mt-1">
+                      ✓ New image selected: {profileImage.name}
+                    </p>
+                  )}
+                </div>
+              </div>
             </div>
 
             {!currentUser && (

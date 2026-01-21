@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { useSearchParams } from 'react-router-dom';
 import { Send, CheckCircle } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
@@ -48,14 +49,23 @@ interface JoinMissionFormData {
 }
 
 export default function JoinMission() {
+  const [searchParams] = useSearchParams();
+  const preselectedMissionId = searchParams.get('missionId');
   const [missions, setMissions] = useState<Mission[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm<JoinMissionFormData>();
+  const { register, handleSubmit, formState: { errors }, setValue } = useForm<JoinMissionFormData>();
 
   useEffect(() => {
     fetchActiveMissions();
   }, []);
+
+  useEffect(() => {
+    // Pre-select mission if missionId is provided in URL
+    if (preselectedMissionId && missions.length > 0) {
+      setValue('missionId', preselectedMissionId);
+    }
+  }, [preselectedMissionId, missions, setValue]);
 
   const fetchActiveMissions = async () => {
     try {
@@ -328,7 +338,8 @@ export default function JoinMission() {
               </label>
               <select
                 {...register('missionId', { required: 'Please select a mission' })}
-                className="input"
+                className={`input ${preselectedMissionId ? 'bg-gray-100 cursor-not-allowed' : ''}`}
+                disabled={!!preselectedMissionId}
               >
                 <option value="">Select a Mission</option>
                 {missions.map(mission => (
@@ -337,6 +348,11 @@ export default function JoinMission() {
                   </option>
                 ))}
               </select>
+              {preselectedMissionId && (
+                <p className="text-sm text-primary-600 mt-1">
+                  ✓ Mission pre-selected from the mission page
+                </p>
+              )}
               {errors.missionId && (
                 <p className="text-red-500 text-sm mt-1">{errors.missionId.message}</p>
               )}

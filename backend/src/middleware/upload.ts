@@ -14,7 +14,8 @@ export const UPLOAD_DIRS = {
   banners: path.join(UPLOAD_DIR, 'banners'),
   galleries: path.join(UPLOAD_DIR, 'galleries'),
   missionDirector: path.join(UPLOAD_DIR, 'mission-director'),
-  missionLeaders: path.join(UPLOAD_DIR, 'mission-leaders')
+  missionLeaders: path.join(UPLOAD_DIR, 'mission-leaders'),
+  missions: path.join(UPLOAD_DIR, 'missions')
 } as const;
 
 // Ensure upload directories exist
@@ -97,6 +98,35 @@ const fileFilter = (
  */
 const upload = multer({
   storage: storage,
+  limits: {
+    fileSize: parseInt(process.env.MAX_FILE_SIZE || '10485760') // 10MB default
+  },
+  fileFilter: fileFilter
+});
+
+/**
+ * Generic upload storage (for dynamic folder selection)
+ * Saves to temp directory, controller will move to final destination
+ */
+const genericStorage = multer.diskStorage({
+  destination: (_req, _file, cb) => {
+    const tempDir = path.join(UPLOAD_DIR, 'temp');
+    if (!fs.existsSync(tempDir)) {
+      fs.mkdirSync(tempDir, { recursive: true });
+    }
+    cb(null, tempDir);
+  },
+  filename: (_req, file, cb) => {
+    const uniqueName = `${generateId()}${path.extname(file.originalname)}`;
+    cb(null, uniqueName);
+  }
+});
+
+/**
+ * Generic upload instance (for /admin/upload endpoint)
+ */
+export const genericUpload = multer({
+  storage: genericStorage,
   limits: {
     fileSize: parseInt(process.env.MAX_FILE_SIZE || '10485760') // 10MB default
   },

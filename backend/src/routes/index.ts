@@ -10,9 +10,10 @@ import { GalleryAdminController } from '../controllers/admin/GalleryAdminControl
 import { ContactMessageAdminController } from '../controllers/admin/ContactMessageAdminController.js';
 import { SiteContentAdminController } from '../controllers/admin/SiteContentAdminController.js';
 import { BoardMemberAdminController } from '../controllers/admin/BoardMemberAdminController.js';
+import { UploadController } from '../controllers/admin/UploadController.js';
 import { authenticate, requireAdmin, requireUser } from '../middleware/auth.js';
 import { validate } from '../middleware/validation.js';
-import { upload, handleUploadError } from '../middleware/upload.js';
+import { upload, genericUpload, handleUploadError } from '../middleware/upload.js';
 
 // Initialize controllers
 const authController = new AuthController();
@@ -26,6 +27,7 @@ const galleryAdminController = new GalleryAdminController();
 const contactMessageAdminController = new ContactMessageAdminController();
 const siteContentAdminController = new SiteContentAdminController();
 const boardMemberAdminController = new BoardMemberAdminController();
+const uploadController = new UploadController();
 
 const router = Router();
 
@@ -52,6 +54,10 @@ router.get('/public/calendar-events/:eventId', publicController.getEventById.bin
 
 // Join Mission Application
 router.post('/public/join-mission', publicController.submitJoinMissionApplication.bind(publicController));
+router.get('/public/join-mission/mission/:missionId', publicController.getApprovedScientistsByMission.bind(publicController));
+
+// Public User Profiles (limited data)
+router.get('/public/users', publicController.getPublicUserProfiles.bind(publicController));
 
 // Public Files (Mission Artifacts)
 router.get('/public/files', publicController.getPublicFiles.bind(publicController));
@@ -77,6 +83,11 @@ router.put('/auth/change-password', authenticate, requireUser, authController.ch
 // USER ROUTES (Authenticated Users)
 // ==========================================
 
+// User Profile
+router.put('/user/profile', authenticate, requireUser, userController.updateProfile.bind(userController));
+router.post('/user/change-password', authenticate, userController.changePassword.bind(userController));
+router.post('/user/upload-profile-image', authenticate, requireUser, genericUpload.single('file'), handleUploadError, userController.uploadProfileImage.bind(userController));
+
 // User Missions & Interests
 router.get('/user/missions', authenticate, requireUser, missionController.getPublishedMissions.bind(missionController));
 router.get('/user/missions/:id', authenticate, requireUser, missionController.getMissionWithSubEvents.bind(missionController));
@@ -85,6 +96,10 @@ router.get('/user/missions/:id', authenticate, requireUser, missionController.ge
 // ADMIN ROUTES (Admin Only)
 // ==========================================
 
+// Admin - Generic Upload (uses genericUpload for dynamic folder selection)
+router.post('/admin/upload', authenticate, requireAdmin, genericUpload.single('file'), handleUploadError, uploadController.uploadFile.bind(uploadController));
+router.delete('/admin/upload', authenticate, requireAdmin, uploadController.deleteFile.bind(uploadController));
+
 // Admin - Users
 router.get('/admin/users', authenticate, requireAdmin, userController.getAllUsers.bind(userController));
 router.get('/admin/users/:id', authenticate, requireAdmin, userController.getUserById.bind(userController));
@@ -92,6 +107,7 @@ router.post('/admin/users', authenticate, requireAdmin, userController.createUse
 router.put('/admin/users/:id', authenticate, requireAdmin, userController.updateUser.bind(userController));
 router.delete('/admin/users/:id', authenticate, requireAdmin, userController.deleteUser.bind(userController));
 router.patch('/admin/users/:id/toggle-status', authenticate, requireAdmin, userController.toggleUserStatus.bind(userController));
+router.post('/admin/users/:id/upload-profile-image', authenticate, requireAdmin, genericUpload.single('file'), handleUploadError, userController.uploadUserProfileImage.bind(userController));
 
 // Admin - Missions
 router.get('/admin/missions', authenticate, requireAdmin, missionController.getAllMissions.bind(missionController));

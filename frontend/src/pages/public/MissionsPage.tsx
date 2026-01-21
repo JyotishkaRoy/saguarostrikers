@@ -70,28 +70,25 @@ export default function MissionsPage() {
   };
 
   const getMissionStatus = (startDate: string, endDate: string, dbStatus: string): FilterStatus => {
-    const now = new Date();
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-
-    // Check database status first (manual overrides)
-    if (dbStatus === 'cancelled' || dbStatus === 'archived') {
+    // Use explicit database status directly
+    if (dbStatus === 'archived') {
       return 'archived';
     }
     
-    // Check if manually marked as completed in database
     if (dbStatus === 'completed') {
       return 'completed';
     }
-
-    // Otherwise, determine status based on dates
-    if (now < start) {
-      return 'upcoming';
-    } else if (now > end) {
-      return 'completed';
-    } else {
+    
+    if (dbStatus === 'in-progress') {
       return 'in-progress';
     }
+    
+    if (dbStatus === 'published') {
+      return 'upcoming';
+    }
+
+    // Fallback: use upcoming as default for published missions
+    return 'upcoming';
   };
 
   const getStatusColor = (status: FilterStatus) => {
@@ -152,8 +149,8 @@ export default function MissionsPage() {
             {/* Left Side: Title, Description, Search */}
             <div className="flex-1">
               <div className="flex items-center gap-3 mb-4">
-                <Trophy className="h-12 w-12 text-primary-600" />
-                <h1 className="text-4xl font-bold text-gray-900">Our Missions</h1>
+                <Trophy className="h-10 w-10 text-primary-600" />
+                <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Our Missions</h1>
               </div>
               <p className="text-lg text-gray-600 mb-6">
                 Explore our exciting rocketry missions and join the journey to reach new heights
@@ -279,14 +276,26 @@ export default function MissionsPage() {
                   to={`/missions/${mission.slug}`}
                   className="card group hover:shadow-xl transition-all duration-300"
                 >
-                  {/* Image */}
+                  {/* Image/Video */}
                   <div className="relative h-48 bg-gradient-to-br from-primary-600 to-primary-800 rounded-lg overflow-hidden mb-4">
                     {mission.imageUrl ? (
-                      <img
-                        src={mission.imageUrl}
-                        alt={mission.title}
-                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                      />
+                      // Check if it's a video file
+                      /\.(mp4|webm|ogg)$/i.test(mission.imageUrl) ? (
+                        <video
+                          src={mission.imageUrl}
+                          className="w-full h-full object-cover"
+                          autoPlay
+                          loop
+                          muted
+                          playsInline
+                        />
+                      ) : (
+                        <img
+                          src={mission.imageUrl}
+                          alt={mission.title}
+                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                        />
+                      )
                     ) : (
                       <div className="flex items-center justify-center h-full">
                         <Trophy className="h-20 w-20 text-white opacity-50" />

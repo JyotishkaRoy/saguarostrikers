@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Plus, Edit, Trash2, Save, X as XIcon, Upload, Image as ImageIcon, Mail, UserPlus } from 'lucide-react';
+import { Plus, Edit, Trash2, Save, X as XIcon, Upload, Image as ImageIcon, Mail, UserPlus, User as UserIcon } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 import Modal from '@/components/Modal';
@@ -30,6 +30,18 @@ export default function AdminBoardMembers() {
     fetchBoardMembers();
     fetchUsers();
   }, []);
+
+  // Helper function to get the display image for a board member
+  const getDisplayImage = (member: BoardMember): string | null => {
+    // Priority: 1. Board member's own image, 2. User's profile picture, 3. null (default icon)
+    if (member.imageUrl) {
+      return member.imageUrl;
+    }
+    
+    // Find the user by email and use their profile picture
+    const user = users.find(u => u.email === member.email);
+    return user?.profileImageUrl || null;
+  };
 
   const fetchBoardMembers = async () => {
     try {
@@ -62,14 +74,19 @@ export default function AdminBoardMembers() {
 
   // Get available users (exclude those already assigned as board members)
   const getAvailableUsers = () => {
-    const assignedEmails = boardMembers.map(member => member.email.toLowerCase());
+    // Get emails of assigned board members, excluding the one being edited
+    const assignedEmails = boardMembers
+      .filter(member => !editingMember || member.boardMemberId !== editingMember.boardMemberId)
+      .map(member => member.email.toLowerCase());
     return users.filter(user => !assignedEmails.includes(user.email.toLowerCase()));
   };
 
   const handleOpenModal = (member?: BoardMember) => {
     if (member) {
       setEditingMember(member);
-      setSelectedUserId('');
+      // Find the user ID associated with this board member
+      const associatedUser = users.find(u => u.email.toLowerCase() === member.email.toLowerCase());
+      setSelectedUserId(associatedUser?.userId || '');
       setFormData({
         name: member.name,
         position: member.position,
@@ -114,7 +131,9 @@ export default function AdminBoardMembers() {
       setFormData(prev => ({
         ...prev,
         name: `${user.firstName} ${user.lastName}`,
-        email: user.email
+        email: user.email,
+        // Show user's profile picture as preview (can be overridden by uploading leader-specific image)
+        imageUrl: user.profileImageUrl || ''
       }));
     }
   };
@@ -238,15 +257,15 @@ export default function AdminBoardMembers() {
           <div key={member.boardMemberId} className="card group hover:shadow-lg transition-shadow">
             {/* Image */}
             <div className="relative h-48 bg-gradient-to-br from-primary-500 to-primary-700 rounded-t-lg overflow-hidden">
-              {member.imageUrl ? (
+              {getDisplayImage(member) ? (
                 <img
-                  src={member.imageUrl}
+                  src={getDisplayImage(member)!}
                   alt={member.name}
                   className="w-full h-full object-cover"
                 />
               ) : (
-                <div className="w-full h-full flex items-center justify-center text-white">
-                  <div className="text-6xl">👤</div>
+                <div className="w-full h-full flex items-center justify-center bg-primary-100">
+                  <UserIcon className="h-24 w-24 text-primary-600" />
                 </div>
               )}
               {/* Status Badge */}
@@ -313,62 +332,62 @@ export default function AdminBoardMembers() {
       {/* Add/Edit Modal */}
       <Modal isOpen={showModal} onClose={handleCloseModal} title={editingMember ? 'Edit Leader' : 'Add New Leader'} size="lg">
           <form onSubmit={handleSubmit} className="space-y-4">
-            {/* User Selector - Only show when adding new leader */}
-            {!editingMember && (
-              <div className="bg-primary-50 border border-primary-200 rounded-lg p-4 mb-4">
-                <label className="block text-sm font-medium text-primary-900 mb-2 flex items-center gap-2">
-                  <UserPlus className="h-4 w-4" />
-                  Select User <span className="text-danger-600">*</span>
-                </label>
-                {loadingUsers ? (
-                  <div className="flex items-center gap-2 text-sm text-gray-500">
-                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-600"></div>
-                    Loading users...
-                  </div>
-                ) : (
-                  <>
-                    <select
-                      value={selectedUserId}
-                      onChange={(e) => handleUserSelect(e.target.value)}
-                      className="input w-full"
-                      required
-                    >
-                      <option value="">-- Select a user --</option>
-                      {getAvailableUsers().map((user) => (
-                        <option key={user.userId} value={user.userId}>
-                          {user.firstName} {user.lastName} ({user.email})
-                        </option>
-                      ))}
-                    </select>
-                    {getAvailableUsers().length === 0 && (
-                      <p className="text-xs text-orange-600 mt-2">
-                        ⚠️ All active users are already assigned as leaders
-                      </p>
-                    )}
-                  </>
-                )}
-                <p className="text-xs text-primary-700 mt-2">
-                  Select a registered user to assign as a mission leader. Users already assigned as leaders are hidden.
-                </p>
-              </div>
-            )}
+            {/* User Selector - Available in both Add and Edit modes */}
+            <div className="bg-primary-50 border border-primary-200 rounded-lg p-4 mb-4">
+              <label className="block text-sm font-medium text-primary-900 mb-2 flex items-center gap-2">
+                <UserPlus className="h-4 w-4" />
+                Select User <span className="text-danger-600">*</span>
+              </label>
+              {loadingUsers ? (
+                <div className="flex items-center gap-2 text-sm text-gray-500">
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-primary-600"></div>
+                  Loading users...
+                </div>
+              ) : (
+                <>
+                  <select
+                    value={selectedUserId}
+                    onChange={(e) => handleUserSelect(e.target.value)}
+                    className="input w-full"
+                    required
+                  >
+                    <option value="">-- Select a user --</option>
+                    {getAvailableUsers().map((user) => (
+                      <option key={user.userId} value={user.userId}>
+                        {user.firstName} {user.lastName} ({user.email})
+                      </option>
+                    ))}
+                  </select>
+                  {getAvailableUsers().length === 0 && (
+                    <p className="text-xs text-orange-600 mt-2">
+                      ⚠️ All active users are already assigned as leaders
+                    </p>
+                  )}
+                </>
+              )}
+              <p className="text-xs text-primary-700 mt-2">
+                {editingMember 
+                  ? 'Change the user assigned to this leadership position. The dropdown shows available users (excluding other assigned leaders).'
+                  : 'Select a registered user to assign as a mission leader. Users already assigned as leaders are hidden.'}
+              </p>
+            </div>
 
             {/* Name - Auto-populated from user selection */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Name <span className="text-danger-600">*</span>
+                Leader Name <span className="text-danger-600">*</span>
               </label>
               <input
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 className="input w-full bg-gray-50"
-                placeholder="Will be auto-filled from user selection"
+                placeholder="Select a user from the dropdown above"
                 required
                 readOnly
               />
               <p className="text-xs text-gray-500 mt-1">
-                Auto-populated from selected user
+                📌 Auto-populated from selected user above
               </p>
             </div>
 
@@ -390,19 +409,19 @@ export default function AdminBoardMembers() {
             {/* Email - Auto-populated from user selection */}
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Email <span className="text-danger-600">*</span>
+                Leader Email <span className="text-danger-600">*</span>
               </label>
               <input
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 className="input w-full bg-gray-50"
-                placeholder="Will be auto-filled from user selection"
+                placeholder="Select a user from the dropdown above"
                 required
                 readOnly
               />
               <p className="text-xs text-gray-500 mt-1">
-                Auto-populated from selected user
+                📌 Auto-populated from selected user above
               </p>
             </div>
 
@@ -437,8 +456,8 @@ export default function AdminBoardMembers() {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-gradient-to-br from-primary-500 to-primary-700 flex items-center justify-center text-white">
-                      <div className="text-5xl">👤</div>
+                    <div className="w-full h-full bg-primary-100 flex items-center justify-center">
+                      <UserIcon className="h-16 w-16 text-primary-600" />
                     </div>
                   )}
                 </div>

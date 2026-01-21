@@ -69,9 +69,9 @@ class MissionDataHelper {
   }
 
   getPublishedMissions() {
-    // Return all missions except drafts (published, completed, cancelled, archived are all visible)
+    // Return all missions except drafts and cancelled (published, in-progress, completed, archived are visible)
     const missions = this.getAllMissions();
-    return missions.filter(comp => comp.status !== 'draft');
+    return missions.filter(comp => comp.status !== 'draft' && comp.status !== 'cancelled');
   }
 }
 

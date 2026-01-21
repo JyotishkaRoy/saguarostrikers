@@ -48,7 +48,7 @@ export default function Navbar() {
           <div className="container mx-auto px-4 pl-8">
             <div className="flex h-16 items-center justify-between">
               {/* Desktop Navigation */}
-              <div className="hidden lg:flex lg:items-center lg:gap-1 text-sm flex-1">
+              <div className="hidden lg:flex lg:items-center lg:gap-1 text-base flex-1 justify-end">
             <Link 
               to="/" 
               className={cn(
@@ -196,17 +196,7 @@ export default function Navbar() {
                     isActive('/login') && "underline underline-offset-4 decoration-2"
                   )}
                 >
-                  Login
-                </Link>
-                <span className="text-white/50">|</span>
-                <Link 
-                  to="/register" 
-                  className={cn(
-                    "text-white hover:text-secondary-300 transition-colors px-2 py-1",
-                    isActive('/register') && "underline underline-offset-4 decoration-2"
-                  )}
-                >
-                  Register
+                  Admin
                 </Link>
               </>
             )}
@@ -298,10 +288,7 @@ export default function Navbar() {
             ) : (
               <>
                 <Link to="/login" className="block rounded-lg px-3 py-2 text-white hover:bg-primary-700">
-                  Login
-                </Link>
-                <Link to="/register" className="block rounded-lg bg-secondary-500 px-3 py-2 text-white hover:bg-secondary-600">
-                  Register
+                  Admin
                 </Link>
               </>
             )}

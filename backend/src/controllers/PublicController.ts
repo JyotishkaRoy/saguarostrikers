@@ -242,4 +242,45 @@ export class PublicController {
       res.status(500).json({ success: false, message: 'Failed to view image' });
     }
   }
+
+  // Get approved scientists (applications) by mission ID
+  async getApprovedScientistsByMission(req: Request, res: Response): Promise<void> {
+    try {
+      const { missionId } = req.params;
+      
+      // Get all applications for this mission
+      const applications = await this.joinMissionService.getApplicationsByMission(missionId);
+      
+      // Filter only approved applications
+      const approvedScientists = applications.filter(app => app.status === 'approved');
+      
+      res.status(200).json({ success: true, data: approvedScientists });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Failed to fetch mission scientists' });
+    }
+  }
+
+  // Get public user profiles (limited data for display purposes)
+  async getPublicUserProfiles(_req: Request, res: Response): Promise<void> {
+    try {
+      // Import UserService if not already available
+      const { UserService } = await import('../services/UserService.js');
+      const userService = new UserService();
+      
+      const users = await userService.getAllUsers();
+      
+      // Return only non-sensitive data
+      const publicProfiles = users.map(user => ({
+        userId: user.userId,
+        email: user.email,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        profileImageUrl: user.profileImageUrl,
+      }));
+      
+      res.status(200).json({ success: true, data: publicProfiles });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Failed to fetch user profiles' });
+    }
+  }
 }

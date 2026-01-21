@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Users, Search, Filter, Eye, CheckCircle } from 'lucide-react';
+import { Users, Search, Filter, Eye, CheckCircle, Rocket } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
+import type { Mission } from '@/types';
 
 interface Application {
   applicationId: string;
@@ -27,6 +28,8 @@ interface Application {
 export default function AdminApplications() {
   const [applications, setApplications] = useState<Application[]>([]);
   const [filteredApplications, setFilteredApplications] = useState<Application[]>([]);
+  const [missions, setMissions] = useState<Mission[]>([]);
+  const [selectedMissionId, setSelectedMissionId] = useState<string>('all');
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState<string>('all');
@@ -43,17 +46,48 @@ export default function AdminApplications() {
   });
 
   useEffect(() => {
+    fetchMissions();
     fetchApplications();
-    fetchStats();
   }, []);
+
+  useEffect(() => {
+    // Recalculate stats when mission or applications change
+    if (selectedMissionId !== 'all') {
+      const missionApps = applications.filter(app => app.missionId === selectedMissionId);
+      setStats({
+        total: missionApps.length,
+        pending: missionApps.filter(app => app.status === 'pending').length,
+        underReview: missionApps.filter(app => app.status === 'under_review').length,
+        approved: missionApps.filter(app => app.status === 'approved').length,
+        rejected: missionApps.filter(app => app.status === 'rejected').length,
+        waitlisted: missionApps.filter(app => app.status === 'waitlisted').length,
+      });
+    } else {
+      setStats({
+        total: applications.length,
+        pending: applications.filter(app => app.status === 'pending').length,
+        underReview: applications.filter(app => app.status === 'under_review').length,
+        approved: applications.filter(app => app.status === 'approved').length,
+        rejected: applications.filter(app => app.status === 'rejected').length,
+        waitlisted: applications.filter(app => app.status === 'waitlisted').length,
+      });
+    }
+  }, [applications, selectedMissionId]);
 
   useEffect(() => {
     let filtered = applications;
 
+    // Filter by mission
+    if (selectedMissionId !== 'all') {
+      filtered = filtered.filter(app => app.missionId === selectedMissionId);
+    }
+
+    // Filter by status
     if (filterStatus !== 'all') {
       filtered = filtered.filter(app => app.status === filterStatus);
     }
 
+    // Filter by search term
     if (searchTerm) {
       filtered = filtered.filter(app =>
         `${app.studentFirstName} ${app.studentLastName}`.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -63,7 +97,22 @@ export default function AdminApplications() {
     }
 
     setFilteredApplications(filtered);
-  }, [applications, filterStatus, searchTerm]);
+  }, [applications, selectedMissionId, filterStatus, searchTerm]);
+
+  const fetchMissions = async () => {
+    try {
+      const response = await api.get<Mission[]>('/admin/missions');
+      if (response.success && response.data) {
+        // Only show upcoming and in-progress missions (missions that accept applications)
+        const activeMissions = response.data.filter(m => 
+          m.status === 'published' || m.status === 'in-progress'
+        );
+        setMissions(activeMissions);
+      }
+    } catch (error) {
+      console.error('Failed to fetch missions:', error);
+    }
+  };
 
   const fetchApplications = async () => {
     setIsLoading(true);
@@ -77,17 +126,6 @@ export default function AdminApplications() {
       toast.error(getErrorMessage(error));
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  const fetchStats = async () => {
-    try {
-      const response = await api.get<typeof stats>('/admin/applications/stats');
-      if (response.success && response.data) {
-        setStats(response.data);
-      }
-    } catch (error) {
-      console.error('Failed to fetch stats:', error);
     }
   };
 
@@ -157,7 +195,22 @@ export default function AdminApplications() {
 
       {/* Filters */}
       <div className="card mb-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="relative">
+            <Rocket className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+            <select
+              value={selectedMissionId}
+              onChange={(e) => setSelectedMissionId(e.target.value)}
+              className="input pl-10 font-medium"
+            >
+              <option value="all">All Missions</option>
+              {missions.map(mission => (
+                <option key={mission.missionId} value={mission.missionId}>
+                  {mission.title}
+                </option>
+              ))}
+            </select>
+          </div>
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
             <input
@@ -203,6 +256,7 @@ export default function AdminApplications() {
             <thead>
               <tr className="border-b border-gray-200">
                 <th className="text-left p-4 font-semibold text-gray-700">Student</th>
+                <th className="text-left p-4 font-semibold text-gray-700">Mission</th>
                 <th className="text-left p-4 font-semibold text-gray-700">School</th>
                 <th className="text-left p-4 font-semibold text-gray-700">Grade</th>
                 <th className="text-left p-4 font-semibold text-gray-700">Parent</th>
@@ -212,50 +266,58 @@ export default function AdminApplications() {
               </tr>
             </thead>
             <tbody>
-              {filteredApplications.map((app) => (
-                <tr key={app.applicationId} className="border-b border-gray-100 hover:bg-gray-50">
-                  <td className="p-4">
-                    <div className="font-medium text-gray-900">
-                      {app.studentFirstName} {app.studentLastName}
-                    </div>
-                    <div className="text-sm text-gray-500">{app.studentEmail}</div>
-                  </td>
-                  <td className="p-4 text-gray-700">{app.schoolName}</td>
-                  <td className="p-4 text-gray-700">{app.grade}</td>
-                  <td className="p-4">
-                    <div className="text-gray-700">
-                      {app.parentFirstName} {app.parentLastName}
-                    </div>
-                    <div className="text-sm text-gray-500">{app.parentPhone}</div>
-                  </td>
-                  <td className="p-4 text-sm text-gray-500">
-                    {new Date(app.createdAt).toLocaleDateString()}
-                  </td>
-                  <td className="p-4">
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium border ${statusColors[app.status]}`}>
-                      {statusLabels[app.status]}
-                    </span>
-                  </td>
-                  <td className="p-4">
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => handleViewDetails(app)}
-                        className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
-                        title="View Details"
-                      >
-                        <Eye className="h-5 w-5" />
-                      </button>
-                      <button
-                        onClick={() => handleReview(app)}
-                        className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
-                        title="Review Application"
-                      >
-                        <CheckCircle className="h-5 w-5" />
-                      </button>
-                    </div>
-                  </td>
-                </tr>
-              ))}
+              {filteredApplications.map((app) => {
+                const mission = missions.find(m => m.missionId === app.missionId);
+                return (
+                  <tr key={app.applicationId} className="border-b border-gray-100 hover:bg-gray-50">
+                    <td className="p-4">
+                      <div className="font-medium text-gray-900">
+                        {app.studentFirstName} {app.studentLastName}
+                      </div>
+                      <div className="text-sm text-gray-500">{app.studentEmail}</div>
+                    </td>
+                    <td className="p-4">
+                      <div className="text-sm font-medium text-primary-600">
+                        {mission?.title || 'Unknown Mission'}
+                      </div>
+                    </td>
+                    <td className="p-4 text-gray-700">{app.schoolName}</td>
+                    <td className="p-4 text-gray-700">{app.grade}</td>
+                    <td className="p-4">
+                      <div className="text-gray-700">
+                        {app.parentFirstName} {app.parentLastName}
+                      </div>
+                      <div className="text-sm text-gray-500">{app.parentPhone}</div>
+                    </td>
+                    <td className="p-4 text-sm text-gray-500">
+                      {new Date(app.createdAt).toLocaleDateString()}
+                    </td>
+                    <td className="p-4">
+                      <span className={`px-3 py-1 rounded-full text-xs font-medium border ${statusColors[app.status]}`}>
+                        {statusLabels[app.status]}
+                      </span>
+                    </td>
+                    <td className="p-4">
+                      <div className="flex gap-2">
+                        <button
+                          onClick={() => handleViewDetails(app)}
+                          className="p-2 text-blue-600 hover:bg-blue-50 rounded-lg transition-colors"
+                          title="View Details"
+                        >
+                          <Eye className="h-5 w-5" />
+                        </button>
+                        <button
+                          onClick={() => handleReview(app)}
+                          className="p-2 text-green-600 hover:bg-green-50 rounded-lg transition-colors"
+                          title="Review Application"
+                        >
+                          <CheckCircle className="h-5 w-5" />
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>
@@ -265,6 +327,7 @@ export default function AdminApplications() {
       {showDetailModal && selectedApplication && (
         <ApplicationDetailModal
           application={selectedApplication}
+          missions={missions}
           onClose={() => {
             setShowDetailModal(false);
             setSelectedApplication(null);
@@ -284,7 +347,6 @@ export default function AdminApplications() {
             setShowReviewModal(false);
             setSelectedApplication(null);
             fetchApplications();
-            fetchStats();
           }}
         />
       )}
@@ -295,15 +357,26 @@ export default function AdminApplications() {
 // Application Detail Modal
 interface ApplicationDetailModalProps {
   application: Application;
+  missions: Mission[];
   onClose: () => void;
 }
 
-function ApplicationDetailModal({ application, onClose }: ApplicationDetailModalProps) {
+function ApplicationDetailModal({ application, missions, onClose }: ApplicationDetailModalProps) {
+  const mission = missions.find(m => m.missionId === application.missionId);
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-lg shadow-xl max-w-3xl w-full max-h-[90vh] overflow-y-auto">
         <div className="p-6 border-b border-gray-200 flex justify-between items-center">
-          <h2 className="text-2xl font-bold text-gray-900">Application Details</h2>
+          <div>
+            <h2 className="text-2xl font-bold text-gray-900">Application Details</h2>
+            {mission && (
+              <p className="text-sm text-primary-600 mt-1 flex items-center gap-1">
+                <Rocket className="h-4 w-4" />
+                {mission.title}
+              </p>
+            )}
+          </div>
           <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
             ✕
           </button>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { Trophy, Calendar, MapPin, ArrowLeft, FileText, Image as ImageIcon } from 'lucide-react';
+import { Trophy, Calendar, MapPin, ArrowLeft, Users, Package, Image } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 import { useAuthStore } from '@/store/authStore';
@@ -45,21 +45,24 @@ export default function MissionDetailPage() {
   };
 
   const getStatusColor = (startDate: string, endDate: string, dbStatus: string) => {
-    const now = new Date();
-    const start = new Date(startDate);
-    const end = new Date(endDate);
-
-    // Check database status first (manual overrides)
-    if (dbStatus === 'cancelled' || dbStatus === 'archived') {
+    // Use explicit database status
+    if (dbStatus === 'archived') {
       return { label: 'Archived', class: 'badge-warning' };
     }
 
-    // Check if manually marked as completed in database
     if (dbStatus === 'completed') {
       return { label: 'Completed', class: 'badge-gray' };
     }
+    
+    if (dbStatus === 'in-progress') {
+      return { label: 'In Progress', class: 'badge-success' };
+    }
 
-    // Otherwise, determine status based on dates
+    if (dbStatus === 'published') {
+      return { label: 'Upcoming', class: 'badge-primary' };
+    }
+
+    // Fallback: use dates to determine status
     if (now < start) {
       return { label: 'Upcoming', class: 'badge-primary' };
     } else if (now > end) {
@@ -110,14 +113,25 @@ export default function MissionDetailPage() {
           Back to Missions
         </Link>
 
-        {/* Hero Image */}
+        {/* Hero Media (Image or Video) */}
         <div className="relative h-96 bg-gradient-to-br from-primary-600 to-primary-800 rounded-2xl overflow-hidden mb-8">
           {mission.imageUrl ? (
-            <img
-              src={mission.imageUrl}
-              alt={mission.title}
-              className="w-full h-full object-cover"
-            />
+            mission.imageUrl.match(/\.(mp4|webm|ogg)$/i) ? (
+              <video
+                src={mission.imageUrl}
+                className="w-full h-full object-cover"
+                autoPlay
+                loop
+                muted
+                playsInline
+              />
+            ) : (
+              <img
+                src={mission.imageUrl}
+                alt={mission.title}
+                className="w-full h-full object-cover"
+              />
+            )
           ) : (
             <div className="flex items-center justify-center h-full">
               <Trophy className="h-32 w-32 text-white opacity-30" />
@@ -125,21 +139,35 @@ export default function MissionDetailPage() {
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
           <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-            <div className="flex items-start justify-between gap-8">
+            <div className="flex items-end justify-between gap-8">
               {/* Left Side: Title and Status */}
-              <div className="flex-1">
+              <div className="flex-1 flex flex-col justify-end">
                 <div className="flex items-center gap-3 mb-4">
                   <span className={`badge ${status.class} text-base px-4 py-2`}>{status.label}</span>
                 </div>
-                <h1 className="text-4xl md:text-5xl font-bold mb-2">{mission.title}</h1>
+                <h1 
+                  className="text-4xl md:text-5xl font-bold mb-2"
+                  style={{
+                    background: 'linear-gradient(135deg, rgba(255, 255, 255, 0.3) 0%, rgba(255, 255, 255, 0.1) 100%)',
+                    WebkitBackgroundClip: 'text',
+                    backgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    textShadow: 'none',
+                    filter: 'drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5)) drop-shadow(0 0 20px rgba(255, 255, 255, 0.3))',
+                    WebkitTextStroke: '1.5px rgba(255, 255, 255, 0.4)',
+                  }}
+                >
+                  {mission.title}
+                </h1>
               </div>
 
-              {/* Right Side: Join Button (only for upcoming missions) */}
-              {status.label === 'Upcoming' && (
-                <div className="flex-shrink-0 self-end">
-                  {isAuthenticated ? (
+              {/* Right Side: Action Buttons */}
+              <div className="flex-shrink-0">
+                {status.label === 'Upcoming' ? (
+                  // Join Button for Upcoming Missions
+                  isAuthenticated ? (
                     <Link 
-                      to="/join-mission" 
+                      to={`/join-mission?missionId=${mission.missionId}`}
                       className="btn-primary shadow-xl hover:shadow-2xl transition-shadow inline-flex items-center gap-2 px-8 py-4 text-lg font-bold"
                     >
                       <Trophy className="h-5 w-5" />
@@ -153,26 +181,53 @@ export default function MissionDetailPage() {
                       <Trophy className="h-5 w-5" />
                       Join this Mission
                     </Link>
-                  )}
-                </div>
-              )}
+                  )
+                ) : (
+                  // Three Buttons for Non-Upcoming Missions
+                  <div className="flex flex-col gap-3">
+                    <Link 
+                      to={`/missions/${mission.slug}/scientists`}
+                      className="btn-primary shadow-lg hover:shadow-xl transition-shadow inline-flex items-center gap-2 px-6 py-3 text-base font-semibold"
+                    >
+                      <Users className="h-5 w-5" />
+                      Mission Scientists
+                    </Link>
+                    <Link 
+                      to={`/missions/${mission.slug}/artifacts`}
+                      className="btn-primary shadow-lg hover:shadow-xl transition-shadow inline-flex items-center gap-2 px-6 py-3 text-base font-semibold"
+                    >
+                      <Package className="h-5 w-5" />
+                      Mission Artifacts
+                    </Link>
+                    <Link 
+                      to={`/missions/${mission.slug}/gallery`}
+                      className="btn-primary shadow-lg hover:shadow-xl transition-shadow inline-flex items-center gap-2 px-6 py-3 text-base font-semibold"
+                    >
+                      <Image className="h-5 w-5" />
+                      Mission Gallery
+                    </Link>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:items-start">
           {/* Main Content */}
           <div className="lg:col-span-2 space-y-8">
             {/* About */}
-            <div className="card">
+            <div className="card lg:min-h-[190px] flex flex-col">
               <h2 className="text-2xl font-bold text-gray-900 mb-4">About This Mission</h2>
-              <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{mission.description}</p>
+              <div className="flex-1">
+                <p className="text-gray-700 leading-relaxed whitespace-pre-wrap">{mission.description}</p>
+              </div>
             </div>
 
             {/* Details Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="card">
-                <div className="flex items-start gap-3">
+              <div className="card h-[180px] flex flex-col">
+                <div className="flex items-start gap-3 flex-1">
                   <Calendar className="h-6 w-6 text-primary-600 flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Mission Dates</h3>
@@ -198,8 +253,8 @@ export default function MissionDetailPage() {
                 </div>
               </div>
 
-              <div className="card">
-                <div className="flex items-start gap-3">
+              <div className="card h-[180px] flex flex-col">
+                <div className="flex items-start gap-3 flex-1">
                   <MapPin className="h-6 w-6 text-primary-600 flex-shrink-0 mt-1" />
                   <div>
                     <h3 className="font-semibold text-gray-900 mb-2">Location</h3>
@@ -209,38 +264,14 @@ export default function MissionDetailPage() {
               </div>
             </div>
 
-            {/* Additional Resources (Placeholder) */}
-            <div className="card">
-              <h2 className="text-2xl font-bold text-gray-900 mb-4">Mission Resources</h2>
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
-                  <FileText className="h-5 w-5 text-primary-600" />
-                  <div className="flex-1">
-                    <p className="font-medium text-gray-900">Mission Guidelines</p>
-                    <p className="text-sm text-gray-600">Download the official rules and requirements</p>
-                  </div>
-                  <button className="btn-outline text-sm py-1.5 px-3">Download</button>
-                </div>
-                <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
-                  <ImageIcon className="h-5 w-5 text-primary-600" />
-                  <div className="flex-1">
-                    <p className="font-medium text-gray-900">Mission Gallery</p>
-                    <p className="text-sm text-gray-600">View photos and videos from this mission</p>
-                  </div>
-                  <Link to="/mission-gallery" className="btn-outline text-sm py-1.5 px-3">
-                    View Gallery
-                  </Link>
-                </div>
-              </div>
-            </div>
           </div>
 
           {/* Sidebar */}
-          <div className="lg:col-span-1 space-y-6">
+          <div className="lg:col-span-1 space-y-8">
             {/* Quick Info */}
-            <div className="card">
+            <div className="card lg:min-h-[190px] flex flex-col">
               <h3 className="font-bold text-gray-900 mb-4">Quick Info</h3>
-              <div className="space-y-3">
+              <div className="space-y-3 flex-1">
                 <div className="flex items-center gap-2 text-sm">
                   <div className="h-2 w-2 rounded-full bg-primary-600"></div>
                   <span className="text-gray-600">Status:</span>
@@ -266,14 +297,16 @@ export default function MissionDetailPage() {
             </div>
 
             {/* Contact */}
-            <div className="card">
+            <div className="card h-[180px] flex flex-col">
               <h3 className="font-bold text-gray-900 mb-4">Have Questions?</h3>
-              <p className="text-sm text-gray-600 mb-4">
-                Contact our team if you have any questions about this mission.
-              </p>
-              <Link to="/contact" className="btn-outline w-full justify-center">
-                Contact Us
-              </Link>
+              <div className="flex-1 flex flex-col justify-between">
+                <p className="text-sm text-gray-600 mb-4">
+                  Contact our team if you have any questions about this mission.
+                </p>
+                <Link to="/contact" className="btn-outline w-full justify-center">
+                  Contact Us
+                </Link>
+              </div>
             </div>
           </div>
         </div>

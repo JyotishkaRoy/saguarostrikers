@@ -20,6 +20,7 @@ import MissionCalendar from './pages/public/MissionCalendar';
 import JoinMission from './pages/public/JoinMission';
 import FutureExplorers from './pages/public/FutureExplorers';
 import MissionArtifacts from './pages/public/MissionArtifacts';
+import MissionScientists from './pages/public/MissionScientists';
 import DiscussionBoard from './pages/public/DiscussionBoard';
 import DiscussionThread from './pages/public/DiscussionThread';
 
@@ -39,6 +40,7 @@ import Profile from './pages/user/Profile';
 import AdminDashboard from './pages/admin/AdminDashboard';
 import AdminUsers from './pages/admin/AdminUsers';
 import AdminMissions from './pages/admin/AdminMissions';
+import AdminScientists from './pages/admin/AdminScientists';
 import AdminTeams from './pages/admin/AdminTeams';
 import AdminNotices from './pages/admin/AdminNotices';
 import AdminSiteContent from './pages/admin/AdminSiteContent';
@@ -78,6 +80,7 @@ function App() {
           <Route path="/discussions/:id" element={<DiscussionThread />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/missions" element={<MissionsPage />} />
+          <Route path="/missions/:missionSlug/scientists" element={<MissionScientists />} />
           <Route path="/missions/:slug" element={<MissionDetailPage />} />
 
           {/* Auth Routes */}
@@ -96,6 +99,7 @@ function App() {
           <Route path="/admin" element={<AdminRoute><AdminDashboard /></AdminRoute>} />
           <Route path="/admin/users" element={<AdminRoute><AdminUsers /></AdminRoute>} />
           <Route path="/admin/missions" element={<AdminRoute><AdminMissions /></AdminRoute>} />
+          <Route path="/admin/scientists" element={<AdminRoute><AdminScientists /></AdminRoute>} />
           <Route path="/admin/teams" element={<AdminRoute><AdminTeams /></AdminRoute>} />
           <Route path="/admin/notices" element={<AdminRoute><AdminNotices /></AdminRoute>} />
           <Route path="/admin/site-content" element={<AdminRoute><AdminSiteContent /></AdminRoute>} />

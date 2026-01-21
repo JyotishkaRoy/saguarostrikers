@@ -9,8 +9,9 @@
     "role": "admin",
     "status": "active",
     "createdAt": "2025-01-15T10:00:00.000Z",
-    "updatedAt": "2026-01-16T15:30:00.000Z",
-    "lastLogin": "2026-01-17T00:02:31.298Z"
+    "updatedAt": "2026-01-21T13:07:02.951Z",
+    "lastLogin": "2026-01-21T12:32:18.180Z",
+    "profileImageUrl": "/uploads/users/ZYTGOKOUExDF/profile.jpg"
   },
   {
     "userId": "AKVjArNofHsh",
@@ -22,7 +23,8 @@
     "role": "user",
     "status": "active",
     "createdAt": "2025-08-10T14:20:00.000Z",
-    "updatedAt": "2025-12-01T09:15:00.000Z"
+    "updatedAt": "2026-01-21T13:15:48.869Z",
+    "profileImageUrl": "/uploads/users/AKVjArNofHsh/profile.png"
   },
   {
     "userId": "jkvt7EeVpH2H",
@@ -83,5 +85,18 @@
     "phone": "9499691809",
     "createdAt": "2026-01-20T23:02:19.427Z",
     "updatedAt": "2026-01-20T23:02:19.427Z"
+  },
+  {
+    "userId": "qLs3l83RgSkd",
+    "email": "alex.rivera@student.edu",
+    "password": "$2a$10$vNDbDq6fqp26kJhnvwqaIOkrMJ9yfSLlJD4PSzLKzUTRDRwAbJjHC",
+    "firstName": "Alex",
+    "lastName": "Rivera",
+    "role": "user",
+    "status": "active",
+    "phone": "+1-555-0201",
+    "createdAt": "2026-01-21T11:30:34.099Z",
+    "updatedAt": "2026-01-21T11:30:34.099Z",
+    "lastLogin": "2026-01-21T11:31:04.872Z"
   }
 ]

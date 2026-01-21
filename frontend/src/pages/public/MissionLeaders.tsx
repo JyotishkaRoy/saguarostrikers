@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Mail } from 'lucide-react';
+import { Mail, User } from 'lucide-react';
 import { api } from '@/lib/api';
 import type { BoardMember } from '@/types';
 
@@ -101,7 +101,7 @@ export default function MissionLeaders() {
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center">
-                          <div className="text-white text-8xl">👤</div>
+                          <User className="h-32 w-32 text-white/30" />
                         </div>
                       )}
                       
