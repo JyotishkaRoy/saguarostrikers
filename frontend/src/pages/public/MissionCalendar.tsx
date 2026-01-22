@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { ChevronLeft, ChevronRight, X } from 'lucide-react';
+import { ChevronLeft, ChevronRight, X, Calendar as CalendarIcon } from 'lucide-react';
 import { api } from '@/lib/api';
 import { cn } from '@/lib/utils';
 
@@ -96,14 +96,15 @@ export default function MissionCalendar() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
+    <div className="min-h-screen py-12">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Mission Calendar
-          </h1>
-          <p className="text-xl text-gray-600">
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-4">
+            <CalendarIcon className="h-10 w-10 text-primary-600" />
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Mission Calendar</h1>
+          </div>
+          <p className="text-lg text-gray-600">
             Stay updated with upcoming launches, meetings, and important deadlines
           </p>
         </div>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useSearchParams, Link } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { Image, Plus, Edit, Trash2, ChevronDown, ChevronUp, Eye, EyeOff, Package, Search } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
@@ -395,13 +395,7 @@ export default function AdminGallery() {
                     <ChevronDown className="h-5 w-5 text-gray-400" />
                   )}
                   <div>
-                    <Link
-                      to={`/admin/missions?missionId=${mission.missionId}`}
-                      className="text-lg font-semibold text-gray-900 hover:text-primary-600 hover:underline block"
-                      onClick={(e) => e.stopPropagation()}
-                    >
-                      {mission.title}
-                    </Link>
+                    <h3 className="text-lg font-semibold text-gray-900">{mission.title}</h3>
                     <p className="text-sm text-gray-600">
                       {imageCount} item{imageCount !== 1 ? 's' : ''} • {publishedCount} published
                     </p>

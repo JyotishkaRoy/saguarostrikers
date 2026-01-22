@@ -21,6 +21,7 @@ import JoinMission from './pages/public/JoinMission';
 import FutureExplorers from './pages/public/FutureExplorers';
 import MissionArtifacts from './pages/public/MissionArtifacts';
 import MissionScientists from './pages/public/MissionScientists';
+import PublicMissionGallery from './pages/public/MissionGallery';
 import DiscussionBoard from './pages/public/DiscussionBoard';
 import DiscussionThread from './pages/public/DiscussionThread';
 
@@ -81,6 +82,8 @@ function App() {
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/missions" element={<MissionsPage />} />
           <Route path="/missions/:missionSlug/scientists" element={<MissionScientists />} />
+          <Route path="/missions/:missionSlug/artifacts" element={<MissionArtifacts />} />
+          <Route path="/missions/:missionSlug/gallery" element={<PublicMissionGallery />} />
           <Route path="/missions/:slug" element={<MissionDetailPage />} />
 
           {/* Auth Routes */}

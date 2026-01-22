@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
-import { Send, CheckCircle } from 'lucide-react';
+import { Send, CheckCircle, Rocket } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 import type { Mission } from '@/types';
@@ -100,7 +100,7 @@ export default function JoinMission() {
 
   if (isSuccess) {
     return (
-      <div className="min-h-screen bg-gray-50 py-16">
+      <div className="min-h-screen py-12">
         <div className="container mx-auto px-4 max-w-2xl">
           <div className="bg-white rounded-lg shadow-lg p-8 text-center">
             <CheckCircle className="h-16 w-16 text-green-500 mx-auto mb-4" />
@@ -131,14 +131,15 @@ export default function JoinMission() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-16">
+    <div className="min-h-screen py-12">
       <div className="container mx-auto px-4 max-w-4xl">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
-            Join a Mission
-          </h1>
-          <p className="text-xl text-gray-600">
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-4">
+            <Rocket className="h-10 w-10 text-primary-600" />
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Join a Mission</h1>
+          </div>
+          <p className="text-lg text-gray-600">
             Ready to launch your rocketry journey? Fill out the form below to apply.
           </p>
         </div>
@@ -228,6 +229,7 @@ export default function JoinMission() {
                   {[6, 7, 8, 9, 10, 11, 12].map(grade => (
                     <option key={grade} value={grade}>{grade}th Grade</option>
                   ))}
+                  <option value="Other">Other</option>
                 </select>
                 {errors.grade && (
                   <p className="text-red-500 text-sm mt-1">{errors.grade.message}</p>
@@ -389,8 +391,229 @@ export default function JoinMission() {
             </div>
           </div>
 
-          {/* Parent Details - Will create in next part */}
-          {/* (Continuing in next response due to length) */}
+          {/* Parent Details */}
+          <div className="card">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              Parent/Guardian Details
+            </h2>
+            <p className="text-sm text-gray-600 mb-6">
+              Please provide parent or guardian contact information
+            </p>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  First Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  {...register('parentFirstName', { required: 'Parent first name is required' })}
+                  className="input"
+                />
+                {errors.parentFirstName && (
+                  <p className="text-red-500 text-sm mt-1">{errors.parentFirstName.message}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Middle Name
+                </label>
+                <input {...register('parentMiddleName')} className="input" />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Last Name <span className="text-red-500">*</span>
+                </label>
+                <input
+                  {...register('parentLastName', { required: 'Parent last name is required' })}
+                  className="input"
+                />
+                {errors.parentLastName && (
+                  <p className="text-red-500 text-sm mt-1">{errors.parentLastName.message}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Address Line 1 <span className="text-red-500">*</span>
+              </label>
+              <input
+                {...register('parentAddressLine1', { required: 'Parent address is required' })}
+                className="input"
+              />
+              {errors.parentAddressLine1 && (
+                <p className="text-red-500 text-sm mt-1">{errors.parentAddressLine1.message}</p>
+              )}
+            </div>
+
+            <div className="mt-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Address Line 2
+              </label>
+              <input {...register('parentAddressLine2')} className="input" />
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  City <span className="text-red-500">*</span>
+                </label>
+                <input
+                  {...register('parentCity', { required: 'Parent city is required' })}
+                  className="input"
+                />
+                {errors.parentCity && (
+                  <p className="text-red-500 text-sm mt-1">{errors.parentCity.message}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  State <span className="text-red-500">*</span>
+                </label>
+                <input
+                  {...register('parentState', { required: 'Parent state is required' })}
+                  className="input"
+                  maxLength={2}
+                  placeholder="AZ"
+                />
+                {errors.parentState && (
+                  <p className="text-red-500 text-sm mt-1">{errors.parentState.message}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Zip Code <span className="text-red-500">*</span>
+                </label>
+                <input
+                  {...register('parentZip', { required: 'Parent zip code is required' })}
+                  className="input"
+                  maxLength={10}
+                />
+                {errors.parentZip && (
+                  <p className="text-red-500 text-sm mt-1">{errors.parentZip.message}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Email ID <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  {...register('parentEmail', {
+                    required: 'Parent email is required',
+                    pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' }
+                  })}
+                  className="input"
+                />
+                {errors.parentEmail && (
+                  <p className="text-red-500 text-sm mt-1">{errors.parentEmail.message}</p>
+                )}
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Phone <span className="text-red-500">*</span>
+                </label>
+                <input
+                  {...register('parentPhone', { required: 'Parent phone is required' })}
+                  className="input"
+                  type="tel"
+                />
+                {errors.parentPhone && (
+                  <p className="text-red-500 text-sm mt-1">{errors.parentPhone.message}</p>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-4">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Alternate Email (optional)
+              </label>
+              <input
+                type="email"
+                {...register('parentAlternateEmail', {
+                  pattern: { value: /^\S+@\S+$/i, message: 'Invalid email' }
+                })}
+                className="input"
+              />
+              {errors.parentAlternateEmail && (
+                <p className="text-red-500 text-sm mt-1">{errors.parentAlternateEmail.message}</p>
+              )}
+            </div>
+          </div>
+
+          {/* Agreements */}
+          <div className="card">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">
+              Agreements & Consent
+            </h2>
+
+            <div className="space-y-4">
+              <div className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  {...register('agreementFinancial', { required: 'Financial agreement is required' })}
+                  className="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                />
+                <label className="text-sm text-gray-700">
+                  <span className="text-red-500">*</span> I understand and agree to the financial obligations associated with participating in this mission.
+                </label>
+              </div>
+              {errors.agreementFinancial && (
+                <p className="text-red-500 text-sm ml-7">{errors.agreementFinancial.message}</p>
+              )}
+
+              <div className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  {...register('agreementPhotograph', { required: 'Photograph agreement is required' })}
+                  className="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                />
+                <label className="text-sm text-gray-700">
+                  <span className="text-red-500">*</span> I consent to the use of photographs and videos of the student for promotional and educational purposes related to Saguaro Strikers activities.
+                </label>
+              </div>
+              {errors.agreementPhotograph && (
+                <p className="text-red-500 text-sm ml-7">{errors.agreementPhotograph.message}</p>
+              )}
+
+              <div className="flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  {...register('agreementLiability', { required: 'Liability agreement is required' })}
+                  className="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                />
+                <label className="text-sm text-gray-700">
+                  <span className="text-red-500">*</span> I acknowledge and accept the risks associated with rocketry activities and release Saguaro Strikers from liability for any injuries or damages that may occur during mission activities.
+                </label>
+              </div>
+              {errors.agreementLiability && (
+                <p className="text-red-500 text-sm ml-7">{errors.agreementLiability.message}</p>
+              )}
+            </div>
+
+            <div className="mt-6 bg-gray-50 p-4 rounded-lg">
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Parent/Guardian's Electronic Signature <span className="text-red-500">*</span>
+              </label>
+              <p className="text-sm text-gray-600 mb-2">Type your full name to sign electronically</p>
+              <input
+                {...register('parentSignature', { required: 'Parent signature is required' })}
+                className="input"
+                placeholder="Type your full name"
+              />
+              {errors.parentSignature && (
+                <p className="text-red-500 text-sm mt-1">{errors.parentSignature.message}</p>
+              )}
+            </div>
+          </div>
 
           <div className="flex justify-center">
             <button

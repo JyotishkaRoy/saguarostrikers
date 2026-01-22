@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Mail, User } from 'lucide-react';
+import { Mail, User, UsersRound } from 'lucide-react';
 import { api } from '@/lib/api';
 import type { BoardMember } from '@/types';
 
@@ -53,11 +53,12 @@ export default function MissionLeaders() {
     <div className="min-h-screen py-16" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)' }}>
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Meet Our Mission Leaders
-          </h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto">
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-4">
+            <UsersRound className="h-10 w-10 text-white" />
+            <h1 className="text-3xl md:text-4xl font-bold text-white">Meet Our Mission Leaders</h1>
+          </div>
+          <p className="text-lg text-white/90">
             The dedicated team driving innovation and excellence in rocketry
           </p>
         </div>

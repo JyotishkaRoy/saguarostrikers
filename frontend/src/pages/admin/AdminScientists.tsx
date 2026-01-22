@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useSearchParams, Link } from 'react-router-dom';
 import { UsersRound, Trophy, Mail, Phone, GraduationCap, User, Search, Edit, UserPlus, X, Filter, Eye } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
@@ -33,6 +34,9 @@ interface RegisteredUser {
 }
 
 export default function AdminScientists() {
+  const [searchParams] = useSearchParams();
+  const urlMissionId = searchParams.get('missionId');
+  
   const [missionsWithMembers, setMissionsWithMembers] = useState<MissionWithMembers[]>([]);
   const [filteredMissions, setFilteredMissions] = useState<MissionWithMembers[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -63,6 +67,11 @@ export default function AdminScientists() {
   useEffect(() => {
     let filtered = missionsWithMembers;
 
+    // Filter by missionId from URL params
+    if (urlMissionId) {
+      filtered = filtered.filter(mission => mission.missionId === urlMissionId);
+    }
+
     // Filter by status
     if (filterStatus !== 'all') {
       filtered = filtered.filter(mission => mission.status === filterStatus);
@@ -80,7 +89,7 @@ export default function AdminScientists() {
     }
 
     setFilteredMissions(filtered);
-  }, [searchTerm, filterStatus, missionsWithMembers]);
+  }, [searchTerm, filterStatus, missionsWithMembers, urlMissionId]);
 
   const fetchMissionsWithMembers = async () => {
     try {
@@ -474,7 +483,12 @@ export default function AdminScientists() {
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
                     <Trophy className="h-6 w-6 text-primary-600" />
-                    <h2 className="text-2xl font-bold text-gray-900">{mission.title}</h2>
+                    <Link
+                      to={`/admin/missions?missionId=${mission.missionId}`}
+                      className="text-lg font-semibold text-gray-900 hover:text-primary-600 hover:underline"
+                    >
+                      {mission.title}
+                    </Link>
                     <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getStatusColor(mission.status)}`}>
                       {getStatusLabel(mission.status)}
                     </span>

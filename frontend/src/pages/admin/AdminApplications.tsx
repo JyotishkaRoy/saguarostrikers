@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Users, Search, Filter, Eye, CheckCircle, Rocket } from 'lucide-react';
+import { useSearchParams, Link } from 'react-router-dom';
+import { Users, Search, Filter, Eye, CheckCircle, Rocket, FileText } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 import type { Mission } from '@/types';
@@ -26,10 +27,13 @@ interface Application {
 }
 
 export default function AdminApplications() {
+  const [searchParams] = useSearchParams();
+  const urlMissionId = searchParams.get('missionId');
+  
   const [applications, setApplications] = useState<Application[]>([]);
   const [filteredApplications, setFilteredApplications] = useState<Application[]>([]);
   const [missions, setMissions] = useState<Mission[]>([]);
-  const [selectedMissionId, setSelectedMissionId] = useState<string>('all');
+  const [selectedMissionId, setSelectedMissionId] = useState<string>(urlMissionId || 'all');
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
   const [filterStatus, setFilterStatus] = useState<string>('all');
@@ -49,6 +53,13 @@ export default function AdminApplications() {
     fetchMissions();
     fetchApplications();
   }, []);
+
+  // Update selectedMissionId when URL param changes
+  useEffect(() => {
+    if (urlMissionId) {
+      setSelectedMissionId(urlMissionId);
+    }
+  }, [urlMissionId]);
 
   useEffect(() => {
     // Recalculate stats when mission or applications change
@@ -277,9 +288,18 @@ export default function AdminApplications() {
                       <div className="text-sm text-gray-500">{app.studentEmail}</div>
                     </td>
                     <td className="p-4">
-                      <div className="text-sm font-medium text-primary-600">
-                        {mission?.title || 'Unknown Mission'}
-                      </div>
+                      {mission ? (
+                        <Link
+                          to={`/admin/missions?missionId=${mission.missionId}`}
+                          className="text-sm font-medium text-primary-600 hover:text-primary-700 hover:underline"
+                        >
+                          {mission.title}
+                        </Link>
+                      ) : (
+                        <div className="text-sm font-medium text-gray-500">
+                          Unknown Mission
+                        </div>
+                      )}
                     </td>
                     <td className="p-4 text-gray-700">{app.schoolName}</td>
                     <td className="p-4 text-gray-700">{app.grade}</td>
@@ -305,6 +325,13 @@ export default function AdminApplications() {
                           title="View Details"
                         >
                           <Eye className="h-5 w-5" />
+                        </button>
+                        <button
+                          onClick={() => window.open(`/uploads/applications/${app.applicationId}.pdf`, '_blank')}
+                          className="p-2 text-purple-600 hover:bg-purple-50 rounded-lg transition-colors"
+                          title="View PDF"
+                        >
+                          <FileText className="h-5 w-5" />
                         </button>
                         <button
                           onClick={() => handleReview(app)}

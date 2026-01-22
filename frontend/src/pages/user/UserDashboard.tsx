@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { 
   Trophy, Users, FileText, Image, Calendar, 
-  TrendingUp, Clock, CheckCircle, AlertCircle 
+  TrendingUp, Clock, CheckCircle, AlertCircle, LayoutDashboard
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
@@ -148,11 +148,14 @@ export default function UserDashboard() {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">
-          Welcome back, {user?.firstName}!
-        </h1>
-        <p className="text-gray-600">Here's what's happening with your missions</p>
+      <div className="mb-12">
+        <div className="flex items-center gap-3 mb-4">
+          <LayoutDashboard className="h-10 w-10 text-primary-600" />
+          <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
+            Welcome back, {user?.firstName}!
+          </h1>
+        </div>
+        <p className="text-lg text-gray-600">Here's what's happening with your missions</p>
       </div>
 
       {/* Stats Cards */}

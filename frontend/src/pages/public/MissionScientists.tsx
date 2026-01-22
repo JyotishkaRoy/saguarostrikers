@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { Mail, User as UserIcon, ArrowLeft, Rocket } from 'lucide-react';
 import { api } from '@/lib/api';
 import type { Mission, User } from '@/types';
@@ -20,7 +20,6 @@ interface MissionWithScientists extends Mission {
 
 export default function MissionScientists() {
   const { missionSlug } = useParams<{ missionSlug: string }>();
-  const navigate = useNavigate();
   const [mission, setMission] = useState<MissionWithScientists | null>(null);
   const [users, setUsers] = useState<User[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -87,10 +86,10 @@ export default function MissionScientists() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen py-16">
+      <div className="min-h-screen py-12 bg-gray-50 text-gray-900">
         <div className="container mx-auto px-4">
           <div className="flex items-center justify-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-500"></div>
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600"></div>
           </div>
         </div>
       </div>
@@ -99,18 +98,13 @@ export default function MissionScientists() {
 
   if (error || !mission) {
     return (
-      <div className="min-h-screen py-16">
+      <div className="min-h-screen py-12 bg-gray-50 text-gray-900">
         <div className="container mx-auto px-4">
           <div className="text-center py-12">
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Mission Not Found</h2>
-            <p className="text-gray-600 mb-6">{error}</p>
-            <button
-              onClick={() => navigate('/missions')}
-              className="btn-primary inline-flex items-center gap-2"
-            >
-              <ArrowLeft className="h-4 w-4" />
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">Mission Not Found</h1>
+            <Link to="/missions" className="text-primary-600 hover:underline">
               Back to Missions
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -118,23 +112,21 @@ export default function MissionScientists() {
   }
 
   return (
-    <div className="min-h-screen py-16">
+    <div className="min-h-screen py-12 bg-gray-50 text-gray-900">
       <div className="container mx-auto px-4">
-        {/* Back Button */}
-        <button
-          onClick={() => navigate(`/missions/${missionSlug}`)}
-          className="mb-8 text-primary-600 hover:text-primary-700 transition-colors inline-flex items-center gap-2"
-        >
-          <ArrowLeft className="h-4 w-4" />
-          Back to Mission Details
-        </button>
-
         {/* Header */}
         <div className="mb-12">
-          <div className="flex items-center gap-3">
+          <Link
+            to={`/missions/${missionSlug}`}
+            className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 mb-4"
+          >
+            <ArrowLeft className="h-4 w-4" />
+            Back to Mission
+          </Link>
+          <div className="flex items-center gap-3 mb-4">
             <Rocket className="h-10 w-10 text-primary-600" />
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
-              {mission.title} <span className="text-gray-400">|</span> Meet the Crew
+              {mission.title} <span className="text-gray-400 mx-2">|</span> Meet the Crew
             </h1>
           </div>
         </div>

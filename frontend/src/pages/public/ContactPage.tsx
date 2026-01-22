@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, Phone, MapPin, Send, CheckCircle } from 'lucide-react';
+import { Mail, Phone, MapPin, Send, CheckCircle, MessageCircle } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 
@@ -42,9 +42,12 @@ export default function ContactPage() {
     <div className="min-h-screen py-12">
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Contact Us</h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-4">
+            <MessageCircle className="h-10 w-10 text-primary-600" />
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Contact Us</h1>
+          </div>
+          <p className="text-lg text-gray-600">
             Have questions about our missions or want to get involved? We'd love to hear from you!
           </p>
         </div>

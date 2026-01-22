@@ -90,12 +90,12 @@ export default function DiscussionBoard() {
     <div className="min-h-screen py-12">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4 flex items-center justify-center gap-3">
+        <div className="mb-12">
+          <div className="flex items-center gap-3 mb-4">
             <MessageSquare className="h-10 w-10 text-primary-600" />
-            Discussion Board
-          </h1>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Discussion Board</h1>
+          </div>
+          <p className="text-lg text-gray-600">
             Join the conversation, ask questions, and connect with fellow strikers
           </p>
         </div>

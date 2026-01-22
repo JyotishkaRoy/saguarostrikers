@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Trophy, Plus, Edit, Trash2, Eye, Calendar, MapPin, Search } from 'lucide-react';
+import { useSearchParams } from 'react-router-dom';
+import { Trophy, Plus, Edit, Trash2, Eye, Calendar, MapPin, Search, Users, UserRound, Package, Image } from 'lucide-react';
+import { Link } from 'react-router-dom';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 
@@ -18,6 +20,9 @@ interface Mission {
 }
 
 export default function AdminMissions() {
+  const [searchParams] = useSearchParams();
+  const urlMissionId = searchParams.get('missionId');
+  
   const [missions, setMissions] = useState<Mission[]>([]);
   const [filteredMissions, setFilteredMissions] = useState<Mission[]>([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -39,6 +44,11 @@ export default function AdminMissions() {
   useEffect(() => {
     let filtered = missions;
 
+    // Filter by missionId from URL params
+    if (urlMissionId) {
+      filtered = filtered.filter(m => m.missionId === urlMissionId);
+    }
+
     if (filterStatus !== 'all') {
       filtered = filtered.filter(c => c.status === filterStatus);
     }
@@ -52,7 +62,7 @@ export default function AdminMissions() {
     }
 
     setFilteredMissions(filtered);
-  }, [searchTerm, filterStatus, missions]);
+  }, [searchTerm, filterStatus, missions, urlMissionId]);
 
   const fetchMissions = async () => {
     try {
@@ -311,6 +321,37 @@ export default function AdminMissions() {
                       <MapPin className="h-4 w-4" />
                       <span>{mission.location}</span>
                     </div>
+                  </div>
+                  {/* Quick Navigation Buttons */}
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    <Link
+                      to={`/admin/applications?missionId=${mission.missionId}`}
+                      className="btn-outline text-xs py-1.5 px-3 flex items-center gap-1.5"
+                    >
+                      <Users className="h-3.5 w-3.5" />
+                      Applications
+                    </Link>
+                    <Link
+                      to={`/admin/scientists?missionId=${mission.missionId}`}
+                      className="btn-outline text-xs py-1.5 px-3 flex items-center gap-1.5"
+                    >
+                      <UserRound className="h-3.5 w-3.5" />
+                      Scientists
+                    </Link>
+                    <Link
+                      to={`/admin/artifacts?missionId=${mission.missionId}`}
+                      className="btn-outline text-xs py-1.5 px-3 flex items-center gap-1.5"
+                    >
+                      <Package className="h-3.5 w-3.5" />
+                      Artifacts
+                    </Link>
+                    <Link
+                      to={`/admin/gallery?missionId=${mission.missionId}`}
+                      className="btn-outline text-xs py-1.5 px-3 flex items-center gap-1.5"
+                    >
+                      <Image className="h-3.5 w-3.5" />
+                      Gallery
+                    </Link>
                   </div>
                 </div>
                 <div className="flex items-center gap-2 ml-4">

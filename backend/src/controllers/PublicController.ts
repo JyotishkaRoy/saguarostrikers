@@ -7,6 +7,7 @@ import { CalendarEventService } from '../services/CalendarEventService.js';
 import { JoinMissionService } from '../services/JoinMissionService.js';
 import { FileManagementService } from '../services/FileManagementService.js';
 import { GalleryService } from '../services/GalleryService.js';
+import { ArtifactService } from '../services/ArtifactService.js';
 
 export class PublicController {
   private missionService: MissionService;
@@ -17,6 +18,7 @@ export class PublicController {
   private joinMissionService: JoinMissionService;
   private fileService: FileManagementService;
   private galleryService: GalleryService;
+  private artifactService: ArtifactService;
 
   constructor() {
     this.missionService = new MissionService();
@@ -27,6 +29,85 @@ export class PublicController {
     this.joinMissionService = new JoinMissionService();
     this.fileService = new FileManagementService();
     this.galleryService = new GalleryService();
+    this.artifactService = new ArtifactService();
+  }
+
+  // Get admin dashboard statistics
+  async getDashboardStats(_req: Request, res: Response): Promise<void> {
+    try {
+      const { UserService } = await import('../services/UserService.js');
+      const userService = new UserService();
+      
+      // Fetch all data in parallel
+      const [
+        allUsers,
+        allMissions,
+        allApplications,
+        allFiles,
+        allGallery,
+        allEvents,
+        allNotices,
+        allMessages,
+      ] = await Promise.all([
+        userService.getAllUsers(),
+        this.missionService.getAllMissions(),
+        this.joinMissionService.getAllApplications(),
+        this.fileService.getAllFiles(),
+        this.galleryService.getAllImages(),
+        this.calendarEventService.getAllEvents(),
+        this.noticeService.getAllNotices(),
+        this.contactService.getAllMessages(),
+      ]);
+
+      // Calculate stats
+      const now = new Date();
+      const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
+
+      const stats = {
+        users: {
+          total: allUsers.length,
+          active: allUsers.filter(u => u.status === 'active').length,
+          new: allUsers.filter(u => new Date(u.createdAt) >= thirtyDaysAgo).length,
+        },
+        missions: {
+          total: allMissions.length,
+          active: allMissions.filter(m => m.status === 'published' || m.status === 'in-progress').length,
+          upcoming: allMissions.filter(m => m.status === 'published').length,
+        },
+        applications: {
+          total: allApplications.length,
+          pending: allApplications.filter(a => a.status === 'pending' || a.status === 'under_review').length,
+          approved: allApplications.filter(a => a.status === 'approved').length,
+        },
+        files: {
+          total: allFiles.length,
+          public: allFiles.filter(f => f.isPublic).length,
+          downloads: allFiles.reduce((sum, f) => sum + (f.downloadCount || 0), 0),
+        },
+        gallery: {
+          total: allGallery.length,
+          public: allGallery.filter(g => g.isPublic).length,
+          views: allGallery.reduce((sum, g) => sum + (g.viewCount || 0), 0),
+        },
+        calendarEvents: {
+          total: allEvents.length,
+          upcoming: allEvents.filter(e => new Date(e.date) >= now && e.status === 'upcoming').length,
+        },
+        notices: {
+          total: allNotices.length,
+          published: allNotices.filter(n => n.status === 'published').length,
+        },
+        contactMessages: {
+          total: allMessages.length,
+          unread: allMessages.filter(m => m.status === 'new').length,
+        },
+      };
+
+      res.status(200).json({ success: true, data: stats });
+    } catch (error) {
+      console.error('Error fetching dashboard stats:', error);
+      res.status(500).json({ success: false, message: 'Failed to fetch dashboard statistics' });
+    }
   }
 
   async getHomepage(_req: Request, res: Response): Promise<void> {
@@ -281,6 +362,54 @@ export class PublicController {
       res.status(200).json({ success: true, data: publicProfiles });
     } catch (error) {
       res.status(500).json({ success: false, message: 'Failed to fetch user profiles' });
+    }
+  }
+
+  // Get published artifacts by mission slug
+  async getPublishedArtifactsByMissionSlug(req: Request, res: Response): Promise<void> {
+    try {
+      const { missionSlug } = req.params;
+      
+      // Get mission by slug
+      const mission = await this.missionService.getMissionBySlug(missionSlug);
+      if (!mission) {
+        res.status(404).json({ success: false, message: 'Mission not found' });
+        return;
+      }
+
+      // Get published artifacts for this mission
+      const artifacts = await this.artifactService.getPublishedArtifactsByMission(mission.missionId);
+      
+      res.status(200).json({ success: true, data: artifacts });
+    } catch (error: any) {
+      res.status(500).json({ 
+        success: false, 
+        message: error.message || 'Failed to fetch mission artifacts' 
+      });
+    }
+  }
+
+  // Get published gallery images by mission slug
+  async getPublishedGalleryByMissionSlug(req: Request, res: Response): Promise<void> {
+    try {
+      const { missionSlug } = req.params;
+      
+      // Get mission by slug
+      const mission = await this.missionService.getMissionBySlug(missionSlug);
+      if (!mission) {
+        res.status(404).json({ success: false, message: 'Mission not found' });
+        return;
+      }
+
+      // Get published gallery images for this mission
+      const images = await this.galleryService.getPublishedImagesByMission(mission.missionId);
+      
+      res.status(200).json({ success: true, data: images });
+    } catch (error: any) {
+      res.status(500).json({ 
+        success: false, 
+        message: error.message || 'Failed to fetch mission gallery' 
+      });
     }
   }
 }

@@ -52,6 +52,14 @@ export class GalleryDataHelper {
     return images.filter(image => image.missionId === missionId);
   }
 
+  async getPublishedImagesByMission(missionId: string): Promise<GalleryImage[]> {
+    const images = this.readData();
+    return images.filter(
+      image => image.missionId === missionId && 
+      (image.status === 'published' || (image.isPublic && !image.status)) // Support legacy images
+    );
+  }
+
   async getImagesBySubEvent(subEventId: string): Promise<GalleryImage[]> {
     const images = this.readData();
     return images.filter(image => image.subEventId === subEventId);
@@ -80,6 +88,7 @@ export class GalleryDataHelper {
       tags: data.tags || [],
       uploadedBy,
       uploadedAt: now,
+      status: data.status || 'draft',
     };
 
     images.push(newImage);

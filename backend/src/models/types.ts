@@ -222,6 +222,7 @@ export interface GalleryImage {
   isPublic: boolean; // Whether image is publicly accessible
   viewCount: number;
   tags?: string[];
+  status?: 'draft' | 'published' | 'unpublished'; // Gallery item status (similar to artifacts)
 }
 
 export interface CreateFileData {
@@ -236,6 +237,43 @@ export interface CreateFileData {
   isPublic?: boolean;
 }
 
+// ============================================
+// Mission Artifact Types
+// ============================================
+
+export interface MissionArtifact {
+  artifactId: string;
+  missionId: string; // Required - every artifact must be associated with a mission
+  description: string;
+  fileName: string; // Stored filename
+  originalFileName: string; // Original filename for display
+  filePath: string; // Relative path from uploads root
+  fileType: string; // MIME type
+  fileSize: number; // Bytes
+  status: ArtifactStatus;
+  uploadedBy: string; // userId
+  createdAt: string;
+  updatedAt: string;
+  publishedAt?: string;
+}
+
+export type ArtifactStatus = 'draft' | 'published' | 'unpublished';
+
+export interface CreateArtifactData {
+  missionId: string;
+  description: string;
+  fileName: string;
+  originalFileName: string;
+  filePath: string;
+  fileType: string;
+  fileSize: number;
+}
+
+export interface UpdateArtifactData {
+  description?: string;
+  status?: ArtifactStatus;
+}
+
 export interface CreateGalleryImageData {
   imageUrl: string;
   title: string;
@@ -244,6 +282,7 @@ export interface CreateGalleryImageData {
   subEventId?: string;
   isPublic?: boolean;
   tags?: string[];
+  status?: 'draft' | 'published' | 'unpublished';
 }
 
 // ============================================

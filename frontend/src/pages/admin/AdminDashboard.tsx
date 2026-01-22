@@ -4,6 +4,8 @@ import {
   TrendingUp, Eye, Download, Clock 
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { api, getErrorMessage } from '@/lib/api';
+import toast from 'react-hot-toast';
 
 interface DashboardStats {
   users: { total: number; active: number; new: number };
@@ -27,20 +29,13 @@ export default function AdminDashboard() {
   const fetchStats = async () => {
     try {
       setIsLoading(true);
-      // In a real implementation, these would be API calls
-      // For now, using mock data
-      setStats({
-        users: { total: 150, active: 120, new: 15 },
-        missions: { total: 25, active: 5, upcoming: 8 },
-        applications: { total: 45, pending: 12, approved: 30 },
-        files: { total: 320, public: 180, downloads: 1250 },
-        gallery: { total: 245, public: 190, views: 5420 },
-        calendarEvents: { total: 35, upcoming: 12 },
-        notices: { total: 20, published: 15 },
-        contactMessages: { total: 78, unread: 5 },
-      });
+      const response = await api.get<DashboardStats>('/admin/dashboard/stats');
+      if (response.success && response.data) {
+        setStats(response.data);
+      }
     } catch (error) {
       console.error('Failed to fetch stats:', error);
+      toast.error(getErrorMessage(error));
     } finally {
       setIsLoading(false);
     }

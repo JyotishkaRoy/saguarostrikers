@@ -155,6 +155,22 @@ export interface GalleryImage {
   uploadedAt: string;
 }
 
+export interface MissionArtifact {
+  artifactId: string;
+  missionId: string;
+  description: string;
+  fileName: string;
+  originalFileName: string;
+  filePath: string;
+  fileType: string;
+  fileSize: number;
+  status: 'draft' | 'published' | 'unpublished';
+  uploadedBy: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt?: string;
+}
+
 export interface HomepageContent {
   heroImages: string[];
   aboutUs: string;

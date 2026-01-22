@@ -1,0 +1,154 @@
+import PDFDocument from 'pdfkit';
+import fs from 'fs';
+import path from 'path';
+import { JoinMissionApplication } from '../models/types.js';
+
+export class PDFGenerator {
+  /**
+   * Generate PDF for join mission application
+   */
+  static async generateApplicationPDF(
+    application: JoinMissionApplication,
+    missionTitle: string
+  ): Promise<string> {
+    // Ensure applications directory exists
+    // Use same pattern as upload middleware
+    const uploadsBase = process.env.UPLOAD_PATH || path.join(process.cwd(), '..', 'uploads');
+    const applicationsDir = path.join(uploadsBase, 'applications');
+    
+    if (!fs.existsSync(applicationsDir)) {
+      fs.mkdirSync(applicationsDir, { recursive: true });
+    }
+
+    const fileName = `${application.applicationId}.pdf`;
+    const filePath = path.join(applicationsDir, fileName);
+
+    // Create PDF document
+    const doc = new PDFDocument({ margin: 50 });
+    const stream = fs.createWriteStream(filePath);
+    doc.pipe(stream);
+
+    // Header
+    doc.fontSize(20).font('Helvetica-Bold').text('Saguaro Strikers - Mission Application', { align: 'center' });
+    doc.moveDown(0.5);
+    doc.fontSize(12).font('Helvetica').text(`Application ID: ${application.applicationId}`, { align: 'center' });
+    doc.fontSize(10).text(`Submitted: ${new Date(application.createdAt).toLocaleDateString()}`, { align: 'center' });
+    doc.moveDown(1);
+
+    // Student Details Section
+    doc.fontSize(16).font('Helvetica-Bold').text('STUDENT DETAILS', { underline: true });
+    doc.moveDown(0.5);
+    doc.fontSize(11).font('Helvetica');
+
+    this.addField(doc, 'First Name', application.studentFirstName);
+    if (application.studentMiddleName) {
+      this.addField(doc, 'Middle Name', application.studentMiddleName);
+    }
+    this.addField(doc, 'Last Name', application.studentLastName);
+    this.addField(doc, 'Date of Birth', new Date(application.studentDob).toLocaleDateString());
+    this.addField(doc, 'School Name', application.schoolName);
+    this.addField(doc, 'Grade', application.grade);
+    this.addField(doc, 'Email', application.studentEmail);
+    if (application.studentPhone) {
+      this.addField(doc, 'Phone', application.studentPhone);
+    }
+    if (application.studentSlack) {
+      this.addField(doc, 'Slack ID', application.studentSlack);
+    }
+
+    doc.moveDown(0.5);
+    doc.fontSize(12).font('Helvetica-Bold').text('Student Address:', { continued: false });
+    doc.fontSize(11).font('Helvetica');
+    doc.text(application.studentAddressLine1);
+    if (application.studentAddressLine2) {
+      doc.text(application.studentAddressLine2);
+    }
+    doc.text(`${application.studentCity}, ${application.studentState} ${application.studentZip}`);
+    doc.moveDown(1);
+
+    // Mission Selection
+    doc.fontSize(16).font('Helvetica-Bold').text('MISSION SELECTION', { underline: true });
+    doc.moveDown(0.5);
+    doc.fontSize(11).font('Helvetica');
+    this.addField(doc, 'Mission', missionTitle);
+    doc.moveDown(0.5);
+    doc.fontSize(12).font('Helvetica-Bold').text('Why are you fit for this mission?', { continued: false });
+    doc.fontSize(11).font('Helvetica');
+    doc.text(application.fitReason, { align: 'justify' });
+    doc.moveDown(1);
+
+    // Parent Details Section
+    doc.fontSize(16).font('Helvetica-Bold').text('PARENT/GUARDIAN DETAILS', { underline: true });
+    doc.moveDown(0.5);
+    doc.fontSize(11).font('Helvetica');
+
+    this.addField(doc, 'First Name', application.parentFirstName);
+    if (application.parentMiddleName) {
+      this.addField(doc, 'Middle Name', application.parentMiddleName);
+    }
+    this.addField(doc, 'Last Name', application.parentLastName);
+    this.addField(doc, 'Email', application.parentEmail);
+    this.addField(doc, 'Phone', application.parentPhone);
+    if (application.parentAlternateEmail) {
+      this.addField(doc, 'Alternate Email', application.parentAlternateEmail);
+    }
+
+    doc.moveDown(0.5);
+    doc.fontSize(12).font('Helvetica-Bold').text('Parent Address:', { continued: false });
+    doc.fontSize(11).font('Helvetica');
+    doc.text(application.parentAddressLine1);
+    if (application.parentAddressLine2) {
+      doc.text(application.parentAddressLine2);
+    }
+    doc.text(`${application.parentCity}, ${application.parentState} ${application.parentZip}`);
+    doc.moveDown(1);
+
+    // Agreements Section
+    doc.fontSize(16).font('Helvetica-Bold').text('AGREEMENTS & CONSENT', { underline: true });
+    doc.moveDown(0.5);
+    doc.fontSize(11).font('Helvetica');
+    
+    doc.text('✓ Financial Responsibility Agreement: Accepted', { continued: false });
+    doc.text('✓ Photograph Usage Agreement: Accepted', { continued: false });
+    doc.text('✓ Liability Waiver: Accepted', { continued: false });
+    doc.moveDown(1);
+
+    // Signatures Section
+    doc.fontSize(16).font('Helvetica-Bold').text('ELECTRONIC SIGNATURES', { underline: true });
+    doc.moveDown(0.5);
+    doc.fontSize(11).font('Helvetica');
+    
+    this.addField(doc, 'Student Signature', application.studentSignature);
+    doc.text(`Date: ${new Date(application.studentSignatureDate).toLocaleDateString()}`);
+    doc.moveDown(0.5);
+    
+    this.addField(doc, 'Parent/Guardian Signature', application.parentSignature);
+    doc.text(`Date: ${new Date(application.parentSignatureDate).toLocaleDateString()}`);
+    doc.moveDown(1);
+
+    // Footer
+    doc.fontSize(9).fillColor('#666666').font('Helvetica').text(
+      'This is an electronically submitted application. By signing above, both student and parent/guardian acknowledge that they have read and agree to all terms and conditions.',
+      { align: 'center' }
+    );
+    doc.fillColor('black'); // Reset color
+
+    // Finalize PDF
+    doc.end();
+
+    // Wait for the stream to finish writing
+    return new Promise((resolve, reject) => {
+      stream.on('finish', () => {
+        resolve(filePath);
+      });
+      stream.on('error', (error) => {
+        reject(error);
+      });
+    });
+  }
+
+  private static addField(doc: InstanceType<typeof PDFDocument>, label: string, value: string): void {
+    doc.font('Helvetica-Bold').text(`${label}:`, { continued: true, width: 150 });
+    doc.font('Helvetica').text(value || 'N/A', { width: 350 });
+  }
+}

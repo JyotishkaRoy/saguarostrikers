@@ -2,6 +2,7 @@ import { JoinMissionDataHelper } from '../data/JoinMissionDataHelper.js';
 import { EmailService } from './EmailService.js';
 import { MissionDataHelper } from '../data/MissionDataHelper.js';
 import { UserService } from './UserService.js';
+import { PDFGenerator } from '../utils/pdfGenerator.js';
 import {
   JoinMissionApplication,
   CreateJoinMissionData,
@@ -60,6 +61,15 @@ export class JoinMissionService {
 
     // Create application
     const application = await this.dataHelper.createApplication(data);
+
+    // Generate and save PDF
+    try {
+      await PDFGenerator.generateApplicationPDF(application, mission.title);
+      console.log(`✅ PDF generated for application ${application.applicationId}`);
+    } catch (pdfError) {
+      console.error('Error generating PDF:', pdfError);
+      // Don't fail the application if PDF generation fails
+    }
 
     // Send confirmation emails
     try {

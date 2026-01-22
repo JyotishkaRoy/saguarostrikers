@@ -11,9 +11,10 @@ import { ContactMessageAdminController } from '../controllers/admin/ContactMessa
 import { SiteContentAdminController } from '../controllers/admin/SiteContentAdminController.js';
 import { BoardMemberAdminController } from '../controllers/admin/BoardMemberAdminController.js';
 import { UploadController } from '../controllers/admin/UploadController.js';
+import { ArtifactAdminController } from '../controllers/admin/ArtifactAdminController.js';
 import { authenticate, requireAdmin, requireUser } from '../middleware/auth.js';
 import { validate } from '../middleware/validation.js';
-import { upload, genericUpload, handleUploadError } from '../middleware/upload.js';
+import { upload, genericUpload, artifactUpload, galleryUpload, handleUploadError } from '../middleware/upload.js';
 
 // Initialize controllers
 const authController = new AuthController();
@@ -28,6 +29,7 @@ const contactMessageAdminController = new ContactMessageAdminController();
 const siteContentAdminController = new SiteContentAdminController();
 const boardMemberAdminController = new BoardMemberAdminController();
 const uploadController = new UploadController();
+const artifactAdminController = new ArtifactAdminController();
 
 const router = Router();
 
@@ -69,6 +71,12 @@ router.get('/public/gallery', publicController.getPublicGalleryImages.bind(publi
 router.get('/public/gallery/mission/:missionId', publicController.getPublicGalleryImagesByMission.bind(publicController));
 router.get('/public/gallery/:galleryId', publicController.viewGalleryImage.bind(publicController));
 
+// Public Mission Artifacts
+router.get('/public/missions/:missionSlug/artifacts', publicController.getPublishedArtifactsByMissionSlug.bind(publicController));
+
+// Public Mission Gallery
+router.get('/public/missions/:missionSlug/gallery', publicController.getPublishedGalleryByMissionSlug.bind(publicController));
+
 // ==========================================
 // AUTH ROUTES
 // ==========================================
@@ -99,6 +107,9 @@ router.get('/user/missions/:id', authenticate, requireUser, missionController.ge
 // Admin - Generic Upload (uses genericUpload for dynamic folder selection)
 router.post('/admin/upload', authenticate, requireAdmin, genericUpload.single('file'), handleUploadError, uploadController.uploadFile.bind(uploadController));
 router.delete('/admin/upload', authenticate, requireAdmin, uploadController.deleteFile.bind(uploadController));
+
+// Admin - Dashboard
+router.get('/admin/dashboard/stats', authenticate, requireAdmin, publicController.getDashboardStats.bind(publicController));
 
 // Admin - Users
 router.get('/admin/users', authenticate, requireAdmin, userController.getAllUsers.bind(userController));
@@ -147,17 +158,26 @@ router.patch('/admin/files/:fileId/toggle-visibility', authenticate, requireAdmi
 router.delete('/admin/files/:fileId', authenticate, requireAdmin, fileManagementAdminController.deleteFile.bind(fileManagementAdminController));
 
 // Admin - Gallery Management
-router.get('/admin/gallery', authenticate, requireAdmin, galleryAdminController.getAllImages.bind(galleryAdminController));
+router.get('/admin/gallery', authenticate, requireAdmin, galleryAdminController.getAllMissionsWithGalleries.bind(galleryAdminController));
+router.get('/admin/gallery/all', authenticate, requireAdmin, galleryAdminController.getAllImages.bind(galleryAdminController));
 router.get('/admin/gallery/stats', authenticate, requireAdmin, galleryAdminController.getGalleryStatistics.bind(galleryAdminController));
 router.get('/admin/gallery/search', authenticate, requireAdmin, galleryAdminController.searchImages.bind(galleryAdminController));
 router.get('/admin/gallery/tags', authenticate, requireAdmin, galleryAdminController.getImagesByTags.bind(galleryAdminController));
 router.get('/admin/gallery/mission/:missionId', authenticate, requireAdmin, galleryAdminController.getImagesByMission.bind(galleryAdminController));
 router.get('/admin/gallery/:galleryId', authenticate, requireAdmin, galleryAdminController.getImageById.bind(galleryAdminController));
+router.post('/admin/gallery', authenticate, requireAdmin, galleryUpload.single('file'), handleUploadError, galleryAdminController.createGalleryImage.bind(galleryAdminController));
 router.put('/admin/gallery/:galleryId', authenticate, requireAdmin, galleryAdminController.updateImage.bind(galleryAdminController));
 router.patch('/admin/gallery/:galleryId/toggle-visibility', authenticate, requireAdmin, galleryAdminController.toggleImageVisibility.bind(galleryAdminController));
 router.post('/admin/gallery/:galleryId/tags', authenticate, requireAdmin, galleryAdminController.addTags.bind(galleryAdminController));
 router.delete('/admin/gallery/:galleryId/tags', authenticate, requireAdmin, galleryAdminController.removeTags.bind(galleryAdminController));
 router.delete('/admin/gallery/:galleryId', authenticate, requireAdmin, galleryAdminController.deleteImage.bind(galleryAdminController));
+
+// Admin - Mission Artifacts
+router.get('/admin/artifacts', authenticate, requireAdmin, artifactAdminController.getAllMissionsWithArtifacts.bind(artifactAdminController));
+router.get('/admin/artifacts/mission/:missionId', authenticate, requireAdmin, artifactAdminController.getArtifactsByMission.bind(artifactAdminController));
+router.post('/admin/artifacts', authenticate, requireAdmin, artifactUpload.single('file'), handleUploadError, artifactAdminController.createArtifact.bind(artifactAdminController));
+router.put('/admin/artifacts/:artifactId', authenticate, requireAdmin, artifactAdminController.updateArtifact.bind(artifactAdminController));
+router.delete('/admin/artifacts/:artifactId', authenticate, requireAdmin, artifactAdminController.deleteArtifact.bind(artifactAdminController));
 
 // Admin - Contact Messages
 router.get('/admin/contact-messages', authenticate, requireAdmin, contactMessageAdminController.getAllMessages.bind(contactMessageAdminController));
