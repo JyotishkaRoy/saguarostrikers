@@ -304,7 +304,7 @@ export default function MissionDetailPage() {
                   Contact our team if you have any questions about this mission.
                 </p>
                 <Link to="/contact" className="btn-outline w-full justify-center">
-                  Contact Us
+                  Reach Mission Control
                 </Link>
               </div>
             </div>

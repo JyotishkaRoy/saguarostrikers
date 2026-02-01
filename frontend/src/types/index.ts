@@ -171,6 +171,13 @@ export interface MissionArtifact {
   publishedAt?: string;
 }
 
+export interface FeaturedVideo {
+  id?: string;
+  title: string;
+  url: string;
+  thumbnail?: string;
+}
+
 export interface HomepageContent {
   heroImages: string[];
   aboutUs: string;
@@ -180,6 +187,7 @@ export interface HomepageContent {
   missionCommanderName?: string;
   missionCommanderTitle?: string;
   missionCommanderImage?: string;
+  featuredVideos?: FeaturedVideo[];
 }
 
 export interface ApiResponse<T = any> {

@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { Trophy, Plus, Edit, Trash2, Eye, Calendar, MapPin, Search, Users, UserRound, Package, Image } from 'lucide-react';
+import { Trophy, Plus, Edit, Trash2, Eye, Calendar, MapPin, Search, Users, UserRound, Package, Image, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
@@ -351,6 +351,13 @@ export default function AdminMissions() {
                     >
                       <Image className="h-3.5 w-3.5" />
                       Gallery
+                    </Link>
+                    <Link
+                      to={`/admin/discussions?missionId=${mission.missionId}`}
+                      className="btn-outline text-xs py-1.5 px-3 flex items-center gap-1.5"
+                    >
+                      <MessageCircle className="h-3.5 w-3.5" />
+                      Discussions
                     </Link>
                   </div>
                 </div>

@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { Calendar, Plus, Edit2, Trash2, Search, Filter } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
-import type { CalendarEvent } from '@/types';
+import type { CalendarEvent, Mission } from '@/types';
 
 export default function AdminCalendarEvents() {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [missions, setMissions] = useState<Mission[]>([]);
   const [filteredEvents, setFilteredEvents] = useState<CalendarEvent[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
@@ -15,7 +16,17 @@ export default function AdminCalendarEvents() {
 
   useEffect(() => {
     fetchEvents();
+    fetchMissions();
   }, []);
+
+  const fetchMissions = async () => {
+    try {
+      const response = await api.get<Mission[]>('/admin/missions');
+      if (response.success && response.data) setMissions(response.data);
+    } catch {
+      // non-blocking
+    }
+  };
 
   useEffect(() => {
     let filtered = events;
@@ -130,7 +141,6 @@ export default function AdminCalendarEvents() {
               <option value="all">All Types</option>
               <option value="launch">Launch</option>
               <option value="meeting">Meeting</option>
-              <option value="mission">Mission</option>
               <option value="deadline">Deadline</option>
               <option value="other">Other</option>
             </select>
@@ -156,7 +166,7 @@ export default function AdminCalendarEvents() {
             <div key={event.eventId} className="card hover:shadow-lg transition-shadow">
               <div className="flex justify-between items-start">
                 <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
+                  <div className="flex items-center gap-3 mb-2 flex-wrap">
                     <h3 className="text-xl font-semibold text-gray-900">{event.title}</h3>
                     <span className={`px-3 py-1 rounded-full text-xs font-medium border ${eventTypeColors[event.type]}`}>
                       {event.type}
@@ -164,6 +174,11 @@ export default function AdminCalendarEvents() {
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${eventStatusColors[event.status]}`}>
                       {event.status}
                     </span>
+                    {event.missionId && (
+                      <span className="px-3 py-1 rounded-full text-xs font-medium bg-purple-50 text-purple-700 border border-purple-200">
+                        Mission: {missions.find(m => m.missionId === event.missionId)?.title ?? event.missionId}
+                      </span>
+                    )}
                   </div>
                   <p className="text-gray-600 mb-3">{event.description}</p>
                   <div className="flex flex-wrap gap-4 text-sm text-gray-500">
@@ -207,6 +222,7 @@ export default function AdminCalendarEvents() {
       {showModal && (
         <EventModal
           event={editingEvent}
+          missions={missions}
           onClose={() => {
             setShowModal(false);
             setEditingEvent(null);
@@ -225,11 +241,12 @@ export default function AdminCalendarEvents() {
 // Event Modal Component
 interface EventModalProps {
   event: CalendarEvent | null;
+  missions: Mission[];
   onClose: () => void;
   onSave: () => void;
 }
 
-function EventModal({ event, onClose, onSave }: EventModalProps) {
+function EventModal({ event, missions, onClose, onSave }: EventModalProps) {
   const [formData, setFormData] = useState({
     title: event?.title || '',
     description: event?.description || '',
@@ -239,17 +256,36 @@ function EventModal({ event, onClose, onSave }: EventModalProps) {
     type: event?.type || 'other',
     status: event?.status || 'upcoming',
     location: event?.location || '',
+    missionId: event?.missionId || '',
   });
   const [isSaving, setIsSaving] = useState(false);
+
+  useEffect(() => {
+    setFormData({
+      title: event?.title || '',
+      description: event?.description || '',
+      date: event?.date?.split('T')[0] || '',
+      startTime: event?.startTime || '',
+      endTime: event?.endTime || '',
+      type: event?.type || 'other',
+      status: event?.status || 'upcoming',
+      location: event?.location || '',
+      missionId: event?.missionId || '',
+    });
+  }, [event]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
+    const payload = {
+      ...formData,
+      missionId: formData.missionId || undefined,
+    };
 
     try {
       const response = event
-        ? await api.put(`/admin/calendar-events/${event.eventId}`, formData)
-        : await api.post('/admin/calendar-events', formData);
+        ? await api.put(`/admin/calendar-events/${event.eventId}`, payload)
+        : await api.post('/admin/calendar-events', payload);
 
       if (response.success) {
         toast.success(event ? 'Event updated successfully' : 'Event created successfully');
@@ -364,7 +400,6 @@ function EventModal({ event, onClose, onSave }: EventModalProps) {
               >
                 <option value="launch">Launch</option>
                 <option value="meeting">Meeting</option>
-                <option value="mission">Mission</option>
                 <option value="deadline">Deadline</option>
                 <option value="other">Other</option>
               </select>
@@ -386,6 +421,27 @@ function EventModal({ event, onClose, onSave }: EventModalProps) {
                 <option value="cancelled">Cancelled</option>
               </select>
             </div>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Mission (optional)
+            </label>
+            <select
+              value={formData.missionId}
+              onChange={(e) => setFormData({ ...formData, missionId: e.target.value })}
+              className="input"
+            >
+              <option value="">None — specific event</option>
+              {missions.map((m) => (
+                <option key={m.missionId} value={m.missionId}>
+                  {m.title}
+                </option>
+              ))}
+            </select>
+            <p className="text-xs text-gray-500 mt-1">
+              Leave as &quot;None&quot; for a standalone event, or select a mission to associate this event with.
+            </p>
           </div>
 
           <div className="flex gap-3 pt-4">

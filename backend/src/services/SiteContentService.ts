@@ -1,6 +1,6 @@
 import { SiteContentDataHelper } from '../data/SiteContentDataHelper.js';
 import { BoardMemberDataHelper } from '../data/BoardMemberDataHelper.js';
-import { HomepageContent, BoardMember } from '../models/types.js';
+import { HomepageContent, BoardMember, JoinMissionAgreements, FutureExplorersContent, FutureExplorersCarouselImage } from '../models/types.js';
 import { generateId } from '../utils/idGenerator.js';
 import { createError } from '../middleware/errorHandler.js';
 
@@ -46,6 +46,74 @@ export class SiteContentService {
    */
   async setHeroImages(imageUrls: string[]): Promise<HomepageContent> {
     return this.siteContentDataHelper.setHeroImages(imageUrls);
+  }
+
+  /**
+   * Get Join Mission agreement texts (public)
+   */
+  async getJoinMissionAgreements(): Promise<JoinMissionAgreements> {
+    return this.siteContentDataHelper.getJoinMissionAgreements();
+  }
+
+  /**
+   * Update Join Mission agreement texts (admin)
+   */
+  async updateJoinMissionAgreements(updates: Partial<JoinMissionAgreements>): Promise<JoinMissionAgreements> {
+    return this.siteContentDataHelper.updateJoinMissionAgreements(updates);
+  }
+
+  /**
+   * Get Future Explorers page content (public)
+   */
+  async getFutureExplorersContent(): Promise<FutureExplorersContent> {
+    return this.siteContentDataHelper.getFutureExplorersContent();
+  }
+
+  /**
+   * Update Future Explorers content (admin) – publishes immediately
+   */
+  async updateFutureExplorersContent(updates: Partial<FutureExplorersContent>): Promise<FutureExplorersContent> {
+    return this.siteContentDataHelper.updateFutureExplorersContent(updates);
+  }
+
+  /**
+   * Add carousel image to Future Explorers (admin)
+   */
+  async addFutureExplorersCarouselImage(url: string, sequence?: number): Promise<FutureExplorersContent> {
+    const content = this.siteContentDataHelper.getFutureExplorersContent();
+    const images = content.carouselImages ?? [];
+    const maxSeq = images.length > 0 ? Math.max(...images.map((i) => i.sequence)) : -1;
+    const image: FutureExplorersCarouselImage = {
+      imageId: generateId(),
+      url,
+      sequence: sequence ?? maxSeq + 1,
+      active: true,
+    };
+    return this.siteContentDataHelper.addFutureExplorersCarouselImage(image);
+  }
+
+  /**
+   * Update carousel image (sequence, active) (admin)
+   */
+  async updateFutureExplorersCarouselImage(
+    imageId: string,
+    updates: Partial<Pick<FutureExplorersCarouselImage, 'sequence' | 'active'>>
+  ): Promise<FutureExplorersContent | null> {
+    return this.siteContentDataHelper.updateFutureExplorersCarouselImage(imageId, updates);
+  }
+
+  /**
+   * Remove carousel image (admin)
+   */
+  async removeFutureExplorersCarouselImage(imageId: string): Promise<FutureExplorersContent> {
+    return this.siteContentDataHelper.removeFutureExplorersCarouselImage(imageId);
+  }
+
+  /**
+   * Reorder carousel images (admin)
+   */
+  async setFutureExplorersCarouselOrder(orderedImages: FutureExplorersCarouselImage[]): Promise<FutureExplorersContent> {
+    return this.siteContentDataHelper.setFutureExplorersCarouselOrder(orderedImages);
   }
 
   /**

@@ -150,7 +150,7 @@ export default function MissionStatement() {
                     </li>
                     <li>
                       <a href="/contact" className="text-white/90 hover:text-white transition-colors flex items-center">
-                        <span className="mr-2">→</span> Contact Us
+                        <span className="mr-2">→</span> Reach Mission Control
                       </a>
                     </li>
                   </ul>

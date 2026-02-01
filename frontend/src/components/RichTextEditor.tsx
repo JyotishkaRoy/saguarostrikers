@@ -48,7 +48,7 @@ export default function RichTextEditor({
   ];
 
   return (
-    <div className="rich-text-editor-wrapper">
+    <div className="rich-text-editor-wrapper relative z-0">
       <ReactQuill
         theme="snow"
         value={value}
@@ -59,20 +59,18 @@ export default function RichTextEditor({
         style={{ height }}
       />
       <style>{`
-        .rich-text-editor-wrapper .ql-container {
-          min-height: ${height};
-          font-family: 'Inter', sans-serif;
-        }
-        .rich-text-editor-wrapper .ql-editor {
-          min-height: ${height};
-          font-size: 16px;
-        }
         .rich-text-editor-wrapper .ql-toolbar {
           border-radius: 0.5rem 0.5rem 0 0;
           background: #f9fafb;
         }
         .rich-text-editor-wrapper .ql-container {
           border-radius: 0 0 0.5rem 0.5rem;
+          font-family: 'Inter', sans-serif;
+          min-height: 120px;
+        }
+        .rich-text-editor-wrapper .ql-editor {
+          font-size: 16px;
+          min-height: 120px;
         }
         .rich-text-editor-wrapper .ql-editor.ql-blank::before {
           font-style: normal;

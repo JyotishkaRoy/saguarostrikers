@@ -172,6 +172,14 @@ export class TeamService {
   }
 
   /**
+   * Get total count of unique team members (distinct users on any team)
+   */
+  async getUniqueTeamMemberCount(): Promise<number> {
+    const all = this.teamMemberDataHelper.getAll();
+    return new Set(all.map(m => m.userId)).size;
+  }
+
+  /**
    * Get team members
    */
   async getTeamMembers(teamId: string): Promise<TeamMember[]> {

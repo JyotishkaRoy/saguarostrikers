@@ -144,5 +144,35 @@
     "createdBy": "ZYTGOKOUExDF",
     "createdAt": "2026-01-08T10:00:00.000Z",
     "updatedAt": "2026-01-08T10:00:00.000Z"
+  },
+  {
+    "eventId": "6lKRmQOGesOx",
+    "title": "test1234",
+    "description": "test1234",
+    "date": "2026-02-10",
+    "startTime": "",
+    "endTime": "",
+    "type": "mission",
+    "status": "upcoming",
+    "missionId": "d11ccJtQ6zjj",
+    "location": "",
+    "createdBy": "ZYTGOKOUExDF",
+    "createdAt": "2026-02-01T17:41:07.249Z",
+    "updatedAt": "2026-02-01T17:41:07.249Z"
+  },
+  {
+    "eventId": "AstwnUZfjYZw",
+    "title": "test123456",
+    "description": "test123456",
+    "date": "2026-02-02",
+    "startTime": "",
+    "endTime": "",
+    "type": "meeting",
+    "status": "upcoming",
+    "missionId": "d11ccJtQ6zjj",
+    "location": "",
+    "createdBy": "ZYTGOKOUExDF",
+    "createdAt": "2026-02-01T17:42:18.836Z",
+    "updatedAt": "2026-02-01T17:42:18.836Z"
   }
 ]

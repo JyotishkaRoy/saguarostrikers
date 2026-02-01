@@ -128,17 +128,76 @@ export type PublishStatus = 'draft' | 'published' | 'unpublished';
 export type Priority = 'low' | 'medium' | 'high';
 
 // ============================================
+// Discussion Types
+// ============================================
+
+export interface DiscussionReply {
+  replyId: string;
+  content: string;
+  authorId: string;
+  authorName?: string;
+  authorEmail?: string;
+  authorRole?: string;
+  createdAt: string;
+}
+
+export interface DiscussionThread {
+  threadId: string;
+  title: string;
+  description: string;
+  category: string;
+  status: 'open' | 'closed';
+  missionId?: string; // Optional: link thread to a specific mission
+  createdBy?: string;
+  replies: DiscussionReply[];
+  replyCount: number;
+  lastReplyAt: string | null;
+  isPinned: boolean;
+  isLocked: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+// ============================================
 // Site Content Types
 // ============================================
 
+export interface JoinMissionAgreements {
+  agreementFinancial: string;
+  agreementPhotograph: string;
+  agreementLiability: string;
+}
+
+export interface FutureExplorersCarouselImage {
+  imageId: string;
+  url: string;
+  sequence: number;
+  active: boolean;
+}
+
+export interface FutureExplorersContent {
+  row1Col1Html: string;
+  carouselImages: FutureExplorersCarouselImage[];
+  row2Html: string;
+}
+
 export interface SiteContent {
   homepage: HomepageContent;
+  joinMission?: JoinMissionAgreements;
+  futureExplorers?: FutureExplorersContent;
 }
 
 export interface HeroCTA {
   text: string;
   link: string;
   style: 'primary' | 'secondary';
+}
+
+export interface FeaturedVideo {
+  id?: string;
+  title: string;
+  url: string; // YouTube/Vimeo embed URL or uploaded video file URL
+  thumbnail?: string;
 }
 
 export interface HomepageContent {
@@ -153,6 +212,7 @@ export interface HomepageContent {
   missionCommanderName?: string;
   missionCommanderTitle?: string;
   missionCommanderImage?: string;
+  featuredVideos?: FeaturedVideo[];
 }
 
 export interface BoardMember {

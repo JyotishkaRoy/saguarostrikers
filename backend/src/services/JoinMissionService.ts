@@ -122,6 +122,10 @@ export class JoinMissionService {
     return await this.dataHelper.getApplicationsByStatus(status);
   }
 
+  async getApprovedApplicationsByStudentEmail(email: string): Promise<JoinMissionApplication[]> {
+    return await this.dataHelper.getApprovedApplicationsByStudentEmail(email);
+  }
+
   async updateApplicationStatus(
     applicationId: string,
     data: UpdateApplicationStatusData,

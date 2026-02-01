@@ -3,6 +3,10 @@ import { body } from 'express-validator';
 import { AuthService } from '../services/AuthService.js';
 import { AuthRequest } from '../models/types.js';
 import { ApiError } from '../middleware/errorHandler.js';
+import { AuditDataHelper } from '../data/AuditDataHelper.js';
+import { getRequestInfo } from '../middleware/audit.js';
+
+const auditDataHelper = new AuditDataHelper();
 
 export class AuthController {
   private authService: AuthService;
@@ -75,6 +79,21 @@ export class AuthController {
       const { email, password } = req.body;
 
       const result = await this.authService.login(email, password);
+
+      const requestInfo = getRequestInfo(req as AuthRequest);
+      try {
+        auditDataHelper.createLog({
+          userId: result.user.userId,
+          action: 'USER_LOGIN',
+          entity: 'user',
+          entityId: result.user.userId,
+          changes: {},
+          ipAddress: requestInfo.ipAddress,
+          userAgent: requestInfo.userAgent
+        });
+      } catch (logError) {
+        console.error('Audit log failed:', logError);
+      }
 
       res.status(200).json({
         success: true,
@@ -168,6 +187,33 @@ export class AuthController {
           message: 'Failed to update profile'
         });
       }
+    }
+  }
+
+  /**
+   * Logout (logs audit and returns success; client clears token)
+   */
+  async logout(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      if (req.user) {
+        const requestInfo = getRequestInfo(req);
+        try {
+          auditDataHelper.createLog({
+            userId: req.user.userId,
+            action: 'USER_LOGOUT',
+            entity: 'user',
+            entityId: req.user.userId,
+            changes: {},
+            ipAddress: requestInfo.ipAddress,
+            userAgent: requestInfo.userAgent
+          });
+        } catch (logError) {
+          console.error('Audit log failed:', logError);
+        }
+      }
+      res.status(200).json({ success: true, message: 'Logged out' });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Logout failed' });
     }
   }
 

@@ -28,6 +28,55 @@
     "missionCommanderMessage": "To the dedicated members of Saguaro Strikers, your unwavering passion and dedication are the driving forces behind our shared success. Together we are building a brighter future through innovation, teamwork, and excellence in rocketry. Thank you for all you do.",
     "missionCommanderName": "Jyotishka Roy",
     "missionCommanderTitle": "Mission Director",
-    "missionCommanderImage": "/uploads/mission-director/d3339152-e1e2-4cf5-92a3-ce8891641ef4.JPG"
+    "missionCommanderImage": "/uploads/mission-director/d3339152-e1e2-4cf5-92a3-ce8891641ef4.JPG",
+    "featuredVideos": [
+      {
+        "title": "",
+        "url": "https://youtu.be/oMeXcBk1x-c?si=NVv01vHqxdwSETbf"
+      },
+      {
+        "title": "MVI_4205 2",
+        "url": "/uploads/featured-videos/G1umBaRHjCB0.MP4"
+      },
+      {
+        "title": "MVI_4256 2",
+        "url": "/uploads/featured-videos/TKngjZjnNsqa.MP4"
+      }
+    ]
+  },
+  "joinMission": {
+    "agreementFinancial": "I understand and agree to the financial obligations associated with participating in this mission.",
+    "agreementPhotograph": "I consent to the use of photographs and videos of the student for promotional and educational purposes related to Saguaro Strikers activities.",
+    "agreementLiability": "I acknowledge and accept the risks associated with rocketry activities and release Saguaro Strikers from liability for any injuries or damages that may occur during mission activities."
+  },
+  "futureExplorers": {
+    "row1Col1Html": "<h2>About the Program</h2><p>The Future Explorers' Program is our flagship outreach initiative designed to introduce students to the exciting world of rocketry and aerospace engineering.</p><p>Through interactive workshops, demonstrations, and mentorship opportunities, we aim to inspire curiosity and develop practical STEM skills.</p>",
+    "carouselImages": [
+      {
+        "imageId": "pyHB3LPxbpuC",
+        "url": "/uploads/future-explorers/4b6pdfnzf8qH.jpg",
+        "sequence": 0,
+        "active": true
+      },
+      {
+        "imageId": "gfnw8K82TpPO",
+        "url": "/uploads/future-explorers/fZPbygh1M52G.jpg",
+        "sequence": 1,
+        "active": true
+      },
+      {
+        "imageId": "Ht3Y92b37Tg1",
+        "url": "/uploads/future-explorers/zjJm8p3LSVA4.jpg",
+        "sequence": 2,
+        "active": true
+      },
+      {
+        "imageId": "T2ljCeNXl8jv",
+        "url": "/uploads/future-explorers/iHmEQZOFfTJd.jpg",
+        "sequence": 3,
+        "active": true
+      }
+    ],
+    "row2Html": "<h2>Success Stories</h2><p>Add images, text, or a combination here. This content is editable by Admin.</p>"
   }
 }

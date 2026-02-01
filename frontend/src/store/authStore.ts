@@ -83,6 +83,8 @@ export const useAuthStore = create<AuthState>()(
       },
 
       logout: () => {
+        // Notify backend for audit log (best-effort; don't block clearing state)
+        api.post('/auth/logout').catch(() => {});
         set({
           user: null,
           token: null,

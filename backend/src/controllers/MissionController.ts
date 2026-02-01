@@ -1,13 +1,45 @@
 import { Request, Response } from 'express';
 import { MissionService } from '../services/MissionService.js';
+import { JoinMissionService } from '../services/JoinMissionService.js';
 import { AuthRequest } from '../models/types.js';
 import { ApiError } from '../middleware/errorHandler.js';
 
 export class MissionController {
   private missionService: MissionService;
+  private joinMissionService: JoinMissionService;
 
   constructor() {
     this.missionService = new MissionService();
+    this.joinMissionService = new JoinMissionService();
+  }
+
+  /**
+   * Get missions the current user is approved for (My Missions)
+   */
+  async getMyMissions(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      const email = req.user?.email;
+      if (!email) {
+        res.status(401).json({ success: false, message: 'Authentication required' });
+        return;
+      }
+      const applications = await this.joinMissionService.getApprovedApplicationsByStudentEmail(email);
+      const missionIds = [...new Set(applications.map(a => a.missionId))];
+      const missions: Awaited<ReturnType<MissionService['getMissionById']>>[] = [];
+      for (const id of missionIds) {
+        try {
+          const mission = await this.missionService.getMissionById(id);
+          missions.push(mission);
+        } catch {
+          // Mission may have been deleted; skip
+        }
+      }
+      // Sort by start date descending
+      missions.sort((a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime());
+      res.status(200).json({ success: true, data: missions });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Failed to fetch your missions' });
+    }
   }
 
   /**

@@ -8,6 +8,7 @@ import { JoinMissionService } from '../services/JoinMissionService.js';
 import { FileManagementService } from '../services/FileManagementService.js';
 import { GalleryService } from '../services/GalleryService.js';
 import { ArtifactService } from '../services/ArtifactService.js';
+import { TeamService } from '../services/TeamService.js';
 
 export class PublicController {
   private missionService: MissionService;
@@ -19,6 +20,7 @@ export class PublicController {
   private fileService: FileManagementService;
   private galleryService: GalleryService;
   private artifactService: ArtifactService;
+  private teamService: TeamService;
 
   constructor() {
     this.missionService = new MissionService();
@@ -30,6 +32,7 @@ export class PublicController {
     this.fileService = new FileManagementService();
     this.galleryService = new GalleryService();
     this.artifactService = new ArtifactService();
+    this.teamService = new TeamService();
   }
 
   // Get admin dashboard statistics
@@ -38,12 +41,12 @@ export class PublicController {
       const { UserService } = await import('../services/UserService.js');
       const userService = new UserService();
       
-      // Fetch all data in parallel
+      // Fetch all data in parallel (artifacts = Mission Artifacts card; gallery = Mission Gallery card)
       const [
         allUsers,
         allMissions,
         allApplications,
-        allFiles,
+        allArtifacts,
         allGallery,
         allEvents,
         allNotices,
@@ -52,7 +55,7 @@ export class PublicController {
         userService.getAllUsers(),
         this.missionService.getAllMissions(),
         this.joinMissionService.getAllApplications(),
-        this.fileService.getAllFiles(),
+        this.artifactService.getAllArtifacts(),
         this.galleryService.getAllImages(),
         this.calendarEventService.getAllEvents(),
         this.noticeService.getAllNotices(),
@@ -61,6 +64,7 @@ export class PublicController {
 
       // Calculate stats
       const now = new Date();
+      now.setHours(0, 0, 0, 0);
       const thirtyDaysAgo = new Date(now.getTime() - 30 * 24 * 60 * 60 * 1000);
 
       const stats = {
@@ -72,7 +76,7 @@ export class PublicController {
         missions: {
           total: allMissions.length,
           active: allMissions.filter(m => m.status === 'published' || m.status === 'in-progress').length,
-          upcoming: allMissions.filter(m => m.status === 'published').length,
+          upcoming: allMissions.filter(m => m.status === 'published' && new Date(m.startDate) > now).length,
         },
         applications: {
           total: allApplications.length,
@@ -80,9 +84,9 @@ export class PublicController {
           approved: allApplications.filter(a => a.status === 'approved').length,
         },
         files: {
-          total: allFiles.length,
-          public: allFiles.filter(f => f.isPublic).length,
-          downloads: allFiles.reduce((sum, f) => sum + (f.downloadCount || 0), 0),
+          total: allArtifacts.length,
+          public: allArtifacts.filter(a => a.status === 'published').length,
+          downloads: 0,
         },
         gallery: {
           total: allGallery.length,
@@ -107,6 +111,37 @@ export class PublicController {
     } catch (error) {
       console.error('Error fetching dashboard stats:', error);
       res.status(500).json({ success: false, message: 'Failed to fetch dashboard statistics' });
+    }
+  }
+
+  /**
+   * Get public stats for homepage (active missions, team members, events, completed missions)
+   */
+  async getPublicStats(_req: Request, res: Response): Promise<void> {
+    try {
+      const [missions, upcomingEvents, teamMemberCount] = await Promise.all([
+        this.missionService.getPublishedMissions(),
+        this.calendarEventService.getUpcomingEvents(500),
+        this.teamService.getUniqueTeamMemberCount()
+      ]);
+
+      const activeMissions = missions.filter(
+        m => m.status === 'published' || m.status === 'in-progress'
+      ).length;
+      const completedMissions = missions.filter(m => m.status === 'completed').length;
+
+      res.status(200).json({
+        success: true,
+        data: {
+          activeMissions,
+          teamMembers: teamMemberCount,
+          upcomingEvents: upcomingEvents.length,
+          completedMissions
+        }
+      });
+    } catch (error) {
+      console.error('Error fetching public stats:', error);
+      res.status(500).json({ success: false, message: 'Failed to fetch stats' });
     }
   }
 
@@ -164,6 +199,24 @@ export class PublicController {
     }
   }
 
+  async getJoinMissionAgreements(_req: Request, res: Response): Promise<void> {
+    try {
+      const agreements = await this.siteContentService.getJoinMissionAgreements();
+      res.status(200).json({ success: true, data: agreements });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Failed to fetch join mission agreements' });
+    }
+  }
+
+  async getFutureExplorers(_req: Request, res: Response): Promise<void> {
+    try {
+      const content = await this.siteContentService.getFutureExplorersContent();
+      res.status(200).json({ success: true, data: content });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Failed to fetch Future Explorers content' });
+    }
+  }
+
   // Calendar Events
   async getCalendarEvents(req: Request, res: Response): Promise<void> {
     try {
@@ -198,6 +251,16 @@ export class PublicController {
       res.status(200).json({ success: true, data: events });
     } catch (error) {
       res.status(500).json({ success: false, message: 'Failed to fetch upcoming events' });
+    }
+  }
+
+  async getCalendarEventsByMission(req: Request, res: Response): Promise<void> {
+    try {
+      const { missionId } = req.params;
+      const events = await this.calendarEventService.getEventsByMission(missionId);
+      res.status(200).json({ success: true, data: events });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Failed to fetch mission events' });
     }
   }
 

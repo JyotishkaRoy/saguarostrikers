@@ -69,7 +69,7 @@ export default function AdminDashboard() {
               <p className="text-3xl font-bold text-gray-900 mb-2">{stats?.users.total}</p>
               <div className="flex items-center gap-2 text-sm">
                 <span className="text-success-600 font-medium">+{stats?.users.new} new</span>
-                <span className="text-gray-500">this month</span>
+                <span className="text-gray-500">in last 30 days</span>
               </div>
             </div>
             <Users className="h-12 w-12 text-primary-600" />

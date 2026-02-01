@@ -1,9 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Save, Eye, Edit, Globe, Plus, X as XIcon, Image as ImageIcon } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+const FEATURED_VIDEO_UPLOAD_PREFIX = '/uploads/featured-videos/';
+import { toYouTubeEmbedUrl, isEmbedVideoUrl } from '@/lib/utils';
 import toast from 'react-hot-toast';
 import RichTextEditor from '@/components/RichTextEditor';
 import RichTextDisplay from '@/components/RichTextDisplay';
+import FutureExplorersEditor from '@/components/FutureExplorersEditor';
 import axios from 'axios';
 
 interface SiteContent {
@@ -48,11 +51,12 @@ export default function AdminSiteContent() {
     setPreviewMode(null);
   };
 
-  const handleSave = async (contentId: string) => {
+  const handleSave = async (contentId: string, contentOverride?: string) => {
     try {
+      const contentToSend = contentOverride !== undefined ? contentOverride : editContent;
       await api.put(`/admin/site-content/${contentId}`, {
         title: editTitle,
-        content: editContent
+        content: contentToSend
       });
       toast.success('Content updated successfully');
       setEditingId(null);
@@ -74,15 +78,40 @@ export default function AdminSiteContent() {
     }
   };
 
-  const sections = [
-    { key: 'homepage-hero', label: 'Homepage Hero', type: 'hero' },
-    { key: 'mission-commander', label: 'Mission Director Statement', type: 'commander' },
-    { key: 'homepage-about', label: 'About Us', type: 'richtext' },
-    { key: 'homepage-mission', label: 'Mission', type: 'richtext' },
-    { key: 'homepage-vision', label: 'Vision', type: 'richtext' },
+  type TabId = 'homepage-hero' | 'mission-director' | 'about-us' | 'agreements-consent' | 'future-explorers';
+  const [activeTab, setActiveTab] = useState<TabId>('homepage-hero');
+
+  const tabs: { id: TabId; label: string }[] = [
+    { id: 'homepage-hero', label: 'Homepage Hero' },
+    { id: 'about-us', label: 'Homepage' },
+    { id: 'mission-director', label: 'Mission Director Statement' },
+    { id: 'agreements-consent', label: 'Agreements & Consent' },
+    { id: 'future-explorers', label: "Future Explorer's Program" },
   ];
 
-  if (isLoading) {
+  const sectionsByTab: Record<TabId, { key: string; label: string; type: 'hero' | 'commander' | 'richtext' | 'featured-videos' | 'plain' }[]> = {
+    'homepage-hero': [
+      { key: 'homepage-hero', label: 'Homepage Hero', type: 'hero' },
+    ],
+    'mission-director': [
+      { key: 'mission-commander', label: 'Mission Director Statement', type: 'commander' },
+      { key: 'homepage-mission', label: 'Mission', type: 'richtext' },
+      { key: 'homepage-vision', label: 'Vision', type: 'richtext' },
+    ],
+    'about-us': [
+      { key: 'homepage-about', label: 'About Us', type: 'richtext' },
+      { key: 'featured-videos', label: 'Featured Videos', type: 'featured-videos' },
+    ],
+    'agreements-consent': [
+      { key: 'join-mission-agreement-financial', label: 'Financial Obligations Agreement', type: 'plain' },
+      { key: 'join-mission-agreement-photograph', label: 'Photograph & Video Consent', type: 'plain' },
+      { key: 'join-mission-agreement-liability', label: 'Liability Release', type: 'plain' },
+    ],
+  };
+
+  const sections = activeTab === 'future-explorers' ? [] : sectionsByTab[activeTab];
+
+  if (isLoading && activeTab !== 'future-explorers') {
     return (
       <div className="container mx-auto px-4 py-8">
         <div className="flex items-center justify-center py-12">
@@ -95,19 +124,41 @@ export default function AdminSiteContent() {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold text-gray-900 mb-2">Site Content Management</h1>
-        <p className="text-gray-600">Edit and manage website content with rich text formatting</p>
+      <div className="mb-6">
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">Settings</h1>
+        <p className="text-gray-600">Edit and manage website content</p>
       </div>
 
-      {/* Content Sections */}
+      {/* Tabs */}
+      <div className="border-b border-gray-200 mb-6">
+        <nav className="flex gap-1" aria-label="Tabs">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTab(tab.id)}
+              className={`py-3 px-4 text-sm font-medium rounded-t-lg border-b-2 transition-colors ${
+                activeTab === tab.id
+                  ? 'border-primary-600 text-primary-600 bg-primary-50'
+                  : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300'
+              }`}
+            >
+              {tab.label}
+            </button>
+          ))}
+        </nav>
+      </div>
+
+      {/* Tab content: sections for active tab */}
       <div className="space-y-6">
-        {sections.map((section) => {
+        {activeTab === 'future-explorers' ? (
+          <FutureExplorersEditor showTitle={false} useSettingsLayout />
+        ) : (
+        sections.map((section) => {
           const content = contents.find(c => c.section === section.key) || {
             contentId: section.key,
             section: section.key,
             title: section.label,
-            content: '<p>Content coming soon...</p>',
+            content: section.key === 'featured-videos' ? JSON.stringify({ videos: [] }, null, 2) : section.type === 'plain' ? '' : '<p>Content coming soon...</p>',
             isPublished: false,
             lastModified: new Date().toISOString()
           };
@@ -157,7 +208,14 @@ export default function AdminSiteContent() {
 
               {/* Content */}
               {isEditing ? (
-                section.type === 'hero' ? (
+                section.type === 'featured-videos' ? (
+                  <FeaturedVideosEditor
+                    content={editContent}
+                    onChange={setEditContent}
+                    onSave={(serialized) => handleSave(content.contentId, serialized)}
+                    onCancel={() => setEditingId(null)}
+                  />
+                ) : section.type === 'hero' ? (
                   <HeroEditor
                     content={editContent}
                     onChange={setEditContent}
@@ -171,6 +229,28 @@ export default function AdminSiteContent() {
                     onSave={() => handleSave(content.contentId)}
                     onCancel={() => setEditingId(null)}
                   />
+                ) : section.type === 'plain' ? (
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        Text (shown on Join Mission page)
+                      </label>
+                      <textarea
+                        value={editContent}
+                        onChange={(e) => setEditContent(e.target.value)}
+                        rows={4}
+                        className="input w-full"
+                      />
+                    </div>
+                    <div className="flex gap-2">
+                      <button type="button" onClick={() => handleSave(content.contentId)} className="btn-primary">
+                        Save
+                      </button>
+                      <button type="button" onClick={() => setEditingId(null)} className="btn-outline">
+                        Cancel
+                      </button>
+                    </div>
+                  </div>
                 ) : (
                   <div className="space-y-4">
                     <div>
@@ -191,7 +271,7 @@ export default function AdminSiteContent() {
                       <RichTextEditor
                         value={editContent}
                         onChange={setEditContent}
-                        height="400px"
+                        height="280px"
                         placeholder="Enter your content here..."
                       />
                     </div>
@@ -219,7 +299,9 @@ export default function AdminSiteContent() {
                   </div>
                 )
               ) : isPreview ? (
-                section.type === 'hero' ? (
+                section.type === 'featured-videos' ? (
+                  <FeaturedVideosPreview content={content.content} />
+                ) : section.type === 'hero' ? (
                   <HeroPreview content={content.content} />
                 ) : section.type === 'commander' ? (
                   <MissionCommanderPreview content={content.content} />
@@ -231,7 +313,9 @@ export default function AdminSiteContent() {
                 )
               ) : (
                 <div className="text-gray-600 text-sm">
-                  {section.type === 'hero' || section.type === 'commander' ? (
+                  {section.type === 'featured-videos' ? (
+                    <div className="text-gray-500 italic">Click "Edit" to manage up to 3 featured videos (link or upload). Shown on homepage.</div>
+                  ) : section.type === 'hero' || section.type === 'commander' ? (
                     <div className="text-gray-500 italic">Click "Preview" to see {section.type === 'hero' ? 'hero' : 'mission director'} content</div>
                   ) : (
                     <>
@@ -251,7 +335,8 @@ export default function AdminSiteContent() {
               )}
             </div>
           );
-        })}
+        })
+        )}
       </div>
     </div>
   );
@@ -904,6 +989,306 @@ function MissionCommanderPreview({ content }: MissionCommanderPreviewProps) {
             />
           </div>
         </div>
+      )}
+    </div>
+  );
+}
+
+// Featured Videos Editor (max 3; link or upload)
+interface FeaturedVideosEditorProps {
+  content: string;
+  onChange: (content: string) => void;
+  onSave: (content: string) => void;
+  onCancel: () => void;
+}
+
+function FeaturedVideosEditor({ content, onChange, onSave, onCancel }: FeaturedVideosEditorProps) {
+  const [videos, setVideos] = useState<Array<{ id?: string; title: string; url: string; thumbnail?: string }>>(() => {
+    try {
+      const parsed = JSON.parse(content);
+      return Array.isArray(parsed.videos) ? parsed.videos.slice(0, 3) : [];
+    } catch {
+      return [];
+    }
+  });
+  const [pendingFiles, setPendingFiles] = useState<Record<number, File>>({});
+  const [previewUrls, setPreviewUrls] = useState<Record<number, string>>({});
+  const [saving, setSaving] = useState(false);
+  const previewUrlsRef = useRef<Record<number, string>>({});
+
+  useEffect(() => {
+    onChange(JSON.stringify({ videos }, null, 2));
+  }, [videos, onChange]);
+
+  useEffect(() => {
+    Object.values(previewUrlsRef.current).forEach(url => URL.revokeObjectURL(url));
+    const next: Record<number, string> = {};
+    Object.entries(pendingFiles).forEach(([key, file]) => {
+      next[Number(key)] = URL.createObjectURL(file);
+    });
+    previewUrlsRef.current = next;
+    setPreviewUrls(next);
+    return () => {
+      Object.values(previewUrlsRef.current).forEach(url => URL.revokeObjectURL(url));
+      previewUrlsRef.current = {};
+    };
+  }, [pendingFiles]);
+
+  const setVideo = (index: number, updates: Partial<{ title: string; url: string; thumbnail?: string }>) => {
+    setVideos(prev => {
+      const next = [...prev];
+      next[index] = { title: '', url: '', ...(next[index] || {}), ...updates };
+      return next;
+    });
+  };
+
+  const addSlot = () => {
+    if (videos.length >= 3) return;
+    setVideos(prev => [...prev, { title: '', url: '' }]);
+  };
+
+  const removeSlot = async (index: number) => {
+    const urlToDelete = videos[index]?.url;
+    if (urlToDelete?.startsWith(FEATURED_VIDEO_UPLOAD_PREFIX)) {
+      try {
+        await api.deleteWithBody('/admin/site-content/featured-video', { url: urlToDelete });
+        toast.success('Video removed from server');
+      } catch (err) {
+        toast.error(getErrorMessage(err));
+        return;
+      }
+    }
+    setVideos(prev => prev.filter((_, i) => i !== index));
+    setPendingFiles(prev => {
+      const rekeyed: Record<number, File> = {};
+      Object.entries(prev).forEach(([k, v]) => {
+        const i = Number(k);
+        if (i === index) return;
+        rekeyed[i > index ? i - 1 : i] = v;
+      });
+      return rekeyed;
+    });
+  };
+
+  const handleFileSelect = (index: number, event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (!file) return;
+    if (!file.type.startsWith('video/')) {
+      toast.error('Please select a video file');
+      return;
+    }
+    setPendingFiles(prev => ({ ...prev, [index]: file }));
+    setVideo(index, { title: videos[index]?.title || file.name.replace(/\.[^.]+$/, '') });
+    event.target.value = '';
+  };
+
+  const clearPendingFile = (index: number) => {
+    setPendingFiles(prev => {
+      const next = { ...prev };
+      delete next[index];
+      return next;
+    });
+  };
+
+  const handleSave = async () => {
+    const indicesToUpload = Object.keys(pendingFiles).map(Number).sort((a, b) => a - b);
+    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+    const token = localStorage.getItem('token');
+    setSaving(true);
+    try {
+      let updatedVideos = [...videos];
+      for (const i of indicesToUpload) {
+        const file = pendingFiles[i];
+        if (!file) continue;
+        const formData = new FormData();
+        formData.append('video', file);
+        const response = await axios.post(
+          `${API_URL}/admin/site-content/upload-featured-video`,
+          formData,
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        if (response.data?.success && response.data?.data?.url) {
+          updatedVideos[i] = {
+            ...updatedVideos[i],
+            url: response.data.data.url,
+            title: updatedVideos[i].title || response.data.data.originalName?.replace(/\.[^.]+$/, '') || file.name
+          };
+        }
+      }
+      const newUrls = new Set(updatedVideos.map(v => v.url).filter(Boolean));
+      let previousVideos: Array<{ url?: string }> = [];
+      try {
+        const parsed = JSON.parse(content);
+        previousVideos = Array.isArray(parsed.videos) ? parsed.videos : [];
+      } catch {
+        /* ignore */
+      }
+      for (const v of previousVideos) {
+        const u = v.url?.trim();
+        if (u?.startsWith(FEATURED_VIDEO_UPLOAD_PREFIX) && !newUrls.has(u)) {
+          try {
+            await api.deleteWithBody('/admin/site-content/featured-video', { url: u });
+          } catch {
+            /* best-effort delete */
+          }
+        }
+      }
+      setVideos(updatedVideos);
+      setPendingFiles({});
+      onSave(JSON.stringify({ videos: updatedVideos }, null, 2));
+      toast.success('Featured videos saved.');
+    } catch (error) {
+      toast.error(getErrorMessage(error));
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  return (
+    <div className="space-y-6">
+      <p className="text-sm text-gray-500">Up to 3 videos shown on the homepage. Use a link (e.g. YouTube embed URL) or upload a video file.</p>
+      {[0, 1, 2].map((i) => (
+        <div key={i} className="border border-gray-200 rounded-lg p-4 space-y-3">
+          <div className="flex items-center justify-between">
+            <span className="font-medium text-gray-700">Video {i + 1}</span>
+            {i < videos.length ? (
+              <button type="button" onClick={() => removeSlot(i)} className="text-sm text-danger-600 hover:text-danger-800">Remove</button>
+            ) : (
+              <button type="button" onClick={addSlot} className="text-sm text-primary-600 hover:text-primary-800">Add</button>
+            )}
+          </div>
+          {i < videos.length && (
+            <>
+              {pendingFiles[i] ? (
+                <div className="rounded-lg overflow-hidden bg-black aspect-video mb-3 relative">
+                  <video
+                    src={previewUrls[i] || ''}
+                    className="w-full h-full object-contain"
+                    controls
+                    playsInline
+                    muted
+                  />
+                  <p className="absolute bottom-0 left-0 right-0 bg-black/70 text-white text-xs py-1.5 px-2">
+                    Selected: {pendingFiles[i].name} — not saved yet. Click &quot;Save Featured Videos&quot; to upload.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => clearPendingFile(i)}
+                    className="absolute top-2 right-2 bg-white/90 hover:bg-white rounded p-1.5 text-gray-700"
+                    title="Remove selected file"
+                  >
+                    <XIcon className="h-4 w-4" />
+                  </button>
+                </div>
+              ) : videos[i].url ? (
+                <div className="rounded-lg overflow-hidden bg-black aspect-video mb-3">
+                  {isEmbedVideoUrl(videos[i].url) ? (
+                    <iframe
+                      src={toYouTubeEmbedUrl(videos[i].url)}
+                      title={videos[i].title || `Video ${i + 1}`}
+                      className="w-full h-full"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    />
+                  ) : (
+                    <video
+                      src={videos[i].url}
+                      className="w-full h-full object-contain"
+                      controls
+                      playsInline
+                      muted
+                    />
+                  )}
+                </div>
+              ) : null}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
+                <input
+                  type="text"
+                  value={videos[i].title}
+                  onChange={(e) => setVideo(i, { title: e.target.value })}
+                  className="input w-full"
+                  placeholder="e.g. Welcome to Saguaro Strikers"
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Video URL (embed link or uploaded file URL)</label>
+                <input
+                  type="text"
+                  value={videos[i].url}
+                  onChange={(e) => setVideo(i, { url: e.target.value })}
+                  className="input w-full"
+                  placeholder="e.g. https://www.youtube.com/embed/... or /uploads/featured-videos/..."
+                  disabled={!!pendingFiles[i]}
+                />
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">Or upload a video file</label>
+                <label className="inline-flex items-center gap-2 btn-outline cursor-pointer">
+                  <Plus className="h-4 w-4" />
+                  {pendingFiles[i] ? 'Change video' : 'Choose video'}
+                  <input
+                    type="file"
+                    accept="video/*"
+                    className="hidden"
+                    onChange={(e) => handleFileSelect(i, e)}
+                  />
+                </label>
+              </div>
+            </>
+          )}
+        </div>
+      ))}
+      {videos.length < 3 && (
+        <button type="button" onClick={addSlot} className="btn-outline flex items-center gap-2">
+          <Plus className="h-4 w-4" />
+          Add video slot
+        </button>
+      )}
+      <div className="flex gap-2 pt-4 border-t border-gray-200">
+        <button
+          onClick={handleSave}
+          disabled={saving}
+          className="btn-primary flex items-center gap-2 disabled:opacity-50"
+        >
+          <Save className="h-4 w-4" />
+          {saving ? 'Saving & uploading...' : 'Save Featured Videos'}
+        </button>
+        <button onClick={onCancel} className="btn-outline" disabled={saving}>Cancel</button>
+      </div>
+      {Object.keys(pendingFiles).length > 0 && (
+        <p className="text-sm text-amber-700 mt-2">
+          You have {Object.keys(pendingFiles).length} video(s) selected but not yet saved. Click &quot;Save Featured Videos&quot; to upload them to the server.
+        </p>
+      )}
+    </div>
+  );
+}
+
+function FeaturedVideosPreview({ content }: { content: string }) {
+  const videos = (() => {
+    try {
+      const parsed = JSON.parse(content);
+      return Array.isArray(parsed.videos) ? parsed.videos : [];
+    } catch {
+      return [];
+    }
+  })();
+
+  return (
+    <div className="bg-gray-50 p-6 rounded-lg space-y-4">
+      <h3 className="text-xs font-semibold text-gray-500 uppercase mb-2">Featured Videos ({videos.length})</h3>
+      {videos.length === 0 ? (
+        <p className="text-sm text-gray-500 italic">No videos configured.</p>
+      ) : (
+        <ul className="space-y-2">
+          {videos.map((v: { title?: string; url?: string }, i: number) => (
+            <li key={i} className="text-sm">
+              <span className="font-medium">{v.title || 'Untitled'}</span>
+              {v.url && <span className="text-gray-500 ml-2 truncate block">{v.url}</span>}
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );

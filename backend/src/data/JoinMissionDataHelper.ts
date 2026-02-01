@@ -57,6 +57,14 @@ export class JoinMissionDataHelper {
     return applications.find(app => app.studentEmail.toLowerCase() === email.toLowerCase()) || null;
   }
 
+  async getApprovedApplicationsByStudentEmail(email: string): Promise<JoinMissionApplication[]> {
+    const applications = this.readData();
+    const lower = email.toLowerCase();
+    return applications.filter(
+      app => app.studentEmail.toLowerCase() === lower && app.status === 'approved'
+    );
+  }
+
   async createApplication(data: CreateJoinMissionData): Promise<JoinMissionApplication> {
     const applications = this.readData();
     const now = new Date().toISOString();

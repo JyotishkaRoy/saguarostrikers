@@ -55,57 +55,40 @@ export default function HomePage() {
 
   const fetchStats = async () => {
     try {
-      // Fetch all missions (published only for public view)
-      const missionsResponse = await api.get<Mission[]>('/public/missions');
-      const missions = missionsResponse.success && missionsResponse.data ? missionsResponse.data : [];
-      
-      // Fetch upcoming calendar events
-      const eventsResponse = await api.get<any[]>('/public/calendar-events/upcoming?limit=100');
-      const events = eventsResponse.success && Array.isArray(eventsResponse.data) ? eventsResponse.data : [];
-      
-      // Count completed missions
-      const completed = missions.filter(c => c.status === 'completed').length;
-      
-      // For active missions, count published missions
-      const activeMissions = missions.filter(c => c.status === 'published' || c.status === 'draft').length;
-      
-      // Use a reasonable team member estimate based on our data
-      // In production, you'd create a public stats endpoint
-      const teamMembersCount = 30; // Estimate based on multiple teams
-      
-      setStats({
-        totalMissions: activeMissions,
-        totalTeamMembers: teamMembersCount,
-        totalEvents: events.length,
-        completedMissions: completed
-      });
+      const response = await api.get<{
+        activeMissions: number;
+        teamMembers: number;
+        upcomingEvents: number;
+        completedMissions: number;
+      }>('/public/stats');
+      if (response.success && response.data) {
+        setStats({
+          totalMissions: response.data.activeMissions,
+          totalTeamMembers: response.data.teamMembers,
+          totalEvents: response.data.upcomingEvents,
+          completedMissions: response.data.completedMissions
+        });
+      }
     } catch (error) {
       console.error('Failed to fetch stats:', error);
-      // Set default values on error
       setStats({
-        totalMissions: 4,
-        totalTeamMembers: 30,
-        totalEvents: 10,
+        totalMissions: 0,
+        totalTeamMembers: 0,
+        totalEvents: 0,
         completedMissions: 0
       });
     }
   };
 
-  // Sample videos - In production, these would come from the API
-  const sampleVideos = [
-    {
-      id: '1',
-      title: 'Welcome to Saguaro Strikers',
-      url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-      thumbnail: '/images/video-thumb-1.jpg',
-    },
-    {
-      id: '2',
-      title: 'Our Mission',
-      url: 'https://www.youtube.com/embed/dQw4w9WgXcQ',
-      thumbnail: '/images/video-thumb-2.jpg',
-    },
-  ];
+  // Featured videos from settings (max 3), with fallback shape for VideoCarousel
+  const featuredVideos = (content?.featuredVideos ?? [])
+    .slice(0, 3)
+    .map((v, i) => ({
+      id: v.id ?? String(i + 1),
+      title: v.title || 'Video',
+      url: v.url,
+      thumbnail: v.thumbnail
+    }));
 
   return (
     <div className="min-h-screen">
@@ -186,16 +169,10 @@ export default function HomePage() {
             )}
           </div>
 
-          {/* Column 2: 40% - Video Carousel */}
+          {/* Column 2: 40% - Quick Stats */}
           <div className="lg:col-span-2">
             <div className="sticky top-24">
-              <h3 className="text-2xl font-bold text-gray-900 mb-6">
-                Featured Videos
-              </h3>
-              <VideoCarousel videos={sampleVideos} />
-              
-              {/* Quick Stats */}
-              <div className="mt-8 grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 gap-4">
                 <div className="bg-primary-50 rounded-lg p-4 text-center">
                   <div className="text-3xl font-bold text-primary-600">{stats.totalMissions}</div>
                   <div className="text-sm text-gray-600 mt-1">Active Missions</div>
@@ -215,6 +192,12 @@ export default function HomePage() {
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Featured Videos - below Welcome / About */}
+        <div className="mt-12">
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">Featured Videos</h3>
+          <VideoCarousel videos={featuredVideos} />
         </div>
       </div>
 

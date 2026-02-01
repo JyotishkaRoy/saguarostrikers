@@ -39,8 +39,8 @@ class DiscussionService {
   // Add a reply to a thread
   async addReply(threadId, replyData, user) {
     // Validate
-    if (!replyData.content || replyData.content.trim().length < 5) {
-      throw new Error('Reply must be at least 5 characters');
+    if (!replyData.content || replyData.content.trim().length < 1) {
+      throw new Error('Reply must be at least 1 character');
     }
 
     if (!user || !user.userId) {

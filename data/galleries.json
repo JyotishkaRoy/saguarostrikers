@@ -175,5 +175,70 @@
     "uploadedBy": "ZYTGOKOUExDF",
     "uploadedAt": "2026-01-21T18:09:26.897Z",
     "status": "published"
+  },
+  {
+    "galleryId": "bsZsK6NLnlWu",
+    "imageUrl": "mission-galleries/Test-d11ccJtQ6zjj/BAn495yyZfID.MP4",
+    "title": "Video",
+    "description": "",
+    "missionId": "d11ccJtQ6zjj",
+    "isPublic": true,
+    "viewCount": 0,
+    "tags": [],
+    "uploadedBy": "ZYTGOKOUExDF",
+    "uploadedAt": "2026-02-01T18:56:26.714Z",
+    "status": "published"
+  },
+  {
+    "galleryId": "PGX6A1C3TPKT",
+    "imageUrl": "mission-galleries/Test-d11ccJtQ6zjj/MfeJYHqPEYzn.jpg",
+    "title": "Images",
+    "description": "",
+    "missionId": "d11ccJtQ6zjj",
+    "isPublic": true,
+    "viewCount": 0,
+    "tags": [],
+    "uploadedBy": "ZYTGOKOUExDF",
+    "uploadedAt": "2026-02-01T18:56:44.017Z",
+    "status": "published"
+  },
+  {
+    "galleryId": "eaBhCOPjTfLj",
+    "imageUrl": "mission-galleries/Test-d11ccJtQ6zjj/jKiVXFb2cb6Q.jpg",
+    "title": "Images",
+    "description": "",
+    "missionId": "d11ccJtQ6zjj",
+    "isPublic": true,
+    "viewCount": 0,
+    "tags": [],
+    "uploadedBy": "ZYTGOKOUExDF",
+    "uploadedAt": "2026-02-01T18:56:44.038Z",
+    "status": "published"
+  },
+  {
+    "galleryId": "n4eARGiO1Jc4",
+    "imageUrl": "mission-galleries/Test-d11ccJtQ6zjj/UMWTZEzCMfiI.jpg",
+    "title": "Images",
+    "description": "",
+    "missionId": "d11ccJtQ6zjj",
+    "isPublic": true,
+    "viewCount": 0,
+    "tags": [],
+    "uploadedBy": "ZYTGOKOUExDF",
+    "uploadedAt": "2026-02-01T18:56:44.051Z",
+    "status": "published"
+  },
+  {
+    "galleryId": "yN09LQwe6Mtm",
+    "imageUrl": "mission-galleries/Test-d11ccJtQ6zjj/KHVhdIOWNUbL.jpg",
+    "title": "Images",
+    "description": "",
+    "missionId": "d11ccJtQ6zjj",
+    "isPublic": true,
+    "viewCount": 0,
+    "tags": [],
+    "uploadedBy": "ZYTGOKOUExDF",
+    "uploadedAt": "2026-02-01T18:56:44.061Z",
+    "status": "published"
   }
 ]

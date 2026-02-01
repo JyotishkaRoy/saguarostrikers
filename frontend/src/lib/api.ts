@@ -71,6 +71,12 @@ class ApiClient {
     return response.data;
   }
 
+  // DELETE with request body (e.g. for featured-video file deletion)
+  async deleteWithBody<T>(url: string, data?: any): Promise<ApiResponse<T>> {
+    const response = await this.client.delete<ApiResponse<T>>(url, { data });
+    return response.data;
+  }
+
   // File upload
   async uploadFile<T>(url: string, file: File, data?: Record<string, any>): Promise<ApiResponse<T>> {
     const formData = new FormData();

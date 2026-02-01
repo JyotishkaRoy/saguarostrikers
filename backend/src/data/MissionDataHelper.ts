@@ -61,12 +61,19 @@ export class MissionDataHelper extends BaseDataHelper<Mission> {
   }
 
   /**
-   * Get upcoming missions (published and in future)
+   * Get upcoming missions: published with future start date, or in-progress (current).
+   * Sorted by startDate ascending so soonest first.
    */
   public getUpcomingMissions(): Mission[] {
     const now = new Date();
-    return this.findWhere(
-      comp => comp.status === 'published' && new Date(comp.startDate) > now
+    now.setHours(0, 0, 0, 0);
+    const missions = this.findWhere(
+      comp =>
+        (comp.status === 'published' && new Date(comp.startDate) >= now) ||
+        comp.status === 'in-progress'
+    );
+    return missions.sort(
+      (a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime()
     );
   }
 

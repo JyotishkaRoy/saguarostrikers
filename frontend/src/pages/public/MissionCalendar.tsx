@@ -1,25 +1,31 @@
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, X, Calendar as CalendarIcon } from 'lucide-react';
 import { api } from '@/lib/api';
 import { cn } from '@/lib/utils';
-
-interface CalendarEvent {
-  eventId: string;
-  title: string;
-  description: string;
-  date: string;
-  type: 'launch' | 'meeting' | 'mission' | 'deadline' | 'workshop' | 'other';
-  status: 'upcoming' | 'ongoing' | 'completed';
-}
+import type { CalendarEvent, Mission } from '@/types';
 
 export default function MissionCalendar() {
   const [currentDate, setCurrentDate] = useState(new Date(2026, 1, 1)); // Start from Feb 2026 (where events are)
   const [events, setEvents] = useState<CalendarEvent[]>([]);
+  const [missions, setMissions] = useState<Mission[]>([]);
   const [selectedEvent, setSelectedEvent] = useState<CalendarEvent | null>(null);
 
   useEffect(() => {
     fetchEvents();
   }, [currentDate]);
+
+  useEffect(() => {
+    const fetchMissions = async () => {
+      try {
+        const response = await api.get<Mission[]>('/public/missions');
+        if (response.success && response.data) setMissions(response.data);
+      } catch {
+        // non-blocking
+      }
+    };
+    fetchMissions();
+  }, []);
 
   const fetchEvents = async () => {
     try {
@@ -65,6 +71,9 @@ export default function MissionCalendar() {
     return events.filter(event => event.date === dateStr);
   };
 
+  const getMissionTitle = (missionId: string | undefined) =>
+    missionId ? missions.find(m => m.missionId === missionId)?.title : null;
+
   const previousMonth = () => {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() - 1, 1));
   };
@@ -109,8 +118,9 @@ export default function MissionCalendar() {
           </p>
         </div>
 
-        {/* Calendar */}
-        <div className="max-w-5xl mx-auto">
+        {/* Calendar + Legend */}
+        <div className="flex gap-6 items-start justify-center max-w-6xl mx-auto flex-wrap lg:flex-nowrap">
+          <div className="flex-1 min-w-0 w-full">
           <div className="bg-white rounded-lg shadow-lg overflow-hidden">
             {/* Calendar Header */}
             <div className="bg-primary-600 text-white p-6">
@@ -173,51 +183,60 @@ export default function MissionCalendar() {
                     </div>
                     
                     <div className="space-y-1">
-                      {dayEvents.map(event => (
-                        <button
-                          key={event.eventId}
-                          onClick={() => setSelectedEvent(event)}
-                          className={cn(
-                            'w-full text-left text-xs px-2 py-1 rounded border truncate hover:shadow-sm transition-shadow',
-                            eventTypeColors[event.type]
-                          )}
-                        >
-                          {event.title}
-                        </button>
-                      ))}
+                      {dayEvents.map(event => {
+                        const missionTitle = getMissionTitle(event.missionId);
+                        return (
+                          <button
+                            key={event.eventId}
+                            onClick={() => setSelectedEvent(event)}
+                            className={cn(
+                              'w-full text-left text-xs px-2 py-1 rounded border hover:shadow-sm transition-shadow',
+                              eventTypeColors[event.type]
+                            )}
+                          >
+                            <span className="block truncate">{event.title}</span>
+                            {missionTitle && (
+                              <span className="block truncate text-[10px] opacity-90 mt-0.5">
+                                {missionTitle}
+                              </span>
+                            )}
+                          </button>
+                        );
+                      })}
                     </div>
                   </div>
                 );
               })}
             </div>
           </div>
+          </div>
 
-          {/* Legend */}
-          <div className="mt-6 bg-white rounded-lg shadow-sm p-6">
+          {/* Legend - vertical, right of calendar */}
+          <div className="bg-white rounded-lg shadow-sm p-6 flex-shrink-0 w-full lg:w-auto">
             <h3 className="font-semibold text-gray-900 mb-4">Event Types</h3>
-            <div className="flex flex-wrap gap-4">
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-4 bg-red-100 border border-red-300 rounded"></div>
+            <div className="flex flex-col gap-3">
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 flex-shrink-0 bg-red-100 border border-red-300 rounded"></div>
                 <span className="text-sm text-gray-700">Launch</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-4 bg-blue-100 border border-blue-300 rounded"></div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 flex-shrink-0 bg-blue-100 border border-blue-300 rounded"></div>
                 <span className="text-sm text-gray-700">Meeting</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-4 bg-purple-100 border border-purple-300 rounded"></div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 flex-shrink-0 bg-purple-100 border border-purple-300 rounded"></div>
                 <span className="text-sm text-gray-700">Mission</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-4 bg-orange-100 border border-orange-300 rounded"></div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 flex-shrink-0 bg-orange-100 border border-orange-300 rounded"></div>
                 <span className="text-sm text-gray-700">Deadline</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-4 bg-green-100 border border-green-300 rounded"></div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 flex-shrink-0 bg-green-100 border border-green-300 rounded"></div>
                 <span className="text-sm text-gray-700">Workshop</span>
               </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-4 h-4 bg-gray-100 border border-gray-300 rounded"></div>
+              <div className="flex items-center gap-2">
+                <div className="w-4 h-4 flex-shrink-0 bg-gray-100 border border-gray-300 rounded"></div>
                 <span className="text-sm text-gray-700">Other</span>
               </div>
             </div>
@@ -250,6 +269,18 @@ export default function MissionCalendar() {
                   {selectedEvent.type.charAt(0).toUpperCase() + selectedEvent.type.slice(1)}
                 </span>
               </div>
+
+              {selectedEvent.missionId && getMissionTitle(selectedEvent.missionId) && (
+                <div className="mb-4">
+                  <p className="text-sm text-gray-600 mb-1">Mission</p>
+                  <Link
+                    to={`/missions/${missions.find(m => m.missionId === selectedEvent.missionId)?.slug}`}
+                    className="text-primary-600 font-medium hover:underline"
+                  >
+                    {getMissionTitle(selectedEvent.missionId)}
+                  </Link>
+                </div>
+              )}
               
               <div className="mb-4">
                 <p className="text-sm text-gray-600 mb-1">Date</p>

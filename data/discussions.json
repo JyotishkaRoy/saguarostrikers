@@ -1,1 +1,28 @@
-[]
+[
+  {
+    "threadId": "HV5evxJgSJUu",
+    "title": "Technical Help",
+    "description": "Technical Help",
+    "category": "technical",
+    "status": "open",
+    "missionId": "d11ccJtQ6zjj",
+    "createdBy": "ZYTGOKOUExDF",
+    "replies": [
+      {
+        "replyId": "Ih5pJm3sm5JC",
+        "content": "Hello Sir!",
+        "authorId": "ZYTGOKOUExDF",
+        "authorName": "Sarah Johnson",
+        "authorEmail": "admin@rocketry.org",
+        "authorRole": "admin",
+        "createdAt": "2026-02-01T19:25:40.351Z"
+      }
+    ],
+    "replyCount": 1,
+    "lastReplyAt": "2026-02-01T19:25:40.351Z",
+    "isPinned": false,
+    "isLocked": false,
+    "createdAt": "2026-02-01T19:25:21.387Z",
+    "updatedAt": "2026-02-01T19:25:40.351Z"
+  }
+]

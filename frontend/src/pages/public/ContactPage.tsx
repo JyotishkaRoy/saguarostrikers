@@ -45,7 +45,7 @@ export default function ContactPage() {
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
             <MessageCircle className="h-10 w-10 text-primary-600" />
-            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Contact Us</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Reach Mission Control</h1>
           </div>
           <p className="text-lg text-gray-600">
             Have questions about our missions or want to get involved? We'd love to hear from you!

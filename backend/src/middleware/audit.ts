@@ -121,3 +121,40 @@ export const logAudit = async (
     console.error('Error logging audit:', error);
   }
 };
+
+const MUTATING_METHODS = ['POST', 'PUT', 'PATCH', 'DELETE'];
+
+/**
+ * Middleware that logs admin POST/PUT/PATCH/DELETE requests on success (2xx).
+ * GET requests are never logged. Use once with router.use('/admin', ...).
+ */
+export const adminActivityLogger = (req: AuthRequest, res: Response, next: NextFunction): void => {
+  const originalSend = res.send;
+  res.send = function (data: any): Response {
+    const method = (req.method || '').toUpperCase();
+    const isSuccess = res.statusCode >= 200 && res.statusCode < 300;
+    const shouldLog = isSuccess && MUTATING_METHODS.includes(method);
+    if (shouldLog) {
+      try {
+        const requestInfo = getRequestInfo(req);
+        const userId = req.user?.userId || 'unknown';
+        const action = `${req.method} ${req.originalUrl || req.path}`;
+        const entity = extractEntityFromPath(req.originalUrl || req.path);
+        const entityId = (req.params && (req.params.id || req.params.eventId || req.params.contentId || req.params.messageId || req.params.applicationId || req.params.fileId || req.params.galleryId || req.params.artifactId)) || '—';
+        auditDataHelper.createLog({
+          userId,
+          action,
+          entity,
+          entityId: String(entityId),
+          changes: sanitizeBody(req.body),
+          ipAddress: requestInfo.ipAddress,
+          userAgent: requestInfo.userAgent
+        });
+      } catch (error) {
+        console.error('Error logging admin activity:', error);
+      }
+    }
+    return originalSend.call(this, data);
+  };
+  next();
+};

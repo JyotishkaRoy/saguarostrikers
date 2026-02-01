@@ -1,6 +1,9 @@
 import { Request, Response } from 'express';
+import fs from 'fs';
+import path from 'path';
 import { SiteContentService } from '../../services/SiteContentService.js';
 import { ApiError, createError } from '../../middleware/errorHandler.js';
+import { UPLOAD_DIRS } from '../../middleware/upload.js';
 
 interface SiteContentSection {
   contentId: string;
@@ -24,7 +27,8 @@ export class SiteContentAdminController {
   async getAllContent(_req: Request, res: Response): Promise<void> {
     try {
       const homepageContent = await this.siteContentService.getHomepageContent();
-      
+      const joinMissionAgreements = await this.siteContentService.getJoinMissionAgreements();
+
       // Serialize hero content as JSON string for rich text editor
       const heroContent = {
         headline: homepageContent.heroHeadline || 'Welcome to Saguaro Strikers Rocketry',
@@ -80,6 +84,38 @@ export class SiteContentAdminController {
           section: 'homepage-vision',
           title: 'Vision',
           content: homepageContent.vision || '<p>Vision content...</p>',
+          isPublished: true,
+          lastModified: new Date().toISOString()
+        },
+        {
+          contentId: 'featured-videos',
+          section: 'featured-videos',
+          title: 'Featured Videos',
+          content: JSON.stringify({ videos: homepageContent.featuredVideos || [] }, null, 2),
+          isPublished: true,
+          lastModified: new Date().toISOString()
+        },
+        {
+          contentId: 'join-mission-agreement-financial',
+          section: 'join-mission-agreement-financial',
+          title: 'Financial Obligations Agreement',
+          content: joinMissionAgreements.agreementFinancial,
+          isPublished: true,
+          lastModified: new Date().toISOString()
+        },
+        {
+          contentId: 'join-mission-agreement-photograph',
+          section: 'join-mission-agreement-photograph',
+          title: 'Photograph & Video Consent',
+          content: joinMissionAgreements.agreementPhotograph,
+          isPublished: true,
+          lastModified: new Date().toISOString()
+        },
+        {
+          contentId: 'join-mission-agreement-liability',
+          section: 'join-mission-agreement-liability',
+          title: 'Liability Release',
+          content: joinMissionAgreements.agreementLiability,
           isPublished: true,
           lastModified: new Date().toISOString()
         }
@@ -138,11 +174,37 @@ export class SiteContentAdminController {
         case 'homepage-vision':
           updates.vision = content;
           break;
+        case 'featured-videos': {
+          try {
+            const { videos } = JSON.parse(content);
+            if (!Array.isArray(videos)) throw new Error('videos must be an array');
+            updates.featuredVideos = videos.slice(0, 3).map((v: any) => ({
+              id: v.id || undefined,
+              title: v.title || '',
+              url: v.url || '',
+              thumbnail: v.thumbnail || undefined
+            }));
+          } catch (parseError) {
+            throw createError.badRequest('Invalid featured videos format. Expected JSON with videos array (max 3 items, each with title and url)');
+          }
+          break;
+        }
+        case 'join-mission-agreement-financial':
+          await this.siteContentService.updateJoinMissionAgreements({ agreementFinancial: String(content ?? '') });
+          break;
+        case 'join-mission-agreement-photograph':
+          await this.siteContentService.updateJoinMissionAgreements({ agreementPhotograph: String(content ?? '') });
+          break;
+        case 'join-mission-agreement-liability':
+          await this.siteContentService.updateJoinMissionAgreements({ agreementLiability: String(content ?? '') });
+          break;
         default:
           throw createError.badRequest('Invalid content section');
       }
 
-      await this.siteContentService.updateHomepageContent(updates);
+      if (Object.keys(updates).length > 0) {
+        await this.siteContentService.updateHomepageContent(updates);
+      }
 
       const updatedSection: SiteContentSection = {
         contentId,
@@ -241,6 +303,74 @@ export class SiteContentAdminController {
   }
 
   /**
+   * Upload featured video file (max 3 on homepage)
+   */
+  async uploadFeaturedVideo(req: Request, res: Response): Promise<void> {
+    try {
+      if (!req.file) {
+        throw createError.badRequest('No video file uploaded');
+      }
+
+      const videoUrl = `/uploads/featured-videos/${req.file.filename}`;
+
+      res.status(200).json({
+        success: true,
+        message: 'Featured video uploaded successfully',
+        data: {
+          url: videoUrl,
+          filename: req.file.filename,
+          originalName: req.file.originalname,
+          size: req.file.size
+        }
+      });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        res.status(error.statusCode).json({ success: false, message: error.message });
+      } else {
+        res.status(500).json({ success: false, message: 'Failed to upload featured video' });
+      }
+    }
+  }
+
+  /**
+   * Delete a featured video file from uploads/featured-videos (when admin removes a video)
+   */
+  async deleteFeaturedVideo(req: Request, res: Response): Promise<void> {
+    try {
+      const { url } = req.body;
+      if (!url || typeof url !== 'string') {
+        throw createError.badRequest('Missing or invalid url in request body');
+      }
+      const trimmed = url.trim();
+      if (!trimmed.startsWith('/uploads/featured-videos/')) {
+        throw createError.badRequest('URL must be a featured-videos upload path');
+      }
+      const filename = path.basename(trimmed);
+      if (!filename || filename === '.' || filename === '..' || filename.includes('/') || filename.includes('\\')) {
+        throw createError.badRequest('Invalid file path');
+      }
+      const filePath = path.resolve(UPLOAD_DIRS.featuredVideos, filename);
+      const dirResolved = path.resolve(UPLOAD_DIRS.featuredVideos);
+      if (!filePath.startsWith(dirResolved + path.sep) && filePath !== dirResolved) {
+        throw createError.badRequest('Invalid file path');
+      }
+      if (fs.existsSync(filePath)) {
+        fs.unlinkSync(filePath);
+      }
+      res.status(200).json({
+        success: true,
+        message: 'Featured video file deleted'
+      });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        res.status(error.statusCode).json({ success: false, message: error.message });
+      } else {
+        res.status(500).json({ success: false, message: 'Failed to delete featured video file' });
+      }
+    }
+  }
+
+  /**
    * Upload mission director image
    */
   async uploadMissionDirectorImage(req: Request, res: Response): Promise<void> {
@@ -267,6 +397,129 @@ export class SiteContentAdminController {
         res.status(error.statusCode).json({ success: false, message: error.message });
       } else {
         res.status(500).json({ success: false, message: 'Failed to upload mission director image' });
+      }
+    }
+  }
+
+  /**
+   * Get Future Explorers page content (admin)
+   */
+  async getFutureExplorers(_req: Request, res: Response): Promise<void> {
+    try {
+      const content = await this.siteContentService.getFutureExplorersContent();
+      res.status(200).json({ success: true, data: content });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Failed to fetch Future Explorers content' });
+    }
+  }
+
+  /**
+   * Update Future Explorers content (row1Col1Html, row2Html) – publishes immediately
+   */
+  async updateFutureExplorers(req: Request, res: Response): Promise<void> {
+    try {
+      const { row1Col1Html, row2Html } = req.body;
+      const updates: { row1Col1Html?: string; row2Html?: string } = {};
+      if (typeof row1Col1Html === 'string') updates.row1Col1Html = row1Col1Html;
+      if (typeof row2Html === 'string') updates.row2Html = row2Html;
+      const content = await this.siteContentService.updateFutureExplorersContent(updates);
+      res.status(200).json({ success: true, message: 'Content updated and published', data: content });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        res.status(error.statusCode).json({ success: false, message: error.message });
+      } else {
+        res.status(500).json({ success: false, message: 'Failed to update Future Explorers content' });
+      }
+    }
+  }
+
+  /**
+   * Upload carousel image for Future Explorers and add to carousel (admin)
+   */
+  async uploadFutureExplorersCarouselImage(req: Request, res: Response): Promise<void> {
+    try {
+      if (!req.file) {
+        throw createError.badRequest('No image file uploaded');
+      }
+      const imageUrl = `/uploads/future-explorers/${req.file.filename}`;
+      const content = await this.siteContentService.addFutureExplorersCarouselImage(imageUrl);
+      res.status(200).json({
+        success: true,
+        message: 'Carousel image uploaded and published',
+        data: content,
+      });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        res.status(error.statusCode).json({ success: false, message: error.message });
+      } else {
+        res.status(500).json({ success: false, message: 'Failed to upload carousel image' });
+      }
+    }
+  }
+
+  /**
+   * Update carousel image (sequence, active) (admin)
+   */
+  async updateFutureExplorersCarouselImage(req: Request, res: Response): Promise<void> {
+    try {
+      const { imageId } = req.params;
+      const { sequence, active } = req.body;
+      const updates: { sequence?: number; active?: boolean } = {};
+      if (typeof sequence === 'number') updates.sequence = sequence;
+      if (typeof active === 'boolean') updates.active = active;
+      const content = await this.siteContentService.updateFutureExplorersCarouselImage(imageId, updates);
+      if (!content) {
+        res.status(404).json({ success: false, message: 'Carousel image not found' });
+        return;
+      }
+      res.status(200).json({ success: true, message: 'Carousel image updated', data: content });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        res.status(error.statusCode).json({ success: false, message: error.message });
+      } else {
+        res.status(500).json({ success: false, message: 'Failed to update carousel image' });
+      }
+    }
+  }
+
+  /**
+   * Delete carousel image (admin)
+   */
+  async deleteFutureExplorersCarouselImage(req: Request, res: Response): Promise<void> {
+    try {
+      const { imageId } = req.params;
+      const content = await this.siteContentService.removeFutureExplorersCarouselImage(imageId);
+      res.status(200).json({ success: true, message: 'Carousel image removed', data: content });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        res.status(error.statusCode).json({ success: false, message: error.message });
+      } else {
+        res.status(500).json({ success: false, message: 'Failed to delete carousel image' });
+      }
+    }
+  }
+
+  /**
+   * Reorder carousel images (admin) – body: { orderedImageIds: string[] }
+   */
+  async setFutureExplorersCarouselOrder(req: Request, res: Response): Promise<void> {
+    try {
+      const { orderedImageIds } = req.body;
+      if (!Array.isArray(orderedImageIds)) {
+        throw createError.badRequest('orderedImageIds must be an array');
+      }
+      const content = await this.siteContentService.getFutureExplorersContent();
+      const byId = new Map((content.carouselImages ?? []).map((img) => [img.imageId, img]));
+      const ordered = orderedImageIds
+        .filter((id: string) => byId.has(id))
+        .map((id: string, idx: number) => ({ ...byId.get(id)!, sequence: idx }));
+      const updated = await this.siteContentService.setFutureExplorersCarouselOrder(ordered);
+      res.status(200).json({ success: true, message: 'Carousel order updated', data: updated });
+    } catch (error) {
+      if (error instanceof ApiError) {
+        res.status(error.statusCode).json({ success: false, message: error.message });
+      } else {
+        res.status(500).json({ success: false, message: 'Failed to reorder carousel' });
       }
     }
   }

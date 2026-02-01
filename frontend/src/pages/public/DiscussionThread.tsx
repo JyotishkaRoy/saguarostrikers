@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, MessageCircle, User, Clock, Send } from 'lucide-react';
+import { ArrowLeft, MessageCircle, User, Clock, Send, Pencil, X, Trash2 } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 import { useAuthStore } from '@/store/authStore';
@@ -8,7 +8,9 @@ import { useAuthStore } from '@/store/authStore';
 interface Reply {
   replyId: string;
   content: string;
-  authorName: string;
+  authorId?: string;
+  authorName?: string;
+  authorEmail?: string;
   authorRole: string;
   createdAt: string;
 }
@@ -31,7 +33,11 @@ export default function DiscussionThread() {
   const [isLoading, setIsLoading] = useState(true);
   const [replyContent, setReplyContent] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const { isAuthenticated } = useAuthStore();
+  const [editingReplyId, setEditingReplyId] = useState<string | null>(null);
+  const [editingContent, setEditingContent] = useState('');
+  const [isSavingEdit, setIsSavingEdit] = useState(false);
+  const [deletingReplyId, setDeletingReplyId] = useState<string | null>(null);
+  const { isAuthenticated, user } = useAuthStore();
 
   useEffect(() => {
     fetchThread();
@@ -54,8 +60,8 @@ export default function DiscussionThread() {
   const handleSubmitReply = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!replyContent.trim() || replyContent.trim().length < 5) {
-      toast.error('Reply must be at least 5 characters');
+    if (!replyContent.trim()) {
+      toast.error('Enter a message');
       return;
     }
 
@@ -143,15 +149,107 @@ export default function DiscussionThread() {
                     <User className="h-5 w-5 text-gray-600" />
                   </div>
                   <div className="flex-1">
-                    <div className="flex items-center gap-2 mb-2">
-                      <span className="font-semibold text-gray-900">{reply.authorName}</span>
+                    <div className="flex items-center gap-2 mb-2 flex-wrap">
+                      <span className="font-semibold text-gray-900">
+                        {reply.authorName && reply.authorEmail && reply.authorName !== reply.authorEmail
+                          ? `${reply.authorName} | ${reply.authorEmail}`
+                          : (reply.authorEmail || reply.authorName || 'User')}
+                      </span>
                       {reply.authorRole === 'admin' && (
                         <span className="badge-primary text-xs">Admin</span>
                       )}
-                      <span className="text-sm text-gray-500">•</span>
-                      <span className="text-sm text-gray-500">{formatDate(reply.createdAt)}</span>
+                      {user?.userId === reply.authorId && !thread.isLocked && (
+                        editingReplyId === reply.replyId ? (
+                          <span className="flex items-center gap-1 ml-auto">
+                            <button
+                              type="button"
+                              onClick={() => { setEditingReplyId(null); setEditingContent(''); }}
+                              className="text-sm text-gray-500 hover:text-gray-700"
+                            >
+                              <X className="h-4 w-4" /> Cancel
+                            </button>
+                          </span>
+                        ) : (
+                          <button
+                            type="button"
+                            onClick={() => { setEditingReplyId(reply.replyId); setEditingContent(reply.content); }}
+                            className="text-sm text-primary-600 hover:text-primary-700 ml-auto"
+                            title="Edit message"
+                          >
+                            <Pencil className="h-4 w-4" />
+                          </button>
+                        )
+                      )}
+                      {user?.role === 'admin' && (
+                        <button
+                          type="button"
+                          onClick={async () => {
+                            if (!id || !window.confirm('Delete this message?')) return;
+                            setDeletingReplyId(reply.replyId);
+                            try {
+                              await api.delete(`/admin/discussions/${id}/replies/${reply.replyId}`);
+                              toast.success('Message deleted');
+                              fetchThread();
+                            } catch (err) {
+                              toast.error(getErrorMessage(err));
+                            } finally {
+                              setDeletingReplyId(null);
+                            }
+                          }}
+                          disabled={deletingReplyId === reply.replyId}
+                          className="text-sm text-red-600 hover:text-red-700 ml-auto"
+                          title="Delete message (admin)"
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </button>
+                      )}
                     </div>
-                    <p className="text-gray-700 whitespace-pre-wrap">{reply.content}</p>
+                    <p className="text-sm text-gray-500 mt-0.5">{formatDate(reply.createdAt)}</p>
+                    {editingReplyId === reply.replyId ? (
+                      <div className="mt-2">
+                        <textarea
+                          value={editingContent}
+                          onChange={(e) => setEditingContent(e.target.value)}
+                          className="input w-full resize-none"
+                          rows={3}
+                          minLength={1}
+                          autoFocus
+                        />
+                        <div className="flex gap-2 mt-2">
+                          <button
+                            type="button"
+                            onClick={async () => {
+                              if (!editingContent.trim()) return;
+                              setIsSavingEdit(true);
+                              try {
+                                await api.put(`/discussions/${id}/replies/${reply.replyId}`, { content: editingContent.trim() });
+                                toast.success('Message updated');
+                                setEditingReplyId(null);
+                                setEditingContent('');
+                                fetchThread();
+                              } catch (err) {
+                                toast.error(getErrorMessage(err));
+                              } finally {
+                                setIsSavingEdit(false);
+                              }
+                            }}
+                            disabled={isSavingEdit || !editingContent.trim()}
+                            className="btn-primary"
+                          >
+                            {isSavingEdit ? 'Saving...' : 'Save'}
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => { setEditingReplyId(null); setEditingContent(''); }}
+                            className="btn-outline"
+                          >
+                            Cancel
+                          </button>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-gray-700 whitespace-pre-wrap">{reply.content}</p>
+                    )}
                   </div>
                 </div>
               </div>
@@ -175,7 +273,7 @@ export default function DiscussionThread() {
                 className="input w-full"
                 rows={4}
                 required
-                minLength={5}
+                minLength={1}
               ></textarea>
               <div className="flex justify-end mt-4">
                 <button

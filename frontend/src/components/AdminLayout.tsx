@@ -16,7 +16,8 @@ import {
   MessageCircle,
   ChevronDown,
   ChevronRight,
-  Package
+  Package,
+  Rocket
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ReactNode, useState } from 'react';
@@ -47,7 +48,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
   const mainNavItems: NavItem[] = [
     { label: 'Dashboard', path: '/admin', icon: <LayoutDashboard className="h-5 w-5" /> },
-    { label: 'Settings', path: '/admin/site-content', icon: <Settings className="h-5 w-5" /> },
+    { label: 'Settings', path: '/admin/settings', icon: <Settings className="h-5 w-5" /> },
     { label: 'Board Members', path: '/admin/board-members', icon: <Shield className="h-5 w-5" /> },
     { label: 'Users', path: '/admin/users', icon: <Users className="h-5 w-5" /> },
     { label: 'Messages', path: '/admin/contact-messages', icon: <MessageSquare className="h-5 w-5" /> },
@@ -60,11 +61,12 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     { label: 'Mission Scientists', path: '/admin/scientists', icon: <UsersRound className="h-4 w-4" /> },
     { label: 'Mission Artifacts', path: '/admin/artifacts', icon: <Package className="h-4 w-4" /> },
     { label: 'Mission Galleries', path: '/admin/gallery', icon: <Image className="h-4 w-4" /> },
+    { label: 'Discussions', path: '/admin/discussions', icon: <MessageCircle className="h-4 w-4" /> },
   ];
 
   const contentNavItems: NavItem[] = [
     { label: 'Calendar Events', path: '/admin/calendar-events', icon: <Calendar className="h-5 w-5" /> },
-    { label: 'Discussions', path: '/admin/discussions', icon: <MessageCircle className="h-5 w-5" /> },
+    { label: 'Future Explorers', path: '/admin/future-explorers', icon: <Rocket className="h-5 w-5" /> },
   ];
 
   return (
@@ -116,7 +118,7 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                   "w-full flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                   (isActive('/admin/missions') || location.pathname.includes('/admin/applications') || 
                    location.pathname.includes('/admin/scientists') || location.pathname.includes('/admin/artifacts') || 
-                   location.pathname.includes('/admin/gallery'))
+                   location.pathname.includes('/admin/gallery') || location.pathname.includes('/admin/discussions'))
                     ? "bg-primary-50 text-primary-700"
                     : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
                 )}

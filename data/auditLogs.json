@@ -9,5 +9,412 @@
     "ipAddress": "::1",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
     "timestamp": "2026-01-09T20:57:12.371Z"
+  },
+  {
+    "logId": "07VDlOMvlt1S",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/missions",
+    "entity": "missions",
+    "entityId": "—",
+    "changes": {
+      "title": "cccufcuyfu",
+      "description": "cgcufvyuguigiug",
+      "startDate": "2026-02-12",
+      "endDate": "2026-02-18",
+      "location": "Irvine, CA",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:15:44.064Z"
+  },
+  {
+    "logId": "QnzdIiuvsfVv",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/missions",
+    "entity": "missions",
+    "entityId": "—",
+    "changes": {
+      "title": "Another Test",
+      "description": "Another Test",
+      "startDate": "2026-02-12",
+      "endDate": "2026-02-18",
+      "location": "Irvine, CA",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:24:01.644Z"
+  },
+  {
+    "logId": "GWgYc4Dz7DEv",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/5yT4LV97536w/status",
+    "entity": "status",
+    "entityId": "5yT4LV97536w",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:47:24.172Z"
+  },
+  {
+    "logId": "hKB00pVD50Tm",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/artifacts",
+    "entity": "artifacts",
+    "entityId": "—",
+    "changes": {
+      "missionId": "d11ccJtQ6zjj",
+      "description": "Video"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:47:47.244Z"
+  },
+  {
+    "logId": "Mlr5iDEetbng",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/artifacts",
+    "entity": "artifacts",
+    "entityId": "—",
+    "changes": {
+      "missionId": "d11ccJtQ6zjj",
+      "description": "Image"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:48:01.935Z"
+  },
+  {
+    "logId": "WrkxWo3um27i",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/artifacts/x1zWSJXPWmEH",
+    "entity": "x1zWSJXPWmEH",
+    "entityId": "x1zWSJXPWmEH",
+    "changes": {
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:49:03.575Z"
+  },
+  {
+    "logId": "WQpxPTEdtYA0",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/artifacts/C7BlRARNULId",
+    "entity": "C7BlRARNULId",
+    "entityId": "C7BlRARNULId",
+    "changes": {
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:49:05.908Z"
+  },
+  {
+    "logId": "hiJTLFJBskCp",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "d11ccJtQ6zjj",
+      "title": "Video",
+      "description": "",
+      "status": "draft"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:56:26.715Z"
+  },
+  {
+    "logId": "4GDMrtYO00YS",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "d11ccJtQ6zjj",
+      "title": "Images",
+      "description": "",
+      "status": "draft"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:56:44.022Z"
+  },
+  {
+    "logId": "Fw9BzhizhbUX",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "d11ccJtQ6zjj",
+      "title": "Images",
+      "description": "",
+      "status": "draft"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:56:44.038Z"
+  },
+  {
+    "logId": "i2wqC6KWSUss",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "d11ccJtQ6zjj",
+      "title": "Images",
+      "description": "",
+      "status": "draft"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:56:44.052Z"
+  },
+  {
+    "logId": "OM7FohRyt8eT",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "d11ccJtQ6zjj",
+      "title": "Images",
+      "description": "",
+      "status": "draft"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:56:44.061Z"
+  },
+  {
+    "logId": "yxWUuinTn0XR",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/gallery/bsZsK6NLnlWu",
+    "entity": "bsZsK6NLnlWu",
+    "entityId": "bsZsK6NLnlWu",
+    "changes": {
+      "status": "published",
+      "isPublic": true
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:56:59.128Z"
+  },
+  {
+    "logId": "5CPpTegtDbHl",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/gallery/PGX6A1C3TPKT",
+    "entity": "PGX6A1C3TPKT",
+    "entityId": "PGX6A1C3TPKT",
+    "changes": {
+      "status": "published",
+      "isPublic": true
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:57:02.058Z"
+  },
+  {
+    "logId": "eLn5cXrzcCsw",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/gallery/eaBhCOPjTfLj",
+    "entity": "eaBhCOPjTfLj",
+    "entityId": "eaBhCOPjTfLj",
+    "changes": {
+      "status": "published",
+      "isPublic": true
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:57:04.059Z"
+  },
+  {
+    "logId": "Ms9ajY8l0Imm",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/gallery/yN09LQwe6Mtm",
+    "entity": "yN09LQwe6Mtm",
+    "entityId": "yN09LQwe6Mtm",
+    "changes": {
+      "status": "published",
+      "isPublic": true
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:57:06.122Z"
+  },
+  {
+    "logId": "qPAEJUFxOZt1",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/gallery/n4eARGiO1Jc4",
+    "entity": "n4eARGiO1Jc4",
+    "entityId": "n4eARGiO1Jc4",
+    "changes": {
+      "status": "published",
+      "isPublic": true
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:57:07.443Z"
+  },
+  {
+    "logId": "pgEIJ0eJ1QTb",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/discussions",
+    "entity": "discussions",
+    "entityId": "—",
+    "changes": {
+      "title": "Test-Discussions",
+      "description": "Test-Discussions",
+      "category": "general",
+      "missionId": "d11ccJtQ6zjj",
+      "isPinned": false,
+      "isLocked": false
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:06:22.935Z"
+  },
+  {
+    "logId": "3uRliBE9ubsX",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/discussions",
+    "entity": "discussions",
+    "entityId": "—",
+    "changes": {
+      "title": "Technical Help",
+      "description": "Technical Help",
+      "category": "technical",
+      "missionId": "d11ccJtQ6zjj",
+      "isPinned": false,
+      "isLocked": false
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:15:58.958Z"
+  },
+  {
+    "logId": "KOaXrTnDY8l2",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/discussions/ziPPQTPQIkxj/replies/ujblDkl8oTSd",
+    "entity": "ujblDkl8oTSd",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:17:54.825Z"
+  },
+  {
+    "logId": "lwpbDhv6tYy1",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/discussions/ziPPQTPQIkxj/replies/4HBOczIYDL6y",
+    "entity": "4HBOczIYDL6y",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:17:57.778Z"
+  },
+  {
+    "logId": "zpMUim3hCejN",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/discussions/SFqHg9hD1OWC/replies/hkOjk0cYIJjP",
+    "entity": "hkOjk0cYIJjP",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:19:24.348Z"
+  },
+  {
+    "logId": "5xHuDHUTNItv",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/discussions/SFqHg9hD1OWC",
+    "entity": "SFqHg9hD1OWC",
+    "entityId": "SFqHg9hD1OWC",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:24:13.703Z"
+  },
+  {
+    "logId": "7u8tPlCFUO3C",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/discussions/ziPPQTPQIkxj",
+    "entity": "ziPPQTPQIkxj",
+    "entityId": "ziPPQTPQIkxj",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:24:16.824Z"
+  },
+  {
+    "logId": "9LZD95wkv4Nv",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/discussions",
+    "entity": "discussions",
+    "entityId": "—",
+    "changes": {
+      "title": "Technical Help",
+      "description": "Technical Help",
+      "category": "technical",
+      "missionId": "d11ccJtQ6zjj",
+      "isPinned": false,
+      "isLocked": false
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:25:21.388Z"
+  },
+  {
+    "logId": "TphmlDTd5g6D",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/site-content/future-explorers/upload-carousel",
+    "entity": "upload-carousel",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T20:20:34.743Z"
+  },
+  {
+    "logId": "FyISN4hjF0S7",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/site-content/future-explorers/upload-carousel",
+    "entity": "upload-carousel",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T20:20:34.758Z"
+  },
+  {
+    "logId": "IhZV66Jx4IiP",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/site-content/future-explorers/upload-carousel",
+    "entity": "upload-carousel",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T20:20:34.785Z"
+  },
+  {
+    "logId": "KSNu598uVLk9",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/site-content/future-explorers/upload-carousel",
+    "entity": "upload-carousel",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T20:20:34.903Z"
   }
 ]

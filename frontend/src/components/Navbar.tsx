@@ -1,5 +1,5 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { Menu, X, User, LogOut, UserCircle, Shield, ChevronDown } from 'lucide-react';
+import { Menu, X, User, LogOut, UserCircle, Shield, ChevronDown, Trophy } from 'lucide-react';
 import { useState } from 'react';
 import { useAuthStore } from '@/store/authStore';
 import { cn } from '@/lib/utils';
@@ -148,7 +148,7 @@ export default function Navbar() {
                 isActive('/contact') && "underline underline-offset-4 decoration-2"
               )}
             >
-              Contact
+              Reach Mission Control
             </Link>
 
             {isAuthenticated ? (
@@ -176,6 +176,13 @@ export default function Navbar() {
                         <span>Admin Portal</span>
                       </Link>
                     )}
+                    <Link
+                      to="/my-missions"
+                      className="flex w-full items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                    >
+                      <Trophy className="h-4 w-4" />
+                      <span>My Missions</span>
+                    </Link>
                     <button
                       onClick={handleLogout}
                       className="flex w-full items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
@@ -260,7 +267,7 @@ export default function Navbar() {
               Future Explorers
             </Link>
             <Link to="/contact" className={cn("block rounded-lg px-3 py-2 text-white hover:bg-primary-700", isActive('/contact') && "bg-primary-700")}>
-              Contact
+              Reach Mission Control
             </Link>
             {isAuthenticated ? (
               <>
@@ -278,6 +285,12 @@ export default function Navbar() {
                     Admin Portal
                   </Link>
                 )}
+                <Link
+                  to="/my-missions"
+                  className="block rounded-lg px-3 py-2 text-white hover:bg-primary-700"
+                >
+                  My Missions
+                </Link>
                 <button
                   onClick={handleLogout}
                   className="block w-full rounded-lg px-3 py-2 text-left text-white hover:bg-primary-700"

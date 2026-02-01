@@ -48,17 +48,48 @@ interface JoinMissionFormData {
   parentSignatureDate: string;
 }
 
+const DEFAULT_AGREEMENT_FINANCIAL = 'I understand and agree to the financial obligations associated with participating in this mission.';
+const DEFAULT_AGREEMENT_PHOTOGRAPH = 'I consent to the use of photographs and videos of the student for promotional and educational purposes related to Saguaro Strikers activities.';
+const DEFAULT_AGREEMENT_LIABILITY = 'I acknowledge and accept the risks associated with rocketry activities and release Saguaro Strikers from liability for any injuries or damages that may occur during mission activities.';
+
+interface JoinMissionAgreements {
+  agreementFinancial: string;
+  agreementPhotograph: string;
+  agreementLiability: string;
+}
+
 export default function JoinMission() {
   const [searchParams] = useSearchParams();
   const preselectedMissionId = searchParams.get('missionId');
   const [missions, setMissions] = useState<Mission[]>([]);
+  const [agreements, setAgreements] = useState<JoinMissionAgreements>({
+    agreementFinancial: DEFAULT_AGREEMENT_FINANCIAL,
+    agreementPhotograph: DEFAULT_AGREEMENT_PHOTOGRAPH,
+    agreementLiability: DEFAULT_AGREEMENT_LIABILITY,
+  });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const { register, handleSubmit, formState: { errors }, setValue } = useForm<JoinMissionFormData>();
 
   useEffect(() => {
     fetchActiveMissions();
+    fetchAgreements();
   }, []);
+
+  const fetchAgreements = async () => {
+    try {
+      const response = await api.get<JoinMissionAgreements>('/public/join-mission-agreements');
+      if (response.success && response.data) {
+        setAgreements({
+          agreementFinancial: response.data.agreementFinancial || DEFAULT_AGREEMENT_FINANCIAL,
+          agreementPhotograph: response.data.agreementPhotograph || DEFAULT_AGREEMENT_PHOTOGRAPH,
+          agreementLiability: response.data.agreementLiability || DEFAULT_AGREEMENT_LIABILITY,
+        });
+      }
+    } catch {
+      // keep defaults
+    }
+  };
 
   useEffect(() => {
     // Pre-select mission if missionId is provided in URL
@@ -563,7 +594,7 @@ export default function JoinMission() {
                   className="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                 />
                 <label className="text-sm text-gray-700">
-                  <span className="text-red-500">*</span> I understand and agree to the financial obligations associated with participating in this mission.
+                  <span className="text-red-500">*</span> {agreements.agreementFinancial}
                 </label>
               </div>
               {errors.agreementFinancial && (
@@ -577,7 +608,7 @@ export default function JoinMission() {
                   className="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                 />
                 <label className="text-sm text-gray-700">
-                  <span className="text-red-500">*</span> I consent to the use of photographs and videos of the student for promotional and educational purposes related to Saguaro Strikers activities.
+                  <span className="text-red-500">*</span> {agreements.agreementPhotograph}
                 </label>
               </div>
               {errors.agreementPhotograph && (
@@ -591,7 +622,7 @@ export default function JoinMission() {
                   className="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
                 />
                 <label className="text-sm text-gray-700">
-                  <span className="text-red-500">*</span> I acknowledge and accept the risks associated with rocketry activities and release Saguaro Strikers from liability for any injuries or damages that may occur during mission activities.
+                  <span className="text-red-500">*</span> {agreements.agreementLiability}
                 </label>
               </div>
               {errors.agreementLiability && (

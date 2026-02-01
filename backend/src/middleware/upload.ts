@@ -17,7 +17,9 @@ export const UPLOAD_DIRS = {
   missionLeaders: path.join(UPLOAD_DIR, 'mission-leaders'),
   missions: path.join(UPLOAD_DIR, 'missions'),
   missionArtifacts: path.join(UPLOAD_DIR, 'mission-artifacts'),
-  missionGalleries: path.join(UPLOAD_DIR, 'mission-galleries')
+  missionGalleries: path.join(UPLOAD_DIR, 'mission-galleries'),
+  featuredVideos: path.join(UPLOAD_DIR, 'featured-videos'),
+  futureExplorers: path.join(UPLOAD_DIR, 'future-explorers')
 } as const;
 
 // Ensure upload directories exist
@@ -36,10 +38,14 @@ const storage = multer.diskStorage({
     
     if (req.path && req.path.includes('upload-banner')) {
       uploadPath = UPLOAD_DIRS.banners;
+    } else if (req.path && req.path.includes('upload-featured-video')) {
+      uploadPath = UPLOAD_DIRS.featuredVideos;
     } else if (req.path && req.path.includes('mission-director')) {
       uploadPath = UPLOAD_DIRS.missionDirector;
     } else if (req.path && req.path.includes('upload-leader-image')) {
       uploadPath = UPLOAD_DIRS.missionLeaders;
+    } else if (req.path && req.path.includes('future-explorers')) {
+      uploadPath = UPLOAD_DIRS.futureExplorers;
     } else if (req.path && req.path.includes('gallery')) {
       uploadPath = UPLOAD_DIRS.galleries;
     } else if (_file.mimetype.startsWith('image/')) {
@@ -101,7 +107,7 @@ const fileFilter = (
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE || '10485760') // 10MB default
+    fileSize: parseInt(process.env.MAX_FILE_SIZE || '104857600') // 100MB default
   },
   fileFilter: fileFilter
 });
@@ -130,7 +136,7 @@ const genericStorage = multer.diskStorage({
 export const genericUpload = multer({
   storage: genericStorage,
   limits: {
-    fileSize: parseInt(process.env.MAX_FILE_SIZE || '10485760') // 10MB default
+    fileSize: parseInt(process.env.MAX_FILE_SIZE || '104857600') // 100MB default
   },
   fileFilter: fileFilter
 });
@@ -168,7 +174,7 @@ export const handleUploadError = (
   if (err instanceof MulterError) {
     if (err.code === 'LIMIT_FILE_SIZE') {
       // Try to get the actual limit from the request or use a default message
-      const maxSize = process.env.MAX_ARTIFACT_SIZE || process.env.MAX_GALLERY_SIZE || process.env.MAX_FILE_SIZE || '10485760';
+      const maxSize = process.env.MAX_ARTIFACT_SIZE || process.env.MAX_GALLERY_SIZE || process.env.MAX_FILE_SIZE || '104857600';
       const sizeInMB = Math.round(parseInt(maxSize) / (1024 * 1024));
       res.status(400).json({
         success: false,

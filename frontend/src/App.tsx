@@ -54,6 +54,7 @@ import AdminApplications from './pages/admin/AdminApplications';
 import AdminArtifacts from './pages/admin/AdminArtifacts';
 import AdminGallery from './pages/admin/AdminGallery';
 import AdminDiscussions from './pages/admin/AdminDiscussions';
+import AdminFutureExplorers from './pages/admin/AdminFutureExplorers';
 
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
@@ -105,7 +106,7 @@ function App() {
           <Route path="/admin/scientists" element={<AdminRoute><AdminScientists /></AdminRoute>} />
           <Route path="/admin/teams" element={<AdminRoute><AdminTeams /></AdminRoute>} />
           <Route path="/admin/notices" element={<AdminRoute><AdminNotices /></AdminRoute>} />
-          <Route path="/admin/site-content" element={<AdminRoute><AdminSiteContent /></AdminRoute>} />
+          <Route path="/admin/settings" element={<AdminRoute><AdminSiteContent /></AdminRoute>} />
           <Route path="/admin/board-members" element={<AdminRoute><AdminBoardMembers /></AdminRoute>} />
           <Route path="/admin/contact-messages" element={<AdminRoute><AdminContactMessages /></AdminRoute>} />
           <Route path="/admin/files" element={<AdminRoute><AdminFiles /></AdminRoute>} />
@@ -115,6 +116,7 @@ function App() {
           <Route path="/admin/artifacts" element={<AdminRoute><AdminArtifacts /></AdminRoute>} />
           <Route path="/admin/gallery" element={<AdminRoute><AdminGallery /></AdminRoute>} />
           <Route path="/admin/discussions" element={<AdminRoute><AdminDiscussions /></AdminRoute>} />
+          <Route path="/admin/future-explorers" element={<AdminRoute><AdminFutureExplorers /></AdminRoute>} />
 
           {/* 404 */}
           <Route path="*" element={<div className="container mx-auto px-4 py-16 text-center"><h1 className="text-4xl font-bold">404 - Page Not Found</h1></div>} />
