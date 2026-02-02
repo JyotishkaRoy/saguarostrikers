@@ -28,9 +28,10 @@ Thumbs.db
 logs/
 *.log
 
-# Uploads (optional - you might want to commit these for demo)
-uploads/*
-!uploads/.gitkeep
+# Uploads: un-ignored so subfolders (banners, future-explorers, etc.) are in git
+# To ignore uploads again, uncomment:
+# uploads/*
+# !uploads/.gitkeep
 
 # Cache
 .cache/
