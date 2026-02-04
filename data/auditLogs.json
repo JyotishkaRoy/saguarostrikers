@@ -416,5 +416,321 @@
     "ipAddress": "::1",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
     "timestamp": "2026-02-01T20:20:34.903Z"
+  },
+  {
+    "logId": "S7gopXpjIsxt",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/contact-messages/XYKhfbV2n5ZH/status",
+    "entity": "status",
+    "entityId": "XYKhfbV2n5ZH",
+    "changes": {
+      "status": "archived"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:31:42.224Z"
+  },
+  {
+    "logId": "i2TcC8WnxZjn",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/contact-messages/XYKhfbV2n5ZH/status",
+    "entity": "status",
+    "entityId": "XYKhfbV2n5ZH",
+    "changes": {
+      "status": "new"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:32:00.115Z"
+  },
+  {
+    "logId": "HEjvZW3g8dhs",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/contact-messages/XYKhfbV2n5ZH/status",
+    "entity": "status",
+    "entityId": "XYKhfbV2n5ZH",
+    "changes": {
+      "status": "archived"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:32:46.411Z"
+  },
+  {
+    "logId": "DVaBDOHIPNRA",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/contact-messages/XYKhfbV2n5ZH/status",
+    "entity": "status",
+    "entityId": "XYKhfbV2n5ZH",
+    "changes": {
+      "status": "archived"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:33:00.329Z"
+  },
+  {
+    "logId": "ezkkB3UWbO3r",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/contact-messages/XYKhfbV2n5ZH/status",
+    "entity": "status",
+    "entityId": "XYKhfbV2n5ZH",
+    "changes": {
+      "status": "new"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:33:06.775Z"
+  },
+  {
+    "logId": "4WijXlKrUfJZ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/outreaches",
+    "entity": "outreaches",
+    "entityId": "—",
+    "changes": {
+      "title": "Robert Moor Workshop",
+      "description": "An outreach event for future explorer",
+      "startDate": "2026-02-26",
+      "endDate": "2026-02-27",
+      "location": "Irvine, CA",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:38:13.953Z"
+  },
+  {
+    "logId": "mp6GTDBPA0ZO",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/upload",
+    "entity": "upload",
+    "entityId": "—",
+    "changes": {
+      "folder": "outreaches",
+      "outreachTitle": "Robert Moor Workshop",
+      "outreachId": "xVBs0bh0RGTf"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:38:13.974Z"
+  },
+  {
+    "logId": "zXlDBaS8KwEg",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/outreaches/xVBs0bh0RGTf",
+    "entity": "xVBs0bh0RGTf",
+    "entityId": "xVBs0bh0RGTf",
+    "changes": {
+      "title": "Robert Moor Workshop",
+      "description": "An outreach event for future explorer",
+      "startDate": "2026-02-26",
+      "endDate": "2026-02-27",
+      "location": "Irvine, CA",
+      "status": "published",
+      "imageUrl": "/uploads/outreaches/robert-moor-workshop-xVBs0bh0RGTf/hero.jpg"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:38:13.977Z"
+  },
+  {
+    "logId": "llLc3oPDFGTl",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/outreaches/xVBs0bh0RGTf/participants",
+    "entity": "participants",
+    "entityId": "—",
+    "changes": {
+      "userId": "ZYTGOKOUExDF"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:53:34.665Z"
+  },
+  {
+    "logId": "nButgJvHncve",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/outreaches/xVBs0bh0RGTf/participants",
+    "entity": "participants",
+    "entityId": "—",
+    "changes": {
+      "userId": "jkvt7EeVpH2H"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:53:43.213Z"
+  },
+  {
+    "logId": "hTIeoKAr9vn5",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/outreach-artifacts",
+    "entity": "outreach-artifacts",
+    "entityId": "—",
+    "changes": {
+      "outreachId": "xVBs0bh0RGTf",
+      "description": "Test"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:54:21.750Z"
+  },
+  {
+    "logId": "0fzzmTuRLKDA",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/outreach-artifacts/pd59RbGGgord",
+    "entity": "pd59RbGGgord",
+    "entityId": "pd59RbGGgord",
+    "changes": {
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:54:26.159Z"
+  },
+  {
+    "logId": "lXerTrTwHhSb",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/outreach-artifacts/pd59RbGGgord",
+    "entity": "pd59RbGGgord",
+    "entityId": "pd59RbGGgord",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:54:49.878Z"
+  },
+  {
+    "logId": "FDrvrNxAFFId",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "outreachId": "xVBs0bh0RGTf",
+      "title": "IMG_4143.JPG",
+      "description": "",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:55:15.712Z"
+  },
+  {
+    "logId": "nh7tiJd4TC5w",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "outreachId": "xVBs0bh0RGTf",
+      "title": "IMG_4144 2.JPG",
+      "description": "",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:55:15.729Z"
+  },
+  {
+    "logId": "iNtgqjkmsVf4",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/outreaches",
+    "entity": "outreaches",
+    "entityId": "—",
+    "changes": {
+      "title": "Davis Magnet Outreach",
+      "description": "Davis Magnet Outreach",
+      "startDate": "2026-02-05",
+      "endDate": "2026-02-05",
+      "location": "Irvine, CA",
+      "status": "draft"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T01:06:46.782Z"
+  },
+  {
+    "logId": "NJODdzMlwnfC",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/upload",
+    "entity": "upload",
+    "entityId": "—",
+    "changes": {
+      "folder": "outreaches",
+      "outreachTitle": "Davis Magnet Outreach",
+      "outreachId": "8b1CoMa5Dw56"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T01:06:46.806Z"
+  },
+  {
+    "logId": "SzmIv9fTKFY0",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/outreaches/8b1CoMa5Dw56",
+    "entity": "8b1CoMa5Dw56",
+    "entityId": "8b1CoMa5Dw56",
+    "changes": {
+      "title": "Davis Magnet Outreach",
+      "description": "Davis Magnet Outreach",
+      "startDate": "2026-02-05",
+      "endDate": "2026-02-05",
+      "location": "Irvine, CA",
+      "status": "draft",
+      "imageUrl": "/uploads/outreaches/davis-magnet-outreach-8b1CoMa5Dw56/hero.MP4"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T01:06:46.810Z"
+  },
+  {
+    "logId": "gBsn0WAlRSP0",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/outreaches/8b1CoMa5Dw56",
+    "entity": "8b1CoMa5Dw56",
+    "entityId": "8b1CoMa5Dw56",
+    "changes": {
+      "title": "Davis Magnet Outreach",
+      "description": "Davis Magnet Outreach",
+      "startDate": "2026-02-05",
+      "endDate": "2026-02-05",
+      "location": "Irvine, CA",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T01:07:04.708Z"
+  },
+  {
+    "logId": "moGPm9IvnK1G",
+    "userId": "qLs3l83RgSkd",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "qLs3l83RgSkd",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T01:16:40.770Z"
+  },
+  {
+    "logId": "oGdAHdfkMiJa",
+    "userId": "qLs3l83RgSkd",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "qLs3l83RgSkd",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T01:21:32.545Z"
+  },
+  {
+    "logId": "Ckqw1pwU86p0",
+    "userId": "ZYTGOKOUExDF",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "ZYTGOKOUExDF",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T01:22:06.429Z"
   }
 ]

@@ -52,11 +52,24 @@ export class GalleryDataHelper {
     return images.filter(image => image.missionId === missionId);
   }
 
+  async getImagesByOutreach(outreachId: string): Promise<GalleryImage[]> {
+    const images = this.readData();
+    return images.filter(image => image.outreachId === outreachId);
+  }
+
   async getPublishedImagesByMission(missionId: string): Promise<GalleryImage[]> {
     const images = this.readData();
     return images.filter(
       image => image.missionId === missionId && 
       (image.status === 'published' || (image.isPublic && !image.status)) // Support legacy images
+    );
+  }
+
+  async getPublishedImagesByOutreach(outreachId: string): Promise<GalleryImage[]> {
+    const images = this.readData();
+    return images.filter(
+      image => image.outreachId === outreachId &&
+      (image.status === 'published' || (image.isPublic && !image.status))
     );
   }
 
@@ -82,6 +95,7 @@ export class GalleryDataHelper {
       title: data.title,
       description: data.description,
       missionId: data.missionId,
+      outreachId: data.outreachId,
       subEventId: data.subEventId,
       isPublic: data.isPublic !== undefined ? data.isPublic : false,
       viewCount: 0,

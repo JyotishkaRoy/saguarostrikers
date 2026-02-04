@@ -22,6 +22,14 @@ export class UserService {
   }
 
   /**
+   * Get active users only (for participant dropdowns, etc.)
+   */
+  async getActiveUsers(): Promise<Omit<User, 'password'>[]> {
+    const users = this.userDataHelper.getActiveUsers();
+    return users.map(({ password: _, ...user }) => user);
+  }
+
+  /**
    * Get user by ID
    */
   async getUserById(userId: string): Promise<Omit<User, 'password'>> {

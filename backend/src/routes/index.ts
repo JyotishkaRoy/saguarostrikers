@@ -14,6 +14,9 @@ import { UploadController } from '../controllers/admin/UploadController.js';
 import { ArtifactAdminController } from '../controllers/admin/ArtifactAdminController.js';
 import { AuditAdminController } from '../controllers/admin/AuditAdminController.js';
 import { DiscussionAdminController } from '../controllers/admin/DiscussionAdminController.js';
+import { OutreachAdminController } from '../controllers/admin/OutreachAdminController.js';
+import { OutreachParticipantAdminController } from '../controllers/admin/OutreachParticipantAdminController.js';
+import { OutreachArtifactAdminController } from '../controllers/admin/OutreachArtifactAdminController.js';
 import { DiscussionController } from '../controllers/DiscussionController.js';
 import { authenticate, requireAdmin, requireUser } from '../middleware/auth.js';
 import { adminActivityLogger } from '../middleware/audit.js';
@@ -36,6 +39,9 @@ const uploadController = new UploadController();
 const artifactAdminController = new ArtifactAdminController();
 const auditAdminController = new AuditAdminController();
 const discussionAdminController = new DiscussionAdminController();
+const outreachAdminController = new OutreachAdminController();
+const outreachParticipantAdminController = new OutreachParticipantAdminController();
+const outreachArtifactAdminController = new OutreachArtifactAdminController();
 const discussionController = new DiscussionController();
 
 const router = Router();
@@ -50,6 +56,8 @@ router.get('/public/stats', publicController.getPublicStats.bind(publicControlle
 router.get('/public/board-members', publicController.getBoardMembers.bind(publicController));
 router.get('/public/join-mission-agreements', publicController.getJoinMissionAgreements.bind(publicController));
 router.get('/public/future-explorers', publicController.getFutureExplorers.bind(publicController));
+router.get('/public/outreaches', publicController.getPublishedOutreaches.bind(publicController));
+router.get('/public/outreach/:slug', publicController.getOutreachDetailBySlug.bind(publicController));
 router.get('/public/notices', publicController.getPublicNotices.bind(publicController));
 router.post('/public/contact', publicController.submitContactMessage.bind(publicController));
 
@@ -149,6 +157,23 @@ router.post('/admin/missions',  missionController.createMission.bind(missionCont
 router.put('/admin/missions/:id',  missionController.updateMission.bind(missionController));
 router.delete('/admin/missions/:id',  missionController.deleteMission.bind(missionController));
 
+// Admin - Outreaches (same CRUD as missions)
+// More specific routes first (with extra path segments) so they don't match :id
+router.get('/admin/outreaches',  outreachAdminController.getAllOutreaches.bind(outreachAdminController));
+router.get('/admin/outreaches/:outreachId/participants',  outreachParticipantAdminController.getParticipants.bind(outreachParticipantAdminController));
+router.post('/admin/outreaches/:outreachId/participants',  outreachParticipantAdminController.addParticipant.bind(outreachParticipantAdminController));
+router.delete('/admin/outreaches/:outreachId/participants/:userId',  outreachParticipantAdminController.removeParticipant.bind(outreachParticipantAdminController));
+router.get('/admin/outreaches/:outreachId/artifacts',  outreachArtifactAdminController.getByOutreach.bind(outreachArtifactAdminController));
+router.get('/admin/outreaches/:id',  outreachAdminController.getOutreachById.bind(outreachAdminController));
+router.post('/admin/outreaches',  outreachAdminController.createOutreach.bind(outreachAdminController));
+router.put('/admin/outreaches/:id',  outreachAdminController.updateOutreach.bind(outreachAdminController));
+router.delete('/admin/outreaches/:id',  outreachAdminController.deleteOutreach.bind(outreachAdminController));
+
+// Admin - Outreach Artifacts (upload)
+router.post('/admin/outreach-artifacts',  genericUpload.single('file'), handleUploadError, outreachArtifactAdminController.createArtifact.bind(outreachArtifactAdminController));
+router.put('/admin/outreach-artifacts/:artifactId',  outreachArtifactAdminController.updateArtifact.bind(outreachArtifactAdminController));
+router.delete('/admin/outreach-artifacts/:artifactId',  outreachArtifactAdminController.deleteArtifact.bind(outreachArtifactAdminController));
+
 // Admin - Calendar Events
 router.get('/admin/calendar-events',  calendarEventAdminController.getAllEvents.bind(calendarEventAdminController));
 router.get('/admin/calendar-events/type/:type',  calendarEventAdminController.getEventsByType.bind(calendarEventAdminController));
@@ -186,6 +211,7 @@ router.get('/admin/gallery/stats',  galleryAdminController.getGalleryStatistics.
 router.get('/admin/gallery/search',  galleryAdminController.searchImages.bind(galleryAdminController));
 router.get('/admin/gallery/tags',  galleryAdminController.getImagesByTags.bind(galleryAdminController));
 router.get('/admin/gallery/mission/:missionId',  galleryAdminController.getImagesByMission.bind(galleryAdminController));
+router.get('/admin/gallery/outreach/:outreachId',  galleryAdminController.getImagesByOutreach.bind(galleryAdminController));
 router.get('/admin/gallery/:galleryId',  galleryAdminController.getImageById.bind(galleryAdminController));
 router.post('/admin/gallery',  galleryUpload.single('file'), handleUploadError, galleryAdminController.createGalleryImage.bind(galleryAdminController));
 router.put('/admin/gallery/:galleryId',  galleryAdminController.updateImage.bind(galleryAdminController));
@@ -204,6 +230,7 @@ router.delete('/admin/artifacts/:artifactId',  artifactAdminController.deleteArt
 // Admin - Contact Messages
 router.get('/admin/contact-messages',  contactMessageAdminController.getAllMessages.bind(contactMessageAdminController));
 router.get('/admin/contact-messages/stats',  contactMessageAdminController.getMessageStats.bind(contactMessageAdminController));
+router.get('/admin/outreach-queries',  contactMessageAdminController.getOutreachQueries.bind(contactMessageAdminController));
 router.get('/admin/contact-messages/:messageId',  contactMessageAdminController.getMessageById.bind(contactMessageAdminController));
 router.patch('/admin/contact-messages/:messageId/status',  contactMessageAdminController.updateMessageStatus.bind(contactMessageAdminController));
 router.post('/admin/contact-messages/:messageId/respond',  contactMessageAdminController.respondToMessage.bind(contactMessageAdminController));

@@ -2,16 +2,20 @@ import { Response } from 'express';
 import { AuthRequest } from '../../models/types';
 import { GalleryService } from '../../services/GalleryService.js';
 import { MissionService } from '../../services/MissionService.js';
+import { OutreachService } from '../../services/OutreachService.js';
+import { getOutreachFolderName } from '../../utils/outreachUploadPaths.js';
 import path from 'path';
 import fs from 'fs';
 
 export class GalleryAdminController {
   private galleryService: GalleryService;
   private missionService: MissionService;
+  private outreachService: OutreachService;
 
   constructor() {
     this.galleryService = new GalleryService();
     this.missionService = new MissionService();
+    this.outreachService = new OutreachService();
   }
 
   async getAllImages(_req: AuthRequest, res: Response): Promise<void> {
@@ -43,6 +47,16 @@ export class GalleryAdminController {
     try {
       const { missionId } = req.params;
       const images = await this.galleryService.getImagesByMission(missionId);
+      res.status(200).json({ success: true, data: images });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Failed to fetch images' });
+    }
+  }
+
+  async getImagesByOutreach(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      const { outreachId } = req.params;
+      const images = await this.galleryService.getImagesByOutreach(outreachId);
       res.status(200).json({ success: true, data: images });
     } catch (error) {
       res.status(500).json({ success: false, message: 'Failed to fetch images' });
@@ -254,12 +268,12 @@ export class GalleryAdminController {
         return;
       }
 
-      const { missionId, title, description, status } = req.body;
+      const { missionId, outreachId, title, description, status } = req.body;
 
-      if (!missionId) {
+      if (!missionId && !outreachId) {
         res.status(400).json({
           success: false,
-          message: 'Mission ID is required',
+          message: 'Mission ID or Outreach ID is required',
         });
         return;
       }
@@ -272,46 +286,46 @@ export class GalleryAdminController {
         return;
       }
 
-      // Get mission to construct folder path
-      const mission = await this.missionService.getMissionById(missionId);
-      if (!mission) {
-        res.status(404).json({
-          success: false,
-          message: 'Mission not found',
-        });
-        return;
+      const uploadsBase = path.join(process.cwd(), '..', 'uploads');
+      let galleryDir: string;
+      let relativePath: string;
+      const imageData: { imageUrl: string; title: string; description: string; missionId?: string; outreachId?: string; isPublic: boolean; status: string } = {
+        imageUrl: '',
+        title: title.trim(),
+        description: description || '',
+        isPublic: status === 'published',
+        status: status || 'draft',
+      };
+
+      if (outreachId) {
+        const outreach = await this.outreachService.getOutreachById(outreachId);
+        // Files under uploads/outreach-galleries/outreachname-outreachId/
+        const outreachFolder = getOutreachFolderName(outreach.title, outreach.outreachId);
+        galleryDir = path.join(uploadsBase, 'outreach-galleries', outreachFolder);
+        imageData.outreachId = outreachId;
+      } else {
+        const mission = await this.missionService.getMissionById(missionId);
+        if (!mission) {
+          res.status(404).json({ success: false, message: 'Mission not found' });
+          return;
+        }
+        const missionFolder = `${mission.title}-${mission.missionId}`;
+        galleryDir = path.join(uploadsBase, 'mission-galleries', missionFolder);
+        imageData.missionId = missionId;
       }
 
-      // Move file from temp to mission-specific folder
-      const missionFolder = `${mission.title}-${mission.missionId}`;
-      const uploadsBase = path.join(process.cwd(), '..', 'uploads');
-      const galleryDir = path.join(
-        uploadsBase,
-        'mission-galleries',
-        missionFolder
-      );
-
-      // Create folder if it doesn't exist
       if (!fs.existsSync(galleryDir)) {
         fs.mkdirSync(galleryDir, { recursive: true });
       }
 
-      // Move file from temp to final location
       const tempFilePath = req.file.path;
       const finalFilePath = path.join(galleryDir, req.file.filename);
       fs.renameSync(tempFilePath, finalFilePath);
 
-      // Construct relative file path
-      const relativePath = `mission-galleries/${missionFolder}/${req.file.filename}`;
-
-      const imageData = {
-        imageUrl: relativePath,
-        title: title.trim(),
-        description: description || '',
-        missionId,
-        isPublic: status === 'published',
-        status: status || 'draft',
-      };
+      relativePath = galleryDir.includes('outreach-galleries')
+        ? `outreach-galleries/${path.basename(galleryDir)}/${req.file.filename}`
+        : `mission-galleries/${path.basename(galleryDir)}/${req.file.filename}`;
+      imageData.imageUrl = relativePath;
 
       const image = await this.galleryService.createImage(
         imageData,

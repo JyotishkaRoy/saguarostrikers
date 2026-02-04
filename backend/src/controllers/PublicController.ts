@@ -9,6 +9,9 @@ import { FileManagementService } from '../services/FileManagementService.js';
 import { GalleryService } from '../services/GalleryService.js';
 import { ArtifactService } from '../services/ArtifactService.js';
 import { TeamService } from '../services/TeamService.js';
+import { OutreachService } from '../services/OutreachService.js';
+import { OutreachParticipantService } from '../services/OutreachParticipantService.js';
+import { OutreachArtifactService } from '../services/OutreachArtifactService.js';
 
 export class PublicController {
   private missionService: MissionService;
@@ -21,6 +24,9 @@ export class PublicController {
   private galleryService: GalleryService;
   private artifactService: ArtifactService;
   private teamService: TeamService;
+  private outreachService: OutreachService;
+  private outreachParticipantService: OutreachParticipantService;
+  private outreachArtifactService: OutreachArtifactService;
 
   constructor() {
     this.missionService = new MissionService();
@@ -33,6 +39,9 @@ export class PublicController {
     this.galleryService = new GalleryService();
     this.artifactService = new ArtifactService();
     this.teamService = new TeamService();
+    this.outreachService = new OutreachService();
+    this.outreachParticipantService = new OutreachParticipantService();
+    this.outreachArtifactService = new OutreachArtifactService();
   }
 
   // Get admin dashboard statistics
@@ -214,6 +223,42 @@ export class PublicController {
       res.status(200).json({ success: true, data: content });
     } catch (error) {
       res.status(500).json({ success: false, message: 'Failed to fetch Future Explorers content' });
+    }
+  }
+
+  async getPublishedOutreaches(_req: Request, res: Response): Promise<void> {
+    try {
+      const outreaches = await this.outreachService.getPublishedOutreaches();
+      res.status(200).json({ success: true, data: outreaches });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Failed to fetch outreach events' });
+    }
+  }
+
+  /** Get full outreach detail by slug (published only): outreach, participants, artifacts, gallery. */
+  async getOutreachDetailBySlug(req: Request, res: Response): Promise<void> {
+    try {
+      const { slug } = req.params;
+      const outreach = await this.outreachService.getOutreachBySlug(slug);
+      if (outreach.status !== 'published') {
+        res.status(404).json({ success: false, message: 'Outreach not found' });
+        return;
+      }
+      const [participants, artifacts, gallery] = await Promise.all([
+        this.outreachParticipantService.getPublicParticipantsByOutreachId(outreach.outreachId),
+        this.outreachArtifactService.getPublishedByOutreachId(outreach.outreachId),
+        this.galleryService.getPublishedImagesByOutreach(outreach.outreachId),
+      ]);
+      res.status(200).json({
+        success: true,
+        data: { outreach, participants, artifacts, gallery },
+      });
+    } catch (error: any) {
+      if (error.statusCode === 404) {
+        res.status(404).json({ success: false, message: error.message || 'Outreach not found' });
+        return;
+      }
+      res.status(500).json({ success: false, message: 'Failed to fetch outreach details' });
     }
   }
 

@@ -2,6 +2,7 @@ import { Response } from 'express';
 import { AuthRequest } from '../../models/types';
 import path from 'path';
 import fs from 'fs';
+import { getOutreachFolderName } from '../../utils/outreachUploadPaths.js';
 
 export class UploadController {
   /**
@@ -66,6 +67,35 @@ export class UploadController {
         
         // Generate URL for frontend
         fileUrl = `/uploads/missions/${missionFolderName}/${fileName}`;
+      } else if (folder === 'outreaches') {
+        // Files under uploads/outreaches/outreachname-outreachId/
+        const outreachTitle = req.body.outreachTitle;
+        const outreachId = req.body.outreachId;
+        if (outreachTitle && outreachId) {
+          const outreachFolderName = getOutreachFolderName(outreachTitle, outreachId);
+          targetDir = path.join(uploadsBase, 'outreaches', outreachFolderName);
+          if (!fs.existsSync(targetDir)) {
+            fs.mkdirSync(targetDir, { recursive: true });
+            console.log(`📁 Created outreach folder: ${outreachFolderName}`);
+          }
+          const existingFiles = fs.readdirSync(targetDir);
+          existingFiles.forEach(file => {
+            const filePath = path.join(targetDir, file);
+            fs.unlinkSync(filePath);
+          });
+          const fileExt = path.extname(req.file.originalname);
+          const fileName = `hero${fileExt}`;
+          const targetPath = path.join(targetDir, fileName);
+          fs.renameSync(req.file.path, targetPath);
+          fileUrl = `/uploads/outreaches/${outreachFolderName}/${fileName}`;
+        } else {
+          targetDir = path.join(uploadsBase, folder);
+          if (!fs.existsSync(targetDir)) fs.mkdirSync(targetDir, { recursive: true });
+          const fileName = path.basename(req.file.path);
+          const targetPath = path.join(targetDir, fileName);
+          fs.renameSync(req.file.path, targetPath);
+          fileUrl = `/uploads/${folder}/${fileName}`;
+        }
       } else {
         // Standard upload for other types
         targetDir = path.join(uploadsBase, folder);

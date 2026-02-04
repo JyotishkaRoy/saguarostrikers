@@ -29,6 +29,10 @@ export class ContactDataHelper extends BaseDataHelper<ContactMessage> {
     return this.findWhere(message => message.status === status);
   }
 
+  public getMessagesBySubject(subject: string): ContactMessage[] {
+    return this.findWhere(message => message.subject === subject);
+  }
+
   public getNewMessages(): ContactMessage[] {
     return this.getMessagesByStatus('new');
   }

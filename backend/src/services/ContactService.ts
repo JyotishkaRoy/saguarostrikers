@@ -43,6 +43,13 @@ export class ContactService {
   }
 
   /**
+   * Get messages by subject (e.g. "Outreach Queries")
+   */
+  async getMessagesBySubject(subject: string): Promise<ContactMessage[]> {
+    return this.contactDataHelper.getMessagesBySubject(subject);
+  }
+
+  /**
    * Get message by ID
    */
   async getMessageById(messageId: string): Promise<ContactMessage> {

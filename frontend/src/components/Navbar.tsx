@@ -137,7 +137,7 @@ export default function Navbar() {
                 isActive('/future-explorers') && "underline underline-offset-4 decoration-2"
               )}
             >
-              Future Explorers
+              Outreach Events
             </Link>
             <span className="text-white/50">|</span>
             
@@ -264,7 +264,7 @@ export default function Navbar() {
               Join a Mission?
             </Link>
             <Link to="/future-explorers" className={cn("block rounded-lg px-3 py-2 text-white hover:bg-primary-700", isActive('/future-explorers') && "bg-primary-700")}>
-              Future Explorers
+              Outreach Events
             </Link>
             <Link to="/contact" className={cn("block rounded-lg px-3 py-2 text-white hover:bg-primary-700", isActive('/contact') && "bg-primary-700")}>
               Reach Mission Control

@@ -59,6 +59,35 @@ export interface Mission {
 
 export type MissionStatus = 'draft' | 'published' | 'in-progress' | 'completed' | 'cancelled' | 'archived';
 
+// ============================================
+// Outreach Types (same structure as Mission for admin/outreaches)
+// ============================================
+
+export interface Outreach {
+  outreachId: string;
+  title: string;
+  slug: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+  status: OutreachStatus;
+  imageUrl?: string;
+  createdBy: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type OutreachStatus = 'draft' | 'published' | 'in-progress' | 'completed' | 'cancelled' | 'archived';
+
+export interface OutreachParticipant {
+  outreachParticipantId: string;
+  outreachId: string;
+  userId: string;
+  role?: string;
+  addedAt: string;
+}
+
 export interface SubEvent {
   subEventId: string;
   missionId: string;
@@ -276,6 +305,7 @@ export interface GalleryImage {
   title: string;
   description?: string;
   missionId?: string;
+  outreachId?: string;
   subEventId?: string;
   uploadedBy: string; // userId
   uploadedAt: string;
@@ -334,11 +364,44 @@ export interface UpdateArtifactData {
   status?: ArtifactStatus;
 }
 
+// Outreach Artifacts (same structure as mission artifacts, keyed by outreachId)
+export interface OutreachArtifact {
+  artifactId: string;
+  outreachId: string;
+  description: string;
+  fileName: string;
+  originalFileName: string;
+  filePath: string;
+  fileType: string;
+  fileSize: number;
+  status: ArtifactStatus;
+  uploadedBy: string;
+  createdAt: string;
+  updatedAt: string;
+  publishedAt?: string;
+}
+
+export interface CreateOutreachArtifactData {
+  outreachId: string;
+  description: string;
+  fileName: string;
+  originalFileName: string;
+  filePath: string;
+  fileType: string;
+  fileSize: number;
+}
+
+export interface UpdateOutreachArtifactData {
+  description?: string;
+  status?: ArtifactStatus;
+}
+
 export interface CreateGalleryImageData {
   imageUrl: string;
   title: string;
   description?: string;
   missionId?: string;
+  outreachId?: string;
   subEventId?: string;
   isPublic?: boolean;
   tags?: string[];
@@ -412,6 +475,26 @@ export interface UpdateMissionData {
   endDate?: string;
   location?: string;
   status?: MissionStatus;
+  imageUrl?: string;
+}
+
+export interface CreateOutreachData {
+  title: string;
+  description: string;
+  startDate: string;
+  endDate: string;
+  location: string;
+  status?: OutreachStatus;
+  imageUrl?: string;
+}
+
+export interface UpdateOutreachData {
+  title?: string;
+  description?: string;
+  startDate?: string;
+  endDate?: string;
+  location?: string;
+  status?: OutreachStatus;
   imageUrl?: string;
 }
 

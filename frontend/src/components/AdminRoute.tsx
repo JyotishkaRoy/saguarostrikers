@@ -24,7 +24,7 @@ export default function AdminRoute({ children }: AdminRouteProps) {
   }
 
   if (user?.role !== 'admin') {
-    return <Navigate to="/dashboard" replace />;
+    return <Navigate to="/my-missions" replace />;
   }
 
   return <AdminLayout>{children}</AdminLayout>;

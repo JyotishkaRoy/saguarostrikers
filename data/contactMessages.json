@@ -46,5 +46,14 @@
     "message": "My daughter is interested in joining your rocketry program, but I have some questions about safety protocols and supervision. What safety measures do you have in place? What kind of training do students receive?",
     "status": "new",
     "createdAt": "2026-01-16T11:30:00.000Z"
+  },
+  {
+    "messageId": "XYKhfbV2n5ZH",
+    "name": "Debasis Pramanik",
+    "email": "debasis.nice@gmail.com",
+    "subject": "Outreach Queries",
+    "message": "This is test Outreach query.",
+    "status": "new",
+    "createdAt": "2026-02-04T00:31:17.966Z"
   }
 ]

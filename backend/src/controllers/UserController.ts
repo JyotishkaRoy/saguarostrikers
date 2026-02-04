@@ -10,9 +10,12 @@ export class UserController {
     this.userService = new UserService();
   }
 
-  async getAllUsers(_req: AuthRequest, res: Response): Promise<void> {
+  async getAllUsers(req: AuthRequest, res: Response): Promise<void> {
     try {
-      const users = await this.userService.getAllUsers();
+      const status = req.query.status as string | undefined;
+      const users = status === 'active'
+        ? await this.userService.getActiveUsers()
+        : await this.userService.getAllUsers();
       res.status(200).json({ success: true, data: users });
     } catch (error) {
       res.status(500).json({ success: false, message: 'Failed to fetch users' });

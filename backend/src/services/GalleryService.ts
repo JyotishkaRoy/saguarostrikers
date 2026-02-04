@@ -30,6 +30,14 @@ export class GalleryService {
     return await this.dataHelper.getPublishedImagesByMission(missionId);
   }
 
+  async getImagesByOutreach(outreachId: string): Promise<GalleryImage[]> {
+    return await this.dataHelper.getImagesByOutreach(outreachId);
+  }
+
+  async getPublishedImagesByOutreach(outreachId: string): Promise<GalleryImage[]> {
+    return await this.dataHelper.getPublishedImagesByOutreach(outreachId);
+  }
+
   async getImagesBySubEvent(subEventId: string): Promise<GalleryImage[]> {
     return await this.dataHelper.getImagesBySubEvent(subEventId);
   }

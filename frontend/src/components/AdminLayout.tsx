@@ -35,6 +35,7 @@ interface NavItem {
 export default function AdminLayout({ children }: AdminLayoutProps) {
   const location = useLocation();
   const [missionsExpanded, setMissionsExpanded] = useState(true);
+  const [outreachExpanded, setOutreachExpanded] = useState(true);
 
   const isActive = (path: string) => {
     if (path === '/admin' && location.pathname === '/admin') {
@@ -64,9 +65,12 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
     { label: 'Discussions', path: '/admin/discussions', icon: <MessageCircle className="h-4 w-4" /> },
   ];
 
+  const outreachSubItems: NavItem[] = [
+    { label: 'Applications', path: '/admin/outreach-applications', icon: <FileText className="h-4 w-4" /> },
+  ];
+
   const contentNavItems: NavItem[] = [
     { label: 'Calendar Events', path: '/admin/calendar-events', icon: <Calendar className="h-5 w-5" /> },
-    { label: 'Future Explorers', path: '/admin/future-explorers', icon: <Rocket className="h-5 w-5" /> },
   ];
 
   return (
@@ -150,6 +154,63 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
                     <span>All Missions</span>
                   </Link>
                   {missionSubItems.map((item) => (
+                    <Link
+                      key={item.path}
+                      to={item.path}
+                      className={cn(
+                        "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                        isActive(item.path)
+                          ? "bg-primary-50 text-primary-700"
+                          : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                      )}
+                    >
+                      {item.icon}
+                      <span>{item.label}</span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* Outreach Events with Submenu (same structure as Missions) */}
+            <div>
+              <button
+                onClick={() => setOutreachExpanded(!outreachExpanded)}
+                className={cn(
+                  "w-full flex items-center justify-between gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                  (isActive('/admin/outreaches') || location.pathname.includes('/admin/outreach-applications') ||
+                   location.pathname.includes('/admin/outreach-participants') || location.pathname.includes('/admin/outreach-artifacts') ||
+                   location.pathname.includes('/admin/outreach-galleries') || location.pathname.includes('/admin/future-explorers'))
+                    ? "bg-primary-50 text-primary-700"
+                    : "text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                )}
+              >
+                <div className="flex items-center gap-3">
+                  <Rocket className="h-5 w-5" />
+                  <span>Outreach Events</span>
+                </div>
+                {outreachExpanded ? (
+                  <ChevronDown className="h-4 w-4" />
+                ) : (
+                  <ChevronRight className="h-4 w-4" />
+                )}
+              </button>
+
+              {outreachExpanded && (
+                <div className="ml-6 mt-1 space-y-1">
+                  <Link
+                    to="/admin/outreaches"
+                    className={cn(
+                      "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
+                      isActive('/admin/outreaches')
+                        ? "bg-primary-50 text-primary-700"
+                        : "text-gray-600 hover:bg-gray-100 hover:text-gray-900"
+                    )}
+                  >
+                    <Rocket className="h-4 w-4" />
+                    <span>All Outreaches</span>
+                  </Link>
+                  {outreachSubItems.map((item) => (
                     <Link
                       key={item.path}
                       to={item.path}

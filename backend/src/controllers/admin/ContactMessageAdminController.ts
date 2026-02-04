@@ -11,14 +11,29 @@ export class ContactMessageAdminController {
   }
 
   /**
-   * Get all contact messages
+   * Get all contact messages (optional query: subject=Outreach Queries)
    */
-  async getAllMessages(_req: Request, res: Response): Promise<void> {
+  async getAllMessages(req: Request, res: Response): Promise<void> {
     try {
-      const messages = await this.contactService.getAllMessages();
+      const subject = req.query.subject as string | undefined;
+      const messages = subject
+        ? await this.contactService.getMessagesBySubject(subject)
+        : await this.contactService.getAllMessages();
       res.status(200).json({ success: true, data: messages });
     } catch (error) {
       res.status(500).json({ success: false, message: 'Failed to fetch messages' });
+    }
+  }
+
+  /**
+   * Get outreach queries only (contact messages with subject "Outreach Queries")
+   */
+  async getOutreachQueries(_req: Request, res: Response): Promise<void> {
+    try {
+      const messages = await this.contactService.getMessagesBySubject('Outreach Queries');
+      res.status(200).json({ success: true, data: messages });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Failed to fetch outreach queries' });
     }
   }
 

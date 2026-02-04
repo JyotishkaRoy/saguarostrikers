@@ -1,15 +1,27 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Mail, Phone, MapPin, Send, CheckCircle, MessageCircle } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 
+const OUTREACH_SUBJECT = 'Outreach Queries';
+
 export default function ContactPage() {
-  const [formData, setFormData] = useState({
+  const [searchParams] = useSearchParams();
+  const isOutreachQuery = searchParams.get('subject') === 'outreach';
+
+  const [formData, setFormData] = useState(() => ({
     name: '',
     email: '',
-    subject: '',
+    subject: isOutreachQuery ? OUTREACH_SUBJECT : '',
     message: '',
-  });
+  }));
+
+  useEffect(() => {
+    if (isOutreachQuery && formData.subject !== OUTREACH_SUBJECT) {
+      setFormData((prev) => ({ ...prev, subject: OUTREACH_SUBJECT }));
+    }
+  }, [isOutreachQuery]);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -122,7 +134,9 @@ export default function ContactPage() {
                         value={formData.subject}
                         onChange={handleChange}
                         required
-                        placeholder="What is your message about?"
+                        placeholder={isOutreachQuery ? undefined : 'What is your message about?'}
+                        readOnly={isOutreachQuery}
+                        style={isOutreachQuery ? { cursor: 'not-allowed', backgroundColor: 'var(--tw-gray-100, #f3f4f6)' } : undefined}
                       />
                     </div>
 

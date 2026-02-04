@@ -27,7 +27,7 @@ export default function LoginPage() {
       if (user?.role === 'admin') {
         navigate('/admin');
       } else {
-        navigate('/dashboard');
+        navigate('/my-missions');
       }
     } catch (err: any) {
       const errorMessage = err.response?.data?.message || err.message || 'Login failed. Please try again.';

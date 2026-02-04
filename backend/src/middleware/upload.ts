@@ -16,8 +16,11 @@ export const UPLOAD_DIRS = {
   missionDirector: path.join(UPLOAD_DIR, 'mission-director'),
   missionLeaders: path.join(UPLOAD_DIR, 'mission-leaders'),
   missions: path.join(UPLOAD_DIR, 'missions'),
+  outreaches: path.join(UPLOAD_DIR, 'outreaches'),
   missionArtifacts: path.join(UPLOAD_DIR, 'mission-artifacts'),
   missionGalleries: path.join(UPLOAD_DIR, 'mission-galleries'),
+  outreachArtifacts: path.join(UPLOAD_DIR, 'outreach-artifacts'),
+  outreachGalleries: path.join(UPLOAD_DIR, 'outreach-galleries'),
   featuredVideos: path.join(UPLOAD_DIR, 'featured-videos'),
   futureExplorers: path.join(UPLOAD_DIR, 'future-explorers')
 } as const;

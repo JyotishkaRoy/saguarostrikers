@@ -19,6 +19,7 @@ import MissionStatement from './pages/public/MissionStatement';
 import MissionCalendar from './pages/public/MissionCalendar';
 import JoinMission from './pages/public/JoinMission';
 import FutureExplorers from './pages/public/FutureExplorers';
+import OutreachDetailPage from './pages/public/OutreachDetailPage';
 import MissionArtifacts from './pages/public/MissionArtifacts';
 import MissionScientists from './pages/public/MissionScientists';
 import PublicMissionGallery from './pages/public/MissionGallery';
@@ -55,6 +56,12 @@ import AdminArtifacts from './pages/admin/AdminArtifacts';
 import AdminGallery from './pages/admin/AdminGallery';
 import AdminDiscussions from './pages/admin/AdminDiscussions';
 import AdminFutureExplorers from './pages/admin/AdminFutureExplorers';
+import AdminOutreaches from './pages/admin/AdminOutreaches';
+import AdminOutreachPlaceholder from './pages/admin/AdminOutreachPlaceholder';
+import AdminOutreachApplications from './pages/admin/AdminOutreachApplications';
+import AdminOutreachParticipants from './pages/admin/AdminOutreachParticipants';
+import AdminOutreachArtifacts from './pages/admin/AdminOutreachArtifacts';
+import AdminOutreachGalleries from './pages/admin/AdminOutreachGalleries';
 
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
@@ -77,6 +84,7 @@ function App() {
           <Route path="/mission-calendar" element={<MissionCalendar />} />
           <Route path="/join-mission" element={<JoinMission />} />
           <Route path="/future-explorers" element={<FutureExplorers />} />
+          <Route path="/outreach/:slug" element={<OutreachDetailPage />} />
           <Route path="/mission-artifacts" element={<MissionArtifacts />} />
           <Route path="/discussions" element={<DiscussionBoard />} />
           <Route path="/discussions/:id" element={<DiscussionThread />} />
@@ -116,7 +124,12 @@ function App() {
           <Route path="/admin/artifacts" element={<AdminRoute><AdminArtifacts /></AdminRoute>} />
           <Route path="/admin/gallery" element={<AdminRoute><AdminGallery /></AdminRoute>} />
           <Route path="/admin/discussions" element={<AdminRoute><AdminDiscussions /></AdminRoute>} />
+          <Route path="/admin/outreaches" element={<AdminRoute><AdminOutreaches /></AdminRoute>} />
           <Route path="/admin/future-explorers" element={<AdminRoute><AdminFutureExplorers /></AdminRoute>} />
+          <Route path="/admin/outreach-applications" element={<AdminRoute><AdminOutreachApplications /></AdminRoute>} />
+          <Route path="/admin/outreach-participants" element={<AdminRoute><AdminOutreachParticipants /></AdminRoute>} />
+          <Route path="/admin/outreach-artifacts" element={<AdminRoute><AdminOutreachArtifacts /></AdminRoute>} />
+          <Route path="/admin/outreach-galleries" element={<AdminRoute><AdminOutreachGalleries /></AdminRoute>} />
 
           {/* 404 */}
           <Route path="*" element={<div className="container mx-auto px-4 py-16 text-center"><h1 className="text-4xl font-bold">404 - Page Not Found</h1></div>} />

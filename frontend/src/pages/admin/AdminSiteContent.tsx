@@ -86,7 +86,7 @@ export default function AdminSiteContent() {
     { id: 'about-us', label: 'Homepage' },
     { id: 'mission-director', label: 'Mission Director Statement' },
     { id: 'agreements-consent', label: 'Agreements & Consent' },
-    { id: 'future-explorers', label: "Future Explorer's Program" },
+    { id: 'future-explorers', label: 'Outreach' },
   ];
 
   const sectionsByTab: Record<TabId, { key: string; label: string; type: 'hero' | 'commander' | 'richtext' | 'featured-videos' | 'plain' }[]> = {
