@@ -62,7 +62,7 @@ export interface CalendarEvent {
   date: string;
   startTime?: string;
   endTime?: string;
-  type: 'launch' | 'meeting' | 'mission' | 'deadline' | 'workshop' | 'other';
+  type: 'rocketry-competition' | 'robotics-competition' | 'summer-camp-stem' | 'community-outreach' | 'other';
   status: 'upcoming' | 'ongoing' | 'completed' | 'cancelled';
   missionId?: string;
   location?: string;

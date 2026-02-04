@@ -433,7 +433,7 @@ function HeroEditor({ content, onChange, onSave, onCancel }: HeroEditorProps) {
       formData.append('banner', file);
 
       const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
 
       // Use axios directly to properly handle FormData
       const response = await axios.post(
@@ -783,7 +783,7 @@ function MissionCommanderEditor({ content, onChange, onSave, onCancel }: Mission
       formData.append('missionDirector', file);
 
       const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
 
       const response = await axios.post(
         `${API_URL}/admin/site-content/upload-mission-director`,
@@ -1093,7 +1093,7 @@ function FeaturedVideosEditor({ content, onChange, onSave, onCancel }: FeaturedV
   const handleSave = async () => {
     const indicesToUpload = Object.keys(pendingFiles).map(Number).sort((a, b) => a - b);
     const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
-    const token = localStorage.getItem('token');
+    const token = sessionStorage.getItem('token');
     setSaving(true);
     try {
       let updatedVideos = [...videos];

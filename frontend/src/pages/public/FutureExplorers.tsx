@@ -1,8 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronLeft, ChevronRight, Rocket, Calendar, MapPin } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Rocket, Calendar, MapPin, Search } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+import { formatUtcToLocalDate } from '@/lib/dateUtils';
 import toast from 'react-hot-toast';
+
+type FilterStatus = 'all' | 'upcoming' | 'in-progress' | 'completed';
+const OUTREACHES_PER_PAGE = 6;
 
 interface CarouselImage {
   imageId: string;
@@ -29,11 +33,23 @@ interface PublishedOutreach {
   slug: string;
 }
 
+function getOutreachStatus(startDate: string, endDate: string): FilterStatus {
+  const now = new Date();
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+  if (end < now) return 'completed';
+  if (start <= now && now <= end) return 'in-progress';
+  return 'upcoming';
+}
+
 export default function FutureExplorers() {
   const [content, setContent] = useState<FutureExplorersContent | null>(null);
   const [outreaches, setOutreaches] = useState<PublishedOutreach[]>([]);
   const [loading, setLoading] = useState(true);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [activeFilter, setActiveFilter] = useState<FilterStatus>('all');
+  const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
     const fetchContent = async () => {
@@ -45,7 +61,7 @@ export default function FutureExplorers() {
         ]);
         if (contentRes.success && contentRes.data) setContent(contentRes.data as FutureExplorersContent);
         if (outreachesRes.success && Array.isArray(outreachesRes.data)) {
-          setOutreaches((outreachesRes.data as PublishedOutreach[]).slice(0, 6));
+          setOutreaches((outreachesRes.data as PublishedOutreach[]));
         }
       } catch (e) {
         toast.error(getErrorMessage(e));
@@ -55,6 +71,38 @@ export default function FutureExplorers() {
     };
     fetchContent();
   }, []);
+
+  const filteredOutreaches = (() => {
+    let list = outreaches;
+    if (activeFilter !== 'all') {
+      list = list.filter((o) => getOutreachStatus(o.startDate, o.endDate) === activeFilter);
+    }
+    if (searchTerm.trim()) {
+      const term = searchTerm.toLowerCase();
+      list = list.filter(
+        (o) =>
+          o.title.toLowerCase().includes(term) ||
+          (o.description ?? '').toLowerCase().includes(term) ||
+          (o.location ?? '').toLowerCase().includes(term)
+      );
+    }
+    return [...list].sort((a, b) => new Date(a.startDate).getTime() - new Date(b.startDate).getTime());
+  })();
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [activeFilter, searchTerm]);
+
+  const totalPages = Math.ceil(filteredOutreaches.length / OUTREACHES_PER_PAGE) || 1;
+  const paginatedOutreaches = filteredOutreaches.slice(
+    (currentPage - 1) * OUTREACHES_PER_PAGE,
+    currentPage * OUTREACHES_PER_PAGE
+  );
+
+  const getFilterCount = (filter: FilterStatus) => {
+    if (filter === 'all') return outreaches.length;
+    return outreaches.filter((o) => getOutreachStatus(o.startDate, o.endDate) === filter).length;
+  };
 
   const activeCarouselImages = (content?.carouselImages ?? [])
     .filter((img) => img.active)
@@ -171,48 +219,104 @@ export default function FutureExplorers() {
               </div>
             </div>
 
-            {/* Column 2: Right – Published outreach event cards (max 6) */}
+            {/* Column 2: Right – Search, filters, then outreach event cards */}
             <div className="lg:col-span-3 min-h-[400px] order-2 flex flex-col">
+              {/* Search + Filters (inside the outreach section) */}
+              <div className="mb-4 flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-4">
+                <div className="relative flex-1 min-w-0">
+                  <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-gray-400" />
+                  <input
+                    type="text"
+                    placeholder="Search by name, description, or location..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className="input pl-10 w-full"
+                  />
+                </div>
+                <div className="flex flex-wrap gap-2 flex-shrink-0">
+                  {(['all', 'upcoming', 'in-progress', 'completed'] as const).map((filter) => (
+                    <button
+                      key={filter}
+                      onClick={() => setActiveFilter(filter)}
+                      className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 text-left ${
+                        activeFilter === filter
+                          ? 'bg-primary-600 text-white shadow-lg'
+                          : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-primary-300 hover:bg-primary-50'
+                      }`}
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <span>
+                          {filter === 'all'
+                            ? 'All'
+                            : filter === 'upcoming'
+                              ? 'Upcoming'
+                              : filter === 'in-progress'
+                                ? 'In Progress'
+                                : 'Completed'}
+                        </span>
+                        <span
+                          className={`px-2 py-0.5 rounded-full text-xs font-semibold ${
+                            activeFilter === filter ? 'bg-white/20 text-white' : 'bg-gray-100 text-gray-600'
+                          }`}
+                        >
+                          {getFilterCount(filter)}
+                        </span>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {outreaches.length === 0 ? (
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 flex items-center justify-center min-h-[400px] text-gray-500">
                   No upcoming outreach events at the moment.
                 </div>
+              ) : filteredOutreaches.length === 0 ? (
+                <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-8 flex flex-col items-center justify-center min-h-[300px] text-center">
+                  <p className="text-gray-700 font-medium">
+                    {searchTerm ? 'No outreach events match your search.' : 'No outreach events in this category.'}
+                  </p>
+                  <p className="text-gray-500 text-sm mt-1">
+                    {searchTerm ? 'Try different keywords.' : 'Try selecting "All".'}
+                  </p>
+                </div>
               ) : (
+                <>
                 <div
-                  className="grid gap-3 h-full min-h-[400px] flex-1"
+                  className="grid gap-3 min-h-[400px] flex-1"
                   style={{
                     gridTemplateColumns:
-                      outreaches.length === 1
+                      paginatedOutreaches.length === 1
                         ? '1fr'
-                        : outreaches.length === 2
+                        : paginatedOutreaches.length === 2
                           ? '1fr'
-                          : outreaches.length === 3
+                          : paginatedOutreaches.length === 3
                             ? '1fr'
-                            : outreaches.length === 4
+                            : paginatedOutreaches.length === 4
                               ? '1fr 1fr'
-                              : outreaches.length === 5
+                              : paginatedOutreaches.length === 5
                                 ? '1fr 1fr'
                                 : '1fr 1fr 1fr',
                     gridTemplateRows:
-                      outreaches.length === 1
+                      paginatedOutreaches.length === 1
                         ? '1fr'
-                        : outreaches.length === 2
+                        : paginatedOutreaches.length === 2
                           ? '1fr 1fr'
-                          : outreaches.length === 3
+                          : paginatedOutreaches.length === 3
                             ? '1fr 1fr 1fr'
-                            : outreaches.length === 4
+                            : paginatedOutreaches.length === 4
                               ? '1fr 1fr'
-                              : outreaches.length === 5
+                              : paginatedOutreaches.length === 5
                                 ? '1fr 1fr 1fr'
                                 : '1fr 1fr',
                   }}
                 >
-                  {outreaches.map((outreach, index) => (
+                  {paginatedOutreaches.map((outreach, index) => (
                     <div
                       key={outreach.outreachId}
                       className="relative rounded-lg shadow-sm border border-gray-200 overflow-hidden flex flex-col min-h-0 bg-gray-200"
                       style={
-                        outreaches.length === 5 && index === 4
+                        paginatedOutreaches.length === 5 && index === 4
                           ? { gridColumn: '1 / -1' }
                           : undefined
                       }
@@ -250,9 +354,9 @@ export default function FutureExplorers() {
                           <div className="flex items-center gap-1.5">
                             <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
                             <span>
-                              {new Date(outreach.startDate).toLocaleDateString()}
+                              {formatUtcToLocalDate(outreach.startDate)}
                               {outreach.endDate && outreach.endDate !== outreach.startDate
-                                ? ` – ${new Date(outreach.endDate).toLocaleDateString()}`
+                                ? ` – ${formatUtcToLocalDate(outreach.endDate)}`
                                 : ''}
                             </span>
                           </div>
@@ -273,6 +377,32 @@ export default function FutureExplorers() {
                     </div>
                   ))}
                 </div>
+
+                {/* Pagination */}
+                {totalPages > 1 && (
+                  <div className="flex items-center justify-center gap-2 mt-4">
+                    <button
+                      onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+                      disabled={currentPage === 1}
+                      className="p-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      aria-label="Previous page"
+                    >
+                      <ChevronLeft className="h-5 w-5" />
+                    </button>
+                    <span className="px-4 py-2 text-sm font-medium text-gray-700">
+                      Page {currentPage} of {totalPages}
+                    </span>
+                    <button
+                      onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+                      disabled={currentPage === totalPages}
+                      className="p-2 rounded-lg border border-gray-300 text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                      aria-label="Next page"
+                    >
+                      <ChevronRight className="h-5 w-5" />
+                    </button>
+                  </div>
+                )}
+                </>
               )}
             </div>
           </div>

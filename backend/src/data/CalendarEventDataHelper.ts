@@ -76,6 +76,21 @@ export class CalendarEventDataHelper {
     return limit ? upcomingEvents.slice(0, limit) : upcomingEvents;
   }
 
+  /** Upcoming + ongoing events, optionally filtered by type. For mission/outreach association dropdowns. */
+  async getUpcomingAndOngoingByTypes(types: string[]): Promise<CalendarEvent[]> {
+    const events = this.readData();
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    return events
+      .filter(
+        (event) =>
+          (event.status === 'upcoming' || event.status === 'ongoing') &&
+          (new Date(event.date) >= today || event.status === 'ongoing') &&
+          (types.length === 0 || types.includes(event.type))
+      )
+      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+  }
+
   async createEvent(data: CreateCalendarEventData, createdBy: string): Promise<CalendarEvent> {
     const events = this.readData();
     const now = new Date().toISOString();

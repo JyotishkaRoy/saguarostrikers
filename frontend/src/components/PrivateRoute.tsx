@@ -9,7 +9,7 @@ interface PrivateRouteProps {
 export default function PrivateRoute({ children }: PrivateRouteProps) {
   const { isAuthenticated, hasHydrated } = useAuthStore();
 
-  // Wait for store to rehydrate from localStorage
+  // Wait for store to rehydrate from sessionStorage
   if (!hasHydrated) {
     return (
       <div className="min-h-screen flex items-center justify-center">

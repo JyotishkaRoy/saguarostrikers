@@ -1,7 +1,10 @@
 import { create } from 'zustand';
-import { persist } from 'zustand/middleware';
+import { persist, createJSONStorage } from 'zustand/middleware';
 import type { User, LoginResponse } from '@/types';
 import { api } from '@/lib/api';
+
+// Use sessionStorage so login does not persist when the tab/browser is closed
+const authSessionStorage = typeof window !== 'undefined' ? window.sessionStorage : null;
 
 interface AuthState {
   user: User | null;
@@ -54,7 +57,7 @@ export const useAuthStore = create<AuthState>()(
               isAuthenticated: true,
               isLoading: false,
             });
-            localStorage.setItem('token', response.data.token);
+            authSessionStorage?.setItem('token', response.data.token);
           }
         } catch (error) {
           set({ isLoading: false });
@@ -74,7 +77,7 @@ export const useAuthStore = create<AuthState>()(
               isAuthenticated: true,
               isLoading: false,
             });
-            localStorage.setItem('token', response.data.token);
+            authSessionStorage?.setItem('token', response.data.token);
           }
         } catch (error) {
           set({ isLoading: false });
@@ -90,8 +93,8 @@ export const useAuthStore = create<AuthState>()(
           token: null,
           isAuthenticated: false,
         });
-        localStorage.removeItem('token');
-        localStorage.removeItem('user');
+        authSessionStorage?.removeItem('token');
+        authSessionStorage?.removeItem('user');
       },
 
       updateProfile: async (updates: Partial<User>) => {
@@ -118,7 +121,7 @@ export const useAuthStore = create<AuthState>()(
       },
 
       checkAuth: () => {
-        const token = localStorage.getItem('token');
+        const token = authSessionStorage?.getItem('token');
         if (token && !get().isAuthenticated) {
           // Token exists but store not initialized - fetch user profile
           api.get<User>('/auth/profile')
@@ -140,6 +143,9 @@ export const useAuthStore = create<AuthState>()(
     }),
     {
       name: 'auth-storage',
+      storage: authSessionStorage
+        ? createJSONStorage(() => authSessionStorage)
+        : undefined,
       partialize: (state) => ({
         user: state.user,
         token: state.token,

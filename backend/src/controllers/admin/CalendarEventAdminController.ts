@@ -125,4 +125,23 @@ export class CalendarEventAdminController {
       res.status(500).json({ success: false, message: 'Failed to fetch events by type' });
     }
   }
+
+  /** Upcoming + ongoing events filtered by context: mission (Rocketry, Robotics, Other) or outreach (Community Outreach, Summer Camp STEM, Other). */
+  async getEventsForAssociation(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      const context = req.query.context as string;
+      const missionTypes = ['rocketry-competition', 'robotics-competition', 'other'];
+      const outreachTypes = ['community-outreach', 'summer-camp-stem', 'other'];
+      const types =
+        context === 'mission' ? missionTypes : context === 'outreach' ? outreachTypes : [];
+      if (types.length === 0) {
+        res.status(400).json({ success: false, message: 'Query param context=mission or context=outreach is required' });
+        return;
+      }
+      const events = await this.calendarEventService.getUpcomingAndOngoingByTypes(types);
+      res.status(200).json({ success: true, data: events });
+    } catch (error) {
+      res.status(500).json({ success: false, message: 'Failed to fetch events for association' });
+    }
+  }
 }

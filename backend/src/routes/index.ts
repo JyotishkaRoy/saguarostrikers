@@ -176,6 +176,7 @@ router.delete('/admin/outreach-artifacts/:artifactId',  outreachArtifactAdminCon
 
 // Admin - Calendar Events
 router.get('/admin/calendar-events',  calendarEventAdminController.getAllEvents.bind(calendarEventAdminController));
+router.get('/admin/calendar-events/for-association',  calendarEventAdminController.getEventsForAssociation.bind(calendarEventAdminController));
 router.get('/admin/calendar-events/type/:type',  calendarEventAdminController.getEventsByType.bind(calendarEventAdminController));
 router.get('/admin/calendar-events/search',  calendarEventAdminController.searchEvents.bind(calendarEventAdminController));
 router.get('/admin/calendar-events/:eventId',  calendarEventAdminController.getEventById.bind(calendarEventAdminController));

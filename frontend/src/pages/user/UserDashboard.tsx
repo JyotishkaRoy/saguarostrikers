@@ -249,9 +249,9 @@ export default function UserDashboard() {
               <Trophy className="h-5 w-5 mr-2" />
               Browse Missions
             </Link>
-            <Link to="/mission-calendar" className="btn-outline w-full justify-start">
+            <Link to="/calendar" className="btn-outline w-full justify-start">
               <Calendar className="h-5 w-5 mr-2" />
-              Mission Calendar
+              Calendar
             </Link>
             <Link to="/mission-artifacts" className="btn-outline w-full justify-start">
               <FileText className="h-5 w-5 mr-2" />

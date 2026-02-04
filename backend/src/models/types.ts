@@ -52,6 +52,7 @@ export interface Mission {
   location: string;
   status: MissionStatus;
   imageUrl?: string;
+  calendarEventId?: string;
   createdBy: string; // userId
   createdAt: string;
   updatedAt: string;
@@ -73,6 +74,7 @@ export interface Outreach {
   location: string;
   status: OutreachStatus;
   imageUrl?: string;
+  calendarEventId?: string; // Optional link to a calendar event
   createdBy: string;
   createdAt: string;
   updatedAt: string;
@@ -466,6 +468,7 @@ export interface CreateMissionData {
   location: string;
   status?: MissionStatus;
   imageUrl?: string;
+  calendarEventId?: string;
 }
 
 export interface UpdateMissionData {
@@ -476,6 +479,7 @@ export interface UpdateMissionData {
   location?: string;
   status?: MissionStatus;
   imageUrl?: string;
+  calendarEventId?: string;
 }
 
 export interface CreateOutreachData {
@@ -486,6 +490,7 @@ export interface CreateOutreachData {
   location: string;
   status?: OutreachStatus;
   imageUrl?: string;
+  calendarEventId?: string;
 }
 
 export interface UpdateOutreachData {
@@ -496,6 +501,7 @@ export interface UpdateOutreachData {
   location?: string;
   status?: OutreachStatus;
   imageUrl?: string;
+  calendarEventId?: string;
 }
 
 export interface CreateTeamData {
@@ -537,7 +543,7 @@ export interface CalendarEvent {
   updatedAt: string;
 }
 
-export type CalendarEventType = 'launch' | 'meeting' | 'mission' | 'deadline' | 'workshop' | 'other';
+export type CalendarEventType = 'rocketry-competition' | 'robotics-competition' | 'summer-camp-stem' | 'community-outreach' | 'other';
 export type CalendarEventStatus = 'upcoming' | 'ongoing' | 'completed' | 'cancelled';
 
 export interface CreateCalendarEventData {

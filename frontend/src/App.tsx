@@ -1,6 +1,9 @@
-import { useEffect } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { useEffect, useRef, useCallback } from 'react';
+import { Routes, Route, Navigate, Link } from 'react-router-dom';
 import { useAuthStore } from './store/authStore';
+
+const INACTIVITY_MS = 30 * 60 * 1000; // 30 minutes
+const ACTIVITY_THROTTLE_MS = 60 * 1000; // only reset timer at most once per minute
 
 // Layout Components
 import Navbar from './components/Navbar';
@@ -16,7 +19,7 @@ import MissionsPage from './pages/public/MissionsPage';
 import MissionDetailPage from './pages/public/MissionDetailPage';
 import MissionLeaders from './pages/public/MissionLeaders';
 import MissionStatement from './pages/public/MissionStatement';
-import MissionCalendar from './pages/public/MissionCalendar';
+import CalendarPage from './pages/public/CalendarPage';
 import JoinMission from './pages/public/JoinMission';
 import FutureExplorers from './pages/public/FutureExplorers';
 import OutreachDetailPage from './pages/public/OutreachDetailPage';
@@ -31,7 +34,6 @@ import LoginPage from './pages/auth/LoginPage';
 import RegisterPage from './pages/auth/RegisterPage';
 
 // User Pages
-import UserDashboard from './pages/user/UserDashboard';
 import UserMissions from './pages/user/UserMissions';
 import UserTeams from './pages/user/UserTeams';
 import UserFiles from './pages/user/UserFiles';
@@ -63,13 +65,55 @@ import AdminOutreachParticipants from './pages/admin/AdminOutreachParticipants';
 import AdminOutreachArtifacts from './pages/admin/AdminOutreachArtifacts';
 import AdminOutreachGalleries from './pages/admin/AdminOutreachGalleries';
 
+/** Redirects /dashboard: admins → /admin, non-admins → /my-missions (no dashboard for non-admins). */
+function DashboardRedirect() {
+  const user = useAuthStore((s) => s.user);
+  return <Navigate to={user?.role === 'admin' ? '/admin' : '/my-missions'} replace />;
+}
+
 function App() {
   const checkAuth = useAuthStore((state) => state.checkAuth);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const logout = useAuthStore((state) => state.logout);
+  const inactivityTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastActivityRef = useRef<number>(0);
 
   useEffect(() => {
     // Check authentication status on app load
     checkAuth();
   }, [checkAuth]);
+
+  // Log out after 30 minutes of inactivity (only when logged in)
+  const resetInactivityTimer = useCallback(() => {
+    if (!isAuthenticated) return;
+    const now = Date.now();
+    if (now - lastActivityRef.current < ACTIVITY_THROTTLE_MS) return;
+    lastActivityRef.current = now;
+    if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
+    inactivityTimerRef.current = setTimeout(() => {
+      logout();
+      inactivityTimerRef.current = null;
+    }, INACTIVITY_MS);
+  }, [isAuthenticated, logout]);
+
+  useEffect(() => {
+    if (!isAuthenticated) {
+      if (inactivityTimerRef.current) {
+        clearTimeout(inactivityTimerRef.current);
+        inactivityTimerRef.current = null;
+      }
+      return;
+    }
+    lastActivityRef.current = Date.now();
+    resetInactivityTimer();
+    const events = ['mousedown', 'mousemove', 'keydown', 'scroll', 'touchstart', 'click'];
+    const handleActivity = () => resetInactivityTimer();
+    events.forEach((ev) => window.addEventListener(ev, handleActivity));
+    return () => {
+      events.forEach((ev) => window.removeEventListener(ev, handleActivity));
+      if (inactivityTimerRef.current) clearTimeout(inactivityTimerRef.current);
+    };
+  }, [isAuthenticated, resetInactivityTimer]);
 
   return (
     <div className="flex min-h-screen flex-col">
@@ -81,9 +125,11 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/mission-statement" element={<MissionStatement />} />
           <Route path="/mission-leaders" element={<MissionLeaders />} />
-          <Route path="/mission-calendar" element={<MissionCalendar />} />
+          <Route path="/calendar" element={<CalendarPage />} />
+          <Route path="/mission-calendar" element={<Navigate to="/calendar" replace />} />
           <Route path="/join-mission" element={<JoinMission />} />
-          <Route path="/future-explorers" element={<FutureExplorers />} />
+          <Route path="/outreach-events" element={<FutureExplorers />} />
+          <Route path="/future-explorers" element={<Navigate to="/outreach-events" replace />} />
           <Route path="/outreach/:slug" element={<OutreachDetailPage />} />
           <Route path="/mission-artifacts" element={<MissionArtifacts />} />
           <Route path="/discussions" element={<DiscussionBoard />} />
@@ -101,7 +147,7 @@ function App() {
 
           {/* User Routes (Protected) */}
           <Route path="/profile" element={<PrivateRoute><Profile /></PrivateRoute>} />
-          <Route path="/dashboard" element={<PrivateRoute><UserDashboard /></PrivateRoute>} />
+          <Route path="/dashboard" element={<PrivateRoute><DashboardRedirect /></PrivateRoute>} />
           <Route path="/my-missions" element={<PrivateRoute><UserMissions /></PrivateRoute>} />
           <Route path="/my-teams" element={<PrivateRoute><UserTeams /></PrivateRoute>} />
           <Route path="/my-files" element={<PrivateRoute><UserFiles /></PrivateRoute>} />
@@ -132,7 +178,13 @@ function App() {
           <Route path="/admin/outreach-galleries" element={<AdminRoute><AdminOutreachGalleries /></AdminRoute>} />
 
           {/* 404 */}
-          <Route path="*" element={<div className="container mx-auto px-4 py-16 text-center"><h1 className="text-4xl font-bold">404 - Page Not Found</h1></div>} />
+          <Route path="*" element={
+            <div className="container mx-auto px-4 py-16 text-center">
+              <h1 className="text-4xl font-bold text-gray-900 mb-4">404 - Page Not Found</h1>
+              <p className="text-gray-600 mb-6">The page you're looking for doesn't exist or has been moved.</p>
+              <Link to="/" className="text-primary-600 font-medium hover:underline">Return to Home</Link>
+            </div>
+          } />
         </Routes>
       </main>
       <Footer />

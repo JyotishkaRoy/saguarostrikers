@@ -199,7 +199,7 @@ export default function AdminBoardMembers() {
       formDataUpload.append('image', file);
 
       const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
-      const token = localStorage.getItem('token');
+      const token = sessionStorage.getItem('token');
 
       const response = await axios.post(
         `${API_URL}/admin/board-members/upload-leader-image`,

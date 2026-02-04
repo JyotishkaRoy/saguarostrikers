@@ -17,7 +17,7 @@ class ApiClient {
     // Request interceptor - add auth token
     this.client.interceptors.request.use(
       (config) => {
-        const token = localStorage.getItem('token');
+        const token = sessionStorage.getItem('token');
         if (token && config.headers) {
           config.headers.Authorization = `Bearer ${token}`;
         }
@@ -32,8 +32,8 @@ class ApiClient {
       (error: AxiosError<ApiResponse>) => {
         if (error.response?.status === 401) {
           // Token expired or invalid - clear auth and redirect
-          localStorage.removeItem('token');
-          localStorage.removeItem('user');
+          sessionStorage.removeItem('token');
+          sessionStorage.removeItem('user');
           window.location.href = '/login';
         }
         return Promise.reject(error);

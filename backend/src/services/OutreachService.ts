@@ -55,6 +55,7 @@ export class OutreachService {
       location: data.location,
       status: data.status || 'draft',
       imageUrl: data.imageUrl,
+      calendarEventId: data.calendarEventId,
       createdBy,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString()

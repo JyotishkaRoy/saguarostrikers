@@ -51,6 +51,10 @@ export class CalendarEventService {
     return await this.dataHelper.getUpcomingEvents(limit);
   }
 
+  async getUpcomingAndOngoingByTypes(types: string[]): Promise<CalendarEvent[]> {
+    return await this.dataHelper.getUpcomingAndOngoingByTypes(types);
+  }
+
   async createEvent(data: CreateCalendarEventData, createdBy: string): Promise<CalendarEvent> {
     // Validate date
     const eventDate = new Date(data.date);

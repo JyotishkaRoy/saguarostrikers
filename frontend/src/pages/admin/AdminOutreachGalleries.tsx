@@ -86,7 +86,7 @@ export default function AdminOutreachGalleries() {
       try {
         const response = await fetch(`${API_BASE}/api/admin/gallery`, {
           method: 'POST',
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+          headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` },
           body: formData,
         });
         const data = await response.json();

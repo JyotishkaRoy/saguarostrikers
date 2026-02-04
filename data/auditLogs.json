@@ -701,29 +701,27 @@
     "timestamp": "2026-02-04T01:07:04.708Z"
   },
   {
-    "logId": "moGPm9IvnK1G",
-    "userId": "qLs3l83RgSkd",
-    "action": "USER_LOGIN",
-    "entity": "user",
-    "entityId": "qLs3l83RgSkd",
-    "changes": {},
+    "logId": "Jzc8jxhWMwz6",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/calendar-events",
+    "entity": "calendar-events",
+    "entityId": "—",
+    "changes": {
+      "title": "ARC 2026",
+      "description": "American Rocketry Compitition",
+      "date": "2026-01-01",
+      "startTime": "05:00",
+      "endTime": "10:00",
+      "type": "rocketry-competition",
+      "status": "ongoing",
+      "location": ""
+    },
     "ipAddress": "::1",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
-    "timestamp": "2026-02-04T01:16:40.770Z"
+    "timestamp": "2026-02-04T13:11:35.053Z"
   },
   {
-    "logId": "oGdAHdfkMiJa",
-    "userId": "qLs3l83RgSkd",
-    "action": "USER_LOGIN",
-    "entity": "user",
-    "entityId": "qLs3l83RgSkd",
-    "changes": {},
-    "ipAddress": "::1",
-    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
-    "timestamp": "2026-02-04T01:21:32.545Z"
-  },
-  {
-    "logId": "Ckqw1pwU86p0",
+    "logId": "C0FihiBrlwS4",
     "userId": "ZYTGOKOUExDF",
     "action": "USER_LOGIN",
     "entity": "user",
@@ -731,6 +729,39 @@
     "changes": {},
     "ipAddress": "::1",
     "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
-    "timestamp": "2026-02-04T01:22:06.429Z"
+    "timestamp": "2026-02-04T14:14:38.032Z"
+  },
+  {
+    "logId": "OyOAxzg2pPa5",
+    "userId": "qLs3l83RgSkd",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "qLs3l83RgSkd",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T14:17:42.056Z"
+  },
+  {
+    "logId": "rT5RfNgEF6RC",
+    "userId": "qLs3l83RgSkd",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "qLs3l83RgSkd",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T14:21:44.803Z"
+  },
+  {
+    "logId": "0Oz8gKuH81VZ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "ZYTGOKOUExDF",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T14:22:51.498Z"
   }
 ]

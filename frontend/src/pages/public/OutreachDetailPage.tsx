@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, MapPin, Users, Package, Image as ImageIcon, Rocket, Download } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+import { formatUtcToLocalDate } from '@/lib/dateUtils';
 import toast from 'react-hot-toast';
 
 interface Outreach {
@@ -114,7 +115,7 @@ export default function OutreachDetailPage() {
             <Rocket className="h-16 w-16 mx-auto text-gray-400 mb-4" />
             <h3 className="text-lg font-semibold text-gray-900 mb-2">Outreach not found</h3>
             <p className="text-gray-600 mb-4">The outreach event you're looking for doesn't exist or is not available.</p>
-            <Link to="/future-explorers" className="btn-primary">
+            <Link to="/outreach-events" className="btn-primary">
               Back to Future Explorers
             </Link>
           </div>
@@ -129,7 +130,7 @@ export default function OutreachDetailPage() {
     <div className="min-h-screen py-12 bg-gray-50">
       <div className="container mx-auto px-4 max-w-6xl">
         <Link
-          to="/future-explorers"
+          to="/outreach-events"
           className="inline-flex items-center gap-2 text-primary-600 hover:text-primary-700 mb-6 transition-colors"
         >
           <ArrowLeft className="h-4 w-4" />
@@ -183,21 +184,11 @@ export default function OutreachDetailPage() {
                     <h3 className="font-semibold text-gray-900 mb-2">Event Dates</h3>
                     <p className="text-sm text-gray-600">
                       <strong>Starts:</strong>{' '}
-                      {new Date(outreach.startDate).toLocaleDateString('en-US', {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
+                      {formatUtcToLocalDate(outreach.startDate)}
                     </p>
                     <p className="text-sm text-gray-600 mt-1">
                       <strong>Ends:</strong>{' '}
-                      {new Date(outreach.endDate).toLocaleDateString('en-US', {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
+                      {formatUtcToLocalDate(outreach.endDate)}
                     </p>
                   </div>
                 </div>

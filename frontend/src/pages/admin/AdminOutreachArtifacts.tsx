@@ -81,7 +81,7 @@ export default function AdminOutreachArtifacts() {
       const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
       const response = await fetch(`${baseUrl}/api/admin/outreach-artifacts`, {
         method: 'POST',
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` },
         body: formData,
       });
       const data = await response.json();

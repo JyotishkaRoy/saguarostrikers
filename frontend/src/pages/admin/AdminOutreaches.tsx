@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { Trophy, Plus, Edit, Trash2, Eye, EyeOff, Calendar, MapPin, Search, UserRound, Package, Image, ChevronDown, ChevronUp, UserPlus, Download } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
+import { formatUtcToLocalDate, localDateToUtcIso, utcIsoToLocalDateInput } from '@/lib/dateUtils';
 
 const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5001').replace(/\/api\/?$/, '');
 
@@ -16,8 +17,16 @@ interface Outreach {
   location: string;
   status: 'draft' | 'published' | 'completed' | 'cancelled' | 'in-progress' | 'archived';
   imageUrl?: string;
+  calendarEventId?: string;
   createdAt: string;
   updatedAt: string;
+}
+
+interface CalendarEventOption {
+  eventId: string;
+  title: string;
+  date: string;
+  type: string;
 }
 
 interface Participant {
@@ -77,6 +86,7 @@ export default function AdminOutreaches() {
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingOutreach, setEditingOutreach] = useState<Outreach | null>(null);
+  const [calendarEventsForOutreach, setCalendarEventsForOutreach] = useState<CalendarEventOption[]>([]);
   const [stats, setStats] = useState({
     total: 0,
     published: 0,
@@ -109,6 +119,19 @@ export default function AdminOutreaches() {
   useEffect(() => {
     fetchOutreaches();
   }, []);
+
+  const fetchCalendarEventsForOutreach = async () => {
+    try {
+      const res = await api.get<CalendarEventOption[]>('/admin/calendar-events/for-association?context=outreach');
+      if (res.success && Array.isArray(res.data)) setCalendarEventsForOutreach(res.data);
+    } catch {
+      setCalendarEventsForOutreach([]);
+    }
+  };
+
+  useEffect(() => {
+    if (isModalOpen) fetchCalendarEventsForOutreach();
+  }, [isModalOpen]);
 
   useEffect(() => {
     if (expandedSection) {
@@ -193,7 +216,7 @@ export default function AdminOutreaches() {
       setArtifactUploading(true);
       const response = await fetch(`${API_BASE}/api/admin/outreach-artifacts`, {
         method: 'POST',
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` },
         body: formData,
       });
       const data = await response.json();
@@ -254,7 +277,7 @@ export default function AdminOutreaches() {
       try {
         const response = await fetch(`${API_BASE}/api/admin/gallery`, {
           method: 'POST',
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+          headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` },
           body: formData,
         });
         const data = await response.json();
@@ -352,13 +375,17 @@ export default function AdminOutreaches() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
 
+    const calendarEventId = formData.get('calendarEventId') as string;
+    const startDateLocal = formData.get('startDate') as string;
+    const endDateLocal = formData.get('endDate') as string;
     const data: any = {
       title: formData.get('title'),
       description: formData.get('description'),
-      startDate: formData.get('startDate'),
-      endDate: formData.get('endDate'),
+      startDate: startDateLocal ? localDateToUtcIso(startDateLocal) : '',
+      endDate: endDateLocal ? localDateToUtcIso(endDateLocal) : '',
       location: formData.get('location'),
       status: formData.get('status'),
+      calendarEventId: calendarEventId && calendarEventId.trim() ? calendarEventId : undefined,
     };
 
     try {
@@ -566,7 +593,7 @@ export default function AdminOutreaches() {
                     <div className="flex items-center gap-1">
                       <Calendar className="h-4 w-4" />
                       <span>
-                        {new Date(outreach.startDate).toLocaleDateString()} - {new Date(outreach.endDate).toLocaleDateString()}
+                        {formatUtcToLocalDate(outreach.startDate)} – {formatUtcToLocalDate(outreach.endDate)}
                       </span>
                     </div>
                     <div className="flex items-center gap-1">
@@ -760,7 +787,7 @@ export default function AdminOutreaches() {
                   <input
                     type="date"
                     name="startDate"
-                    defaultValue={editingOutreach?.startDate?.split('T')[0]}
+                    defaultValue={editingOutreach?.startDate ? utcIsoToLocalDateInput(editingOutreach.startDate) : undefined}
                     required
                     className="input w-full"
                   />
@@ -770,7 +797,7 @@ export default function AdminOutreaches() {
                   <input
                     type="date"
                     name="endDate"
-                    defaultValue={editingOutreach?.endDate?.split('T')[0]}
+                    defaultValue={editingOutreach?.endDate ? utcIsoToLocalDateInput(editingOutreach.endDate) : undefined}
                     required
                     className="input w-full"
                   />
@@ -804,6 +831,20 @@ export default function AdminOutreaches() {
                 )}
                 <p className="text-xs text-gray-500 mt-1">
                   Upload an image or video to display in the outreach detail page hero section
+                </p>
+              </div>
+              <div>
+                <label className="block text-sm font-medium mb-1">Calendar Event</label>
+                <select name="calendarEventId" defaultValue={editingOutreach?.calendarEventId ?? ''} className="input w-full">
+                  <option value="">None — standalone outreach</option>
+                  {calendarEventsForOutreach.map((ev) => (
+                    <option key={ev.eventId} value={ev.eventId}>
+                      {ev.title} ({formatUtcToLocalDate(ev.date)})
+                    </option>
+                  ))}
+                </select>
+                <p className="text-xs text-gray-500 mt-1">
+                  Optional: link this outreach to an upcoming/ongoing Community Outreach, Summer Camp (STEM), or Other calendar event
                 </p>
               </div>
               <div>

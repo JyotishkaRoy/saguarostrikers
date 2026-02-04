@@ -136,7 +136,7 @@ export default function AdminUsers() {
               const imageFormData = new FormData();
               imageFormData.append('file', profileImage);
               
-              const token = localStorage.getItem('token');
+              const token = sessionStorage.getItem('token');
               const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5001/api'}/admin/users/${userId}/upload-profile-image`, {
                 method: 'POST',
                 headers: {
@@ -176,7 +176,7 @@ export default function AdminUsers() {
               const imageFormData = new FormData();
               imageFormData.append('file', profileImage);
               
-              const token = localStorage.getItem('token');
+              const token = sessionStorage.getItem('token');
               const uploadResponse = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5001/api'}/admin/users/${userId}/upload-profile-image`, {
                 method: 'POST',
                 headers: {

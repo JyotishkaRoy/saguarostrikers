@@ -109,13 +109,13 @@ export default function Navbar() {
             <span className="text-white/50">|</span>
             
             <Link 
-              to="/mission-calendar" 
+              to="/calendar" 
               className={cn(
                 "text-white hover:text-secondary-300 transition-colors px-2 py-1",
-                isActive('/mission-calendar') && "underline underline-offset-4 decoration-2"
+                isActive('/calendar') && "underline underline-offset-4 decoration-2"
               )}
             >
-              Mission Calendar
+              Calendar
             </Link>
             <span className="text-white/50">|</span>
             
@@ -131,10 +131,10 @@ export default function Navbar() {
             <span className="text-white/50">|</span>
             
             <Link 
-              to="/future-explorers" 
+              to="/outreach-events" 
               className={cn(
                 "text-white hover:text-secondary-300 transition-colors px-2 py-1",
-                isActive('/future-explorers') && "underline underline-offset-4 decoration-2"
+                isActive('/outreach-events') && "underline underline-offset-4 decoration-2"
               )}
             >
               Outreach Events
@@ -257,13 +257,13 @@ export default function Navbar() {
             <Link to="/missions" className={cn("block rounded-lg px-3 py-2 text-white hover:bg-primary-700", isActive('/missions') && "bg-primary-700")}>
               Missions
             </Link>
-            <Link to="/mission-calendar" className={cn("block rounded-lg px-3 py-2 text-white hover:bg-primary-700", isActive('/mission-calendar') && "bg-primary-700")}>
-              Mission Calendar
+            <Link to="/calendar" className={cn("block rounded-lg px-3 py-2 text-white hover:bg-primary-700", isActive('/calendar') && "bg-primary-700")}>
+              Calendar
             </Link>
             <Link to="/join-mission" className={cn("block rounded-lg px-3 py-2 text-white hover:bg-primary-700", isActive('/join-mission') && "bg-primary-700")}>
               Join a Mission?
             </Link>
-            <Link to="/future-explorers" className={cn("block rounded-lg px-3 py-2 text-white hover:bg-primary-700", isActive('/future-explorers') && "bg-primary-700")}>
+            <Link to="/outreach-events" className={cn("block rounded-lg px-3 py-2 text-white hover:bg-primary-700", isActive('/outreach-events') && "bg-primary-700")}>
               Outreach Events
             </Link>
             <Link to="/contact" className={cn("block rounded-lg px-3 py-2 text-white hover:bg-primary-700", isActive('/contact') && "bg-primary-700")}>

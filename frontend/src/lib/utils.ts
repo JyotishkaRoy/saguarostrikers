@@ -9,10 +9,11 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 /**
- * Format date to readable string
+ * Format date to readable string. Expects UTC (ISO or YYYY-MM-DD); displays in user's local timezone.
  */
 export function formatDate(dateString: string): string {
-  const date = new Date(dateString);
+  const iso = dateString?.length === 10 ? `${dateString}T00:00:00.000Z` : dateString;
+  const date = new Date(iso);
   return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
@@ -21,10 +22,11 @@ export function formatDate(dateString: string): string {
 }
 
 /**
- * Format date and time
+ * Format date and time. Expects UTC (ISO); displays in user's local timezone.
  */
 export function formatDateTime(dateString: string): string {
-  const date = new Date(dateString);
+  const iso = dateString?.length === 10 ? `${dateString}T00:00:00.000Z` : dateString;
+  const date = new Date(iso);
   return date.toLocaleString('en-US', {
     year: 'numeric',
     month: 'long',

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Trophy, Calendar, MapPin, ArrowLeft, Users, Package, Image } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+import { formatUtcToLocalDate } from '@/lib/dateUtils';
 import toast from 'react-hot-toast';
 import { useAuthStore } from '@/store/authStore';
 
@@ -63,6 +64,9 @@ export default function MissionDetailPage() {
     }
 
     // Fallback: use dates to determine status
+    const now = new Date();
+    const start = new Date(startDate);
+    const end = new Date(endDate);
     if (now < start) {
       return { label: 'Upcoming', class: 'badge-primary' };
     } else if (now > end) {
@@ -233,21 +237,11 @@ export default function MissionDetailPage() {
                     <h3 className="font-semibold text-gray-900 mb-2">Mission Dates</h3>
                     <p className="text-sm text-gray-600">
                       <strong>Starts:</strong>{' '}
-                      {new Date(mission.startDate).toLocaleDateString('en-US', {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
+                      {formatUtcToLocalDate(mission.startDate)}
                     </p>
                     <p className="text-sm text-gray-600 mt-1">
                       <strong>Ends:</strong>{' '}
-                      {new Date(mission.endDate).toLocaleDateString('en-US', {
-                        weekday: 'long',
-                        year: 'numeric',
-                        month: 'long',
-                        day: 'numeric',
-                      })}
+                      {formatUtcToLocalDate(mission.endDate)}
                     </p>
                   </div>
                 </div>

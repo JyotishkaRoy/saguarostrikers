@@ -3,6 +3,34 @@ import { Calendar, Plus, Edit2, Trash2, Search, Filter } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 import type { CalendarEvent, Mission } from '@/types';
+import {
+  formatUtcToLocalDate,
+  formatUtcToLocalTime,
+  utcToLocalDateInput,
+  utcToLocalTimeInput,
+  localToUtcDateAndTime,
+} from '@/lib/dateUtils';
+
+const EVENT_TYPE_OPTIONS = [
+  { value: 'rocketry-competition', label: 'Rocketry Competition' },
+  { value: 'robotics-competition', label: 'Robotics Competition' },
+  { value: 'summer-camp-stem', label: 'Summer Camp (STEM)' },
+  { value: 'community-outreach', label: 'Community Outreach' },
+  { value: 'other', label: 'Other' },
+] as const;
+
+const eventTypeLabels: Record<string, string> = Object.fromEntries(
+  EVENT_TYPE_OPTIONS.map((o) => [o.value, o.label])
+);
+const eventTypeColors: Record<string, string> = {
+  'rocketry-competition': 'bg-red-100 text-red-800 border-red-300',
+  'robotics-competition': 'bg-blue-100 text-blue-800 border-blue-300',
+  'summer-camp-stem': 'bg-amber-100 text-amber-800 border-amber-300',
+  'community-outreach': 'bg-green-100 text-green-800 border-green-300',
+  other: 'bg-gray-100 text-gray-800 border-gray-300',
+};
+const getTypeColor = (type: string) => eventTypeColors[type] ?? eventTypeColors.other;
+const getTypeLabel = (type: string) => eventTypeLabels[type] ?? type;
 
 export default function AdminCalendarEvents() {
   const [events, setEvents] = useState<CalendarEvent[]>([]);
@@ -86,15 +114,6 @@ export default function AdminCalendarEvents() {
     setShowModal(true);
   };
 
-  const eventTypeColors = {
-    launch: 'bg-red-100 text-red-800 border-red-300',
-    meeting: 'bg-blue-100 text-blue-800 border-blue-300',
-    mission: 'bg-purple-100 text-purple-800 border-purple-300',
-    deadline: 'bg-orange-100 text-orange-800 border-orange-300',
-    workshop: 'bg-green-100 text-green-800 border-green-300',
-    other: 'bg-gray-100 text-gray-800 border-gray-300',
-  };
-
   const eventStatusColors = {
     upcoming: 'bg-green-100 text-green-800',
     ongoing: 'bg-blue-100 text-blue-800',
@@ -139,10 +158,9 @@ export default function AdminCalendarEvents() {
               className="input pl-10"
             >
               <option value="all">All Types</option>
-              <option value="launch">Launch</option>
-              <option value="meeting">Meeting</option>
-              <option value="deadline">Deadline</option>
-              <option value="other">Other</option>
+              {EVENT_TYPE_OPTIONS.map((opt) => (
+                <option key={opt.value} value={opt.value}>{opt.label}</option>
+              ))}
             </select>
           </div>
         </div>
@@ -168,8 +186,8 @@ export default function AdminCalendarEvents() {
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2 flex-wrap">
                     <h3 className="text-xl font-semibold text-gray-900">{event.title}</h3>
-                    <span className={`px-3 py-1 rounded-full text-xs font-medium border ${eventTypeColors[event.type]}`}>
-                      {event.type}
+                    <span className={`px-3 py-1 rounded-full text-xs font-medium border ${getTypeColor(event.type)}`}>
+                      {getTypeLabel(event.type)}
                     </span>
                     <span className={`px-3 py-1 rounded-full text-xs font-medium ${eventStatusColors[event.status]}`}>
                       {event.status}
@@ -183,15 +201,10 @@ export default function AdminCalendarEvents() {
                   <p className="text-gray-600 mb-3">{event.description}</p>
                   <div className="flex flex-wrap gap-4 text-sm text-gray-500">
                     <span className="flex items-center gap-1">
-                      📅 {new Date(event.date).toLocaleDateString('en-US', { 
-                        weekday: 'short', 
-                        year: 'numeric', 
-                        month: 'short', 
-                        day: 'numeric' 
-                      })}
+                      📅 {formatUtcToLocalDate(event.date, event.startTime)}
                     </span>
                     {event.startTime && (
-                      <span>⏰ {event.startTime} {event.endTime && `- ${event.endTime}`}</span>
+                      <span>⏰ {formatUtcToLocalTime(event.date, event.startTime)}{event.endTime ? ` – ${formatUtcToLocalTime(event.date, event.endTime)}` : ''}</span>
                     )}
                     {event.location && (
                       <span>📍 {event.location}</span>
@@ -222,7 +235,6 @@ export default function AdminCalendarEvents() {
       {showModal && (
         <EventModal
           event={editingEvent}
-          missions={missions}
           onClose={() => {
             setShowModal(false);
             setEditingEvent(null);
@@ -241,18 +253,18 @@ export default function AdminCalendarEvents() {
 // Event Modal Component
 interface EventModalProps {
   event: CalendarEvent | null;
-  missions: Mission[];
   onClose: () => void;
   onSave: () => void;
 }
 
-function EventModal({ event, missions, onClose, onSave }: EventModalProps) {
+function EventModal({ event, onClose, onSave }: EventModalProps) {
+  const utcDate = event?.date?.split('T')[0] ?? '';
   const [formData, setFormData] = useState({
     title: event?.title || '',
     description: event?.description || '',
-    date: event?.date?.split('T')[0] || '',
-    startTime: event?.startTime || '',
-    endTime: event?.endTime || '',
+    date: event ? utcToLocalDateInput(utcDate, event.startTime) : '',
+    startTime: event && event.startTime ? utcToLocalTimeInput(utcDate, event.startTime) : '',
+    endTime: event && event.endTime ? utcToLocalTimeInput(utcDate, event.endTime) : '',
     type: event?.type || 'other',
     status: event?.status || 'upcoming',
     location: event?.location || '',
@@ -261,12 +273,13 @@ function EventModal({ event, missions, onClose, onSave }: EventModalProps) {
   const [isSaving, setIsSaving] = useState(false);
 
   useEffect(() => {
+    const d = event?.date?.split('T')[0] ?? '';
     setFormData({
       title: event?.title || '',
       description: event?.description || '',
-      date: event?.date?.split('T')[0] || '',
-      startTime: event?.startTime || '',
-      endTime: event?.endTime || '',
+      date: event ? utcToLocalDateInput(d, event.startTime) : '',
+      startTime: event?.startTime ? utcToLocalTimeInput(d, event.startTime) : '',
+      endTime: event?.endTime ? utcToLocalTimeInput(d, event.endTime) : '',
       type: event?.type || 'other',
       status: event?.status || 'upcoming',
       location: event?.location || '',
@@ -277,8 +290,16 @@ function EventModal({ event, missions, onClose, onSave }: EventModalProps) {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
+    const { date, startTime, endTime } = localToUtcDateAndTime(
+      formData.date,
+      formData.startTime,
+      formData.endTime || undefined
+    );
     const payload = {
       ...formData,
+      date,
+      startTime: startTime || undefined,
+      endTime: endTime || undefined,
       missionId: formData.missionId || undefined,
     };
 
@@ -398,10 +419,11 @@ function EventModal({ event, missions, onClose, onSave }: EventModalProps) {
                 onChange={(e) => setFormData({ ...formData, type: e.target.value as any })}
                 className="input"
               >
-                <option value="launch">Launch</option>
-                <option value="meeting">Meeting</option>
-                <option value="deadline">Deadline</option>
-                <option value="other">Other</option>
+                {EVENT_TYPE_OPTIONS.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
               </select>
             </div>
 
@@ -421,27 +443,6 @@ function EventModal({ event, missions, onClose, onSave }: EventModalProps) {
                 <option value="cancelled">Cancelled</option>
               </select>
             </div>
-          </div>
-
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Mission (optional)
-            </label>
-            <select
-              value={formData.missionId}
-              onChange={(e) => setFormData({ ...formData, missionId: e.target.value })}
-              className="input"
-            >
-              <option value="">None — specific event</option>
-              {missions.map((m) => (
-                <option key={m.missionId} value={m.missionId}>
-                  {m.title}
-                </option>
-              ))}
-            </select>
-            <p className="text-xs text-gray-500 mt-1">
-              Leave as &quot;None&quot; for a standalone event, or select a mission to associate this event with.
-            </p>
           </div>
 
           <div className="flex gap-3 pt-4">
