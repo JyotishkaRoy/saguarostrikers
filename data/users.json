@@ -98,5 +98,29 @@
     "createdAt": "2026-01-21T11:30:34.099Z",
     "updatedAt": "2026-01-21T11:30:34.099Z",
     "lastLogin": "2026-02-04T14:21:44.798Z"
+  },
+  {
+    "userId": "V9bFPgCkjywq",
+    "email": "jordan.taylor@student.edu",
+    "password": "$2a$10$BFdfZ0EhQPU6d0vrb5TP0.zafwktzJg35OEixPMMefxFst7RAfit2",
+    "firstName": "Jordan",
+    "lastName": "Taylor",
+    "role": "user",
+    "status": "active",
+    "phone": "+1-555-0211",
+    "createdAt": "2026-04-14T01:06:05.686Z",
+    "updatedAt": "2026-04-14T01:06:05.686Z"
+  },
+  {
+    "userId": "llDkGpi47AnL",
+    "email": "hari@hari.ram",
+    "password": "$2a$10$ib3h6/OCjb1XbyzyA5TMuO2sxqP6tnNXGukqi8/Z5fVD1r9MdtytG",
+    "firstName": "Hari",
+    "lastName": "Ram",
+    "role": "user",
+    "status": "active",
+    "phone": "1111111111",
+    "createdAt": "2026-04-14T01:08:50.099Z",
+    "updatedAt": "2026-04-14T01:08:50.099Z"
   }
 ]

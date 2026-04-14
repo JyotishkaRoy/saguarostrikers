@@ -774,5 +774,32 @@
     "ipAddress": "::1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
     "timestamp": "2026-04-14T00:48:47.873Z"
+  },
+  {
+    "logId": "K7336l1ts5fb",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/contact-messages/XYKhfbV2n5ZH/status",
+    "entity": "status",
+    "entityId": "XYKhfbV2n5ZH",
+    "changes": {
+      "status": "archived"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-14T01:05:23.891Z"
+  },
+  {
+    "logId": "i6d9Ty1iHejw",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/UqGzFgkc3yZE/status",
+    "entity": "status",
+    "entityId": "UqGzFgkc3yZE",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Strong background and clear motivation. Approved for Spaceport team."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-14T01:06:05.690Z"
   }
 ]
