@@ -42,3 +42,6 @@ coverage/
 
 # Misc
 .turbo
+
+# Local JSON store (keep files on disk; do not commit or push)
+data/*.json
