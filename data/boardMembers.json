@@ -58,17 +58,5 @@
     "status": "active",
     "createdAt": "2025-04-01T13:00:00.000Z",
     "updatedAt": "2026-01-21T10:48:28.937Z"
-  },
-  {
-    "boardMemberId": "OvwVj8qDjeZx",
-    "name": "David Kim",
-    "position": "Chief Technology Officer",
-    "bio": "Michael leads the technology initiatives and software development for the team. With expertise in data analytics and simulation, he helps optimize rocket designs and flight predictions.",
-    "email": "david.kim@email.com",
-    "imageUrl": "",
-    "order": 6,
-    "status": "active",
-    "createdAt": "2025-04-10T10:30:00.000Z",
-    "updatedAt": "2026-01-21T10:47:42.903Z"
   }
 ]
