@@ -4,7 +4,6 @@ import { Trophy, Calendar, MapPin, ArrowLeft, Users, Package, Image } from 'luci
 import { api, getErrorMessage } from '@/lib/api';
 import { formatUtcToLocalDate } from '@/lib/dateUtils';
 import toast from 'react-hot-toast';
-import { useAuthStore } from '@/store/authStore';
 
 interface Mission {
   missionId: string;
@@ -23,7 +22,6 @@ export default function MissionDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const [mission, setMission] = useState<Mission | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const { isAuthenticated } = useAuthStore();
 
   useEffect(() => {
     if (slug) {
@@ -168,24 +166,13 @@ export default function MissionDetailPage() {
               {/* Right Side: Action Buttons */}
               <div className="flex-shrink-0">
                 {status.label === 'Upcoming' ? (
-                  // Join Button for Upcoming Missions
-                  isAuthenticated ? (
-                    <Link 
-                      to={`/join-mission?missionId=${mission.missionId}`}
-                      className="btn-primary shadow-xl hover:shadow-2xl transition-shadow inline-flex items-center gap-2 px-8 py-4 text-lg font-bold"
-                    >
-                      <Trophy className="h-5 w-5" />
-                      Join this Mission
-                    </Link>
-                  ) : (
-                    <Link 
-                      to="/register" 
-                      className="btn-primary shadow-xl hover:shadow-2xl transition-shadow inline-flex items-center gap-2 px-8 py-4 text-lg font-bold"
-                    >
-                      <Trophy className="h-5 w-5" />
-                      Join this Mission
-                    </Link>
-                  )
+                  <Link
+                    to={`/join-mission?missionId=${mission.missionId}`}
+                    className="btn-primary shadow-xl hover:shadow-2xl transition-shadow inline-flex items-center gap-2 px-8 py-4 text-lg font-bold"
+                  >
+                    <Trophy className="h-5 w-5" />
+                    Join this Mission
+                  </Link>
                 ) : (
                   // Three Buttons for Non-Upcoming Missions
                   <div className="flex flex-col gap-3">

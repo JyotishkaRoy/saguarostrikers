@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
 import { Send, CheckCircle, Rocket } from 'lucide-react';
@@ -69,12 +69,18 @@ export default function JoinMission() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { register, handleSubmit, formState: { errors }, setValue } = useForm<JoinMissionFormData>();
+  const { register, handleSubmit, formState: { errors } } = useForm<JoinMissionFormData>();
 
   useEffect(() => {
     fetchActiveMissions();
     fetchAgreements();
   }, []);
+
+  const lockedMissionTitle = useMemo(() => {
+    if (!preselectedMissionId) return '';
+    const m = missions.find((x) => x.missionId === preselectedMissionId);
+    return m?.title ?? '';
+  }, [preselectedMissionId, missions]);
 
   const fetchAgreements = async () => {
     try {
@@ -90,13 +96,6 @@ export default function JoinMission() {
       // keep defaults
     }
   };
-
-  useEffect(() => {
-    // Pre-select mission if missionId is provided in URL
-    if (preselectedMissionId && missions.length > 0) {
-      setValue('missionId', preselectedMissionId);
-    }
-  }, [preselectedMissionId, missions, setValue]);
 
   const fetchActiveMissions = async () => {
     try {
@@ -369,22 +368,46 @@ export default function JoinMission() {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Mission Interested In <span className="text-red-500">*</span>
               </label>
-              <select
-                {...register('missionId', { required: 'Please select a mission' })}
-                className={`input ${preselectedMissionId ? 'bg-gray-100 cursor-not-allowed' : ''}`}
-                disabled={!!preselectedMissionId}
-              >
-                <option value="">Select a Mission</option>
-                {missions.map(mission => (
-                  <option key={mission.missionId} value={mission.missionId}>
-                    {mission.title}
-                  </option>
-                ))}
-              </select>
-              {preselectedMissionId && (
-                <p className="text-sm text-primary-600 mt-1">
-                  ✓ Mission pre-selected from the mission page
-                </p>
+              {preselectedMissionId ? (
+                <>
+                  {/* Hidden: disabled selects are not submitted; keep missionId in form data */}
+                  <input
+                    type="hidden"
+                    key={preselectedMissionId}
+                    {...register('missionId', { required: 'Mission is required' })}
+                    defaultValue={preselectedMissionId}
+                  />
+                  <div
+                    className="input bg-gray-100 text-gray-900 border-gray-200 cursor-default select-none"
+                    aria-readonly="true"
+                  >
+                    {lockedMissionTitle || 'Loading mission…'}
+                  </div>
+                  <p className="text-sm text-gray-600 mt-1">
+                    This mission was selected from the mission page and cannot be changed here.
+                  </p>
+                  {missions.length > 0 && !lockedMissionTitle && (
+                    <p className="text-sm text-amber-700 mt-1">
+                      This mission may no longer be open for applications. You can still submit or choose another mission from{' '}
+                      <a href="/join-mission" className="underline font-medium">
+                        Join a Mission
+                      </a>
+                      {' '}without a pre-selected mission.
+                    </p>
+                  )}
+                </>
+              ) : (
+                <select
+                  {...register('missionId', { required: 'Please select a mission' })}
+                  className="input"
+                >
+                  <option value="">Select a Mission</option>
+                  {missions.map(mission => (
+                    <option key={mission.missionId} value={mission.missionId}>
+                      {mission.title}
+                    </option>
+                  ))}
+                </select>
               )}
               {errors.missionId && (
                 <p className="text-red-500 text-sm mt-1">{errors.missionId.message}</p>
