@@ -83,6 +83,23 @@ export class JoinMissionAdminController {
     }
   }
 
+  async updateApplication(req: AuthRequest, res: Response): Promise<void> {
+    try {
+      const { applicationId } = req.params;
+      const updated = await this.joinMissionService.updateApplication(applicationId, req.body);
+      res.status(200).json({
+        success: true,
+        message: 'Application updated successfully',
+        data: updated
+      });
+    } catch (error: any) {
+      res.status(400).json({
+        success: false,
+        message: error.message || 'Failed to update application'
+      });
+    }
+  }
+
   async deleteApplication(req: AuthRequest, res: Response): Promise<void> {
     try {
       const { applicationId } = req.params;

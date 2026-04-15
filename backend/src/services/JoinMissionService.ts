@@ -7,6 +7,7 @@ import {
   JoinMissionApplication,
   CreateJoinMissionData,
   UpdateApplicationStatusData,
+  UpdateJoinMissionApplicationData,
   ApplicationStatus,
 } from '../models/types';
 
@@ -202,6 +203,23 @@ export class JoinMissionService {
       } catch (emailError) {
         console.error('Error sending status update email:', emailError);
       }
+    }
+
+    return updatedApplication;
+  }
+
+  async updateApplication(
+    applicationId: string,
+    data: UpdateJoinMissionApplicationData
+  ): Promise<JoinMissionApplication> {
+    const application = await this.dataHelper.getApplicationById(applicationId);
+    if (!application) {
+      throw new Error('Application not found');
+    }
+
+    const updatedApplication = await this.dataHelper.updateApplication(applicationId, data);
+    if (!updatedApplication) {
+      throw new Error('Failed to update application');
     }
 
     return updatedApplication;

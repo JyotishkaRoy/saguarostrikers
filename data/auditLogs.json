@@ -796,5 +796,547 @@
     "ipAddress": "::1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
     "timestamp": "2026-04-15T02:19:20.243Z"
+  },
+  {
+    "logId": "cr3oCvK0YD4g",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/upload",
+    "entity": "upload",
+    "entityId": "—",
+    "changes": {
+      "folder": "missions",
+      "missionTitle": "AIAA Rocketry Summer Camp 2024",
+      "missionId": "s8KT8r3nXvCe"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T02:56:14.047Z"
+  },
+  {
+    "logId": "eSZjbFSycqNr",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/s8KT8r3nXvCe",
+    "entity": "s8KT8r3nXvCe",
+    "entityId": "s8KT8r3nXvCe",
+    "changes": {
+      "title": "AIAA Rocketry Summer Camp 2024",
+      "description": "TBD",
+      "startDate": "2024-06-01T07:00:00.000Z",
+      "endDate": "2024-06-30T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "in-progress",
+      "imageUrl": "/uploads/missions/aiaa-rocketry-summer-camp-2024-s8KT8r3nXvCe/hero.JPG"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T02:56:14.090Z"
+  },
+  {
+    "logId": "qNIzny6bXLqS",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/upload",
+    "entity": "upload",
+    "entityId": "—",
+    "changes": {
+      "folder": "missions",
+      "missionTitle": "AIAA Rocketry Summer Camp 2024",
+      "missionId": "s8KT8r3nXvCe"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T02:56:44.470Z"
+  },
+  {
+    "logId": "SqVF7AO7Q7re",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/s8KT8r3nXvCe",
+    "entity": "s8KT8r3nXvCe",
+    "entityId": "s8KT8r3nXvCe",
+    "changes": {
+      "title": "AIAA Rocketry Summer Camp 2024",
+      "description": "TBD",
+      "startDate": "2024-06-01T07:00:00.000Z",
+      "endDate": "2024-06-30T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "in-progress",
+      "imageUrl": "/uploads/missions/aiaa-rocketry-summer-camp-2024-s8KT8r3nXvCe/hero.JPG"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T02:56:44.480Z"
+  },
+  {
+    "logId": "DdhEN2Lix5O6",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/upload",
+    "entity": "upload",
+    "entityId": "—",
+    "changes": {
+      "folder": "missions",
+      "missionTitle": "AIAA Rocketry Summer Camp 2024",
+      "missionId": "s8KT8r3nXvCe"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:00:09.020Z"
+  },
+  {
+    "logId": "rCwKP9gOPw9X",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/s8KT8r3nXvCe",
+    "entity": "s8KT8r3nXvCe",
+    "entityId": "s8KT8r3nXvCe",
+    "changes": {
+      "title": "AIAA Rocketry Summer Camp 2024",
+      "description": "TBD",
+      "startDate": "2024-06-01T07:00:00.000Z",
+      "endDate": "2024-06-30T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "in-progress",
+      "imageUrl": "/uploads/missions/aiaa-rocketry-summer-camp-2024-s8KT8r3nXvCe/hero.png"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:00:09.040Z"
+  },
+  {
+    "logId": "W0A3NeGhhxGc",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/s8KT8r3nXvCe",
+    "entity": "s8KT8r3nXvCe",
+    "entityId": "s8KT8r3nXvCe",
+    "changes": {
+      "title": "AIAA Rocketry Summer Camp 2024",
+      "description": "Rocketry Summer Camp under AIAA OC to provide foundational platform for rocketry enthusiasts and great opportunity to identify the future rocketeer",
+      "startDate": "2024-06-01T07:00:00.000Z",
+      "endDate": "2024-06-30T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "in-progress"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:03:03.755Z"
+  },
+  {
+    "logId": "elOZ6nshMKYW",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:32.725Z"
+  },
+  {
+    "logId": "kb1jGt2dFEfB",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:32.778Z"
+  },
+  {
+    "logId": "UjlHYMOHkRIk",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:32.835Z"
+  },
+  {
+    "logId": "cK0JI7uZeF0w",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:32.896Z"
+  },
+  {
+    "logId": "lCBeI7pyoPMo",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:32.945Z"
+  },
+  {
+    "logId": "ZoFUn9Os7IAU",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:32.987Z"
+  },
+  {
+    "logId": "Zwnr3sL8IZje",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:33.031Z"
+  },
+  {
+    "logId": "RihFXirw93E3",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:33.081Z"
+  },
+  {
+    "logId": "J1zGVuolFHlV",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:33.127Z"
+  },
+  {
+    "logId": "DEwqlGzVNiXm",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:33.175Z"
+  },
+  {
+    "logId": "v2RYF7eRdh8C",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:33.230Z"
+  },
+  {
+    "logId": "tYrm70C0VQn1",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:33.938Z"
+  },
+  {
+    "logId": "dstHClFp8MrU",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:34.312Z"
+  },
+  {
+    "logId": "Ohj1jBO1zB1f",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:34.833Z"
+  },
+  {
+    "logId": "8DdtZ4ompszE",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:35.155Z"
+  },
+  {
+    "logId": "E0UWVw8HIcAk",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:35.591Z"
+  },
+  {
+    "logId": "MfKYn7wXyZUs",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:36.360Z"
+  },
+  {
+    "logId": "kk09JyRsBwES",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:37.039Z"
+  },
+  {
+    "logId": "2rEm4VAlW220",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:37.088Z"
+  },
+  {
+    "logId": "9seROsBRvPFC",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:37.138Z"
+  },
+  {
+    "logId": "TEpB8IBojBG7",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:37.174Z"
+  },
+  {
+    "logId": "swDEMTKg7Xaj",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:37.222Z"
+  },
+  {
+    "logId": "zhmDNDQBY7og",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "s8KT8r3nXvCe",
+      "title": "The Summer Camp 2024 Journey",
+      "description": "Few snaps and launch videos from Summer Camp 2024",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:06:37.251Z"
+  },
+  {
+    "logId": "HDhjpkOEFeo5",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/s8KT8r3nXvCe",
+    "entity": "s8KT8r3nXvCe",
+    "entityId": "s8KT8r3nXvCe",
+    "changes": {
+      "title": "AIAA Rocketry Summer Camp 2024",
+      "description": "Rocketry Summer Camp under AIAA OC to provide foundational platform for rocketry enthusiasts and great opportunity to identify the future rocketeer",
+      "startDate": "2024-06-01T07:00:00.000Z",
+      "endDate": "2024-06-30T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "completed"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:08:04.843Z"
+  },
+  {
+    "logId": "C9zEDrvKg3Cm",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/s8KT8r3nXvCe",
+    "entity": "s8KT8r3nXvCe",
+    "entityId": "s8KT8r3nXvCe",
+    "changes": {
+      "title": "AIAA Rocketry Summer Camp 2024",
+      "description": "Rocketry Summer Camp under AIAA OC to provide foundational platform for rocketry enthusiasts and great opportunity to identify the future rocketeer",
+      "startDate": "2024-06-01T07:00:00.000Z",
+      "endDate": "2024-06-30T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "in-progress"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:09:56.670Z"
+  },
+  {
+    "logId": "eRFYjOMX2F0K",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/applications/RAiBym2sVokq",
+    "entity": "RAiBym2sVokq",
+    "entityId": "RAiBym2sVokq",
+    "changes": {
+      "studentFirstName": "Jyotishka",
+      "studentLastName": "Roy",
+      "studentEmail": "jyotishkaroy06@gmail.com",
+      "studentPhone": "",
+      "missionRole": "Mission Specialist",
+      "shortBio": "A puzzle solver and voracious reader. A passionate robotics and rocketry engineer in the making. Driven by the interest in rocketry and robotics to strive for better results guided by reliable designs & data."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T03:36:31.197Z"
   }
 ]

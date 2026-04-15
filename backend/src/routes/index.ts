@@ -191,6 +191,7 @@ router.get('/admin/applications/search',  joinMissionAdminController.searchAppli
 router.get('/admin/applications/mission/:missionId',  joinMissionAdminController.getApplicationsByMission.bind(joinMissionAdminController));
 router.get('/admin/applications/status/:status',  joinMissionAdminController.getApplicationsByStatus.bind(joinMissionAdminController));
 router.get('/admin/applications/:applicationId',  joinMissionAdminController.getApplicationById.bind(joinMissionAdminController));
+router.put('/admin/applications/:applicationId',  joinMissionAdminController.updateApplication.bind(joinMissionAdminController));
 router.patch('/admin/applications/:applicationId/status',  joinMissionAdminController.updateApplicationStatus.bind(joinMissionAdminController));
 router.delete('/admin/applications/:applicationId',  joinMissionAdminController.deleteApplication.bind(joinMissionAdminController));
 

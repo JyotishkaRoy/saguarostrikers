@@ -1,7 +1,13 @@
 import { readFileSync, writeFileSync } from 'fs';
 import { join, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { JoinMissionApplication, CreateJoinMissionData, UpdateApplicationStatusData, ApplicationStatus } from '../models/types';
+import {
+  JoinMissionApplication,
+  CreateJoinMissionData,
+  UpdateApplicationStatusData,
+  UpdateJoinMissionApplicationData,
+  ApplicationStatus
+} from '../models/types';
 import { generateId } from '../utils/idGenerator.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -101,6 +107,29 @@ export class JoinMissionDataHelper {
       reviewNotes: data.reviewNotes,
       reviewedBy,
       reviewedAt: now,
+      updatedAt: now,
+    };
+
+    applications[index] = updatedApplication;
+    this.writeData(applications);
+    return updatedApplication;
+  }
+
+  async updateApplication(
+    applicationId: string,
+    updates: UpdateJoinMissionApplicationData
+  ): Promise<JoinMissionApplication | null> {
+    const applications = this.readData();
+    const index = applications.findIndex(app => app.applicationId === applicationId);
+
+    if (index === -1) {
+      return null;
+    }
+
+    const now = new Date().toISOString();
+    const updatedApplication: JoinMissionApplication = {
+      ...applications[index],
+      ...updates,
       updatedAt: now,
     };
 

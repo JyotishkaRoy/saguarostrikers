@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { UsersRound, Trophy, Mail, Phone, GraduationCap, User, Search, Edit, UserPlus, X, Filter, Eye } from 'lucide-react';
+import { UsersRound, Trophy, Mail, Phone, User, Search, Edit, UserPlus, X, Filter, Eye } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 import Modal from '@/components/Modal';
@@ -12,8 +12,8 @@ interface ApprovedMember {
   studentLastName: string;
   studentEmail: string;
   studentPhone?: string;
-  grade: string;
-  schoolName: string;
+  missionRole?: string;
+  shortBio?: string;
   missionId: string;
   status: string;
   approvedAt?: string;
@@ -44,9 +44,19 @@ export default function AdminScientists() {
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [showManageModal, setShowManageModal] = useState(false);
   const [selectedMission, setSelectedMission] = useState<MissionWithMembers | null>(null);
+  const [editingScientist, setEditingScientist] = useState<ApprovedMember | null>(null);
   const [allUsers, setAllUsers] = useState<RegisteredUser[]>([]);
   const [selectedUserId, setSelectedUserId] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [editSelectedUserId, setEditSelectedUserId] = useState('');
+  const [editFormData, setEditFormData] = useState({
+    studentFirstName: '',
+    studentLastName: '',
+    studentEmail: '',
+    studentPhone: '',
+    missionRole: '',
+    shortBio: '',
+  });
   const [missionStats, setMissionStats] = useState({
     total: 0,
     published: 0,
@@ -104,7 +114,7 @@ export default function AdminScientists() {
       const missions = missionsResponse.data;
 
       // Fetch all applications
-      const applicationsResponse = await api.get('/admin/applications');
+      const applicationsResponse = await api.get<ApprovedMember[]>('/admin/applications');
       if (!applicationsResponse.success || !applicationsResponse.data) {
         throw new Error('Failed to fetch applications');
       }
@@ -213,6 +223,8 @@ export default function AdminScientists() {
         parentState: 'AZ',
         parentZip: '00000',
         missionId: selectedMission.missionId,
+        missionRole: 'Mission Specialist',
+        shortBio: '',
         fitReason: 'Direct assignment by admin',
         studentSignature: `${user.firstName} ${user.lastName}`,
         parentSignature: `${user.firstName} ${user.lastName}`,
@@ -223,7 +235,7 @@ export default function AdminScientists() {
       };
 
       // Submit application
-      const submitResponse = await api.post('/public/join-mission', applicationData);
+      const submitResponse = await api.post<{ applicationId: string }>('/public/join-mission', applicationData);
       
       if (!submitResponse.success) {
         throw new Error('Failed to create application');
@@ -252,6 +264,61 @@ export default function AdminScientists() {
 
     } catch (error) {
       console.error('Error adding scientist:', error);
+      toast.error(getErrorMessage(error));
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleOpenEditScientist = (member: ApprovedMember) => {
+    setEditingScientist(member);
+    const matchingUser = allUsers.find((u) => u.email.toLowerCase() === member.studentEmail.toLowerCase());
+    setEditSelectedUserId(matchingUser?.userId || '');
+    setEditFormData({
+      studentFirstName: member.studentFirstName || '',
+      studentLastName: member.studentLastName || '',
+      studentEmail: member.studentEmail || '',
+      studentPhone: member.studentPhone || '',
+      missionRole: member.missionRole || 'Mission Specialist',
+      shortBio: member.shortBio || '',
+    });
+  };
+
+  const handleEditUserSelect = (userId: string) => {
+    setEditSelectedUserId(userId);
+    const user = allUsers.find((u) => u.userId === userId);
+    if (!user) return;
+    setEditFormData((prev) => ({
+      ...prev,
+      studentFirstName: user.firstName,
+      studentLastName: user.lastName,
+      studentEmail: user.email,
+      studentPhone: user.phone || prev.studentPhone,
+    }));
+  };
+
+  const handleSaveScientist = async () => {
+    if (!editingScientist) return;
+    if (!editFormData.studentFirstName || !editFormData.studentLastName || !editFormData.studentEmail) {
+      toast.error('First name, last name, and email are required');
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+      await api.put(`/admin/applications/${editingScientist.applicationId}`, {
+        studentFirstName: editFormData.studentFirstName,
+        studentLastName: editFormData.studentLastName,
+        studentEmail: editFormData.studentEmail,
+        studentPhone: editFormData.studentPhone,
+        missionRole: editFormData.missionRole,
+        shortBio: editFormData.shortBio,
+      });
+      toast.success('Scientist updated successfully');
+      setEditingScientist(null);
+      setEditSelectedUserId('');
+      await fetchMissionsWithMembers();
+    } catch (error) {
       toast.error(getErrorMessage(error));
     } finally {
       setIsSubmitting(false);
@@ -550,10 +617,9 @@ export default function AdminScientists() {
                           <h3 className="font-semibold text-sm text-gray-900 truncate">
                             {member.studentFirstName} {member.studentLastName}
                           </h3>
-                          <div className="flex items-center gap-1 text-xs text-gray-600">
-                            <GraduationCap className="h-3 w-3" />
-                            <span>Grade {member.grade}</span>
-                          </div>
+                          <p className="text-xs text-primary-700 truncate">
+                            {member.missionRole || 'Mission Specialist'}
+                          </p>
                         </div>
                       </div>
 
@@ -569,10 +635,9 @@ export default function AdminScientists() {
                             <span>{member.studentPhone}</span>
                           </div>
                         )}
-                        <div className="flex items-center gap-2 text-gray-600">
-                          <GraduationCap className="h-3.5 w-3.5 flex-shrink-0" />
-                          <span className="truncate">{member.schoolName}</span>
-                        </div>
+                        {member.shortBio ? (
+                          <p className="text-gray-500 line-clamp-2">{member.shortBio}</p>
+                        ) : null}
                       </div>
                     </div>
                   ))
@@ -591,6 +656,8 @@ export default function AdminScientists() {
             setShowManageModal(false);
             setSelectedMission(null);
             setSelectedUserId('');
+            setEditingScientist(null);
+            setEditSelectedUserId('');
           }}
           title={`Manage Scientists - ${selectedMission.title}`}
           size="xl"
@@ -671,7 +738,7 @@ export default function AdminScientists() {
                           <p className="text-sm text-gray-600 truncate">{member.studentEmail}</p>
                         </div>
                         <div className="text-sm text-gray-500">
-                          Grade {member.grade}
+                          {member.missionRole || 'Mission Specialist'}
                         </div>
                       </div>
                       <button
@@ -685,11 +752,96 @@ export default function AdminScientists() {
                       >
                         <X className="h-5 w-5" />
                       </button>
+                      <button
+                        onClick={() => handleOpenEditScientist(member)}
+                        disabled={isSubmitting}
+                        className="ml-2 p-2 text-primary-600 hover:bg-primary-50 rounded-lg transition-colors"
+                        title="Edit scientist"
+                      >
+                        <Edit className="h-5 w-5" />
+                      </button>
                     </div>
                   ))}
                 </div>
               )}
             </div>
+
+            {editingScientist && (
+              <div className="bg-white border border-gray-200 rounded-lg p-4">
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <Edit className="h-5 w-5" />
+                  Edit Scientist
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                  <select
+                    className="input md:col-span-2"
+                    value={editSelectedUserId}
+                    onChange={(e) => handleEditUserSelect(e.target.value)}
+                  >
+                    <option value="">Select user to pre-populate First/Last/Email</option>
+                    {allUsers.map((user) => (
+                      <option key={user.userId} value={user.userId}>
+                        {user.firstName} {user.lastName} ({user.email})
+                      </option>
+                    ))}
+                  </select>
+                  <input
+                    className="input"
+                    placeholder="First Name"
+                    value={editFormData.studentFirstName}
+                    onChange={(e) => setEditFormData((prev) => ({ ...prev, studentFirstName: e.target.value }))}
+                  />
+                  <input
+                    className="input"
+                    placeholder="Last Name"
+                    value={editFormData.studentLastName}
+                    onChange={(e) => setEditFormData((prev) => ({ ...prev, studentLastName: e.target.value }))}
+                  />
+                  <input
+                    className="input"
+                    placeholder="Email"
+                    type="email"
+                    value={editFormData.studentEmail}
+                    onChange={(e) => setEditFormData((prev) => ({ ...prev, studentEmail: e.target.value }))}
+                  />
+                  <input
+                    className="input"
+                    placeholder="Phone"
+                    value={editFormData.studentPhone}
+                    onChange={(e) => setEditFormData((prev) => ({ ...prev, studentPhone: e.target.value }))}
+                  />
+                  <input
+                    className="input"
+                    placeholder="Mission Role"
+                    value={editFormData.missionRole}
+                    onChange={(e) => setEditFormData((prev) => ({ ...prev, missionRole: e.target.value }))}
+                  />
+                  <textarea
+                    className="input md:col-span-2"
+                    placeholder="Short Bio"
+                    value={editFormData.shortBio}
+                    rows={3}
+                    onChange={(e) => setEditFormData((prev) => ({ ...prev, shortBio: e.target.value }))}
+                  />
+                </div>
+                <div className="flex gap-2 mt-4">
+                  <button
+                    onClick={handleSaveScientist}
+                    disabled={isSubmitting}
+                    className="btn-primary"
+                  >
+                    Save Changes
+                  </button>
+                  <button
+                    onClick={() => setEditingScientist(null)}
+                    disabled={isSubmitting}
+                    className="btn-outline"
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </div>
+            )}
           </div>
         </Modal>
       )}

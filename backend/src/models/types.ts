@@ -593,6 +593,8 @@ export interface JoinMissionApplication {
   studentSlack?: string;
   // Mission Selection
   missionId: string;
+  missionRole?: string;
+  shortBio?: string;
   fitReason: string;
   studentSignature: string;
   studentSignatureDate: string;
@@ -642,6 +644,8 @@ export interface CreateJoinMissionData {
   studentPhone?: string;
   studentSlack?: string;
   missionId: string;
+  missionRole?: string;
+  shortBio?: string;
   fitReason: string;
   studentSignature: string;
   studentSignatureDate: string;
@@ -667,4 +671,13 @@ export interface CreateJoinMissionData {
 export interface UpdateApplicationStatusData {
   status: ApplicationStatus;
   reviewNotes?: string;
+}
+
+export interface UpdateJoinMissionApplicationData {
+  studentFirstName?: string;
+  studentLastName?: string;
+  studentEmail?: string;
+  studentPhone?: string;
+  missionRole?: string;
+  shortBio?: string;
 }
