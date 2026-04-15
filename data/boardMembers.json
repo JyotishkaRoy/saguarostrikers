@@ -1,0 +1,26 @@
+[
+  {
+    "boardMemberId": "25JwF2msafjm",
+    "name": "Sarah Johnson",
+    "position": "President & Founder",
+    "bio": "Dr. Johnson is an aerospace engineer with over 15 years of experience in rocket propulsion systems. She founded Saguaro Strikers to inspire the next generation of aerospace professionals.",
+    "email": "admin@rocketry.org",
+    "imageUrl": "/uploads/users/ZYTGOKOUExDF/profile.jpg",
+    "order": 1,
+    "status": "active",
+    "createdAt": "2025-01-15T10:00:00.000Z",
+    "updatedAt": "2026-01-21T10:46:49.386Z"
+  },
+  {
+    "boardMemberId": "4Pb3QbW9f90a",
+    "name": "Jyotishka Roy",
+    "position": "President & Founder",
+    "bio": "A puzzle solver and voracious reader. A passionate robotics and rocketry engineer in the making. Driven by the interest in rocketry and robotics to strive for better results guided by reliable designs & data. Keen interest in details and analyzing every small thing to make better advancements in engineering fields.",
+    "email": "jyotishkaroy06@gmail.com",
+    "imageUrl": "/uploads/users/KIDYAJfDFyAe/profile.jpg",
+    "order": 2,
+    "status": "active",
+    "createdAt": "2026-04-15T00:42:57.817Z",
+    "updatedAt": "2026-04-15T01:02:05.768Z"
+  }
+]

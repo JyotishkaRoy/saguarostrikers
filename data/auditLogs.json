@@ -1,0 +1,1437 @@
+[
+  {
+    "logId": "NPDLH6J2DwZq",
+    "userId": "ZYTGOKOUExDF",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "ZYTGOKOUExDF",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-01-09T20:57:12.371Z"
+  },
+  {
+    "logId": "07VDlOMvlt1S",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/missions",
+    "entity": "missions",
+    "entityId": "—",
+    "changes": {
+      "title": "cccufcuyfu",
+      "description": "cgcufvyuguigiug",
+      "startDate": "2026-02-12",
+      "endDate": "2026-02-18",
+      "location": "Irvine, CA",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:15:44.064Z"
+  },
+  {
+    "logId": "QnzdIiuvsfVv",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/missions",
+    "entity": "missions",
+    "entityId": "—",
+    "changes": {
+      "title": "Another Test",
+      "description": "Another Test",
+      "startDate": "2026-02-12",
+      "endDate": "2026-02-18",
+      "location": "Irvine, CA",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:24:01.644Z"
+  },
+  {
+    "logId": "GWgYc4Dz7DEv",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/5yT4LV97536w/status",
+    "entity": "status",
+    "entityId": "5yT4LV97536w",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:47:24.172Z"
+  },
+  {
+    "logId": "hKB00pVD50Tm",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/artifacts",
+    "entity": "artifacts",
+    "entityId": "—",
+    "changes": {
+      "missionId": "d11ccJtQ6zjj",
+      "description": "Video"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:47:47.244Z"
+  },
+  {
+    "logId": "Mlr5iDEetbng",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/artifacts",
+    "entity": "artifacts",
+    "entityId": "—",
+    "changes": {
+      "missionId": "d11ccJtQ6zjj",
+      "description": "Image"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:48:01.935Z"
+  },
+  {
+    "logId": "WrkxWo3um27i",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/artifacts/x1zWSJXPWmEH",
+    "entity": "x1zWSJXPWmEH",
+    "entityId": "x1zWSJXPWmEH",
+    "changes": {
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:49:03.575Z"
+  },
+  {
+    "logId": "WQpxPTEdtYA0",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/artifacts/C7BlRARNULId",
+    "entity": "C7BlRARNULId",
+    "entityId": "C7BlRARNULId",
+    "changes": {
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:49:05.908Z"
+  },
+  {
+    "logId": "hiJTLFJBskCp",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "d11ccJtQ6zjj",
+      "title": "Video",
+      "description": "",
+      "status": "draft"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:56:26.715Z"
+  },
+  {
+    "logId": "4GDMrtYO00YS",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "d11ccJtQ6zjj",
+      "title": "Images",
+      "description": "",
+      "status": "draft"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:56:44.022Z"
+  },
+  {
+    "logId": "Fw9BzhizhbUX",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "d11ccJtQ6zjj",
+      "title": "Images",
+      "description": "",
+      "status": "draft"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:56:44.038Z"
+  },
+  {
+    "logId": "i2wqC6KWSUss",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "d11ccJtQ6zjj",
+      "title": "Images",
+      "description": "",
+      "status": "draft"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:56:44.052Z"
+  },
+  {
+    "logId": "OM7FohRyt8eT",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "d11ccJtQ6zjj",
+      "title": "Images",
+      "description": "",
+      "status": "draft"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:56:44.061Z"
+  },
+  {
+    "logId": "yxWUuinTn0XR",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/gallery/bsZsK6NLnlWu",
+    "entity": "bsZsK6NLnlWu",
+    "entityId": "bsZsK6NLnlWu",
+    "changes": {
+      "status": "published",
+      "isPublic": true
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:56:59.128Z"
+  },
+  {
+    "logId": "5CPpTegtDbHl",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/gallery/PGX6A1C3TPKT",
+    "entity": "PGX6A1C3TPKT",
+    "entityId": "PGX6A1C3TPKT",
+    "changes": {
+      "status": "published",
+      "isPublic": true
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:57:02.058Z"
+  },
+  {
+    "logId": "eLn5cXrzcCsw",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/gallery/eaBhCOPjTfLj",
+    "entity": "eaBhCOPjTfLj",
+    "entityId": "eaBhCOPjTfLj",
+    "changes": {
+      "status": "published",
+      "isPublic": true
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:57:04.059Z"
+  },
+  {
+    "logId": "Ms9ajY8l0Imm",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/gallery/yN09LQwe6Mtm",
+    "entity": "yN09LQwe6Mtm",
+    "entityId": "yN09LQwe6Mtm",
+    "changes": {
+      "status": "published",
+      "isPublic": true
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:57:06.122Z"
+  },
+  {
+    "logId": "qPAEJUFxOZt1",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/gallery/n4eARGiO1Jc4",
+    "entity": "n4eARGiO1Jc4",
+    "entityId": "n4eARGiO1Jc4",
+    "changes": {
+      "status": "published",
+      "isPublic": true
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T18:57:07.443Z"
+  },
+  {
+    "logId": "pgEIJ0eJ1QTb",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/discussions",
+    "entity": "discussions",
+    "entityId": "—",
+    "changes": {
+      "title": "Test-Discussions",
+      "description": "Test-Discussions",
+      "category": "general",
+      "missionId": "d11ccJtQ6zjj",
+      "isPinned": false,
+      "isLocked": false
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:06:22.935Z"
+  },
+  {
+    "logId": "3uRliBE9ubsX",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/discussions",
+    "entity": "discussions",
+    "entityId": "—",
+    "changes": {
+      "title": "Technical Help",
+      "description": "Technical Help",
+      "category": "technical",
+      "missionId": "d11ccJtQ6zjj",
+      "isPinned": false,
+      "isLocked": false
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:15:58.958Z"
+  },
+  {
+    "logId": "KOaXrTnDY8l2",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/discussions/ziPPQTPQIkxj/replies/ujblDkl8oTSd",
+    "entity": "ujblDkl8oTSd",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:17:54.825Z"
+  },
+  {
+    "logId": "lwpbDhv6tYy1",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/discussions/ziPPQTPQIkxj/replies/4HBOczIYDL6y",
+    "entity": "4HBOczIYDL6y",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:17:57.778Z"
+  },
+  {
+    "logId": "zpMUim3hCejN",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/discussions/SFqHg9hD1OWC/replies/hkOjk0cYIJjP",
+    "entity": "hkOjk0cYIJjP",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:19:24.348Z"
+  },
+  {
+    "logId": "5xHuDHUTNItv",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/discussions/SFqHg9hD1OWC",
+    "entity": "SFqHg9hD1OWC",
+    "entityId": "SFqHg9hD1OWC",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:24:13.703Z"
+  },
+  {
+    "logId": "7u8tPlCFUO3C",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/discussions/ziPPQTPQIkxj",
+    "entity": "ziPPQTPQIkxj",
+    "entityId": "ziPPQTPQIkxj",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:24:16.824Z"
+  },
+  {
+    "logId": "9LZD95wkv4Nv",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/discussions",
+    "entity": "discussions",
+    "entityId": "—",
+    "changes": {
+      "title": "Technical Help",
+      "description": "Technical Help",
+      "category": "technical",
+      "missionId": "d11ccJtQ6zjj",
+      "isPinned": false,
+      "isLocked": false
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T19:25:21.388Z"
+  },
+  {
+    "logId": "TphmlDTd5g6D",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/site-content/future-explorers/upload-carousel",
+    "entity": "upload-carousel",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T20:20:34.743Z"
+  },
+  {
+    "logId": "FyISN4hjF0S7",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/site-content/future-explorers/upload-carousel",
+    "entity": "upload-carousel",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T20:20:34.758Z"
+  },
+  {
+    "logId": "IhZV66Jx4IiP",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/site-content/future-explorers/upload-carousel",
+    "entity": "upload-carousel",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T20:20:34.785Z"
+  },
+  {
+    "logId": "KSNu598uVLk9",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/site-content/future-explorers/upload-carousel",
+    "entity": "upload-carousel",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-01T20:20:34.903Z"
+  },
+  {
+    "logId": "S7gopXpjIsxt",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/contact-messages/XYKhfbV2n5ZH/status",
+    "entity": "status",
+    "entityId": "XYKhfbV2n5ZH",
+    "changes": {
+      "status": "archived"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:31:42.224Z"
+  },
+  {
+    "logId": "i2TcC8WnxZjn",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/contact-messages/XYKhfbV2n5ZH/status",
+    "entity": "status",
+    "entityId": "XYKhfbV2n5ZH",
+    "changes": {
+      "status": "new"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:32:00.115Z"
+  },
+  {
+    "logId": "HEjvZW3g8dhs",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/contact-messages/XYKhfbV2n5ZH/status",
+    "entity": "status",
+    "entityId": "XYKhfbV2n5ZH",
+    "changes": {
+      "status": "archived"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:32:46.411Z"
+  },
+  {
+    "logId": "DVaBDOHIPNRA",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/contact-messages/XYKhfbV2n5ZH/status",
+    "entity": "status",
+    "entityId": "XYKhfbV2n5ZH",
+    "changes": {
+      "status": "archived"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:33:00.329Z"
+  },
+  {
+    "logId": "ezkkB3UWbO3r",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/contact-messages/XYKhfbV2n5ZH/status",
+    "entity": "status",
+    "entityId": "XYKhfbV2n5ZH",
+    "changes": {
+      "status": "new"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:33:06.775Z"
+  },
+  {
+    "logId": "4WijXlKrUfJZ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/outreaches",
+    "entity": "outreaches",
+    "entityId": "—",
+    "changes": {
+      "title": "Robert Moor Workshop",
+      "description": "An outreach event for future explorer",
+      "startDate": "2026-02-26",
+      "endDate": "2026-02-27",
+      "location": "Irvine, CA",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:38:13.953Z"
+  },
+  {
+    "logId": "mp6GTDBPA0ZO",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/upload",
+    "entity": "upload",
+    "entityId": "—",
+    "changes": {
+      "folder": "outreaches",
+      "outreachTitle": "Robert Moor Workshop",
+      "outreachId": "xVBs0bh0RGTf"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:38:13.974Z"
+  },
+  {
+    "logId": "zXlDBaS8KwEg",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/outreaches/xVBs0bh0RGTf",
+    "entity": "xVBs0bh0RGTf",
+    "entityId": "xVBs0bh0RGTf",
+    "changes": {
+      "title": "Robert Moor Workshop",
+      "description": "An outreach event for future explorer",
+      "startDate": "2026-02-26",
+      "endDate": "2026-02-27",
+      "location": "Irvine, CA",
+      "status": "published",
+      "imageUrl": "/uploads/outreaches/robert-moor-workshop-xVBs0bh0RGTf/hero.jpg"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:38:13.977Z"
+  },
+  {
+    "logId": "llLc3oPDFGTl",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/outreaches/xVBs0bh0RGTf/participants",
+    "entity": "participants",
+    "entityId": "—",
+    "changes": {
+      "userId": "ZYTGOKOUExDF"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:53:34.665Z"
+  },
+  {
+    "logId": "nButgJvHncve",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/outreaches/xVBs0bh0RGTf/participants",
+    "entity": "participants",
+    "entityId": "—",
+    "changes": {
+      "userId": "jkvt7EeVpH2H"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:53:43.213Z"
+  },
+  {
+    "logId": "hTIeoKAr9vn5",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/outreach-artifacts",
+    "entity": "outreach-artifacts",
+    "entityId": "—",
+    "changes": {
+      "outreachId": "xVBs0bh0RGTf",
+      "description": "Test"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:54:21.750Z"
+  },
+  {
+    "logId": "0fzzmTuRLKDA",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/outreach-artifacts/pd59RbGGgord",
+    "entity": "pd59RbGGgord",
+    "entityId": "pd59RbGGgord",
+    "changes": {
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:54:26.159Z"
+  },
+  {
+    "logId": "lXerTrTwHhSb",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/outreach-artifacts/pd59RbGGgord",
+    "entity": "pd59RbGGgord",
+    "entityId": "pd59RbGGgord",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:54:49.878Z"
+  },
+  {
+    "logId": "FDrvrNxAFFId",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "outreachId": "xVBs0bh0RGTf",
+      "title": "IMG_4143.JPG",
+      "description": "",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:55:15.712Z"
+  },
+  {
+    "logId": "nh7tiJd4TC5w",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "outreachId": "xVBs0bh0RGTf",
+      "title": "IMG_4144 2.JPG",
+      "description": "",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T00:55:15.729Z"
+  },
+  {
+    "logId": "iNtgqjkmsVf4",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/outreaches",
+    "entity": "outreaches",
+    "entityId": "—",
+    "changes": {
+      "title": "Davis Magnet Outreach",
+      "description": "Davis Magnet Outreach",
+      "startDate": "2026-02-05",
+      "endDate": "2026-02-05",
+      "location": "Irvine, CA",
+      "status": "draft"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T01:06:46.782Z"
+  },
+  {
+    "logId": "NJODdzMlwnfC",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/upload",
+    "entity": "upload",
+    "entityId": "—",
+    "changes": {
+      "folder": "outreaches",
+      "outreachTitle": "Davis Magnet Outreach",
+      "outreachId": "8b1CoMa5Dw56"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T01:06:46.806Z"
+  },
+  {
+    "logId": "SzmIv9fTKFY0",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/outreaches/8b1CoMa5Dw56",
+    "entity": "8b1CoMa5Dw56",
+    "entityId": "8b1CoMa5Dw56",
+    "changes": {
+      "title": "Davis Magnet Outreach",
+      "description": "Davis Magnet Outreach",
+      "startDate": "2026-02-05",
+      "endDate": "2026-02-05",
+      "location": "Irvine, CA",
+      "status": "draft",
+      "imageUrl": "/uploads/outreaches/davis-magnet-outreach-8b1CoMa5Dw56/hero.MP4"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T01:06:46.810Z"
+  },
+  {
+    "logId": "gBsn0WAlRSP0",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/outreaches/8b1CoMa5Dw56",
+    "entity": "8b1CoMa5Dw56",
+    "entityId": "8b1CoMa5Dw56",
+    "changes": {
+      "title": "Davis Magnet Outreach",
+      "description": "Davis Magnet Outreach",
+      "startDate": "2026-02-05",
+      "endDate": "2026-02-05",
+      "location": "Irvine, CA",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T01:07:04.708Z"
+  },
+  {
+    "logId": "Jzc8jxhWMwz6",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/calendar-events",
+    "entity": "calendar-events",
+    "entityId": "—",
+    "changes": {
+      "title": "ARC 2026",
+      "description": "American Rocketry Compitition",
+      "date": "2026-01-01",
+      "startTime": "05:00",
+      "endTime": "10:00",
+      "type": "rocketry-competition",
+      "status": "ongoing",
+      "location": ""
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T13:11:35.053Z"
+  },
+  {
+    "logId": "C0FihiBrlwS4",
+    "userId": "ZYTGOKOUExDF",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "ZYTGOKOUExDF",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T14:14:38.032Z"
+  },
+  {
+    "logId": "OyOAxzg2pPa5",
+    "userId": "qLs3l83RgSkd",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "qLs3l83RgSkd",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T14:17:42.056Z"
+  },
+  {
+    "logId": "rT5RfNgEF6RC",
+    "userId": "qLs3l83RgSkd",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "qLs3l83RgSkd",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T14:21:44.803Z"
+  },
+  {
+    "logId": "0Oz8gKuH81VZ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "ZYTGOKOUExDF",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/143.0.0.0 Safari/537.36",
+    "timestamp": "2026-02-04T14:22:51.498Z"
+  },
+  {
+    "logId": "jamT9d0WGhYA",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/board-members/OvwVj8qDjeZx",
+    "entity": "OvwVj8qDjeZx",
+    "entityId": "OvwVj8qDjeZx",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-14T00:48:47.873Z"
+  },
+  {
+    "logId": "K7336l1ts5fb",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/contact-messages/XYKhfbV2n5ZH/status",
+    "entity": "status",
+    "entityId": "XYKhfbV2n5ZH",
+    "changes": {
+      "status": "archived"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-14T01:05:23.891Z"
+  },
+  {
+    "logId": "i6d9Ty1iHejw",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/UqGzFgkc3yZE/status",
+    "entity": "status",
+    "entityId": "UqGzFgkc3yZE",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Strong background and clear motivation. Approved for Spaceport team."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-14T01:06:05.690Z"
+  },
+  {
+    "logId": "VWyWA82QgsgP",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/site-content/join-mission-agreement-financial",
+    "entity": "join-mission-agreement-financial",
+    "entityId": "join-mission-agreement-financial",
+    "changes": {
+      "title": "Financial Obligations Agreement",
+      "content": "You are providing permission for your student to join the event selected above. By giving this parental participation permission, you (as the parent of the student) agree to own all financial responsibilities related to your student's participation. You also agree that you will always be physically present during the various meetings and launches to ensure safety of your student. Finally, you (as the parent of participating student) assume all risks of participation in this Activity, whether known or unknown to you, including travel to and from the Activity (including air travel) or any events incidental to this Activity."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:01:56.948Z"
+  },
+  {
+    "logId": "sKjVSC5x9pZe",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/site-content/join-mission-agreement-photograph",
+    "entity": "join-mission-agreement-photograph",
+    "entityId": "join-mission-agreement-photograph",
+    "changes": {
+      "title": "Photograph & Video Consent",
+      "content": "You hereby irrevocably authorize the event owner as well as this website Admin to use any individual as well as group photograph containing your student taken during the event and/or provided by you for publicizing the program or for any other related lawful purpose. In addition, you waive all rights to inspect or approve the finished product using any of those photographs, including written & electronic copies, wherein your student may appear. Additionally, you waive all rights to royalties or other compensation arising or related to use of the photographs."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:02:18.597Z"
+  },
+  {
+    "logId": "iLEGp2TsNuQn",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/site-content/join-mission-agreement-liability",
+    "entity": "join-mission-agreement-liability",
+    "entityId": "join-mission-agreement-liability",
+    "changes": {
+      "title": "Liability Release",
+      "content": "You acknowledge that since participation of your student in the event is voluntary, you will receive no financial compensation for any loss or damage or injury arising from or associated with the event. You forever discharge the event organizers, owner, participant as well as website owner from all claims, demands and causes of action."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:02:32.203Z"
+  },
+  {
+    "logId": "4elDS1nTPczn",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/site-content/homepage-hero",
+    "entity": "homepage-hero",
+    "entityId": "homepage-hero",
+    "changes": {
+      "title": "Homepage Hero Section",
+      "content": "{\n  \"headline\": \"Welcome to Saguaro Strikers\",\n  \"subheadline\": \"Join us to get on-boarded on an exciting journey of amateur rocketry, robotics and various STEM related community initiatives through innovation, teamwork, and excellence\",\n  \"images\": [\n    \"/uploads/banners/901562cf-46f7-4a91-981b-48840a87783e.png\",\n    \"/uploads/banners/14fdd5f8-3f44-4d9a-81b5-7353de196777.png\",\n    \"/uploads/banners/3770a24f-6244-4188-bfd4-b96f4bfde12c.png\",\n    \"/uploads/banners/024511b4-cd58-431f-b315-b0da5a777ed3.png\",\n    \"/uploads/banners/cad7769f-98d5-4409-a925-e8ec05fb9645.png\",\n    \"/uploads/banners/7d623657-205f-4c7a-86df-51e00b6db0f6.png\"\n  ],\n  \"ctas\": [\n    {\n      \"text\": \"Join Our Team\",\n      \"link\": \"/join-mission\",\n      \"style\": \"primary\"\n    },\n    {\n      \"text\": \"View Missions\",\n      \"link\": \"/competitions\",\n      \"style\": \"secondary\"\n    }\n  ]\n}"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:05:42.690Z"
+  },
+  {
+    "logId": "lMbmPHKG0bxT",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/site-content/featured-video",
+    "entity": "featured-video",
+    "entityId": "—",
+    "changes": {
+      "url": "/uploads/featured-videos/G1umBaRHjCB0.MP4"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:07:50.669Z"
+  },
+  {
+    "logId": "uovqDbacI19I",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/site-content/featured-video",
+    "entity": "featured-video",
+    "entityId": "—",
+    "changes": {
+      "url": "/uploads/featured-videos/TKngjZjnNsqa.MP4"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:07:51.286Z"
+  },
+  {
+    "logId": "TQ7TQhpNW0EN",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/site-content/upload-featured-video",
+    "entity": "upload-featured-video",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:14:22.600Z"
+  },
+  {
+    "logId": "ghntquyGlNLZ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/site-content/upload-featured-video",
+    "entity": "upload-featured-video",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:14:23.100Z"
+  },
+  {
+    "logId": "qeGyAlOrO23w",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/site-content/upload-featured-video",
+    "entity": "upload-featured-video",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:14:23.397Z"
+  },
+  {
+    "logId": "MQPTISsSEEC5",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/site-content/featured-videos",
+    "entity": "featured-videos",
+    "entityId": "featured-videos",
+    "changes": {
+      "title": "Featured Videos",
+      "content": "{\n  \"videos\": [\n    {\n      \"title\": \"Final preparation before launch\",\n      \"url\": \"/uploads/featured-videos/3aYLAMjkMUqw.MOV\"\n    },\n    {\n      \"title\": \"The Countdown\",\n      \"url\": \"/uploads/featured-videos/UzpfpcCF4JH3.MOV\"\n    },\n    {\n      \"title\": \"The nerve wrecking moment of life off\",\n      \"url\": \"/uploads/featured-videos/tc6thwgmrDHv.mp4\"\n    }\n  ]\n}"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:14:23.425Z"
+  },
+  {
+    "logId": "wxWw4lB9G8aV",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/site-content/upload-featured-video",
+    "entity": "upload-featured-video",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:16:46.912Z"
+  },
+  {
+    "logId": "pHZYL7g6KDcx",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/site-content/featured-video",
+    "entity": "featured-video",
+    "entityId": "—",
+    "changes": {
+      "url": "/uploads/featured-videos/UzpfpcCF4JH3.MOV"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:16:46.924Z"
+  },
+  {
+    "logId": "dtQsrbWj72RA",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/site-content/featured-videos",
+    "entity": "featured-videos",
+    "entityId": "featured-videos",
+    "changes": {
+      "title": "Featured Videos",
+      "content": "{\n  \"videos\": [\n    {\n      \"title\": \"Final preparation before launch\",\n      \"url\": \"/uploads/featured-videos/3aYLAMjkMUqw.MOV\"\n    },\n    {\n      \"title\": \"At the launch pad\",\n      \"url\": \"/uploads/featured-videos/5hXf6vF7Fv2Z.MOV\"\n    },\n    {\n      \"title\": \"The nerve wrecking moment of life off\",\n      \"url\": \"/uploads/featured-videos/tc6thwgmrDHv.mp4\"\n    }\n  ]\n}"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:16:46.934Z"
+  },
+  {
+    "logId": "VaAjEWelnghP",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/site-content/homepage-about",
+    "entity": "homepage-about",
+    "entityId": "homepage-about",
+    "changes": {
+      "title": "About Us",
+      "content": "<p class=\"ql-align-justify\"><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Saguaro Strikers</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> is a club for anyone interested in science, technology, building things, or just figuring out how rockets and robots work. It doesn’t matter if you’ve never tried a STEM project before or if you’re not even sure what STEM stands for (it means science, technology, engineering, and math, so that you know). All you really need is a little curiosity and the willingness to try new things. Our club is all about making STEM feel less intimidating and way more fun. When you come to a meeting, you’ll find people discussing the latest launch or test results from the most recent run of our robot. Someone always comes up with a solution to an unintended launch issue or an answer to a problem with the robot, and suddenly, everyone is offering great ideas about it. Questions are always welcome, and everyone is there to learn.</span></p><p class=\"ql-align-justify\"><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">One of the most exciting parts of Saguaro Strikers is building and launching rockets. We start by learning the basics, like how rockets fly and what makes them work, and then we get hands-on with designing and building our own. Launch days are always full of energy because you never know if your rocket will zoom into the sky or spin off in a weird direction. Sometimes things don’t work out, but that’s just part of the experience. We just record the launch, figure out what went wrong, fix and calibrate certain parameters, and try again. The process is just as important as the results, and everyone learns from both success and failure. If robots are more your thing, you’ll definitely find your place with us. A lot of our members love building things that move and can do certain tasks. Some people have been doing it for a while, but most are just starting. We help each other learn, whether it’s coding, wiring, or figuring out how to put everything together. Sometimes we build robots or rockets to practice for the real thing we might build, or sometimes we build the actual robot or rocket.</span></p><p class=\"ql-align-justify\"><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Members are always ready to explain things, usually with quick sketches or diagrams and lots of other resources. Sometimes, we get real scientists or engineers to visit and talk about their work. One thing that’s super important to us is making sure everyone feels welcome. It doesn’t matter if you’ve never built a robot or launched a rocket before. Everyone started somewhere, and there’s no shame or judgment if you make mistakes or don’t know something yet. We have members from all different backgrounds, and we make sure to provide tools and supplies for anyone who needs them. If you’re not sure where to start, just ask, and someone will help you out.</span></p><p class=\"ql-align-justify\"><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">We also like to get involved in the community. Sometimes we run workshops for younger kids to help them build mini rockets or simple robots, and it’s always great to see how excited they get when their projects work. We do demonstrations and help out at events to get more people excited about what you can do with STEM. Our meetings are always packed with STEM and fun discussions about rocketry or robotics. Usually, we start by talking about new things that we are supposed to do and then split up into groups to work on projects or brainstorm ideas. There’s always a lot of encouragement, excitement, and enthusiasm.</span></p><p class=\"ql-align-justify\"><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">You might be wondering why you should join Saguaro Strikers. If you’re interested in trying out new STEM projects, building creative things, talking about wild ideas, and making new ideas come to life, this is the club for you. You don’t need to be an expert or have special experience. Just come with an open mind and a willingness to try. Maybe you’ll invent something new, maybe your rocket will have better performance than the ones made by experienced people, or maybe you’ll just find a bunch of people who share your interests and then work with them as a team to build a project. Whatever happens, you’ll be glad you joined, because Saguaro Strikers is a place where everyone is welcome, everyone learns, and nobody has to be perfect. We’re here to have fun, figure things out together, learn about STEM, robotics, and rocketry, and build amazing things along the way.</span></p><p><br></p><p><br></p>"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:26:49.733Z"
+  },
+  {
+    "logId": "qlltY8HlAobS",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/site-content/upload-mission-director",
+    "entity": "upload-mission-director",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:32:25.083Z"
+  },
+  {
+    "logId": "epVrMpN0cDTB",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/site-content/upload-mission-director",
+    "entity": "upload-mission-director",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:35:01.912Z"
+  },
+  {
+    "logId": "4FPtq6FIhgeJ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/site-content/mission-commander",
+    "entity": "mission-commander",
+    "entityId": "mission-commander",
+    "changes": {
+      "title": "Mission Commander Statement",
+      "content": "{\n  \"message\": \"As the President of Saguaro Strikers, I would like to extend a warm welcome to all members as we embark on our journey into the world of STEM. Here, we can explore creativity and curiosity while working on innovative projects and collaborating as a team.\\n\\nOur club is a space for individuals to engage with science, technology, engineering, and math, regardless of their prior experience. Whether you are launching rockets, programming robots, or simply curious about how things operate, you will find a supportive environment that encourages curiosity and learning. Each member brings their own unique background and perspective, which is extremely valuable to our group. I encourage everyone to share their ideas and ask questions, as collaboration often leads to the best outcomes. We have a variety of activities planned, including hands-on rocket launches, robotics challenges, and community STEM initiatives and I hope each of you takes the opportunity to participate. If you need assistance, don’t hesitate to reach out; we're here to learn from one another. As we move forward this year, let's focus on getting locked and loaded for the various robotics and rocketry competitions we might participate in. We will encounter challenges along the way, but remember that these experiences provide very valuable lessons for our futures.\\nWe invite you to join us as we explore new possibilities within the world of STEM. Regardless of your current skill level, our club provides a unique opportunity to develop technical abilities, collaborate with peers, and contribute to innovative projects. By participating, you will gain access to hands-on workshops and mentorship that will help you grow both as a student and a future professional. I look forward to seeing what we can achieve together this year and the unique ideas you will bring to our team. Your contributions will be essential as we prepare for upcoming competitions and community events. Furthermore, we believe that the skills learned here, such as problem-solving and critical thinking in times of high pressure, will be beneficial in all areas of our academic lives. I am eager to see how our collective efforts will shape the club's journey in the coming years.\",\n  \"name\": \"Jyotishka Roy\",\n  \"title\": \"Mission Director\",\n  \"image\": \"/uploads/mission-director/HLHdiynMUKiA.png\"\n}"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:35:09.649Z"
+  },
+  {
+    "logId": "ynMS03YOEeDP",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/site-content/mission-commander",
+    "entity": "mission-commander",
+    "entityId": "mission-commander",
+    "changes": {
+      "title": "Mission Commander Statement",
+      "content": "{\n  \"message\": \"As the Mission Director of Saguaro Strikers, I would like to extend a warm welcome to all members as we embark on our journey into the world of STEM. Here, we can explore creativity and curiosity while working on innovative projects and collaborating as a team.\",\n  \"name\": \"Jyotishka Roy\",\n  \"title\": \"Mission Director\",\n  \"image\": \"/uploads/mission-director/HLHdiynMUKiA.png\"\n}"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:36:57.016Z"
+  },
+  {
+    "logId": "UHvkjxz0FHbh",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/site-content/homepage-mission",
+    "entity": "homepage-mission",
+    "entityId": "homepage-mission",
+    "changes": {
+      "title": "Mission",
+      "content": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">This club is a space for individuals to engage with science, technology, engineering, and math, regardless of their prior experience. Whether you are launching rockets, programming robots, or simply curious about how things operate, you will find a supportive environment that encourages curiosity and learning. Each member brings their own unique background and perspective, which is extremely valuable to our group. I encourage everyone to share their ideas and ask questions, as collaboration often leads to the best outcomes. We have a variety of activities planned, including hands-on rocket launches, robotics challenges, and community STEM initiatives and I hope each of you takes the opportunity to participate. If you need assistance, don’t hesitate to reach out; we're here to learn from one another. As we move forward this year, let's focus on getting locked and loaded for the various robotics and rocketry competitions we might participate in. We will encounter challenges along the way, but remember that these experiences provide very valuable lessons for our futures.</span></p>"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:37:20.848Z"
+  },
+  {
+    "logId": "0way2gndjyP1",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/site-content/homepage-vision",
+    "entity": "homepage-vision",
+    "entityId": "homepage-vision",
+    "changes": {
+      "title": "Vision",
+      "content": "<p><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">I invite you to join us as we explore new possibilities within the world of STEM. Regardless of your current skill level, our club provides a unique opportunity to develop technical abilities, collaborate with peers, and contribute to innovative projects. By participating, you will gain access to hands-on workshops and mentorship that will help you grow both as a student and a future professional. I look forward to seeing what we can achieve together this year and the unique ideas you will bring to our team. Your contributions will be essential as we prepare for upcoming competitions and community events. Furthermore, we believe that the skills learned here, such as problem-solving and critical thinking in times of high pressure, will be beneficial in all areas of our academic lives. I am eager to see how our collective efforts will shape the club's journey in the coming years.</span></p>"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:37:39.461Z"
+  },
+  {
+    "logId": "RQvq6xkGESEb",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/board-members/v6vf7VioyAGE",
+    "entity": "v6vf7VioyAGE",
+    "entityId": "v6vf7VioyAGE",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:38:48.535Z"
+  },
+  {
+    "logId": "LzTmg8hQ98t1",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/board-members/r3uiHWL7Bfef",
+    "entity": "r3uiHWL7Bfef",
+    "entityId": "r3uiHWL7Bfef",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:38:52.940Z"
+  },
+  {
+    "logId": "O5njThzBU7fz",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/board-members/u00q6VhACXh0",
+    "entity": "u00q6VhACXh0",
+    "entityId": "u00q6VhACXh0",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:38:55.170Z"
+  },
+  {
+    "logId": "CnSBIlw0iNnA",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/board-members/hR5pjIpP7Fzd",
+    "entity": "hR5pjIpP7Fzd",
+    "entityId": "hR5pjIpP7Fzd",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:38:58.295Z"
+  },
+  {
+    "logId": "ezZLFJ5JBKDv",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/users/AKVjArNofHsh",
+    "entity": "AKVjArNofHsh",
+    "entityId": "AKVjArNofHsh",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:39:17.954Z"
+  },
+  {
+    "logId": "EtTj51x2pFWK",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/users/jkvt7EeVpH2H",
+    "entity": "jkvt7EeVpH2H",
+    "entityId": "jkvt7EeVpH2H",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:39:20.926Z"
+  },
+  {
+    "logId": "A3DHZ5cb6MgO",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/users/7XqjA1AKA4jN",
+    "entity": "7XqjA1AKA4jN",
+    "entityId": "7XqjA1AKA4jN",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:39:23.362Z"
+  },
+  {
+    "logId": "QdOu7VIVifIX",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/users/Sw8guc1fI0ew",
+    "entity": "Sw8guc1fI0ew",
+    "entityId": "Sw8guc1fI0ew",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:39:25.556Z"
+  },
+  {
+    "logId": "aA50pFFC4KHl",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/users/VXG5fHlFwxsv",
+    "entity": "VXG5fHlFwxsv",
+    "entityId": "VXG5fHlFwxsv",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:39:27.542Z"
+  },
+  {
+    "logId": "wW2YT5K3Pvak",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/users/Lr9AJDhT3Pex",
+    "entity": "Lr9AJDhT3Pex",
+    "entityId": "Lr9AJDhT3Pex",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:39:29.706Z"
+  },
+  {
+    "logId": "INwBrFjNTgcw",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/users/qLs3l83RgSkd",
+    "entity": "qLs3l83RgSkd",
+    "entityId": "qLs3l83RgSkd",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:39:34.920Z"
+  },
+  {
+    "logId": "4Gvp3uHmGAN4",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/users/V9bFPgCkjywq",
+    "entity": "V9bFPgCkjywq",
+    "entityId": "V9bFPgCkjywq",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:39:37.643Z"
+  },
+  {
+    "logId": "GQLO4CvNqQkL",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/users/llDkGpi47AnL",
+    "entity": "llDkGpi47AnL",
+    "entityId": "llDkGpi47AnL",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:39:39.961Z"
+  },
+  {
+    "logId": "vtpsBViP5bQF",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users",
+    "entity": "users",
+    "entityId": "—",
+    "changes": {
+      "email": "jyotishkaroy06@gmail.com",
+      "firstName": "Jyotishka",
+      "lastName": "Roy",
+      "phone": "",
+      "role": "admin",
+      "status": "active",
+      "password": "[REDACTED]"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:40:58.520Z"
+  },
+  {
+    "logId": "YpggMxyrwifk",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users/KIDYAJfDFyAe/upload-profile-image",
+    "entity": "upload-profile-image",
+    "entityId": "KIDYAJfDFyAe",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:40:58.585Z"
+  },
+  {
+    "logId": "LLAzYnLAhNdI",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/board-members",
+    "entity": "board-members",
+    "entityId": "—",
+    "changes": {
+      "name": "Jyotishka Roy",
+      "position": "President & Founder",
+      "bio": "A passionate rocketry & robotics enthusiast in making",
+      "email": "jyotishkaroy06@gmail.com",
+      "imageUrl": "/uploads/users/KIDYAJfDFyAe/profile.jpg",
+      "status": "active"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:42:57.829Z"
+  },
+  {
+    "logId": "IQe0F2aTEtda",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/missions/6KzGCc7sRQvZ",
+    "entity": "6KzGCc7sRQvZ",
+    "entityId": "6KzGCc7sRQvZ",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:44:54.017Z"
+  },
+  {
+    "logId": "2bdb68SxvCyd",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/missions/j9j7c8O023J2",
+    "entity": "j9j7c8O023J2",
+    "entityId": "j9j7c8O023J2",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:44:56.092Z"
+  },
+  {
+    "logId": "9Qx78vwonohk",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/missions/V38MLp2kCs4j",
+    "entity": "V38MLp2kCs4j",
+    "entityId": "V38MLp2kCs4j",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:44:58.393Z"
+  },
+  {
+    "logId": "WE9I08iAfXsk",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/missions/d11ccJtQ6zjj",
+    "entity": "d11ccJtQ6zjj",
+    "entityId": "d11ccJtQ6zjj",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:45:23.559Z"
+  },
+  {
+    "logId": "1zjGSWMLbZGn",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/missions",
+    "entity": "missions",
+    "entityId": "—",
+    "changes": {
+      "title": "AIAA Rocketry Summer Camp 2024",
+      "description": "TBD",
+      "startDate": "2024-06-01T07:00:00.000Z",
+      "endDate": "2024-06-30T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "draft"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:55:06.146Z"
+  },
+  {
+    "logId": "7aYdteyhSx4d",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/upload",
+    "entity": "upload",
+    "entityId": "—",
+    "changes": {
+      "folder": "missions",
+      "missionTitle": "AIAA Rocketry Summer Camp 2024",
+      "missionId": "s8KT8r3nXvCe"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:55:06.682Z"
+  },
+  {
+    "logId": "WwMrpEXOqEBz",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/s8KT8r3nXvCe",
+    "entity": "s8KT8r3nXvCe",
+    "entityId": "s8KT8r3nXvCe",
+    "changes": {
+      "title": "AIAA Rocketry Summer Camp 2024",
+      "description": "TBD",
+      "startDate": "2024-06-01T07:00:00.000Z",
+      "endDate": "2024-06-30T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "draft",
+      "imageUrl": "/uploads/missions/aiaa-rocketry-summer-camp-2024-s8KT8r3nXvCe/hero.MOV"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:55:06.693Z"
+  },
+  {
+    "logId": "2usCTMdBYvxb",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/s8KT8r3nXvCe",
+    "entity": "s8KT8r3nXvCe",
+    "entityId": "s8KT8r3nXvCe",
+    "changes": {
+      "title": "AIAA Rocketry Summer Camp 2024",
+      "description": "TBD",
+      "startDate": "2024-06-01T07:00:00.000Z",
+      "endDate": "2024-06-30T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "completed"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:55:43.129Z"
+  },
+  {
+    "logId": "0awwlYkdj2sm",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/s8KT8r3nXvCe",
+    "entity": "s8KT8r3nXvCe",
+    "entityId": "s8KT8r3nXvCe",
+    "changes": {
+      "title": "AIAA Rocketry Summer Camp 2024",
+      "description": "TBD",
+      "startDate": "2024-06-01T07:00:00.000Z",
+      "endDate": "2024-06-30T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "in-progress"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:57:05.034Z"
+  },
+  {
+    "logId": "0sv8vywYA1AX",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/RAiBym2sVokq/status",
+    "entity": "status",
+    "entityId": "RAiBym2sVokq",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T00:57:14.031Z"
+  },
+  {
+    "logId": "D9fr5dO8Jy55",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/board-members/4Pb3QbW9f90a",
+    "entity": "4Pb3QbW9f90a",
+    "entityId": "4Pb3QbW9f90a",
+    "changes": {
+      "name": "Jyotishka Roy",
+      "position": "President & Founder",
+      "bio": "A puzzle solver and voracious reader. A passionate robotics and rocketry engineer in the making. Driven by the interest in rocketry and robotics to strive for better results guided by reliable designs & data. Keen interest in details and analyzing every small thing to make better advancements in engineering fields",
+      "email": "jyotishkaroy06@gmail.com",
+      "imageUrl": "/uploads/users/KIDYAJfDFyAe/profile.jpg",
+      "status": "active"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T01:01:43.054Z"
+  },
+  {
+    "logId": "OwzfOG51Uclw",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/board-members/4Pb3QbW9f90a",
+    "entity": "4Pb3QbW9f90a",
+    "entityId": "4Pb3QbW9f90a",
+    "changes": {
+      "name": "Jyotishka Roy",
+      "position": "President & Founder",
+      "bio": "A puzzle solver and voracious reader. A passionate robotics and rocketry engineer in the making. Driven by the interest in rocketry and robotics to strive for better results guided by reliable designs & data. Keen interest in details and analyzing every small thing to make better advancements in engineering fields.",
+      "email": "jyotishkaroy06@gmail.com",
+      "imageUrl": "/uploads/users/KIDYAJfDFyAe/profile.jpg",
+      "status": "active"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T01:02:05.771Z"
+  }
+]

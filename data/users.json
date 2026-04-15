@@ -1,0 +1,29 @@
+[
+  {
+    "userId": "ZYTGOKOUExDF",
+    "email": "admin@rocketry.org",
+    "password": "$2a$10$KqTqo9en8Gn07JYzxjqDJu.Gz3hEzuA4vxJXq9xknjxT/9Vtj3KbW",
+    "firstName": "Sarah",
+    "lastName": "Johnson",
+    "phone": "+1-555-0100",
+    "role": "admin",
+    "status": "active",
+    "createdAt": "2025-01-15T10:00:00.000Z",
+    "updatedAt": "2026-01-21T13:07:02.951Z",
+    "lastLogin": "2026-04-15T00:01:24.281Z",
+    "profileImageUrl": "/uploads/users/ZYTGOKOUExDF/profile.jpg"
+  },
+  {
+    "userId": "KIDYAJfDFyAe",
+    "email": "jyotishkaroy06@gmail.com",
+    "password": "$2a$10$hvTj9rjcpa4fOk7REee64.OPkP6B8NiyawHqjCHL.kuYMXC33OcKO",
+    "firstName": "Jyotishka",
+    "lastName": "Roy",
+    "role": "admin",
+    "status": "active",
+    "phone": "",
+    "createdAt": "2026-04-15T00:40:58.517Z",
+    "updatedAt": "2026-04-15T00:40:58.581Z",
+    "profileImageUrl": "/uploads/users/KIDYAJfDFyAe/profile.jpg"
+  }
+]
