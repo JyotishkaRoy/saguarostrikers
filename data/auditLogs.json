@@ -1433,5 +1433,47 @@
     "ipAddress": "::1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
     "timestamp": "2026-04-15T01:02:05.771Z"
+  },
+  {
+    "logId": "xQVQPyiuZ3zf",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/site-content/homepage-about",
+    "entity": "homepage-about",
+    "entityId": "homepage-about",
+    "changes": {
+      "title": "About Us",
+      "content": "<p class=\"ql-align-justify\"><strong style=\"background-color: transparent; color: rgb(0, 0, 0);\">Saguaro Strikers</strong><span style=\"background-color: transparent; color: rgb(0, 0, 0);\"> is a club for anyone interested in science, technology, building things, or just figuring out how rockets and robots work. It doesn’t matter if you’ve never tried a STEM project before or if you’re not even sure what STEM stands for (it means science, technology, engineering, and math, so that you know). All you really need is a little curiosity and the willingness to try new things. Our club is all about making STEM feel less intimidating and way more fun. When you come to a meeting, you’ll find people discussing the latest launch or test results from the most recent run of our robot. Someone always comes up with a solution to an unintended launch issue or an answer to a problem with the robot, and suddenly, everyone is offering great ideas about it. Questions are always welcome, and everyone is there to learn.</span></p><p class=\"ql-align-justify\"><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">One of the most exciting parts of Saguaro Strikers is building and launching rockets. We start by learning the basics, like how rockets fly and what makes them work, and then we get hands-on with designing and building our own. Launch days are always full of energy because you never know if your rocket will zoom into the sky or spin off in a weird direction. Sometimes things don’t work out, but that’s just part of the experience. We just record the launch, figure out what went wrong, fix and calibrate certain parameters, and try again. The process is just as important as the results, and everyone learns from both success and failure. If robots are more your thing, you’ll definitely find your place with us. A lot of our members love building things that move and can do certain tasks. Some people have been doing it for a while, but most are just starting. We help each other learn, whether it’s coding, wiring, or figuring out how to put everything together. Sometimes we build robots or rockets to practice for the real thing we might build, or sometimes we build the actual robot or rocket.</span></p><p class=\"ql-align-justify\"><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">Members are always ready to explain things, usually with quick sketches or diagrams and lots of other resources. Sometimes, we get real scientists or engineers to visit and talk about their work. One thing that’s super important to us is making sure everyone feels welcome. It doesn’t matter if you’ve never built a robot or launched a rocket before. Everyone started somewhere, and there’s no shame or judgment if you make mistakes or don’t know something yet. We have members from all different backgrounds, and we make sure to provide tools and supplies for anyone who needs them. If you’re not sure where to start, just ask, and someone will help you out.</span></p><p class=\"ql-align-justify\"><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">We also like to get involved in the community. Sometimes we run workshops for younger kids to help them build mini rockets or simple robots, and it’s always great to see how excited they get when their projects work. We do demonstrations and help out at events to get more people excited about what you can do with STEM. Our meetings are always packed with STEM and fun discussions about rocketry or robotics. Usually, we start by talking about new things that we are supposed to do and then split up into groups to work on projects or brainstorm ideas. There’s always a lot of encouragement, excitement, and enthusiasm.</span></p><p class=\"ql-align-justify\"><span style=\"background-color: transparent; color: rgb(0, 0, 0);\">You might be wondering why you should join Saguaro Strikers. If you’re interested in trying out new STEM projects, building creative things, talking about wild ideas, and making new ideas come to life, this is the club for you. You don’t need to be an expert or have special experience. Just come with an open mind and a willingness to try. Maybe you’ll invent something new, maybe your rocket will have better performance than the ones made by experienced people, or maybe you’ll just find a bunch of people who share your interests and then work with them as a team to build a project. Whatever happens, you’ll be glad you joined, because Saguaro Strikers is a place where everyone is welcome, everyone learns, and nobody has to be perfect. We’re here to have fun, figure things out together, learn about STEM, robotics, and rocketry, and build amazing things along the way.</span></p>"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T01:12:53.913Z"
+  },
+  {
+    "logId": "KTFrgYaVq68u",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/site-content/homepage-mission",
+    "entity": "homepage-mission",
+    "entityId": "homepage-mission",
+    "changes": {
+      "title": "Mission",
+      "content": "<p><span style=\"background-color: transparent; color: rgb(255, 255, 255);\">This club is a space for individuals to engage with science, technology, engineering, and math, regardless of their prior experience. Whether you are launching rockets, programming robots, or simply curious about how things operate, you will find a supportive environment that encourages curiosity and learning. Each member brings their own unique background and perspective, which is extremely valuable to our group. I encourage everyone to share their ideas and ask questions, as collaboration often leads to the best outcomes. We have a variety of activities planned, including hands-on rocket launches, robotics challenges, and community STEM initiatives and I hope each of you takes the opportunity to participate. If you need assistance, don’t hesitate to reach out; we're here to learn from one another. As we move forward this year, let's focus on getting locked and loaded for the various robotics and rocketry competitions we might participate in. We will encounter challenges along the way, but remember that these experiences provide very valuable lessons for our futures.</span></p>"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T01:15:45.643Z"
+  },
+  {
+    "logId": "ZaLfDaC4r8Af",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/site-content/homepage-vision",
+    "entity": "homepage-vision",
+    "entityId": "homepage-vision",
+    "changes": {
+      "title": "Vision",
+      "content": "<p><span style=\"background-color: transparent; color: rgb(255, 255, 255);\">I invite you to join us as we explore new possibilities within the world of STEM. Regardless of your current skill level, our club provides a unique opportunity to develop technical abilities, collaborate with peers, and contribute to innovative projects. By participating, you will gain access to hands-on workshops and mentorship that will help you grow both as a student and a future professional. I look forward to seeing what we can achieve together this year and the unique ideas you will bring to our team. Your contributions will be essential as we prepare for upcoming competitions and community events. Furthermore, we believe that the skills learned here, such as problem-solving and critical thinking in times of high pressure, will be beneficial in all areas of our academic lives. I am eager to see how our collective efforts will shape the club's journey in the coming years.</span></p>"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T01:15:55.052Z"
   }
 ]

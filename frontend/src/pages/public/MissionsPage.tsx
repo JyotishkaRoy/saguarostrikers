@@ -24,7 +24,7 @@ export default function MissionsPage() {
   const [filteredMissions, setFilteredMissions] = useState<Mission[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
-  const [activeFilter, setActiveFilter] = useState<FilterStatus>('upcoming');
+  const [activeFilter, setActiveFilter] = useState<FilterStatus>('all');
   const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {

@@ -19,6 +19,7 @@ export default function HomePage() {
   const [stats, setStats] = useState<Stats>({ totalMissions: 0, totalTeamMembers: 0, totalEvents: 0, completedMissions: 0 });
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMissions, setIsLoadingMissions] = useState(true);
+  const [isAboutExpanded, setIsAboutExpanded] = useState(false);
 
   useEffect(() => {
     fetchHomepageContent();
@@ -115,7 +116,28 @@ export default function HomePage() {
                 
                 <div className="space-y-4 text-gray-700 leading-relaxed">
                   {content?.aboutUs ? (
-                    <div dangerouslySetInnerHTML={{ __html: content.aboutUs }} />
+                    <div>
+                      <div
+                        className={!isAboutExpanded ? 'overflow-hidden' : ''}
+                        style={
+                          !isAboutExpanded
+                            ? {
+                                display: '-webkit-box',
+                                WebkitLineClamp: 8,
+                                WebkitBoxOrient: 'vertical'
+                              }
+                            : undefined
+                        }
+                        dangerouslySetInnerHTML={{ __html: content.aboutUs }}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setIsAboutExpanded((prev) => !prev)}
+                        className="mt-2 text-primary-600 hover:text-primary-700 underline underline-offset-2"
+                      >
+                        {isAboutExpanded ? '..less' : '..more'}
+                      </button>
+                    </div>
                   ) : (
                     <>
                       <p>
