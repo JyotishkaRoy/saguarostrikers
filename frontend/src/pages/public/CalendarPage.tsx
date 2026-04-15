@@ -27,7 +27,10 @@ function datePart(isoOrDate: string): string {
 }
 
 export default function CalendarPage() {
-  const [currentDate, setCurrentDate] = useState(new Date(2026, 1, 1)); // Start from Feb 2026 (where events are)
+  const [currentDate, setCurrentDate] = useState(() => {
+    const now = new Date();
+    return new Date(now.getFullYear(), now.getMonth(), 1);
+  });
   const [events, setEvents] = useState<CalendarEvent[]>([]);
   const [missions, setMissions] = useState<Mission[]>([]);
   const [outreaches, setOutreaches] = useState<Outreach[]>([]);
@@ -143,7 +146,7 @@ export default function CalendarPage() {
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Calendar</h1>
           </div>
           <p className="text-lg text-gray-600">
-            Stay updated with upcoming launches, meetings, and important deadlines
+            Stay updated with upcoming events, meetings, and important deadlines
           </p>
         </div>
 

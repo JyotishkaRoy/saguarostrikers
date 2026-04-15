@@ -24,11 +24,11 @@ export default function Footer() {
           {/* Center Section: Email and Copyright */}
           <div className="flex flex-col items-center gap-2 text-center">
             <a 
-              href="mailto:admin@saguarostrikers.org" 
+              href="mailto:info@saguarostrikers.org" 
               className="flex items-center gap-2 text-gray-700 hover:text-primary-600 transition-colors"
             >
               <Mail className="h-5 w-5" />
-              <span>admin@saguarostrikers.org</span>
+              <span>info@saguarostrikers.org</span>
             </a>
             <p className="text-sm text-gray-600">
               © Saguaro Strikers. All rights reserved.

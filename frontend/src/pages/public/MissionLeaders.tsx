@@ -59,7 +59,7 @@ export default function MissionLeaders() {
             <h1 className="text-3xl md:text-4xl font-bold text-white">Meet Our Mission Leaders</h1>
           </div>
           <p className="text-lg text-white/90">
-            The dedicated team driving innovation and excellence in rocketry
+            The dedicated team driving innovation and excellence in various STEM initiatives
           </p>
         </div>
 
@@ -93,32 +93,33 @@ export default function MissionLeaders() {
                     }}
                   >
                     {/* Background Image */}
-                    <div className="relative h-full">
-                      {leader.imageUrl ? (
-                        <img
-                          src={leader.imageUrl}
-                          alt={leader.name}
-                          className="w-full h-full object-cover"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center">
-                          <User className="h-32 w-32 text-white/30" />
-                        </div>
-                      )}
-                      
-                      {/* Gradient Overlay */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-                      
-                      {/* Content */}
-                      <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                        <h3 className="text-2xl font-bold mb-2">{leader.name}</h3>
-                        <p className="text-lg text-white/90 mb-3">{leader.position}</p>
-                        <div className="flex items-center gap-2 text-sm text-white/80">
+                    <div className="flex h-full flex-col">
+                      {/* Image header (stops before the name) */}
+                      <div className="relative h-52">
+                        {leader.imageUrl ? (
+                          <img
+                            src={leader.imageUrl}
+                            alt={leader.name}
+                            className="w-full h-full object-cover"
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-primary-600 to-primary-800 flex items-center justify-center">
+                            <User className="h-20 w-20 text-white/30" />
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent"></div>
+                      </div>
+
+                      {/* Content area (name should be on plain background) */}
+                      <div className="flex-1 bg-white p-6">
+                        <h3 className="text-2xl font-bold text-gray-900 mb-2">{leader.name}</h3>
+                        <p className="text-lg text-primary-700 mb-3">{leader.position}</p>
+                        <div className="flex items-center gap-2 text-sm text-gray-600">
                           <Mail className="h-4 w-4" />
                           <span className="truncate">{leader.email}</span>
                         </div>
-                        <div className="mt-4 text-sm text-white/70 flex items-center gap-2">
-                          <span className="inline-block w-2 h-2 bg-white/70 rounded-full animate-pulse"></span>
+                        <div className="mt-4 text-sm text-gray-500 flex items-center gap-2">
+                          <span className="inline-block w-2 h-2 bg-primary-400 rounded-full animate-pulse"></span>
                           Click to see bio
                         </div>
                       </div>
@@ -137,7 +138,7 @@ export default function MissionLeaders() {
                     <div className="h-full flex flex-col">
                       {/* Header with gradient */}
                       <div className="bg-gradient-to-r from-primary-600 to-primary-800 p-6 text-white">
-                        <h3 className="text-2xl font-bold mb-1">{leader.name}</h3>
+                        <h3 className="text-2xl font-bold mb-1 text-white">{leader.name}</h3>
                         <p className="text-lg text-white/90">{leader.position}</p>
                       </div>
 

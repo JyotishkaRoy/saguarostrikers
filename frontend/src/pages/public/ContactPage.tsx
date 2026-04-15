@@ -198,10 +198,10 @@ export default function ContactPage() {
                   <div>
                     <p className="font-medium text-gray-900 text-xs mb-1">Phone</p>
                     <a
-                      href="tel:+1234567890"
+                      href="tel:+16573659003"
                       className="text-primary-600 hover:text-primary-700 text-sm"
                     >
-                      (123) 456-7890
+                      (657) 365-9003
                     </a>
                   </div>
                 </div>

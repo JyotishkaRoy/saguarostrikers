@@ -114,7 +114,7 @@ export default function HomePage() {
                   Welcome to Saguaro Strikers
                 </h2>
                 
-                <div className="space-y-4 text-gray-700 leading-relaxed">
+                <div className="space-y-4 text-gray-700 leading-relaxed text-justify">
                   {content?.aboutUs ? (
                     <div>
                       <div

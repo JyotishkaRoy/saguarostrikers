@@ -170,7 +170,7 @@ export default function JoinMission() {
             <h1 className="text-3xl md:text-4xl font-bold text-gray-900">Join a Mission</h1>
           </div>
           <p className="text-lg text-gray-600">
-            Ready to launch your rocketry journey? Fill out the form below to apply.
+            Ready to get on board? Fill out the form below to apply.
           </p>
         </div>
 
