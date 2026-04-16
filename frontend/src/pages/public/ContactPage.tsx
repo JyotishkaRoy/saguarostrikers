@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Mail, Phone, MapPin, Send, CheckCircle, MessageCircle } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+import { trackEvent } from '@/lib/analytics';
 import toast from 'react-hot-toast';
 
 const OUTREACH_SUBJECT = 'Outreach Queries';
@@ -32,18 +33,32 @@ export default function ContactPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    trackEvent('contact_submit_attempt', {
+      subject_type: isOutreachQuery ? 'outreach' : 'general',
+    });
 
     try {
       const response = await api.post('/public/contact', formData);
       if (response.success) {
+        trackEvent('contact_submit_success', {
+          subject_type: isOutreachQuery ? 'outreach' : 'general',
+        });
         toast.success('Message sent successfully! We will get back to you soon.');
         setIsSubmitted(true);
         setFormData({ name: '', email: '', subject: '', message: '' });
         setTimeout(() => setIsSubmitted(false), 5000);
       } else {
+        trackEvent('contact_submit_failed', {
+          reason: 'api_response_unsuccessful',
+          subject_type: isOutreachQuery ? 'outreach' : 'general',
+        });
         toast.error(response.message || 'Failed to send message.');
       }
     } catch (error) {
+      trackEvent('contact_submit_failed', {
+        reason: 'request_exception',
+        subject_type: isOutreachQuery ? 'outreach' : 'general',
+      });
       toast.error(getErrorMessage(error));
     } finally {
       setIsSubmitting(false);

@@ -2,7 +2,8 @@
 
 interface ImportMetaEnv {
   readonly VITE_API_URL: string;
-  // Add more env variables as needed
+  readonly VITE_GA4_MEASUREMENT_ID?: string;
+  readonly VITE_GA4_ENABLED?: string;
 }
 
 interface ImportMeta {

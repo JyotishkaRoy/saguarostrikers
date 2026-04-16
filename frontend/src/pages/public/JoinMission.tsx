@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { useSearchParams } from 'react-router-dom';
 import { Send, CheckCircle, Rocket } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+import { trackEvent } from '@/lib/analytics';
 import toast from 'react-hot-toast';
 import type { Mission } from '@/types';
 
@@ -110,6 +111,10 @@ export default function JoinMission() {
 
   const onSubmit = async (data: JoinMissionFormData) => {
     setIsSubmitting(true);
+    trackEvent('join_mission_submit_attempt', {
+      has_preselected_mission: Boolean(preselectedMissionId),
+      selected_mission_id: data.missionId || 'none',
+    });
     try {
       // Add signature dates
       data.studentSignatureDate = new Date().toISOString();
@@ -118,10 +123,16 @@ export default function JoinMission() {
       const response = await api.post('/public/join-mission', data);
       
       if (response.success) {
+        trackEvent('join_mission_submit_success', {
+          selected_mission_id: data.missionId || 'none',
+        });
         toast.success('Application submitted successfully! Check your email for confirmation.');
         setIsSuccess(true);
       }
     } catch (error) {
+      trackEvent('join_mission_submit_failed', {
+        selected_mission_id: data.missionId || 'none',
+      });
       toast.error(getErrorMessage(error));
     } finally {
       setIsSubmitting(false);

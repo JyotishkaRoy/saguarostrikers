@@ -1,6 +1,7 @@
 import { useEffect, useRef, useCallback } from 'react';
-import { Routes, Route, Navigate, Link } from 'react-router-dom';
+import { Routes, Route, Navigate, Link, useLocation } from 'react-router-dom';
 import { useAuthStore } from './store/authStore';
+import { initAnalytics, setupAutoAnalyticsTracking, trackPageView } from './lib/analytics';
 
 const INACTIVITY_MS = 30 * 60 * 1000; // 30 minutes
 const ACTIVITY_THROTTLE_MS = 60 * 1000; // only reset timer at most once per minute
@@ -72,6 +73,7 @@ function DashboardRedirect() {
 }
 
 function App() {
+  const location = useLocation();
   const checkAuth = useAuthStore((state) => state.checkAuth);
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const logout = useAuthStore((state) => state.logout);
@@ -82,6 +84,17 @@ function App() {
     // Check authentication status on app load
     checkAuth();
   }, [checkAuth]);
+
+  useEffect(() => {
+    initAnalytics();
+    const cleanup = setupAutoAnalyticsTracking();
+    return cleanup;
+  }, []);
+
+  useEffect(() => {
+    const path = `${location.pathname}${location.search}${location.hash}`;
+    trackPageView(path);
+  }, [location.pathname, location.search, location.hash]);
 
   // Log out after 30 minutes of inactivity (only when logged in)
   const resetInactivityTimer = useCallback(() => {
