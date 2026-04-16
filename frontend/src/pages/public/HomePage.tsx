@@ -210,7 +210,7 @@ export default function HomePage() {
                   <div className="text-sm text-gray-600 mt-1">Active Missions</div>
                 </div>
                 <div className="bg-primary-50 rounded-lg p-4 text-center">
-                  <div className="text-3xl font-bold text-primary-600">{stats.totalTeamMembers}+</div>
+                  <div className="text-3xl font-bold text-primary-600">{stats.totalTeamMembers}</div>
                   <div className="text-sm text-gray-600 mt-1">Team Members</div>
                 </div>
                 <div className="bg-primary-50 rounded-lg p-4 text-center">

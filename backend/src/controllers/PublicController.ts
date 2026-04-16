@@ -8,7 +8,6 @@ import { JoinMissionService } from '../services/JoinMissionService.js';
 import { FileManagementService } from '../services/FileManagementService.js';
 import { GalleryService } from '../services/GalleryService.js';
 import { ArtifactService } from '../services/ArtifactService.js';
-import { TeamService } from '../services/TeamService.js';
 import { OutreachService } from '../services/OutreachService.js';
 import { OutreachParticipantService } from '../services/OutreachParticipantService.js';
 import { OutreachArtifactService } from '../services/OutreachArtifactService.js';
@@ -23,7 +22,6 @@ export class PublicController {
   private fileService: FileManagementService;
   private galleryService: GalleryService;
   private artifactService: ArtifactService;
-  private teamService: TeamService;
   private outreachService: OutreachService;
   private outreachParticipantService: OutreachParticipantService;
   private outreachArtifactService: OutreachArtifactService;
@@ -38,7 +36,6 @@ export class PublicController {
     this.fileService = new FileManagementService();
     this.galleryService = new GalleryService();
     this.artifactService = new ArtifactService();
-    this.teamService = new TeamService();
     this.outreachService = new OutreachService();
     this.outreachParticipantService = new OutreachParticipantService();
     this.outreachArtifactService = new OutreachArtifactService();
@@ -128,10 +125,10 @@ export class PublicController {
    */
   async getPublicStats(_req: Request, res: Response): Promise<void> {
     try {
-      const [missions, upcomingEvents, teamMemberCount] = await Promise.all([
+      const [missions, upcomingEvents, boardMembers] = await Promise.all([
         this.missionService.getPublishedMissions(),
         this.calendarEventService.getUpcomingEvents(500),
-        this.teamService.getUniqueTeamMemberCount()
+        this.siteContentService.getAllBoardMembers()
       ]);
 
       const activeMissions = missions.filter(
@@ -143,7 +140,7 @@ export class PublicController {
         success: true,
         data: {
           activeMissions,
-          teamMembers: teamMemberCount,
+          teamMembers: boardMembers.length,
           upcomingEvents: upcomingEvents.length,
           completedMissions
         }

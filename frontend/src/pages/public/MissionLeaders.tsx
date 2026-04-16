@@ -56,7 +56,7 @@ export default function MissionLeaders() {
         <div className="mb-12">
           <div className="flex items-center gap-3 mb-4">
             <UsersRound className="h-10 w-10 text-white" />
-            <h1 className="text-3xl md:text-4xl font-bold text-white">Meet Our Mission Leaders</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-white">Meet the Leaders</h1>
           </div>
           <p className="text-lg text-white/90">
             The dedicated team driving innovation and excellence in various STEM initiatives
