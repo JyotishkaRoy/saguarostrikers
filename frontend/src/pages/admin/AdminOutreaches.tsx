@@ -86,6 +86,8 @@ export default function AdminOutreaches() {
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingOutreach, setEditingOutreach] = useState<Outreach | null>(null);
+  const [modalStartDate, setModalStartDate] = useState('');
+  const [modalEndDate, setModalEndDate] = useState('');
   const [calendarEventsForOutreach, setCalendarEventsForOutreach] = useState<CalendarEventOption[]>([]);
   const [stats, setStats] = useState({
     total: 0,
@@ -552,6 +554,8 @@ export default function AdminOutreaches() {
           <button
             onClick={() => {
               setEditingOutreach(null);
+              setModalStartDate('');
+              setModalEndDate('');
               setIsModalOpen(true);
             }}
             className="btn-primary flex items-center gap-2 whitespace-nowrap"
@@ -572,7 +576,15 @@ export default function AdminOutreaches() {
           <Trophy className="h-16 w-16 mx-auto text-gray-400 mb-4" />
           <h3 className="text-lg font-semibold text-gray-900 mb-2">No outreaches found</h3>
           <p className="text-gray-600 mb-4">Create your first outreach to get started</p>
-          <button onClick={() => setIsModalOpen(true)} className="btn-primary">
+          <button
+            onClick={() => {
+              setEditingOutreach(null);
+              setModalStartDate('');
+              setModalEndDate('');
+              setIsModalOpen(true);
+            }}
+            className="btn-primary"
+          >
             Create Outreach
           </button>
         </div>
@@ -730,6 +742,8 @@ export default function AdminOutreaches() {
                   <button
                     onClick={() => {
                       setEditingOutreach(outreach);
+                      setModalStartDate(outreach.startDate ? utcIsoToLocalDateInput(outreach.startDate) : '');
+                      setModalEndDate(outreach.endDate ? utcIsoToLocalDateInput(outreach.endDate) : '');
                       setIsModalOpen(true);
                     }}
                     className="btn-outline text-sm py-1.5 px-3"
@@ -787,8 +801,18 @@ export default function AdminOutreaches() {
                   <input
                     type="date"
                     name="startDate"
-                    defaultValue={editingOutreach?.startDate ? utcIsoToLocalDateInput(editingOutreach.startDate) : undefined}
-                    required
+                    value={modalStartDate}
+                    onChange={(e) => {
+                      const nextStartDate = e.target.value;
+                      setModalStartDate(nextStartDate);
+                      if (!nextStartDate) {
+                        setModalEndDate('');
+                        return;
+                      }
+                      if (modalEndDate && modalEndDate < nextStartDate) {
+                        setModalEndDate('');
+                      }
+                    }}
                     className="input w-full"
                   />
                 </div>
@@ -797,8 +821,10 @@ export default function AdminOutreaches() {
                   <input
                     type="date"
                     name="endDate"
-                    defaultValue={editingOutreach?.endDate ? utcIsoToLocalDateInput(editingOutreach.endDate) : undefined}
-                    required
+                    value={modalEndDate}
+                    onChange={(e) => setModalEndDate(e.target.value)}
+                    min={modalStartDate || undefined}
+                    disabled={!modalStartDate}
                     className="input w-full"
                   />
                 </div>
@@ -871,6 +897,8 @@ export default function AdminOutreaches() {
                   onClick={() => {
                     setIsModalOpen(false);
                     setEditingOutreach(null);
+                    setModalStartDate('');
+                    setModalEndDate('');
                   }}
                   className="btn-outline flex-1"
                 >

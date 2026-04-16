@@ -3179,5 +3179,179 @@
     "ipAddress": "::1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
     "timestamp": "2026-04-16T00:05:20.260Z"
+  },
+  {
+    "logId": "Mj02D5cpJduX",
+    "userId": "KIDYAJfDFyAe",
+    "action": "DELETE /api/admin/site-content/future-explorers/carousel/gfnw8K82TpPO",
+    "entity": "gfnw8K82TpPO",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T01:16:58.666Z"
+  },
+  {
+    "logId": "oEEZliRH8dmd",
+    "userId": "KIDYAJfDFyAe",
+    "action": "DELETE /api/admin/site-content/future-explorers/carousel/Ht3Y92b37Tg1",
+    "entity": "Ht3Y92b37Tg1",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T01:17:02.742Z"
+  },
+  {
+    "logId": "1q5isfbMlV6i",
+    "userId": "KIDYAJfDFyAe",
+    "action": "DELETE /api/admin/site-content/future-explorers/carousel/T2ljCeNXl8jv",
+    "entity": "T2ljCeNXl8jv",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T01:17:05.591Z"
+  },
+  {
+    "logId": "gdl8tkMuVtSY",
+    "userId": "KIDYAJfDFyAe",
+    "action": "DELETE /api/admin/site-content/future-explorers/carousel/pyHB3LPxbpuC",
+    "entity": "pyHB3LPxbpuC",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T01:17:08.102Z"
+  },
+  {
+    "logId": "T7BTW0rtaUqD",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/site-content/future-explorers/upload-carousel",
+    "entity": "upload-carousel",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T01:17:16.808Z"
+  },
+  {
+    "logId": "IEwVQT4JRL4d",
+    "userId": "KIDYAJfDFyAe",
+    "action": "PUT /api/admin/site-content/future-explorers",
+    "entity": "future-explorers",
+    "entityId": "—",
+    "changes": {
+      "row1Col1Html": "<h2>About the Program</h2><p>The Future Explorers' Program is our flagship outreach initiative designed to introduce students to the exciting world of rocketry, aerospace, and robotics engineering.</p><p>Through interactive workshops, demonstrations, and mentorship opportunities, we aim to inspire curiosity and develop practical STEM skills.</p>"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T01:20:15.758Z"
+  },
+  {
+    "logId": "KtPbduCEE8Jv",
+    "userId": "KIDYAJfDFyAe",
+    "action": "DELETE /api/admin/site-content/future-explorers/carousel/v5f2ewcnPfDI",
+    "entity": "v5f2ewcnPfDI",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T01:28:30.337Z"
+  },
+  {
+    "logId": "IVwHayva4eJN",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/site-content/future-explorers/upload-carousel",
+    "entity": "upload-carousel",
+    "entityId": "—",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T01:28:36.056Z"
+  },
+  {
+    "logId": "u90ijIoNXh5U",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/outreaches",
+    "entity": "outreaches",
+    "entityId": "—",
+    "changes": {
+      "title": "test",
+      "description": "test",
+      "startDate": "",
+      "endDate": "",
+      "location": "Irvine, CA",
+      "status": "in-progress"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T01:51:24.997Z"
+  },
+  {
+    "logId": "hyV5ITh5uhmD",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/outreaches",
+    "entity": "outreaches",
+    "entityId": "—",
+    "changes": {
+      "title": "test 2",
+      "description": "test 2",
+      "startDate": "",
+      "endDate": "",
+      "location": "Scottsdale, AZ",
+      "status": "in-progress"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T01:58:19.198Z"
+  },
+  {
+    "logId": "D7UBgUNOCjtS",
+    "userId": "KIDYAJfDFyAe",
+    "action": "DELETE /api/admin/outreaches/wZQNgoVecm9c",
+    "entity": "wZQNgoVecm9c",
+    "entityId": "wZQNgoVecm9c",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T01:59:06.975Z"
+  },
+  {
+    "logId": "HPOP6EqcDuOD",
+    "userId": "KIDYAJfDFyAe",
+    "action": "DELETE /api/admin/outreaches/6O2DaQVOyI4G",
+    "entity": "6O2DaQVOyI4G",
+    "entityId": "6O2DaQVOyI4G",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T01:59:08.919Z"
+  },
+  {
+    "logId": "3uQsIW542BsB",
+    "userId": "KIDYAJfDFyAe",
+    "action": "PUT /api/admin/site-content/future-explorers",
+    "entity": "future-explorers",
+    "entityId": "—",
+    "changes": {
+      "row1Col1Html": "<h2>About the Program</h2><p>The Future Explorers' Program is our flagship outreach initiative designed to introduce students to the exciting world of rocketry, aerospace, and robotics engineering. Through interactive workshops, demonstrations, and mentorship opportunities, we aim to inspire curiosity and develop practical STEM skills.</p><p><br></p><p>The dedicated and passionate volunteers of this exciting program not only support various outreach events organized, but they are also encouraged to ideate and/or arrange community outreach events. This is a platform for everyone to Give Back to the society in their own capacity. As we strongly believe that no contribution is small and no idea is a bad idea.</p>"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T02:03:45.538Z"
+  },
+  {
+    "logId": "KCj1sH7koTAq",
+    "userId": "KIDYAJfDFyAe",
+    "action": "PUT /api/admin/site-content/future-explorers",
+    "entity": "future-explorers",
+    "entityId": "—",
+    "changes": {
+      "row1Col1Html": "<h2>About the Program</h2><p>The <strong>Future Explorers' Program</strong> is our flagship outreach initiative designed to introduce students to the exciting world of rocketry, aerospace, and robotics engineering. Through interactive workshops, demonstrations, and mentorship opportunities, we aim to inspire curiosity and develop practical STEM skills.</p><p><br></p><p>The dedicated and passionate volunteers of this exciting program not only support various outreach events organized, but they are also encouraged to ideate and/or arrange community outreach events. This is a platform for everyone to Give Back to the society in their own capacity. As we strongly believe that no contribution is small and no idea is a bad idea.</p>"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T02:04:29.073Z"
   }
 ]

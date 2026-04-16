@@ -16,7 +16,7 @@ export default function Footer() {
             <div>
               <h3 className="text-2xl font-bold text-gray-900">Saguaro Strikers</h3>
               <p className="text-sm text-gray-600 max-w-xl">
-                A STEM club to inspire, nurture and engage Arizona enthusiasts in the fields of Rocketry and Robotics
+                A STEM club to inspire, nurture and engage all STEM enthusiasts in the fields of Rocketry and Robotics
               </p>
             </div>
           </div>

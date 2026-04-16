@@ -156,8 +156,8 @@ export default function FutureExplorers() {
                   }}
                 />
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <a href="/contact?subject=outreach" className="btn-outline">
-                    Learn More
+                  <a href="/contact" className="btn-outline">
+                    Sounds like You?
                   </a>
                 </div>
               </div>
@@ -166,18 +166,21 @@ export default function FutureExplorers() {
               <div className="bg-white rounded-lg shadow-lg overflow-hidden">
                 {activeCarouselImages.length > 0 ? (
                   <>
-                    <div className="relative h-96 bg-gray-900">
+                    <div className="relative h-96 bg-white">
+                      <div className="absolute inset-0 bg-white" aria-hidden />
+                      <div className="absolute inset-0 celebratory-stars opacity-70" aria-hidden />
+                      <div className="absolute inset-0 celebratory-stars celebratory-stars-slow opacity-40" aria-hidden />
                       <img
                         src={imageUrl(activeCarouselImages[currentImageIndex].url)}
                         alt=""
-                        className="w-full h-full object-cover"
+                        className="relative z-10 w-full h-full object-contain"
                       />
                       {activeCarouselImages.length > 1 && (
                         <>
                           <button
                             type="button"
                             onClick={prevImage}
-                            className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all"
+                            className="absolute left-2 top-1/2 z-20 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all"
                             aria-label="Previous image"
                           >
                             <ChevronLeft className="h-6 w-6 text-gray-900" />
@@ -185,7 +188,7 @@ export default function FutureExplorers() {
                           <button
                             type="button"
                             onClick={nextImage}
-                            className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all"
+                            className="absolute right-2 top-1/2 z-20 -translate-y-1/2 bg-white/80 hover:bg-white rounded-full p-2 shadow-lg transition-all"
                             aria-label="Next image"
                           >
                             <ChevronRight className="h-6 w-6 text-gray-900" />
@@ -212,7 +215,7 @@ export default function FutureExplorers() {
                     )}
                   </>
                 ) : (
-                  <div className="h-96 bg-gray-200 flex items-center justify-center text-gray-500">
+                  <div className="h-96 bg-white flex items-center justify-center text-gray-500">
                     No carousel images yet
                   </div>
                 )}
@@ -311,10 +314,12 @@ export default function FutureExplorers() {
                                 : '1fr 1fr',
                   }}
                 >
-                  {paginatedOutreaches.map((outreach, index) => (
+                  {paginatedOutreaches.map((outreach, index) => {
+                    const hasMedia = Boolean(outreach.imageUrl);
+                    return (
                     <div
                       key={outreach.outreachId}
-                      className="relative rounded-lg shadow-sm border border-gray-200 overflow-hidden flex flex-col min-h-0 bg-gray-200"
+                      className="relative rounded-lg overflow-hidden flex flex-col min-h-[180px] bg-transparent"
                       style={
                         paginatedOutreaches.length === 5 && index === 4
                           ? { gridColumn: '1 / -1' }
@@ -322,35 +327,37 @@ export default function FutureExplorers() {
                       }
                     >
                       {/* Background: image or video */}
+                      <div className="absolute inset-0 bg-white" aria-hidden />
+                      <div className="absolute inset-0 celebratory-stars opacity-70" aria-hidden />
+                      <div className="absolute inset-0 celebratory-stars celebratory-stars-slow opacity-40" aria-hidden />
                       {outreach.imageUrl ? (
                         <>
                           {outreach.imageUrl.match(/\.(mp4|webm|ogg)$/i) ? (
                             <video
                               src={outreach.imageUrl.startsWith('http') ? outreach.imageUrl : outreach.imageUrl}
-                              className="absolute inset-0 w-full h-full object-cover"
+                              className="absolute inset-0 z-[1] w-full h-full object-contain"
                               muted
                               playsInline
                               aria-hidden
                             />
                           ) : (
-                            <div
-                              className="absolute inset-0 bg-cover bg-center"
-                              style={{
-                                backgroundImage: `url(${outreach.imageUrl.startsWith('http') ? outreach.imageUrl : outreach.imageUrl})`,
-                              }}
+                            <img
+                              src={outreach.imageUrl.startsWith('http') ? outreach.imageUrl : outreach.imageUrl}
+                              alt=""
+                              className="absolute inset-0 z-[1] w-full h-full object-contain"
                               aria-hidden
                             />
                           )}
-                          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/50 to-black/30" aria-hidden />
+                          <div className="absolute inset-0 z-[2] bg-gradient-to-t from-black/85 via-black/50 to-black/30" aria-hidden />
                         </>
                       ) : (
-                        <div className="absolute inset-0 bg-gray-700" aria-hidden />
+                        <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-200" aria-hidden />
                       )}
                       {/* Content on top */}
-                      <div className="relative z-10 p-4 flex-1 flex flex-col min-h-0 text-white">
-                        <h3 className="font-bold text-white mb-1 line-clamp-2 drop-shadow-sm">{outreach.title}</h3>
-                        <p className="text-sm text-white/90 line-clamp-2 mb-2 drop-shadow-sm">{outreach.description}</p>
-                        <div className="mt-auto space-y-1 text-xs text-white/80">
+                      <div className={`relative z-10 p-4 flex-1 flex flex-col min-h-0 ${hasMedia ? 'text-white' : 'text-gray-900'}`}>
+                        <h3 className={`font-bold mb-1 line-clamp-2 ${hasMedia ? 'text-white drop-shadow-sm' : 'text-gray-900'}`}>{outreach.title}</h3>
+                        <p className={`text-sm line-clamp-2 mb-2 ${hasMedia ? 'text-white/90 drop-shadow-sm' : 'text-gray-700'}`}>{outreach.description}</p>
+                        <div className={`mt-auto space-y-1 text-xs ${hasMedia ? 'text-white/80' : 'text-gray-600'}`}>
                           <div className="flex items-center gap-1.5">
                             <Calendar className="h-3.5 w-3.5 flex-shrink-0" />
                             <span>
@@ -369,13 +376,13 @@ export default function FutureExplorers() {
                         </div>
                         <Link
                           to={`/outreach/${outreach.slug}`}
-                          className="mt-3 text-sm font-medium text-white hover:text-white/90 underline underline-offset-2"
+                          className={`mt-3 text-sm font-medium underline underline-offset-2 ${hasMedia ? 'text-white hover:text-white/90' : 'text-primary-700 hover:text-primary-800'}`}
                         >
                           Learn more →
                         </Link>
                       </div>
                     </div>
-                  ))}
+                  )})}
                 </div>
 
                 {/* Pagination */}
@@ -408,18 +415,34 @@ export default function FutureExplorers() {
           </div>
         </div>
 
-        {/* Row 2: Full width – Rich text (admin-editable) */}
-        <div className="max-w-7xl mx-auto">
-          <div className="bg-white rounded-lg shadow-sm p-8">
-            <div
-              className="prose prose-lg max-w-none text-gray-700"
-              dangerouslySetInnerHTML={{
-                __html: content?.row2Html ?? '<p>Content will appear here.</p>',
-              }}
-            />
-          </div>
-        </div>
       </div>
+      <style>{`
+        .celebratory-stars {
+          background-image:
+            radial-gradient(circle, rgba(56, 189, 248, 0.55) 0 1px, transparent 1.6px),
+            radial-gradient(circle, rgba(250, 204, 21, 0.5) 0 1.1px, transparent 1.8px),
+            radial-gradient(circle, rgba(244, 114, 182, 0.45) 0 1.2px, transparent 1.9px);
+          background-size: 28px 28px, 42px 42px, 56px 56px;
+          background-position: 0 0, 14px 8px, 6px 18px;
+          animation: twinkle-stars 2.8s ease-in-out infinite;
+        }
+
+        .celebratory-stars-slow {
+          animation-duration: 4.6s;
+          animation-delay: 0.8s;
+        }
+
+        @keyframes twinkle-stars {
+          0%, 100% {
+            opacity: 0.25;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.95;
+            transform: scale(1.02);
+          }
+        }
+      `}</style>
     </div>
   );
 }

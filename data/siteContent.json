@@ -18,7 +18,7 @@
       },
       {
         "text": "View Missions",
-        "link": "/competitions",
+        "link": "/missions",
         "style": "secondary"
       }
     ],
@@ -50,30 +50,12 @@
     "agreementLiability": "You acknowledge that since participation of your student in the event is voluntary, you will receive no financial compensation for any loss or damage or injury arising from or associated with the event. You forever discharge the event organizers, owner, participant as well as website owner from all claims, demands and causes of action."
   },
   "futureExplorers": {
-    "row1Col1Html": "<h2>About the Program</h2><p>The Future Explorers' Program is our flagship outreach initiative designed to introduce students to the exciting world of rocketry and aerospace engineering.</p><p>Through interactive workshops, demonstrations, and mentorship opportunities, we aim to inspire curiosity and develop practical STEM skills.</p>",
+    "row1Col1Html": "<h2>About the Program</h2><p>The <strong>Future Explorers' Program</strong> is our flagship outreach initiative designed to introduce students to the exciting world of rocketry, aerospace, and robotics engineering. Through interactive workshops, demonstrations, and mentorship opportunities, we aim to inspire curiosity and develop practical STEM skills.</p><p><br></p><p>The dedicated and passionate volunteers of this exciting program not only support various outreach events organized, but they are also encouraged to ideate and/or arrange community outreach events. This is a platform for everyone to Give Back to the society in their own capacity. As we strongly believe that no contribution is small and no idea is a bad idea.</p>",
     "carouselImages": [
       {
-        "imageId": "pyHB3LPxbpuC",
-        "url": "/uploads/future-explorers/4b6pdfnzf8qH.jpg",
+        "imageId": "MKjn7oefiRht",
+        "url": "/uploads/future-explorers/euJGoXTAODQz.png",
         "sequence": 0,
-        "active": true
-      },
-      {
-        "imageId": "gfnw8K82TpPO",
-        "url": "/uploads/future-explorers/fZPbygh1M52G.jpg",
-        "sequence": 1,
-        "active": true
-      },
-      {
-        "imageId": "Ht3Y92b37Tg1",
-        "url": "/uploads/future-explorers/zjJm8p3LSVA4.jpg",
-        "sequence": 2,
-        "active": true
-      },
-      {
-        "imageId": "T2ljCeNXl8jv",
-        "url": "/uploads/future-explorers/iHmEQZOFfTJd.jpg",
-        "sequence": 3,
         "active": true
       }
     ],
