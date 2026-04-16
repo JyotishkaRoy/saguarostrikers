@@ -1338,5 +1338,1846 @@
     "ipAddress": "::1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
     "timestamp": "2026-04-15T03:36:31.197Z"
+  },
+  {
+    "logId": "SVjtmokHXa5P",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/outreaches",
+    "entity": "outreaches",
+    "entityId": "—",
+    "changes": {
+      "title": "Test",
+      "description": "TBD",
+      "startDate": "2026-04-14T07:00:00.000Z",
+      "endDate": "2026-04-14T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "in-progress"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T04:18:36.763Z"
+  },
+  {
+    "logId": "jNsxbfOlDhw7",
+    "userId": "ZYTGOKOUExDF",
+    "action": "DELETE /api/admin/outreaches/bLvPe1GIoXLh",
+    "entity": "bLvPe1GIoXLh",
+    "entityId": "bLvPe1GIoXLh",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T04:30:10.682Z"
+  },
+  {
+    "logId": "EdzRwfYgayAT",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/s8KT8r3nXvCe",
+    "entity": "s8KT8r3nXvCe",
+    "entityId": "s8KT8r3nXvCe",
+    "changes": {
+      "title": "AIAA Rocketry Summer Camp 2024",
+      "description": "Rocketry Summer Camp under AIAA OC to provide foundational platform for rocketry enthusiasts and great opportunity to identify the future rocketeer. Rocketry Summer Camp under AIAA OC to provide foundational platform for rocketry enthusiasts and great opportunity to identify the future rocketeerRocketry Summer Camp under AIAA OC to provide foundational platform for rocketry enthusiasts and great opportunity to identify the future rocketeerRocketry Summer Camp under AIAA OC to provide foundational platform for rocketry enthusiasts and great opportunity to identify the future rocketeer",
+      "startDate": "2024-06-01T07:00:00.000Z",
+      "endDate": "2024-06-30T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "in-progress"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T04:32:46.181Z"
+  },
+  {
+    "logId": "lx55XxBz4qvF",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/s8KT8r3nXvCe",
+    "entity": "s8KT8r3nXvCe",
+    "entityId": "s8KT8r3nXvCe",
+    "changes": {
+      "title": "AIAA Rocketry Summer Camp 2024",
+      "description": "Rocketry Summer Camp under AIAA OC to provide foundational platform for rocketry enthusiasts and great opportunity to identify the future rocketeer.",
+      "startDate": "2024-06-01T07:00:00.000Z",
+      "endDate": "2024-06-30T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "in-progress"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T04:33:13.672Z"
+  },
+  {
+    "logId": "yhBFF1w8xtmZ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/s8KT8r3nXvCe",
+    "entity": "s8KT8r3nXvCe",
+    "entityId": "s8KT8r3nXvCe",
+    "changes": {
+      "title": "AIAA Rocketry Summer Camp 2024",
+      "description": "Rocketry Summer Camp under AIAA OC to provide foundational platform for rocketry enthusiasts and great opportunity to identify the future rocketeer.",
+      "startDate": "2024-06-01T07:00:00.000Z",
+      "endDate": "2024-06-30T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "completed"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T04:48:22.754Z"
+  },
+  {
+    "logId": "HWKyLCSSE4dz",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/missions",
+    "entity": "missions",
+    "entityId": "—",
+    "changes": {
+      "title": "American Rocketry Challenge 2025",
+      "description": "ARC (The American Rocketry Challenge) is the world’s largest student rocket contest, designed to inspire the next generation of engineers and aerospace experts. Open to middle and high school students in the United States, the competition tasks teams with designing, building, and launching model rockets that must meet specific, changing mission requirements each year—such as reaching a precise altitude or carrying a fragile \"payload\" (usually a raw egg) back to Earth without breaking.\n\nWe were a new team and this was  the first time for most people on the team. We aimed to work together, share ideas, get better each day, and strive for better data. The first few times, we had some trouble getting it all together at the beginning but as everyone started to learn more and gather more experience, the pace picked up and we could advance much faster. We would design a rocket, get it reviewed by our mentor, build it, launch it, gather data, and analyze the data thoroughly. Once this process was done, we would tweak the design a bit, adjust them in the actual rocket and re-launch it for another trial.\n\nWith determination and focus, we achieved an excellent qualification round which took us to National Finals. As the first timers, we take it to our pride to reach National Finals. At the end of it, we all came back with extraordinary learning about the end-to-end engineering process, various design tools, data analysis based engineering modification, team work & collaboration and most importantly solving various real-time problems keeping calm and patience.",
+      "startDate": "2024-08-01T07:00:00.000Z",
+      "endDate": "2025-03-15T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "in-progress"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:00:47.245Z"
+  },
+  {
+    "logId": "GxUBLkAy3FKh",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/upload",
+    "entity": "upload",
+    "entityId": "—",
+    "changes": {
+      "folder": "missions",
+      "missionTitle": "American Rocketry Challenge 2025",
+      "missionId": "0IEEhuIH8CnE"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:00:47.390Z"
+  },
+  {
+    "logId": "k6ahYJIjse7C",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/0IEEhuIH8CnE",
+    "entity": "0IEEhuIH8CnE",
+    "entityId": "0IEEhuIH8CnE",
+    "changes": {
+      "title": "American Rocketry Challenge 2025",
+      "description": "ARC (The American Rocketry Challenge) is the world’s largest student rocket contest, designed to inspire the next generation of engineers and aerospace experts. Open to middle and high school students in the United States, the competition tasks teams with designing, building, and launching model rockets that must meet specific, changing mission requirements each year—such as reaching a precise altitude or carrying a fragile \"payload\" (usually a raw egg) back to Earth without breaking.\n\nWe were a new team and this was  the first time for most people on the team. We aimed to work together, share ideas, get better each day, and strive for better data. The first few times, we had some trouble getting it all together at the beginning but as everyone started to learn more and gather more experience, the pace picked up and we could advance much faster. We would design a rocket, get it reviewed by our mentor, build it, launch it, gather data, and analyze the data thoroughly. Once this process was done, we would tweak the design a bit, adjust them in the actual rocket and re-launch it for another trial.\n\nWith determination and focus, we achieved an excellent qualification round which took us to National Finals. As the first timers, we take it to our pride to reach National Finals. At the end of it, we all came back with extraordinary learning about the end-to-end engineering process, various design tools, data analysis based engineering modification, team work & collaboration and most importantly solving various real-time problems keeping calm and patience.",
+      "startDate": "2024-08-01T07:00:00.000Z",
+      "endDate": "2025-03-15T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "in-progress",
+      "imageUrl": "/uploads/missions/american-rocketry-challenge-2025-0IEEhuIH8CnE/hero.JPG"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:00:47.399Z"
+  },
+  {
+    "logId": "igiIHxwLjMZG",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/UmDQKfsE6aI3/status",
+    "entity": "status",
+    "entityId": "UmDQKfsE6aI3",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:01:24.172Z"
+  },
+  {
+    "logId": "aDqnqn8pcwVf",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/applications/UmDQKfsE6aI3",
+    "entity": "UmDQKfsE6aI3",
+    "entityId": "UmDQKfsE6aI3",
+    "changes": {
+      "studentFirstName": "Jyotishka",
+      "studentLastName": "Roy",
+      "studentEmail": "jyotishkaroy06@gmail.com",
+      "studentPhone": "",
+      "missionRole": "Mission Specialist",
+      "shortBio": "Passionate learner and problem solver. The fire sparked by a NASA mission video got translated into rocket model building and finally culminated into a working model rocketry. The mission is still on..."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:04:59.177Z"
+  },
+  {
+    "logId": "MQvtLA9XwyVQ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "0IEEhuIH8CnE",
+      "title": "American Rocketry Challenge 2025",
+      "description": "Snaps and videos from American Rocketry Challenge 2025",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:08:18.424Z"
+  },
+  {
+    "logId": "lgOchaPlhE56",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "0IEEhuIH8CnE",
+      "title": "American Rocketry Challenge 2025",
+      "description": "Snaps and videos from American Rocketry Challenge 2025",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:08:18.493Z"
+  },
+  {
+    "logId": "SGuHPQOXwJHT",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "0IEEhuIH8CnE",
+      "title": "American Rocketry Challenge 2025",
+      "description": "Snaps and videos from American Rocketry Challenge 2025",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:08:18.544Z"
+  },
+  {
+    "logId": "GFYOdJb0NM80",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "0IEEhuIH8CnE",
+      "title": "American Rocketry Challenge 2025",
+      "description": "Snaps and videos from American Rocketry Challenge 2025",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:08:18.594Z"
+  },
+  {
+    "logId": "FCgxi0H9gAZO",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "0IEEhuIH8CnE",
+      "title": "American Rocketry Challenge 2025",
+      "description": "Snaps and videos from American Rocketry Challenge 2025",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:08:18.779Z"
+  },
+  {
+    "logId": "gV5OSgX9pMk6",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "0IEEhuIH8CnE",
+      "title": "American Rocketry Challenge 2025",
+      "description": "Snaps and videos from American Rocketry Challenge 2025",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:08:18.842Z"
+  },
+  {
+    "logId": "crrkoFkBUdGx",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "0IEEhuIH8CnE",
+      "title": "American Rocketry Challenge 2025",
+      "description": "Snaps and videos from American Rocketry Challenge 2025",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:08:18.906Z"
+  },
+  {
+    "logId": "bYeTXH0gPfCl",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "0IEEhuIH8CnE",
+      "title": "American Rocketry Challenge 2025",
+      "description": "Snaps and videos from American Rocketry Challenge 2025",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:08:18.966Z"
+  },
+  {
+    "logId": "3hSRQsHrGUEP",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "0IEEhuIH8CnE",
+      "title": "American Rocketry Challenge 2025",
+      "description": "Snaps and videos from American Rocketry Challenge 2025",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:08:19.023Z"
+  },
+  {
+    "logId": "g8FsFHD6vTUR",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "0IEEhuIH8CnE",
+      "title": "American Rocketry Challenge 2025",
+      "description": "Snaps and videos from American Rocketry Challenge 2025",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:08:19.059Z"
+  },
+  {
+    "logId": "XsyUvYHHUSCT",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "0IEEhuIH8CnE",
+      "title": "American Rocketry Challenge 2025",
+      "description": "Snaps and videos from American Rocketry Challenge 2025",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:08:19.105Z"
+  },
+  {
+    "logId": "4f0G47GW5kRI",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/missions",
+    "entity": "missions",
+    "entityId": "—",
+    "changes": {
+      "title": "American Rocketry Challenge 2026",
+      "description": "We, The Saguaro Strikers (Scottsdale AZ ARC team for the 2025-26), are absolutely locked in right now. Our Arizona team is heading into our very first American Rocketry Challenge, and the mix of nerves and pure excitement is unreal. We know it's a tough challenge, but we are focused on making it to Nationals. We are a new team and this will be the first time for most people on the team. We aim to work together, share ideas, get better each day, and strive for better data. Honestly, that determination has become our secret weapon. We are just proving that a new team from the dry heat of Arizona can build an impressive machine. Now, we are ready to put all that spirit to the test and see our real, regulation-compliant rocket fly high for the first time. Our determination drives us for better results each time we fly and we aim for perfection. We feel that our attention to perfection and the smallest details sets us apart from many because it helps us to be the most precise and unlock 100% of the potential a new team can possibly have.",
+      "startDate": "2025-11-01T07:00:00.000Z",
+      "endDate": "2026-04-06T07:00:00.000Z",
+      "location": "Scottsdale, AZ",
+      "status": "in-progress"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:12:25.118Z"
+  },
+  {
+    "logId": "DLbjwQm1GUMj",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/upload",
+    "entity": "upload",
+    "entityId": "—",
+    "changes": {
+      "folder": "missions",
+      "missionTitle": "American Rocketry Challenge 2026",
+      "missionId": "LYdAu2Vb9h6I"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:12:25.146Z"
+  },
+  {
+    "logId": "CrEhTQvA6S9U",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/LYdAu2Vb9h6I",
+    "entity": "LYdAu2Vb9h6I",
+    "entityId": "LYdAu2Vb9h6I",
+    "changes": {
+      "title": "American Rocketry Challenge 2026",
+      "description": "We, The Saguaro Strikers (Scottsdale AZ ARC team for the 2025-26), are absolutely locked in right now. Our Arizona team is heading into our very first American Rocketry Challenge, and the mix of nerves and pure excitement is unreal. We know it's a tough challenge, but we are focused on making it to Nationals. We are a new team and this will be the first time for most people on the team. We aim to work together, share ideas, get better each day, and strive for better data. Honestly, that determination has become our secret weapon. We are just proving that a new team from the dry heat of Arizona can build an impressive machine. Now, we are ready to put all that spirit to the test and see our real, regulation-compliant rocket fly high for the first time. Our determination drives us for better results each time we fly and we aim for perfection. We feel that our attention to perfection and the smallest details sets us apart from many because it helps us to be the most precise and unlock 100% of the potential a new team can possibly have.",
+      "startDate": "2025-11-01T07:00:00.000Z",
+      "endDate": "2026-04-06T07:00:00.000Z",
+      "location": "Scottsdale, AZ",
+      "status": "in-progress",
+      "imageUrl": "/uploads/missions/american-rocketry-challenge-2026-LYdAu2Vb9h6I/hero.jpg"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:12:25.161Z"
+  },
+  {
+    "logId": "tFfE3Oyk8hqQ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.498Z"
+  },
+  {
+    "logId": "akO6l6QmpkDr",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.522Z"
+  },
+  {
+    "logId": "43XVN4wKjhDi",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.539Z"
+  },
+  {
+    "logId": "PHqdSDa0QxB6",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.559Z"
+  },
+  {
+    "logId": "LdEBfctRXxRU",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.575Z"
+  },
+  {
+    "logId": "DGXmV2wx8LlT",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.604Z"
+  },
+  {
+    "logId": "cq4S8NFG4NSC",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.621Z"
+  },
+  {
+    "logId": "TUSFBTuoRNJg",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.644Z"
+  },
+  {
+    "logId": "Ux7DEjxDceO6",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.661Z"
+  },
+  {
+    "logId": "3kliUzYEGtG4",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.673Z"
+  },
+  {
+    "logId": "mkdNw1LWXYqo",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.686Z"
+  },
+  {
+    "logId": "DNqLuDehJnt1",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.694Z"
+  },
+  {
+    "logId": "80D009wf0Wof",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.703Z"
+  },
+  {
+    "logId": "XZdmE6GccSbD",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.712Z"
+  },
+  {
+    "logId": "S30iCIKjaHjw",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.721Z"
+  },
+  {
+    "logId": "iG4ExKy1YYZ1",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Snaps and Videos for ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:25:17.730Z"
+  },
+  {
+    "logId": "Xmjql7aenIOb",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Videos of ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:26:24.563Z"
+  },
+  {
+    "logId": "yY6nyRzMuv3z",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Videos of ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:26:25.476Z"
+  },
+  {
+    "logId": "i9eFPtxCwW1z",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Videos of ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:26:25.757Z"
+  },
+  {
+    "logId": "RF6yJHrRdmge",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Videos of ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:26:26.071Z"
+  },
+  {
+    "logId": "FKuq0zQAxTL2",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "LYdAu2Vb9h6I",
+      "title": "American Rocketry Challenge 2026",
+      "description": "Videos of ARC 2026 journey of the team",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:26:26.311Z"
+  },
+  {
+    "logId": "9FgODTAPejGR",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users",
+    "entity": "users",
+    "entityId": "—",
+    "changes": {
+      "email": "iragarg2013@gmail.com",
+      "firstName": "Augustya ",
+      "lastName": "Garg",
+      "phone": "",
+      "role": "user",
+      "status": "active",
+      "password": "[REDACTED]"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:30:20.672Z"
+  },
+  {
+    "logId": "fPIjhOIyrE9L",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users/yQfNTk4FN5MY/upload-profile-image",
+    "entity": "upload-profile-image",
+    "entityId": "yQfNTk4FN5MY",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:30:20.706Z"
+  },
+  {
+    "logId": "mIjT2qvn4TLj",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users",
+    "entity": "users",
+    "entityId": "—",
+    "changes": {
+      "email": "iragarg20131@gmail.com",
+      "firstName": "Ira",
+      "lastName": "Garg",
+      "phone": "",
+      "role": "user",
+      "status": "active",
+      "password": "[REDACTED]"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:30:58.292Z"
+  },
+  {
+    "logId": "RibPC9JwCPbQ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users/tYxhanfBH3Px/upload-profile-image",
+    "entity": "upload-profile-image",
+    "entityId": "tYxhanfBH3Px",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:30:58.308Z"
+  },
+  {
+    "logId": "HZNBklgyPWaq",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/users/yQfNTk4FN5MY",
+    "entity": "yQfNTk4FN5MY",
+    "entityId": "yQfNTk4FN5MY",
+    "changes": {
+      "email": "gargdeepanshu@gmail.com",
+      "firstName": "Augustya ",
+      "lastName": "Garg",
+      "phone": "",
+      "role": "user",
+      "status": "active"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:31:10.629Z"
+  },
+  {
+    "logId": "f3ZqJMuq2XV4",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/users/tYxhanfBH3Px",
+    "entity": "tYxhanfBH3Px",
+    "entityId": "tYxhanfBH3Px",
+    "changes": {
+      "email": "iragarg2013@gmail.com",
+      "firstName": "Ira",
+      "lastName": "Garg",
+      "phone": "",
+      "role": "user",
+      "status": "active"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:31:17.274Z"
+  },
+  {
+    "logId": "1IxcZFaSud4G",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users",
+    "entity": "users",
+    "entityId": "—",
+    "changes": {
+      "email": "acdaniel9638@gmail.com",
+      "firstName": "Aydin ",
+      "lastName": "Daniel",
+      "phone": "",
+      "role": "user",
+      "status": "active",
+      "password": "[REDACTED]"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:31:48.997Z"
+  },
+  {
+    "logId": "7Wh812IwFjHY",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users/XPyv46XGbVtu/upload-profile-image",
+    "entity": "upload-profile-image",
+    "entityId": "XPyv46XGbVtu",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:31:49.017Z"
+  },
+  {
+    "logId": "MUzQmJtyT73u",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users",
+    "entity": "users",
+    "entityId": "—",
+    "changes": {
+      "email": "ishaanpanda57@gmail.com",
+      "firstName": "Ishaan",
+      "lastName": "Panda",
+      "phone": "",
+      "role": "user",
+      "status": "inactive",
+      "password": "[REDACTED]"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:32:18.421Z"
+  },
+  {
+    "logId": "cfP44uMvdHCM",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users/gKHU1PD9Epum/upload-profile-image",
+    "entity": "upload-profile-image",
+    "entityId": "gKHU1PD9Epum",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:32:18.441Z"
+  },
+  {
+    "logId": "dp5MvnyPKmdh",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users",
+    "entity": "users",
+    "entityId": "—",
+    "changes": {
+      "email": "rndaniel9638@gmail.com",
+      "firstName": "Richelle ",
+      "lastName": "Daniel",
+      "phone": "",
+      "role": "user",
+      "status": "active",
+      "password": "[REDACTED]"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:32:54.035Z"
+  },
+  {
+    "logId": "vZj77UsyhGnH",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users/frD6hfOdXqhH/upload-profile-image",
+    "entity": "upload-profile-image",
+    "entityId": "frD6hfOdXqhH",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:32:54.055Z"
+  },
+  {
+    "logId": "FiC5uJdCFEPS",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users",
+    "entity": "users",
+    "entityId": "—",
+    "changes": {
+      "email": "rsingla1016@gmail.com",
+      "firstName": "Riya ",
+      "lastName": "Singla",
+      "phone": "",
+      "role": "user",
+      "status": "active",
+      "password": "[REDACTED]"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:33:32.243Z"
+  },
+  {
+    "logId": "Egg7MVI2sZG2",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users/F7ULIxjcBHDT/upload-profile-image",
+    "entity": "upload-profile-image",
+    "entityId": "F7ULIxjcBHDT",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:33:32.260Z"
+  },
+  {
+    "logId": "B3FJjAeRyVdV",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users",
+    "entity": "users",
+    "entityId": "—",
+    "changes": {
+      "email": "suhaanps@gmail.com",
+      "firstName": "Suhaan ",
+      "lastName": "Sharma",
+      "phone": "",
+      "role": "user",
+      "status": "active",
+      "password": "[REDACTED]"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:33:57.518Z"
+  },
+  {
+    "logId": "CYVROqMLGFvV",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users/VgZEs2XJbqzj/upload-profile-image",
+    "entity": "upload-profile-image",
+    "entityId": "VgZEs2XJbqzj",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:33:57.534Z"
+  },
+  {
+    "logId": "xPc80Qv6C51K",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users",
+    "entity": "users",
+    "entityId": "—",
+    "changes": {
+      "email": "vyompuri9@gmail.com",
+      "firstName": "Vyom ",
+      "lastName": "Puri",
+      "phone": "",
+      "role": "user",
+      "status": "active",
+      "password": "[REDACTED]"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:34:23.031Z"
+  },
+  {
+    "logId": "DzDkMCqqcp0O",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users/E7dmsKlvYg3b/upload-profile-image",
+    "entity": "upload-profile-image",
+    "entityId": "E7dmsKlvYg3b",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:34:23.051Z"
+  },
+  {
+    "logId": "OkwHCDVHdfuK",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/PoFAjShqsdSG/status",
+    "entity": "status",
+    "entityId": "PoFAjShqsdSG",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:34:42.768Z"
+  },
+  {
+    "logId": "xoHf0nI23zaw",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/9WKy7ELH8prk/status",
+    "entity": "status",
+    "entityId": "9WKy7ELH8prk",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:34:47.028Z"
+  },
+  {
+    "logId": "TYDybCzPHtfE",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/x0Krzz93DVmP/status",
+    "entity": "status",
+    "entityId": "x0Krzz93DVmP",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:34:52.174Z"
+  },
+  {
+    "logId": "t311gkeZzLt3",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/3IGhvG1FNoax/status",
+    "entity": "status",
+    "entityId": "3IGhvG1FNoax",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:34:56.876Z"
+  },
+  {
+    "logId": "9tKw00BxuxXQ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/ML2YfWbLpIT0/status",
+    "entity": "status",
+    "entityId": "ML2YfWbLpIT0",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:35:08.383Z"
+  },
+  {
+    "logId": "AyNRGHm46zeW",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/hpEsk6O3uYOh/status",
+    "entity": "status",
+    "entityId": "hpEsk6O3uYOh",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:35:12.485Z"
+  },
+  {
+    "logId": "uk6y31WdcRDQ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/a2gaHFh809Wl/status",
+    "entity": "status",
+    "entityId": "a2gaHFh809Wl",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:35:15.391Z"
+  },
+  {
+    "logId": "0TdkDDYlWvtj",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/8En4GZs7Sxcg/status",
+    "entity": "status",
+    "entityId": "8En4GZs7Sxcg",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:35:17.989Z"
+  },
+  {
+    "logId": "FqRuYfjWUHHt",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/applications/PoFAjShqsdSG",
+    "entity": "PoFAjShqsdSG",
+    "entityId": "PoFAjShqsdSG",
+    "changes": {
+      "studentFirstName": "Augustya ",
+      "studentLastName": "Garg",
+      "studentEmail": "gargdeepanshu@gmail.com",
+      "studentPhone": "",
+      "missionRole": "Mission Specialist",
+      "shortBio": "Youngest specialist intern of the team. Genius observer and keen learner of technology to team work to collaboration. The journey has just begun..."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:40:49.101Z"
+  },
+  {
+    "logId": "HHYiWZy8EqN6",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/applications/9WKy7ELH8prk",
+    "entity": "9WKy7ELH8prk",
+    "entityId": "9WKy7ELH8prk",
+    "changes": {
+      "studentFirstName": "Ira",
+      "studentLastName": "Garg",
+      "studentEmail": "iragarg2013@gmail.com",
+      "studentPhone": "",
+      "missionRole": "Mission Specialist",
+      "shortBio": "Deep interest in Math and Physics. Is Rocket Science really a rocket science!!! Embarked on a journey in search of this answer."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:44:22.313Z"
+  },
+  {
+    "logId": "XhZHswaQNL47",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/applications/x0Krzz93DVmP",
+    "entity": "x0Krzz93DVmP",
+    "entityId": "x0Krzz93DVmP",
+    "changes": {
+      "studentFirstName": "Aydin ",
+      "studentLastName": "Daniel",
+      "studentEmail": "acdaniel9638@gmail.com",
+      "studentPhone": "",
+      "missionRole": "Mission Commander",
+      "shortBio": "Strategic silence is in effect while the Mission Commander navigates complex mission thoughts and cosmic variables."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:48:58.646Z"
+  },
+  {
+    "logId": "cXpHgvbOGes5",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/applications/3IGhvG1FNoax",
+    "entity": "3IGhvG1FNoax",
+    "entityId": "3IGhvG1FNoax",
+    "changes": {
+      "studentFirstName": "Richelle ",
+      "studentLastName": "Daniel",
+      "studentEmail": "rndaniel9638@gmail.com",
+      "studentPhone": "",
+      "missionRole": "Mission Specialist",
+      "shortBio": "Mission Specialist is still under deep mission thoughts and contemplating on the journey."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:49:32.387Z"
+  },
+  {
+    "logId": "ebmQOQfMqBDG",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/applications/hpEsk6O3uYOh",
+    "entity": "hpEsk6O3uYOh",
+    "entityId": "hpEsk6O3uYOh",
+    "changes": {
+      "studentFirstName": "Riya ",
+      "studentLastName": "Singla",
+      "studentEmail": "rsingla1016@gmail.com",
+      "studentPhone": "",
+      "missionRole": "Mission Specialist",
+      "shortBio": "The Mission Commander is currently deep in mission strategy, contemplating the next phase of the journey."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:50:02.093Z"
+  },
+  {
+    "logId": "xgGJNea4u0Sa",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/applications/a2gaHFh809Wl",
+    "entity": "a2gaHFh809Wl",
+    "entityId": "a2gaHFh809Wl",
+    "changes": {
+      "studentFirstName": "Suhaan ",
+      "studentLastName": "Sharma",
+      "studentEmail": "suhaanps@gmail.com",
+      "studentPhone": "",
+      "missionRole": "Mission Commander",
+      "shortBio": "Current status is offline as the Mission Commander focuses on deep contemplation and the trajectory of the upcoming expedition."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:50:41.617Z"
+  },
+  {
+    "logId": "SzfTXEt66vO5",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/users/gKHU1PD9Epum",
+    "entity": "gKHU1PD9Epum",
+    "entityId": "gKHU1PD9Epum",
+    "changes": {
+      "email": "ishaanpanda57@gmail.com",
+      "firstName": "Ishaan",
+      "lastName": "Panda",
+      "phone": "",
+      "role": "user",
+      "status": "active"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:50:58.275Z"
+  },
+  {
+    "logId": "0pStXcnac4OL",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users",
+    "entity": "users",
+    "entityId": "—",
+    "changes": {
+      "email": "Ishaanms1015@gmail.com",
+      "firstName": "Ishaan ",
+      "lastName": "Sharma",
+      "phone": "",
+      "role": "user",
+      "status": "active",
+      "password": "[REDACTED]"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:51:42.958Z"
+  },
+  {
+    "logId": "vHD8yEmXxYqy",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/users/vfDcfq43a6a1/upload-profile-image",
+    "entity": "upload-profile-image",
+    "entityId": "vfDcfq43a6a1",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:51:43.017Z"
+  },
+  {
+    "logId": "Vcp3fGjGuhei",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/8m9WP13bhcyL/status",
+    "entity": "status",
+    "entityId": "8m9WP13bhcyL",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:52:00.303Z"
+  },
+  {
+    "logId": "xVginPLxRe9h",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PATCH /api/admin/applications/4fvGImFC4qw6/status",
+    "entity": "status",
+    "entityId": "4fvGImFC4qw6",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:52:05.788Z"
+  },
+  {
+    "logId": "GZwmU1KMmK9g",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/applications/8m9WP13bhcyL",
+    "entity": "8m9WP13bhcyL",
+    "entityId": "8m9WP13bhcyL",
+    "changes": {
+      "studentFirstName": "Ishaan",
+      "studentLastName": "Panda",
+      "studentEmail": "ishaanpanda57@gmail.com",
+      "studentPhone": "",
+      "missionRole": "Mission Commander",
+      "shortBio": "Current status is offline as the Mission Commander focuses on deep contemplation and the trajectory of the upcoming expedition."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:52:51.778Z"
+  },
+  {
+    "logId": "U6y1tPRqpAhJ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/applications/ML2YfWbLpIT0",
+    "entity": "ML2YfWbLpIT0",
+    "entityId": "ML2YfWbLpIT0",
+    "changes": {
+      "studentFirstName": "Jyotishka",
+      "studentLastName": "Roy",
+      "studentEmail": "jyotishkaroy06@gmail.com",
+      "studentPhone": "",
+      "missionRole": "Mission Director",
+      "shortBio": "A puzzle solver and voracious reader. A passionate robotics and rocketry engineer in the making. Driven by the interest in rocketry and robotics to strive for better results guided by reliable designs & data. Keen interest in details and analyzing every small thing to make better advancements in engineering fields."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:53:46.397Z"
+  },
+  {
+    "logId": "aD6urDdOhDkZ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/applications/8En4GZs7Sxcg",
+    "entity": "8En4GZs7Sxcg",
+    "entityId": "8En4GZs7Sxcg",
+    "changes": {
+      "studentFirstName": "Vyom ",
+      "studentLastName": "Puri",
+      "studentEmail": "vyompuri9@gmail.com",
+      "studentPhone": "",
+      "missionRole": "Mission Specialist",
+      "shortBio": "The Mission Specialist is currently recalibrating coordinates and reflecting on the vast milestones of the voyage."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:54:42.269Z"
+  },
+  {
+    "logId": "rObBEeZukEqQ",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/applications/4fvGImFC4qw6",
+    "entity": "4fvGImFC4qw6",
+    "entityId": "4fvGImFC4qw6",
+    "changes": {
+      "studentFirstName": "Ishaan ",
+      "studentLastName": "Sharma",
+      "studentEmail": "ishaanms1015@gmail.com",
+      "studentPhone": "",
+      "missionRole": "Mission Specialist",
+      "shortBio": "Mission thoughts are currently undergoing deep-space processing while the Mission Specialist evaluates the path ahead."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:55:47.936Z"
+  },
+  {
+    "logId": "gfsIwr9pHaBq",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/LYdAu2Vb9h6I",
+    "entity": "LYdAu2Vb9h6I",
+    "entityId": "LYdAu2Vb9h6I",
+    "changes": {
+      "title": "American Rocketry Challenge 2026",
+      "description": "We, The Saguaro Strikers (Scottsdale AZ ARC team for the 2025-26), are absolutely locked in right now. Our Arizona team is heading into our very first American Rocketry Challenge, and the mix of nerves and pure excitement is unreal. We know it's a tough challenge, but we are focused on making it to Nationals. We are a new team and this will be the first time for most people on the team. We aim to work together, share ideas, get better each day, and strive for better data. Honestly, that determination has become our secret weapon. We are just proving that a new team from the dry heat of Arizona can build an impressive machine. Now, we are ready to put all that spirit to the test and see our real, regulation-compliant rocket fly high for the first time. Our determination drives us for better results each time we fly and we aim for perfection. We feel that our attention to perfection and the smallest details sets us apart from many because it helps us to be the most precise and unlock 100% of the potential a new team can possibly have.",
+      "startDate": "2025-11-01T07:00:00.000Z",
+      "endDate": "2026-04-06T07:00:00.000Z",
+      "location": "Scottsdale, AZ",
+      "status": "completed"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T05:57:42.459Z"
+  },
+  {
+    "logId": "c8iAO5B7hpKb",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/calendar-events",
+    "entity": "calendar-events",
+    "entityId": "—",
+    "changes": {
+      "title": "American Rocketry Challenge 2027 Kick Off",
+      "description": "American Rocketry Challenge 2027 is going to start soon. This meeting is for share more details and clarify any question regarding registration to complete year's engagement along with financials.",
+      "date": "2026-05-23",
+      "startTime": "23:00",
+      "endTime": "23:30",
+      "type": "rocketry-competition",
+      "status": "upcoming",
+      "location": "BASIS Scottsdale"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T06:10:14.095Z"
+  },
+  {
+    "logId": "uhFErGwiodWH",
+    "userId": "ZYTGOKOUExDF",
+    "action": "POST /api/admin/missions",
+    "entity": "missions",
+    "entityId": "—",
+    "changes": {
+      "title": "American Rocketry Challenge 2027 ",
+      "description": "Keep watching this space for details about upcoming American Rocketry Challenge 2027 ",
+      "startDate": "2026-07-05T07:00:00.000Z",
+      "endDate": "2026-07-05T07:00:00.000Z",
+      "location": "Scottsdale, AZ",
+      "status": "published",
+      "calendarEventId": "mKN0GzJwQ0wB"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T06:26:31.420Z"
+  },
+  {
+    "logId": "bZaUKzcB4A2y",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/znBvpm5EPIDt",
+    "entity": "znBvpm5EPIDt",
+    "entityId": "znBvpm5EPIDt",
+    "changes": {
+      "title": "American Rocketry Challenge 2027 ",
+      "description": "Keep watching this space for details about upcoming American Rocketry Challenge 2027 ",
+      "startDate": "",
+      "endDate": "",
+      "location": "Scottsdale, AZ",
+      "status": "published",
+      "calendarEventId": "mKN0GzJwQ0wB"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T06:29:41.164Z"
+  },
+  {
+    "logId": "CsxuCOXG4ZBP",
+    "userId": "ZYTGOKOUExDF",
+    "action": "PUT /api/admin/missions/0IEEhuIH8CnE",
+    "entity": "0IEEhuIH8CnE",
+    "entityId": "0IEEhuIH8CnE",
+    "changes": {
+      "title": "American Rocketry Challenge 2025",
+      "description": "ARC (The American Rocketry Challenge) is the world’s largest student rocket contest, designed to inspire the next generation of engineers and aerospace experts. Open to middle and high school students in the United States, the competition tasks teams with designing, building, and launching model rockets that must meet specific, changing mission requirements each year—such as reaching a precise altitude or carrying a fragile \"payload\" (usually a raw egg) back to Earth without breaking.\n\nWe were a new team and this was  the first time for most people on the team. We aimed to work together, share ideas, get better each day, and strive for better data. The first few times, we had some trouble getting it all together at the beginning but as everyone started to learn more and gather more experience, the pace picked up and we could advance much faster. We would design a rocket, get it reviewed by our mentor, build it, launch it, gather data, and analyze the data thoroughly. Once this process was done, we would tweak the design a bit, adjust them in the actual rocket and re-launch it for another trial.\n\nWith determination and focus, we achieved an excellent qualification round which took us to National Finals. As the first timers, we take it to our pride to reach National Finals. At the end of it, we all came back with extraordinary learning about the end-to-end engineering process, various design tools, data analysis based engineering modification, team work & collaboration and most importantly solving various real-time problems keeping calm and patience.",
+      "startDate": "2024-08-01T07:00:00.000Z",
+      "endDate": "2025-03-15T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "completed"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/145.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T06:31:12.039Z"
+  },
+  {
+    "logId": "xdxjc6P0F0mn",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/missions",
+    "entity": "missions",
+    "entityId": "—",
+    "changes": {
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Challenges in performing hazardous or risk prone activities remotely on earth or under water resulting into loss of human lives. Also, inability to perform extraterrestrial exploration on celestial bodies not feasible to send human.\nThe solution is an exploring robot that has been designed for exploring purposes on land only for the time being. The prototype model is basically a rover that can be controlled remotely with a joystick module. The connection between the control center or joysticks and the rover is a Bluetooth with 98 feet range. The arm is controlled by a total of 2 joysticks and can go left-right, up-down, and forward-back (i.e. 3 degrees of motion). The chassis has a total of 6 wheels and 4 motors to help the rover move and the middle two wheels are for support of better weight distribution. Finally, the camera is the part that will send live feed to control center and will help to navigate through the unknown and maybe dangerous place.",
+      "startDate": "2023-11-01T07:00:00.000Z",
+      "endDate": "2024-02-29T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "in-progress"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:47:08.119Z"
+  },
+  {
+    "logId": "7NJterT9YURn",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/upload",
+    "entity": "upload",
+    "entityId": "—",
+    "changes": {
+      "folder": "missions",
+      "missionTitle": "Remotely controlled exploration rover with robotic arm",
+      "missionId": "BbBq5Xsnlf2a"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:47:08.203Z"
+  },
+  {
+    "logId": "Kf2VQwqJz1xC",
+    "userId": "KIDYAJfDFyAe",
+    "action": "PUT /api/admin/missions/BbBq5Xsnlf2a",
+    "entity": "BbBq5Xsnlf2a",
+    "entityId": "BbBq5Xsnlf2a",
+    "changes": {
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Challenges in performing hazardous or risk prone activities remotely on earth or under water resulting into loss of human lives. Also, inability to perform extraterrestrial exploration on celestial bodies not feasible to send human.\nThe solution is an exploring robot that has been designed for exploring purposes on land only for the time being. The prototype model is basically a rover that can be controlled remotely with a joystick module. The connection between the control center or joysticks and the rover is a Bluetooth with 98 feet range. The arm is controlled by a total of 2 joysticks and can go left-right, up-down, and forward-back (i.e. 3 degrees of motion). The chassis has a total of 6 wheels and 4 motors to help the rover move and the middle two wheels are for support of better weight distribution. Finally, the camera is the part that will send live feed to control center and will help to navigate through the unknown and maybe dangerous place.",
+      "startDate": "2023-11-01T07:00:00.000Z",
+      "endDate": "2024-02-29T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "in-progress",
+      "imageUrl": "/uploads/missions/remotely-controlled-exploration-rover-with-robotic-arm-BbBq5Xsnlf2a/hero.png"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:47:08.215Z"
+  },
+  {
+    "logId": "RaXqakBoWplH",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/artifacts",
+    "entity": "artifacts",
+    "entityId": "—",
+    "changes": {
+      "missionId": "BbBq5Xsnlf2a",
+      "description": "Complete Research and design"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:48:55.128Z"
+  },
+  {
+    "logId": "iOF45ZbR3IeI",
+    "userId": "KIDYAJfDFyAe",
+    "action": "PATCH /api/admin/applications/pjGdNeUXuWtr/status",
+    "entity": "status",
+    "entityId": "pjGdNeUXuWtr",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": "Direct assignment by admin"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:49:12.975Z"
+  },
+  {
+    "logId": "QJSaDZZjZhJ1",
+    "userId": "KIDYAJfDFyAe",
+    "action": "PUT /api/admin/applications/pjGdNeUXuWtr",
+    "entity": "pjGdNeUXuWtr",
+    "entityId": "pjGdNeUXuWtr",
+    "changes": {
+      "studentFirstName": "Jyotishka",
+      "studentLastName": "Roy",
+      "studentEmail": "jyotishkaroy06@gmail.com",
+      "studentPhone": "",
+      "missionRole": "Researcher",
+      "shortBio": "A robotics enthusiast, driven by a passion for building and programming, spends time engineering innovative solutions to complex real life challenges. Fascinated by the intersection of technology and exploration, with a long-term goal of developing advanced robotics for deep-space mission, the approach is a blend of technical curiosity and creative problem-solving. These small steps will one day help humanity reach further into the stars through robotic innovation."
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:53:38.138Z"
+  },
+  {
+    "logId": "Zsj10FEmHHMX",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "BbBq5Xsnlf2a",
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Snaps and videos illustrating the journey and the outcome",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:57:38.303Z"
+  },
+  {
+    "logId": "WbQHDuFH4dh7",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "BbBq5Xsnlf2a",
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Snaps and videos illustrating the journey and the outcome",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:57:38.357Z"
+  },
+  {
+    "logId": "CcYCyaKCTo4S",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "BbBq5Xsnlf2a",
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Snaps and videos illustrating the journey and the outcome",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:57:38.415Z"
+  },
+  {
+    "logId": "qJ2G6in8Ba1w",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "BbBq5Xsnlf2a",
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Snaps and videos illustrating the journey and the outcome",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:57:38.475Z"
+  },
+  {
+    "logId": "u9EmuKgW0zL9",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "BbBq5Xsnlf2a",
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Snaps and videos illustrating the journey and the outcome",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:57:38.542Z"
+  },
+  {
+    "logId": "TlELASshIY6m",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "BbBq5Xsnlf2a",
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Snaps and videos illustrating the journey and the outcome",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:57:38.602Z"
+  },
+  {
+    "logId": "ar80lAmPkzvq",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "BbBq5Xsnlf2a",
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Snaps and videos illustrating the journey and the outcome",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:57:38.660Z"
+  },
+  {
+    "logId": "GLYtWsqnyiYK",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "BbBq5Xsnlf2a",
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Snaps and videos illustrating the journey and the outcome",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:57:38.745Z"
+  },
+  {
+    "logId": "6AoAQ1LzkvW9",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "BbBq5Xsnlf2a",
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Snaps and videos illustrating the journey and the outcome",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:57:38.769Z"
+  },
+  {
+    "logId": "bb9OsslNBFRq",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "BbBq5Xsnlf2a",
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Snaps and videos illustrating the journey and the outcome",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:57:38.796Z"
+  },
+  {
+    "logId": "kGaZfBZrsWzy",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "BbBq5Xsnlf2a",
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Snaps and videos illustrating the journey and the outcome",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:58:00.095Z"
+  },
+  {
+    "logId": "f5LNHDUjA3OC",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/artifacts",
+    "entity": "artifacts",
+    "entityId": "—",
+    "changes": {
+      "missionId": "BbBq5Xsnlf2a",
+      "description": "Hardware Design"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:58:57.421Z"
+  },
+  {
+    "logId": "mIpsGmE6K0bD",
+    "userId": "KIDYAJfDFyAe",
+    "action": "PUT /api/admin/missions/BbBq5Xsnlf2a",
+    "entity": "BbBq5Xsnlf2a",
+    "entityId": "BbBq5Xsnlf2a",
+    "changes": {
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Challenges in performing hazardous or risk prone activities remotely on earth or under water resulting into loss of human lives. Also, inability to perform extraterrestrial exploration on celestial bodies not feasible to send human.\nThe solution is an exploring robot that has been designed for exploring purposes on land only for the time being. The prototype model is basically a rover that can be controlled remotely with a joystick module. The connection between the control center or joysticks and the rover is a Bluetooth with 98 feet range. The arm is controlled by a total of 2 joysticks and can go left-right, up-down, and forward-back (i.e. 3 degrees of motion). The chassis has a total of 6 wheels and 4 motors to help the rover move and the middle two wheels are for support of better weight distribution. Finally, the camera is the part that will send live feed to control center and will help to navigate through the unknown and maybe dangerous place.",
+      "startDate": "2023-11-01T07:00:00.000Z",
+      "endDate": "2024-02-29T07:00:00.000Z",
+      "location": "Irvine, CA",
+      "status": "completed"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-15T23:59:08.519Z"
+  },
+  {
+    "logId": "d6WWomMW8UUa",
+    "userId": "KIDYAJfDFyAe",
+    "action": "DELETE /api/admin/gallery/wB0SAFcJkVXf",
+    "entity": "wB0SAFcJkVXf",
+    "entityId": "wB0SAFcJkVXf",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T00:00:13.899Z"
+  },
+  {
+    "logId": "hXjhRV896PVE",
+    "userId": "KIDYAJfDFyAe",
+    "action": "POST /api/admin/gallery",
+    "entity": "gallery",
+    "entityId": "—",
+    "changes": {
+      "missionId": "BbBq5Xsnlf2a",
+      "title": "Remotely controlled exploration rover with robotic arm",
+      "description": "Video of the working rover",
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T00:04:57.097Z"
+  },
+  {
+    "logId": "wwR9WzlLo90X",
+    "userId": "KIDYAJfDFyAe",
+    "action": "PUT /api/admin/artifacts/69KOhJerNoGp",
+    "entity": "69KOhJerNoGp",
+    "entityId": "69KOhJerNoGp",
+    "changes": {
+      "description": "Complete Research and design"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T00:05:11.820Z"
+  },
+  {
+    "logId": "wOOSBBUaUo2X",
+    "userId": "KIDYAJfDFyAe",
+    "action": "PUT /api/admin/artifacts/69KOhJerNoGp",
+    "entity": "69KOhJerNoGp",
+    "entityId": "69KOhJerNoGp",
+    "changes": {
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T00:05:16.114Z"
+  },
+  {
+    "logId": "ZjwqUPRumfCA",
+    "userId": "KIDYAJfDFyAe",
+    "action": "PUT /api/admin/artifacts/Ej9QHnV1aPG3",
+    "entity": "Ej9QHnV1aPG3",
+    "entityId": "Ej9QHnV1aPG3",
+    "changes": {
+      "status": "published"
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-16T00:05:20.260Z"
   }
 ]

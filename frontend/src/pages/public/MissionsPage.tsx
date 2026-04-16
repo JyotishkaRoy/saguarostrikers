@@ -19,6 +19,13 @@ interface Mission {
 const MISSIONS_PER_PAGE = 6;
 type FilterStatus = 'all' | 'upcoming' | 'in-progress' | 'completed' | 'archived';
 
+/** Plain text for mission cards so line-clamp counts lines correctly if HTML is stored. */
+function missionCardDescription(description: string): string {
+  if (!description) return '';
+  const stripped = description.replace(/<[^>]*>/g, ' ');
+  return stripped.replace(/\s+/g, ' ').trim();
+}
+
 export default function MissionsPage() {
   const [missions, setMissions] = useState<Mission[]>([]);
   const [filteredMissions, setFilteredMissions] = useState<Mission[]>([]);
@@ -312,7 +319,7 @@ export default function MissionsPage() {
                 <Link
                   key={mission.missionId}
                   to={`/missions/${mission.slug}`}
-                  className="card group hover:shadow-xl transition-all duration-300"
+                  className="card group hover:shadow-xl transition-all duration-300 min-w-0"
                 >
                   {/* Image/Video */}
                   <div className="relative h-48 bg-gradient-to-br from-primary-600 to-primary-800 rounded-lg overflow-hidden mb-4">
@@ -345,11 +352,13 @@ export default function MissionsPage() {
                   </div>
 
                   {/* Content */}
-                  <div>
+                  <div className="min-w-0">
                     <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-primary-600 transition-colors">
                       {mission.title}
                     </h3>
-                    <p className="text-gray-600 mb-4 line-clamp-3">{mission.description}</p>
+                    <p className="text-gray-600 mb-4 line-clamp-3 break-words">
+                      {missionCardDescription(mission.description)}
+                    </p>
 
                     {/* Details */}
                     <div className="space-y-2 mb-4">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, X, Calendar as CalendarIcon } from 'lucide-react';
 import { api } from '@/lib/api';
@@ -35,6 +35,12 @@ export default function CalendarPage() {
   const [missions, setMissions] = useState<Mission[]>([]);
   const [outreaches, setOutreaches] = useState<Outreach[]>([]);
   const [selectedItem, setSelectedItem] = useState<CalendarItem | null>(null);
+  const [isMonthOpen, setIsMonthOpen] = useState(false);
+  const [isYearOpen, setIsYearOpen] = useState(false);
+  const monthMenuRef = useRef<HTMLDivElement | null>(null);
+  const yearMenuRef = useRef<HTMLDivElement | null>(null);
+  const monthListRef = useRef<HTMLDivElement | null>(null);
+  const yearListRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     fetchEvents();
@@ -55,6 +61,37 @@ export default function CalendarPage() {
     };
     load();
   }, []);
+
+  useEffect(() => {
+    const onDocClick = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (monthMenuRef.current && !monthMenuRef.current.contains(target)) {
+        setIsMonthOpen(false);
+      }
+      if (yearMenuRef.current && !yearMenuRef.current.contains(target)) {
+        setIsYearOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', onDocClick);
+    return () => document.removeEventListener('mousedown', onDocClick);
+  }, []);
+
+  useEffect(() => {
+    if (!isYearOpen || !yearListRef.current) return;
+    const selectedYearEl = yearListRef.current.querySelector<HTMLButtonElement>(
+      `button[data-year="${currentDate.getFullYear()}"]`
+    );
+    selectedYearEl?.scrollIntoView({ block: 'center' });
+  }, [isYearOpen, currentDate]);
+
+  useEffect(() => {
+    if (!isMonthOpen || !monthListRef.current) return;
+    const selectedMonthEl = monthListRef.current.querySelector<HTMLButtonElement>(
+      `button[data-month="${currentDate.getMonth()}"]`
+    );
+    selectedMonthEl?.scrollIntoView({ block: 'center' });
+  }, [isMonthOpen, currentDate]);
 
   const fetchEvents = async () => {
     try {
@@ -98,12 +135,23 @@ export default function CalendarPage() {
     setCurrentDate(new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 1));
   };
 
+  const selectMonth = (monthIndex: number) => {
+    setCurrentDate(new Date(currentDate.getFullYear(), monthIndex, 1));
+    setIsMonthOpen(false);
+  };
+
+  const selectYear = (year: number) => {
+    setCurrentDate(new Date(year, currentDate.getMonth(), 1));
+    setIsYearOpen(false);
+  };
+
   const monthNames = [
     'January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
   const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const years = Array.from({ length: 1000 }, (_, i) => 2000 + i);
 
   const daysInMonth = getDaysInMonth(currentDate);
   const firstDay = getFirstDayOfMonth(currentDate);
@@ -164,9 +212,77 @@ export default function CalendarPage() {
                   <ChevronLeft className="h-6 w-6" />
                 </button>
                 
-                <h2 className="text-2xl font-bold">
-                  {monthNames[currentDate.getMonth()]} {currentDate.getFullYear()}
-                </h2>
+                <div className="flex items-center gap-2">
+                  <div className="relative" ref={monthMenuRef}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsMonthOpen((v) => !v);
+                        setIsYearOpen(false);
+                      }}
+                      className="rounded-md px-2 py-1 text-2xl font-bold text-white hover:bg-primary-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                    >
+                      {monthNames[currentDate.getMonth()]}
+                    </button>
+                    {isMonthOpen && (
+                      <div
+                        ref={monthListRef}
+                        className="absolute left-0 top-full z-20 mt-2 max-h-64 w-44 overflow-y-auto rounded-md border border-gray-200 bg-white shadow-xl"
+                      >
+                        {monthNames.map((month, index) => (
+                          <button
+                            key={month}
+                            data-month={index}
+                            type="button"
+                            onClick={() => selectMonth(index)}
+                            className={cn(
+                              'block w-full px-3 py-2 text-left text-sm hover:bg-gray-100',
+                              index === currentDate.getMonth() ? 'bg-primary-50 font-semibold text-primary-700' : 'text-gray-800'
+                            )}
+                          >
+                            {month}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+
+                  <span className="text-2xl font-bold text-white">-</span>
+
+                  <div className="relative" ref={yearMenuRef}>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setIsYearOpen((v) => !v);
+                        setIsMonthOpen(false);
+                      }}
+                      className="rounded-md px-2 py-1 text-2xl font-bold text-white hover:bg-primary-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80"
+                    >
+                      {currentDate.getFullYear()}
+                    </button>
+                    {isYearOpen && (
+                      <div
+                        ref={yearListRef}
+                        className="absolute right-0 top-full z-20 mt-2 max-h-64 w-36 overflow-y-auto rounded-md border border-gray-200 bg-white shadow-xl"
+                      >
+                        {years.map((year) => (
+                          <button
+                            key={year}
+                            data-year={year}
+                            type="button"
+                            onClick={() => selectYear(year)}
+                            className={cn(
+                              'block w-full px-3 py-2 text-left text-sm hover:bg-gray-100',
+                              year === currentDate.getFullYear() ? 'bg-primary-50 font-semibold text-primary-700' : 'text-gray-800'
+                            )}
+                          >
+                            {year}
+                          </button>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                </div>
                 
                 <button
                   onClick={nextMonth}

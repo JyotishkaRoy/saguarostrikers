@@ -28,6 +28,8 @@ interface CalendarEventOption {
   type: string;
 }
 
+type MissionStatus = 'draft' | 'published' | 'completed' | 'cancelled' | 'in-progress' | 'archived';
+
 export default function AdminMissions() {
   const [searchParams] = useSearchParams();
   const urlMissionId = searchParams.get('missionId');
@@ -39,6 +41,9 @@ export default function AdminMissions() {
   const [filterStatus, setFilterStatus] = useState<string>('all');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingMission, setEditingMission] = useState<Mission | null>(null);
+  const [formStatus, setFormStatus] = useState<MissionStatus>('draft');
+  const [formStartDate, setFormStartDate] = useState('');
+  const [formEndDate, setFormEndDate] = useState('');
   const [calendarEventsForMission, setCalendarEventsForMission] = useState<CalendarEventOption[]>([]);
   const [stats, setStats] = useState({
     total: 0,
@@ -117,15 +122,27 @@ export default function AdminMissions() {
     const formData = new FormData(e.currentTarget);
     
     const calendarEventId = formData.get('calendarEventId') as string;
-    const startDateLocal = formData.get('startDate') as string;
-    const endDateLocal = formData.get('endDate') as string;
+    const startDateLocal = formStartDate;
+    const endDateLocal = formEndDate;
+    const datesRequired = formStatus !== 'published';
+
+    if (datesRequired && (!startDateLocal || !endDateLocal)) {
+      toast.error('Start Date and End Date are required for this status');
+      return;
+    }
+
+    if (startDateLocal && endDateLocal && endDateLocal < startDateLocal) {
+      toast.error('End Date cannot be earlier than Start Date');
+      return;
+    }
+
     const data: any = {
       title: formData.get('title'),
       description: formData.get('description'),
       startDate: startDateLocal ? localDateToUtcIso(startDateLocal) : '',
       endDate: endDateLocal ? localDateToUtcIso(endDateLocal) : '',
       location: formData.get('location'),
-      status: formData.get('status'),
+      status: formStatus,
       calendarEventId: calendarEventId && calendarEventId.trim() ? calendarEventId : undefined,
     };
 
@@ -300,6 +317,9 @@ export default function AdminMissions() {
           <button
             onClick={() => {
               setEditingMission(null);
+              setFormStatus('draft');
+              setFormStartDate('');
+              setFormEndDate('');
               setIsModalOpen(true);
             }}
             className="btn-primary flex items-center gap-2 whitespace-nowrap"
@@ -320,7 +340,16 @@ export default function AdminMissions() {
           <Trophy className="h-16 w-16 mx-auto text-gray-400 mb-4" />
           <h3 className="text-lg font-semibold text-gray-900 mb-2">No missions found</h3>
           <p className="text-gray-600 mb-4">Create your first mission to get started</p>
-          <button onClick={() => setIsModalOpen(true)} className="btn-primary">
+          <button
+            onClick={() => {
+              setEditingMission(null);
+              setFormStatus('draft');
+              setFormStartDate('');
+              setFormEndDate('');
+              setIsModalOpen(true);
+            }}
+            className="btn-primary"
+          >
             Create Mission
           </button>
         </div>
@@ -392,6 +421,9 @@ export default function AdminMissions() {
                   <button
                     onClick={() => {
                       setEditingMission(mission);
+                      setFormStatus((mission.status as MissionStatus) || 'draft');
+                      setFormStartDate(mission.startDate ? utcIsoToLocalDateInput(mission.startDate) : '');
+                      setFormEndDate(mission.endDate ? utcIsoToLocalDateInput(mission.endDate) : '');
                       setIsModalOpen(true);
                     }}
                     className="btn-outline text-sm py-1.5 px-3"
@@ -449,8 +481,15 @@ export default function AdminMissions() {
                   <input
                     type="date"
                     name="startDate"
-                    defaultValue={editingMission?.startDate ? utcIsoToLocalDateInput(editingMission.startDate) : undefined}
-                    required
+                    value={formStartDate}
+                    onChange={(e) => {
+                      const nextStart = e.target.value;
+                      setFormStartDate(nextStart);
+                      if (formEndDate && nextStart && formEndDate < nextStart) {
+                        setFormEndDate('');
+                      }
+                    }}
+                    required={formStatus !== 'published'}
                     className="input w-full"
                   />
                 </div>
@@ -459,8 +498,11 @@ export default function AdminMissions() {
                   <input
                     type="date"
                     name="endDate"
-                    defaultValue={editingMission?.endDate ? utcIsoToLocalDateInput(editingMission.endDate) : undefined}
-                    required
+                    value={formEndDate}
+                    onChange={(e) => setFormEndDate(e.target.value)}
+                    min={formStartDate || undefined}
+                    disabled={!formStartDate}
+                    required={formStatus !== 'published'}
                     className="input w-full"
                   />
                 </div>
@@ -511,7 +553,12 @@ export default function AdminMissions() {
               </div>
               <div>
                 <label className="block text-sm font-medium mb-1">Status</label>
-                <select name="status" defaultValue={editingMission?.status || 'draft'} className="input w-full">
+                <select
+                  name="status"
+                  value={formStatus}
+                  onChange={(e) => setFormStatus(e.target.value as MissionStatus)}
+                  className="input w-full"
+                >
                   <option value="draft">Draft</option>
                   <option value="published">Published (Upcoming)</option>
                   <option value="in-progress">In Progress</option>
@@ -533,6 +580,9 @@ export default function AdminMissions() {
                   onClick={() => {
                     setIsModalOpen(false);
                     setEditingMission(null);
+                    setFormStatus('draft');
+                    setFormStartDate('');
+                    setFormEndDate('');
                   }}
                   className="btn-outline flex-1"
                 >

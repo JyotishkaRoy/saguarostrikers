@@ -1,6 +1,6 @@
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { Menu, X, User, LogOut, UserCircle, Shield, ChevronDown, Trophy } from 'lucide-react';
-import { useState } from 'react';
+import { useState, type MouseEvent as ReactMouseEvent } from 'react';
 import { useAuthStore } from '@/store/authStore';
 import { cn } from '@/lib/utils';
 
@@ -18,6 +18,15 @@ export default function Navbar() {
   const handleLogout = () => {
     logout();
     navigate('/');
+  };
+
+  const handleMissionsNavClick = (e: ReactMouseEvent<HTMLAnchorElement>) => {
+    if (location.pathname === '/missions') {
+      e.preventDefault();
+      window.location.reload();
+      return;
+    }
+    setIsOpen(false);
   };
 
   return (
@@ -99,6 +108,7 @@ export default function Navbar() {
             
             <Link 
               to="/missions" 
+              onClick={handleMissionsNavClick}
               className={cn(
                 "text-white hover:text-secondary-300 transition-colors px-2 py-1",
                 isActive('/missions') && "underline underline-offset-4 decoration-2"
@@ -254,7 +264,11 @@ export default function Navbar() {
                 </div>
               )}
             </div>
-            <Link to="/missions" className={cn("block rounded-lg px-3 py-2 text-white hover:bg-primary-700", isActive('/missions') && "bg-primary-700")}>
+            <Link
+              to="/missions"
+              onClick={handleMissionsNavClick}
+              className={cn("block rounded-lg px-3 py-2 text-white hover:bg-primary-700", isActive('/missions') && "bg-primary-700")}
+            >
               Missions
             </Link>
             <Link to="/calendar" className={cn("block rounded-lg px-3 py-2 text-white hover:bg-primary-700", isActive('/calendar') && "bg-primary-700")}>

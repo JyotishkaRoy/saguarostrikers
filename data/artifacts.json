@@ -1,0 +1,32 @@
+[
+  {
+    "artifactId": "69KOhJerNoGp",
+    "missionId": "BbBq5Xsnlf2a",
+    "description": "Complete Research and design",
+    "fileName": "1sRuQ4ZNMCIP.pdf",
+    "originalFileName": "Rover Research & Prototype.pdf",
+    "filePath": "mission-artifacts/Remotely controlled exploration rover with robotic arm-BbBq5Xsnlf2a/1sRuQ4ZNMCIP.pdf",
+    "fileType": "application/pdf",
+    "fileSize": 660213,
+    "status": "published",
+    "uploadedBy": "KIDYAJfDFyAe",
+    "createdAt": "2026-04-15T23:48:55.126Z",
+    "updatedAt": "2026-04-16T00:05:16.112Z",
+    "publishedAt": "2026-04-16T00:05:16.112Z"
+  },
+  {
+    "artifactId": "Ej9QHnV1aPG3",
+    "missionId": "BbBq5Xsnlf2a",
+    "description": "Hardware Design",
+    "fileName": "oFKWIGNbCf8L.png",
+    "originalFileName": "Rover hardware.png",
+    "filePath": "mission-artifacts/Remotely controlled exploration rover with robotic arm-BbBq5Xsnlf2a/oFKWIGNbCf8L.png",
+    "fileType": "image/png",
+    "fileSize": 2347980,
+    "status": "published",
+    "uploadedBy": "KIDYAJfDFyAe",
+    "createdAt": "2026-04-15T23:58:57.419Z",
+    "updatedAt": "2026-04-16T00:05:20.259Z",
+    "publishedAt": "2026-04-16T00:05:20.259Z"
+  }
+]

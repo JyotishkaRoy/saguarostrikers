@@ -33,6 +33,10 @@ logs/
 # uploads/*
 # !uploads/.gitkeep
 
+# GitHub rejects blobs over 100 MB; keep these files on disk only (use Git LFS or host elsewhere to share)
+uploads/mission-galleries/American Rocketry Challenge 2026-LYdAu2Vb9h6I/wXw36RBx1rly.mp4
+uploads/mission-galleries/Remotely controlled exploration rover with robotic arm-BbBq5Xsnlf2a/xqoHSgW9QGJx.mp4
+
 # Cache
 .cache/
 .parcel-cache/
@@ -42,6 +46,3 @@ coverage/
 
 # Misc
 .turbo
-
-# Local JSON store (keep files on disk; do not commit or push)
-data/*.json

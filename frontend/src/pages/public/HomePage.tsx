@@ -42,10 +42,20 @@ export default function HomePage() {
 
   const fetchUpcomingMissions = async () => {
     try {
-      const response = await api.get<Mission[]>('/public/missions/upcoming');
+      const response = await api.get<Mission[]>('/public/missions');
       if (response.success && response.data) {
-        // Limit to 3 missions for the homepage
-        setUpcomingMissions(response.data.slice(0, 3));
+        // Keep homepage in sync with All Missions: status "published" is "Upcoming".
+        const upcomingByStatus = response.data
+          .filter((mission) => mission.status === 'published')
+          .sort((a, b) => {
+            // If date is missing/invalid, push it after dated missions.
+            const aTime = a.startDate ? new Date(a.startDate).getTime() : Number.POSITIVE_INFINITY;
+            const bTime = b.startDate ? new Date(b.startDate).getTime() : Number.POSITIVE_INFINITY;
+            return aTime - bTime;
+          });
+
+        // Limit to 3 missions for the homepage.
+        setUpcomingMissions(upcomingByStatus.slice(0, 3));
       }
     } catch (error) {
       console.error('Failed to fetch upcoming missions:', error);
@@ -275,13 +285,17 @@ export default function HomePage() {
                   <div className="space-y-2 text-sm text-gray-500 mb-4">
                     <div className="flex items-center gap-2">
                       <Calendar className="h-4 w-4 text-primary-600" />
-                      <span>
-                        {new Date(mission.startDate).toLocaleDateString('en-US', {
-                          month: 'short',
-                          day: 'numeric',
-                          year: 'numeric'
-                        })}
-                      </span>
+                      {mission.startDate ? (
+                        <span>
+                          {new Date(mission.startDate).toLocaleDateString('en-US', {
+                            month: 'short',
+                            day: 'numeric',
+                            year: 'numeric'
+                          })}
+                        </span>
+                      ) : (
+                        <span>Date to be announced</span>
+                      )}
                     </div>
                     {mission.location && (
                       <div className="flex items-center gap-2">

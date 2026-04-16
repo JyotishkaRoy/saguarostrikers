@@ -51,7 +51,7 @@ export default function MissionStatement() {
           </div>
         ) : (
           /* 2-Column Layout: 60% / 40% */
-          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-7xl mx-auto items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 max-w-7xl mx-auto items-center lg:items-start">
             {/* Column 1: 60% - Director's Message with Quote */}
             <div className="lg:col-span-3">
               <div className="relative h-56 md:h-64 flex items-center">
@@ -101,7 +101,7 @@ export default function MissionStatement() {
             </div>
 
             {/* Column 2: 40% - Director Image */}
-            <div className="lg:col-span-2">
+            <div className="lg:col-span-2 lg:pt-1">
               <div className="sticky top-24">
                 {/* Circular Profile Image with Gold Border */}
                 <div className="relative w-full max-w-md mx-auto">
