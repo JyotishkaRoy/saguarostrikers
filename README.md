@@ -148,7 +148,7 @@ SaguaroStrikers/
 │   ├── utils/
 │   │   └── initialSetup.js       # Initial setup script
 │   └── server.js                 # Main server file
-├── data/                         # JSON database files (not in git—see .gitignore)
+├── data/                         # JSON database files (tracked—`git pull` updates them)
 │   ├── users.json
 │   ├── missions.json
 │   ├── subEvents.json
@@ -582,7 +582,7 @@ MIT License - Feel free to use this project for learning or personal use.
 - Ensure file type is allowed
 
 **Issue**: Admin can't login
-- **Solution**: Run initial setup script again (creates `data/*.json` locally)
+- **Solution**: Run `git pull` so `data/` JSON (including `users.json`) matches the repo, or run the initial setup script to create users
 - Confirm `data/users.json` exists on disk and contains the admin user
 - Verify JWT_SECRET is set
 
