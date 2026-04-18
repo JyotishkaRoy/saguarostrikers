@@ -3353,5 +3353,41 @@
     "ipAddress": "::1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
     "timestamp": "2026-04-16T02:04:29.073Z"
+  },
+  {
+    "logId": "Mh72c2PV4paE",
+    "userId": "KIDYAJfDFyAe",
+    "action": "PATCH /api/admin/applications/vAUrrdM4Sk1f/status",
+    "entity": "status",
+    "entityId": "vAUrrdM4Sk1f",
+    "changes": {
+      "status": "approved",
+      "reviewNotes": ""
+    },
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-18T01:08:30.832Z"
+  },
+  {
+    "logId": "EzIHkrmqN2Tn",
+    "userId": "KIDYAJfDFyAe",
+    "action": "DELETE /api/admin/users/MK18NTiWxn3P",
+    "entity": "MK18NTiWxn3P",
+    "entityId": "MK18NTiWxn3P",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-18T01:16:14.221Z"
+  },
+  {
+    "logId": "aFgLUZc5i34z",
+    "userId": "KIDYAJfDFyAe",
+    "action": "DELETE /api/admin/applications/vAUrrdM4Sk1f",
+    "entity": "vAUrrdM4Sk1f",
+    "entityId": "vAUrrdM4Sk1f",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-18T01:18:27.146Z"
   }
 ]

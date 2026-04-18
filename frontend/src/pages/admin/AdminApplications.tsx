@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Users, Search, Filter, Eye, CheckCircle, Rocket, FileText } from 'lucide-react';
+import { Users, Search, Filter, Eye, CheckCircle, Rocket, FileText, Trash2 } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 import type { Mission } from '@/types';
@@ -40,6 +40,7 @@ export default function AdminApplications() {
   const [selectedApplication, setSelectedApplication] = useState<Application | null>(null);
   const [showDetailModal, setShowDetailModal] = useState(false);
   const [showReviewModal, setShowReviewModal] = useState(false);
+  const [deletingId, setDeletingId] = useState<string | null>(null);
   const [stats, setStats] = useState({
     total: 0,
     pending: 0,
@@ -148,6 +149,34 @@ export default function AdminApplications() {
   const handleReview = (application: Application) => {
     setSelectedApplication(application);
     setShowReviewModal(true);
+  };
+
+  const handleDeleteApplication = async (app: Application) => {
+    const name = `${app.studentFirstName} ${app.studentLastName}`;
+    if (
+      !window.confirm(
+        `Delete application for ${name}? This permanently removes the application record and cannot be undone.`
+      )
+    ) {
+      return;
+    }
+    try {
+      setDeletingId(app.applicationId);
+      const response = await api.delete(`/admin/applications/${app.applicationId}`);
+      if (response.success) {
+        toast.success('Application deleted');
+        if (selectedApplication?.applicationId === app.applicationId) {
+          setShowDetailModal(false);
+          setShowReviewModal(false);
+          setSelectedApplication(null);
+        }
+        await fetchApplications();
+      }
+    } catch (error) {
+      toast.error(getErrorMessage(error));
+    } finally {
+      setDeletingId(null);
+    }
   };
 
   const statusColors = {
@@ -339,6 +368,15 @@ export default function AdminApplications() {
                           title="Review Application"
                         >
                           <CheckCircle className="h-5 w-5" />
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleDeleteApplication(app)}
+                          disabled={deletingId === app.applicationId}
+                          className="p-2 text-red-600 hover:bg-red-50 rounded-lg transition-colors disabled:opacity-50"
+                          title="Delete application"
+                        >
+                          <Trash2 className="h-5 w-5" />
                         </button>
                       </div>
                     </td>
