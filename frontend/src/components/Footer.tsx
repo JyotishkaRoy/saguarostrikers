@@ -1,5 +1,4 @@
-import { Mail } from 'lucide-react';
-import { Facebook, Twitter, Linkedin } from 'lucide-react';
+import { Mail, Facebook, Linkedin } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -47,15 +46,6 @@ export default function Footer() {
                 aria-label="Facebook"
               >
                 <Facebook className="h-5 w-5" />
-              </a>
-              <a
-                href="https://twitter.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="bg-black hover:bg-gray-800 text-white rounded-full p-2 transition-colors"
-                aria-label="Twitter/X"
-              >
-                <Twitter className="h-5 w-5" />
               </a>
               <a
                 href="https://linkedin.com"
