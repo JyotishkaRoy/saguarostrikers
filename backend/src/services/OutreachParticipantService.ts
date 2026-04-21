@@ -53,18 +53,26 @@ export class OutreachParticipantService {
     const outreach = this.outreachDataHelper.getOutreachById(outreachId);
     if (!outreach) throw createError.notFound('Outreach not found');
     const participants = this.participantDataHelper.getByOutreachId(outreachId);
+    type PublicParticipant = {
+      userId: string;
+      firstName: string;
+      lastName: string;
+      role?: string;
+      profileImageUrl?: string;
+    };
+
     return participants
-      .map((p) => {
+      .map((p): PublicParticipant | null => {
         const user = this.userDataHelper.getUserById(p.userId);
         if (!user) return null;
         return {
           userId: user.userId,
           firstName: user.firstName,
           lastName: user.lastName,
-          role: p.role,
-          profileImageUrl: user.profileImageUrl,
+          ...(p.role ? { role: p.role } : {}),
+          ...(user.profileImageUrl ? { profileImageUrl: user.profileImageUrl } : {}),
         };
       })
-      .filter((x): x is { userId: string; firstName: string; lastName: string; role?: string; profileImageUrl?: string } => x !== null);
+      .filter((x): x is PublicParticipant => x !== null);
   }
 }

@@ -4,6 +4,7 @@ import { GalleryService } from '../../services/GalleryService.js';
 import { MissionService } from '../../services/MissionService.js';
 import { OutreachService } from '../../services/OutreachService.js';
 import { getOutreachFolderName } from '../../utils/outreachUploadPaths.js';
+import { CreateGalleryImageData } from '../../models/types.js';
 import path from 'path';
 import fs from 'fs';
 
@@ -269,6 +270,8 @@ export class GalleryAdminController {
       }
 
       const { missionId, outreachId, title, description, status } = req.body;
+      const normalizedStatus: 'draft' | 'published' | 'unpublished' =
+        status === 'published' || status === 'unpublished' ? status : 'draft';
 
       if (!missionId && !outreachId) {
         res.status(400).json({
@@ -289,12 +292,12 @@ export class GalleryAdminController {
       const uploadsBase = path.join(process.cwd(), '..', 'uploads');
       let galleryDir: string;
       let relativePath: string;
-      const imageData: { imageUrl: string; title: string; description: string; missionId?: string; outreachId?: string; isPublic: boolean; status: string } = {
+      const imageData: CreateGalleryImageData = {
         imageUrl: '',
         title: title.trim(),
         description: description || '',
-        isPublic: status === 'published',
-        status: status || 'draft',
+        isPublic: normalizedStatus === 'published',
+        status: normalizedStatus,
       };
 
       if (outreachId) {

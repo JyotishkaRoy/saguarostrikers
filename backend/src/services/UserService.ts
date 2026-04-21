@@ -133,14 +133,6 @@ export class UserService {
   }
 
   /**
-   * Get active users
-   */
-  async getActiveUsers(): Promise<Omit<User, 'password'>[]> {
-    const users = this.userDataHelper.getActiveUsers();
-    return users.map(({ password: _, ...user }) => user);
-  }
-
-  /**
    * Get user by email
    */
   async getUserByEmail(email: string): Promise<Omit<User, 'password'> | null> {
