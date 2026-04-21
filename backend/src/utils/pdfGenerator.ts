@@ -1,7 +1,7 @@
 import PDFDocument from 'pdfkit';
 import fs from 'fs';
 import path from 'path';
-import { JoinMissionApplication } from '../models/types.js';
+import { JoinMissionApplication, JoinMissionAgreements } from '../models/types.js';
 
 export class PDFGenerator {
   /**
@@ -9,7 +9,8 @@ export class PDFGenerator {
    */
   static async generateApplicationPDF(
     application: JoinMissionApplication,
-    missionTitle: string
+    missionTitle: string,
+    agreements: JoinMissionAgreements
   ): Promise<string> {
     // Ensure applications directory exists
     // Use same pattern as upload middleware
@@ -108,9 +109,26 @@ export class PDFGenerator {
     doc.moveDown(0.5);
     doc.fontSize(11).font('Helvetica');
     
-    doc.text('✓ Financial Responsibility Agreement: Accepted', { continued: false });
-    doc.text('✓ Photograph Usage Agreement: Accepted', { continued: false });
-    doc.text('✓ Liability Waiver: Accepted', { continued: false });
+    this.addAgreementSection(
+      doc,
+      'Financial Obligations Agreement',
+      agreements.agreementFinancial,
+      application.agreementFinancial
+    );
+    doc.moveDown(0.5);
+    this.addAgreementSection(
+      doc,
+      'Photograph & Video Consent',
+      agreements.agreementPhotograph,
+      application.agreementPhotograph
+    );
+    doc.moveDown(0.5);
+    this.addAgreementSection(
+      doc,
+      'Liability Release',
+      agreements.agreementLiability,
+      application.agreementLiability
+    );
     doc.moveDown(1);
 
     // Signatures Section
@@ -150,5 +168,18 @@ export class PDFGenerator {
   private static addField(doc: InstanceType<typeof PDFDocument>, label: string, value: string): void {
     doc.font('Helvetica-Bold').text(`${label}:`, { continued: true, width: 150 });
     doc.font('Helvetica').text(value || 'N/A', { width: 350 });
+  }
+
+  private static addAgreementSection(
+    doc: InstanceType<typeof PDFDocument>,
+    title: string,
+    content: string,
+    accepted: boolean
+  ): void {
+    doc.fontSize(12).font('Helvetica-Bold').text(`${title}:`);
+    doc.fontSize(11).font('Helvetica').text(content || 'N/A', { align: 'justify' });
+    doc.moveDown(0.2);
+    doc.font('Helvetica-Bold').text(`Status: ${accepted ? 'Accepted' : 'Not Accepted'}`);
+    doc.font('Helvetica');
   }
 }

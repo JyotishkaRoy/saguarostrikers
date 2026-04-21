@@ -3,6 +3,7 @@ import { EmailService } from './EmailService.js';
 import { MissionDataHelper } from '../data/MissionDataHelper.js';
 import { UserService } from './UserService.js';
 import { PDFGenerator } from '../utils/pdfGenerator.js';
+import { SiteContentService } from './SiteContentService.js';
 import {
   JoinMissionApplication,
   CreateJoinMissionData,
@@ -16,6 +17,7 @@ export class JoinMissionService {
   private emailService: EmailService;
   private missionDataHelper: MissionDataHelper;
   private userService: UserService;
+  private siteContentService: SiteContentService;
 
   constructor(
     dataHelper?: JoinMissionDataHelper,
@@ -27,6 +29,7 @@ export class JoinMissionService {
     this.emailService = emailService || new EmailService();
     this.missionDataHelper = missionDataHelper || new MissionDataHelper();
     this.userService = userService || new UserService();
+    this.siteContentService = new SiteContentService();
   }
 
   async submitApplication(data: CreateJoinMissionData): Promise<JoinMissionApplication> {
@@ -65,7 +68,8 @@ export class JoinMissionService {
 
     // Generate and save PDF
     try {
-      await PDFGenerator.generateApplicationPDF(application, mission.title);
+      const agreements = await this.siteContentService.getJoinMissionAgreements();
+      await PDFGenerator.generateApplicationPDF(application, mission.title, agreements);
       console.log(`✅ PDF generated for application ${application.applicationId}`);
     } catch (pdfError) {
       console.error('Error generating PDF:', pdfError);
