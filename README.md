@@ -582,7 +582,7 @@ MIT License - Feel free to use this project for learning or personal use.
 - Ensure file type is allowed
 
 **Issue**: Admin can't login
-- **Solution**: Run `git pull` so `data/` JSON (including `users.json`) matches the repo, or run the initial setup script to create users
+- **Solution**: Do **not** overwrite production `data/` from git. Keep runtime JSON data on server and deploy code only (exclude `data/`), or run the initial setup script to create users
 - Confirm `data/users.json` exists on disk and contains the admin user
 - Verify JWT_SECRET is set
 
