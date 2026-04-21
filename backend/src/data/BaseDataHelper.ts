@@ -1,9 +1,6 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { getDataDir } from '../config/paths.js';
 
 /**
  * Base class for all data helpers
@@ -14,7 +11,7 @@ export abstract class BaseDataHelper<T> {
   protected data: T[];
 
   constructor(fileName: string) {
-    this.dataPath = path.join(__dirname, '../../../data', fileName);
+    this.dataPath = path.join(getDataDir(), fileName);
     this.data = [];
     this.loadData();
   }

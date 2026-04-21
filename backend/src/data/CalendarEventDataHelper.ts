@@ -1,17 +1,14 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { join } from 'path';
 import { CalendarEvent, CreateCalendarEventData, UpdateCalendarEventData } from '../models/types';
 import { generateId } from '../utils/idGenerator.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { getDataDir } from '../config/paths.js';
 
 export class CalendarEventDataHelper {
   private dataPath: string;
 
   constructor(dataPath?: string) {
-    this.dataPath = dataPath || join(__dirname, '../../../data', 'calendarEvents.json');
+    this.dataPath = dataPath || join(getDataDir(), 'calendarEvents.json');
   }
 
   private readData(): CalendarEvent[] {

@@ -1,18 +1,14 @@
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 import { SiteContent, HomepageContent, JoinMissionAgreements, FutureExplorersContent, FutureExplorersCarouselImage } from '../models/types.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+import { getDataDir } from '../config/paths.js';
 
 export class SiteContentDataHelper {
   private dataPath: string;
   private data: SiteContent;
 
   constructor() {
-    // Same as BaseDataHelper: project root data dir (__dirname = backend/src/data)
-    this.dataPath = path.join(__dirname, '../../../data', 'siteContent.json');
+    this.dataPath = path.join(getDataDir(), 'siteContent.json');
     this.data = this.loadData();
   }
 

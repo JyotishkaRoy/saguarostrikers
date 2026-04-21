@@ -1,17 +1,14 @@
 import { readFileSync, writeFileSync } from 'fs';
-import { join, dirname } from 'path';
-import { fileURLToPath } from 'url';
+import { join } from 'path';
 import { FileUpload, CreateFileData } from '../models/types';
 import { generateId } from '../utils/idGenerator.js';
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import { getDataDir } from '../config/paths.js';
 
 export class FileDataHelper {
   private dataPath: string;
 
   constructor(dataPath?: string) {
-    this.dataPath = dataPath || join(__dirname, '../../../data', 'files.json');
+    this.dataPath = dataPath || join(getDataDir(), 'files.json');
   }
 
   private readData(): FileUpload[] {
