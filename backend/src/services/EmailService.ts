@@ -3,6 +3,7 @@ import type { Transporter } from 'nodemailer';
 
 export interface EmailOptions {
   to: string | string[];
+  cc?: string | string[];
   subject: string;
   html: string;
   text?: string;
@@ -45,6 +46,7 @@ export class EmailService {
       const mailOptions = {
         from: process.env.EMAIL_FROM || process.env.EMAIL_USER,
         to: options.to,
+        cc: options.cc,
         subject: options.subject,
         html: options.html,
         text: options.text,
@@ -62,59 +64,27 @@ export class EmailService {
   // Template for Join Mission - Student Confirmation
   async sendJoinMissionStudentConfirmation(
     studentEmail: string,
-    studentName: string,
+    studentFirstName: string,
+    parentEmail: string,
     missionTitle: string
   ): Promise<boolean> {
     const subject = `Application Received - ${missionTitle}`;
     const html = `
       <!DOCTYPE html>
       <html>
-      <head>
-        <style>
-          body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-          .container { max-width: 600px; margin: 0 auto; padding: 20px; }
-          .header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; text-align: center; border-radius: 8px 8px 0 0; }
-          .content { background: #f9f9f9; padding: 30px; border-radius: 0 0 8px 8px; }
-          .button { display: inline-block; padding: 12px 24px; background: #667eea; color: white; text-decoration: none; border-radius: 5px; margin: 20px 0; }
-          .footer { text-align: center; margin-top: 30px; color: #666; font-size: 12px; }
-        </style>
-      </head>
-      <body>
-        <div class="container">
-          <div class="header">
-            <h1>🚀 Application Received!</h1>
-          </div>
-          <div class="content">
-            <h2>Hello ${studentName}!</h2>
-            <p>Thank you for your interest in joining <strong>${missionTitle}</strong> with Saguaro Strikers!</p>
-            
-            <p>We've successfully received your application. Our team will review it carefully and get back to you within <strong>3-5 business days</strong>.</p>
-            
-            <h3>What happens next?</h3>
-            <ol>
-              <li>Our team reviews your application</li>
-              <li>We'll assess your fit for the mission</li>
-              <li>You'll receive an email with our decision</li>
-              <li>If approved, we'll send you next steps and joining instructions</li>
-            </ol>
-            
-            <p>In the meantime, feel free to explore our website to learn more about Saguaro Strikers and our other missions.</p>
-            
-            <p>If you have any questions, please don't hesitate to contact us.</p>
-            
-            <p>Best regards,<br><strong>The Saguaro Strikers Team</strong></p>
-          </div>
-          <div class="footer">
-            <p>This is an automated message. Please do not reply directly to this email.</p>
-            <p>&copy; ${new Date().getFullYear()} Saguaro Strikers. All rights reserved.</p>
-          </div>
-        </div>
+      <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+        <p>Hi ${studentFirstName},</p>
+        <p>
+          Thank you for showing your interest in joining ${missionTitle}. You application is currently under review by mission director and/or admin. Once decision is made, you will be notified regarding the same.
+        </p>
+        <p>Thanks,<br/>Saguaro Strikers</p>
       </body>
       </html>
     `;
 
     return await this.sendEmail({
       to: studentEmail,
+      cc: parentEmail,
       subject,
       html,
     });

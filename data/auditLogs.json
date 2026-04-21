@@ -3389,5 +3389,49 @@
     "ipAddress": "::1",
     "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
     "timestamp": "2026-04-18T01:18:27.146Z"
+  },
+  {
+    "logId": "WU75h2xuPLv1",
+    "userId": "KIDYAJfDFyAe",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "KIDYAJfDFyAe",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-21T07:02:07.388Z"
+  },
+  {
+    "logId": "FvqN4f5K6Fm0",
+    "userId": "KIDYAJfDFyAe",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "KIDYAJfDFyAe",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-21T07:12:00.421Z"
+  },
+  {
+    "logId": "IUP7pvBlQFEt",
+    "userId": "KIDYAJfDFyAe",
+    "action": "USER_LOGIN",
+    "entity": "user",
+    "entityId": "KIDYAJfDFyAe",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-21T07:14:53.700Z"
+  },
+  {
+    "logId": "tdOTJOIiONrW",
+    "userId": "KIDYAJfDFyAe",
+    "action": "DELETE /api/admin/applications/CqaCdjtSd88j",
+    "entity": "CqaCdjtSd88j",
+    "entityId": "CqaCdjtSd88j",
+    "changes": {},
+    "ipAddress": "::1",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36",
+    "timestamp": "2026-04-21T07:26:00.211Z"
   }
 ]

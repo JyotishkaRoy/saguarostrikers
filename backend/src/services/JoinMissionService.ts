@@ -81,15 +81,8 @@ export class JoinMissionService {
       // Send to student
       await this.emailService.sendJoinMissionStudentConfirmation(
         data.studentEmail,
-        `${data.studentFirstName} ${data.studentLastName}`,
-        mission.title
-      );
-
-      // Send to parent
-      await this.emailService.sendJoinMissionParentConfirmation(
+        data.studentFirstName,
         data.parentEmail,
-        `${data.studentFirstName} ${data.studentLastName}`,
-        `${data.parentFirstName} ${data.parentLastName}`,
         mission.title
       );
 
