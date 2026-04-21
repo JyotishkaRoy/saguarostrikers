@@ -4,7 +4,7 @@ import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 /** Repository root (parent of backend/). */
-export const REPO_ROOT = path.resolve(__dirname, '../..');
+export const REPO_ROOT = path.resolve(__dirname, '../../..');
 
 /**
  * Directory for JSON data files (users.json, missions.json, etc.).

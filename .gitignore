@@ -47,5 +47,5 @@ coverage/
 # Misc
 .turbo
 
-# data/*.json is tracked in this repo so clones get a full DB snapshot via git pull.
-# Do not add data/*.json here unless you intentionally want to stop tracking local JSON.
+# Local JSON data stores
+data/

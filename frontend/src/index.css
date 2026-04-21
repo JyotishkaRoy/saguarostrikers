@@ -42,6 +42,8 @@
 
   /* Smooth scrolling */
   html {
+    /* Match the previous 80% browser zoom look at 100% zoom */
+    font-size: 80%;
     scroll-behavior: smooth;
   }
 
