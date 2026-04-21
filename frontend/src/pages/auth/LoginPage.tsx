@@ -75,7 +75,7 @@ export default function LoginPage() {
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@rocketry.org"
+                  placeholder="you@example.com"
                   required
                   className="input pl-10"
                   disabled={isLoading}
@@ -131,15 +131,6 @@ export default function LoginPage() {
                 Register here
               </Link>
             </p>
-          </div>
-        </div>
-
-        {/* Demo Credentials */}
-        <div className="mt-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-          <p className="text-sm font-medium text-blue-900 mb-2">Demo Credentials:</p>
-          <div className="text-sm text-blue-800 space-y-1">
-            <p><strong>Email:</strong> admin@rocketry.org</p>
-            <p><strong>Password:</strong> Admin@123</p>
           </div>
         </div>
       </div>
