@@ -312,7 +312,6 @@ export default function CalendarPage() {
               {/* Days of the month */}
               {Array.from({ length: daysInMonth }).map((_, index) => {
                 const day = index + 1;
-                const dayItems = getItemsForDate(day);
                 const isToday = isCurrentMonth && day === today.getDate();
 
                 return (

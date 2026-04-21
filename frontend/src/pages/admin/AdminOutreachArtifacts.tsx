@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
-import { Package, Plus, Trash2, ArrowLeft, Download, Edit, Eye, EyeOff } from 'lucide-react';
+import { Package, Plus, Trash2, ArrowLeft, Download, Eye, EyeOff } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 

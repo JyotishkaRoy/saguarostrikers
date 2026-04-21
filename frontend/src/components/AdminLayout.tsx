@@ -10,7 +10,6 @@ import {
   Calendar,
   Bell,
   Image,
-  Folder,
   UsersRound,
   Shield,
   MessageCircle,

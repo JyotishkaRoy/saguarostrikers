@@ -60,7 +60,6 @@ import AdminGallery from './pages/admin/AdminGallery';
 import AdminDiscussions from './pages/admin/AdminDiscussions';
 import AdminFutureExplorers from './pages/admin/AdminFutureExplorers';
 import AdminOutreaches from './pages/admin/AdminOutreaches';
-import AdminOutreachPlaceholder from './pages/admin/AdminOutreachPlaceholder';
 import AdminOutreachApplications from './pages/admin/AdminOutreachApplications';
 import AdminOutreachParticipants from './pages/admin/AdminOutreachParticipants';
 import AdminOutreachArtifacts from './pages/admin/AdminOutreachArtifacts';

@@ -240,6 +240,9 @@ export default function AdminScientists() {
       if (!submitResponse.success) {
         throw new Error('Failed to create application');
       }
+      if (!submitResponse.data?.applicationId) {
+        throw new Error('Application created without id');
+      }
 
       // Get the created application ID
       const applicationId = submitResponse.data.applicationId;

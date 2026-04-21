@@ -28,6 +28,10 @@ interface CalendarEventOption {
   type: string;
 }
 
+interface UploadResult {
+  url: string;
+}
+
 type MissionStatus = 'draft' | 'published' | 'completed' | 'cancelled' | 'in-progress' | 'archived';
 
 export default function AdminMissions() {
@@ -155,7 +159,7 @@ export default function AdminMissions() {
         if (heroMediaFile && heroMediaFile.name && heroMediaFile.size > 0) {
           try {
             // Use the dedicated uploadFile method with mission details
-            const uploadResponse = await api.uploadFile('/admin/upload', heroMediaFile, {
+            const uploadResponse = await api.uploadFile<UploadResult>('/admin/upload', heroMediaFile, {
               folder: 'missions',
               missionTitle: editingMission.title,
               missionId: editingMission.missionId
@@ -184,7 +188,7 @@ export default function AdminMissions() {
           // Upload file after mission creation if file was selected
           if (heroMediaFile && heroMediaFile.name && heroMediaFile.size > 0) {
             try {
-              const uploadResponse = await api.uploadFile('/admin/upload', heroMediaFile, {
+              const uploadResponse = await api.uploadFile<UploadResult>('/admin/upload', heroMediaFile, {
                 folder: 'missions',
                 missionTitle: newMission.title,
                 missionId: newMission.missionId
@@ -200,7 +204,7 @@ export default function AdminMissions() {
             } catch (uploadError) {
               console.error('File upload failed:', uploadError);
               // Mission was created, but file upload failed - still show success
-              toast.warning('Mission created, but media upload failed');
+              toast.error('Mission created, but media upload failed');
             }
           }
         }

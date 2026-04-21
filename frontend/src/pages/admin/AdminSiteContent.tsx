@@ -107,6 +107,7 @@ export default function AdminSiteContent() {
       { key: 'join-mission-agreement-photograph', label: 'Photograph & Video Consent', type: 'plain' },
       { key: 'join-mission-agreement-liability', label: 'Liability Release', type: 'plain' },
     ],
+    'future-explorers': [],
   };
 
   const sections = activeTab === 'future-explorers' ? [] : sectionsByTab[activeTab];
@@ -1037,7 +1038,8 @@ function FeaturedVideosEditor({ content, onChange, onSave, onCancel }: FeaturedV
   const setVideo = (index: number, updates: Partial<{ title: string; url: string; thumbnail?: string }>) => {
     setVideos(prev => {
       const next = [...prev];
-      next[index] = { title: '', url: '', ...(next[index] || {}), ...updates };
+      const current = next[index] || { title: '', url: '' };
+      next[index] = { ...current, ...updates };
       return next;
     });
   };

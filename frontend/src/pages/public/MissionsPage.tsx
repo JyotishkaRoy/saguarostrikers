@@ -96,7 +96,7 @@ export default function MissionsPage() {
     }
   };
 
-  const getMissionStatus = (startDate: string, endDate: string, dbStatus: string): FilterStatus => {
+  const getMissionStatus = (_startDate: string, _endDate: string, dbStatus: string): FilterStatus => {
     // Use explicit database status directly
     if (dbStatus === 'archived') {
       return 'archived';

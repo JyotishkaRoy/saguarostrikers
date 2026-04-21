@@ -75,6 +75,10 @@ interface ActiveUser {
   status: string;
 }
 
+interface UploadResult {
+  url: string;
+}
+
 export default function AdminOutreaches() {
   const [searchParams] = useSearchParams();
   const urlOutreachId = searchParams.get('outreachId');
@@ -396,7 +400,7 @@ export default function AdminOutreaches() {
 
         if (heroMediaFile && heroMediaFile.name && heroMediaFile.size > 0) {
           try {
-            const uploadResponse = await api.uploadFile('/admin/upload', heroMediaFile, {
+            const uploadResponse = await api.uploadFile<UploadResult>('/admin/upload', heroMediaFile, {
               folder: 'outreaches',
               outreachTitle: editingOutreach.title,
               outreachId: editingOutreach.outreachId
@@ -423,7 +427,7 @@ export default function AdminOutreaches() {
 
           if (heroMediaFile && heroMediaFile.name && heroMediaFile.size > 0) {
             try {
-              const uploadResponse = await api.uploadFile('/admin/upload', heroMediaFile, {
+              const uploadResponse = await api.uploadFile<UploadResult>('/admin/upload', heroMediaFile, {
                 folder: 'outreaches',
                 outreachTitle: newOutreach.title,
                 outreachId: newOutreach.outreachId
@@ -437,7 +441,7 @@ export default function AdminOutreaches() {
               }
             } catch (uploadError) {
               console.error('File upload failed:', uploadError);
-              toast.warning('Outreach created, but media upload failed');
+              toast.error('Outreach created, but media upload failed');
             }
           }
         }

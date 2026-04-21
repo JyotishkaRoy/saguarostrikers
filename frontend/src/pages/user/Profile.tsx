@@ -4,6 +4,10 @@ import { useState } from 'react';
 import { api, getErrorMessage } from '@/lib/api';
 import toast from 'react-hot-toast';
 
+interface UploadResult {
+  url: string;
+}
+
 export default function Profile() {
   const { user } = useAuthStore();
   const [isEditMode, setIsEditMode] = useState(false);
@@ -33,7 +37,7 @@ export default function Profile() {
       // Upload profile image if selected
       if (profileImage) {
         console.log('🖼️ Uploading profile image...');
-        const uploadResponse = await api.uploadFile('/user/upload-profile-image', profileImage, {
+        const uploadResponse = await api.uploadFile<UploadResult>('/user/upload-profile-image', profileImage, {
           userId: user?.userId
         });
         

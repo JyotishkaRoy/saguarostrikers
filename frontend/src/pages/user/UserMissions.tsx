@@ -647,7 +647,7 @@ export default function UserMissions() {
                                                           if (res.success && res.data) setSelectedThreadDetail(res.data);
                                                           const listRes = await api.get(`/discussions?missionId=${selectedMission?.missionId}&limit=100`);
                                                           if (listRes.success && listRes.data && Array.isArray(listRes.data)) {
-                                                            setTabData((prev) => ({ ...prev, discussions: listRes.data }));
+                                                            setTabData((prev) => ({ ...prev, discussions: listRes.data as any[] }));
                                                           }
                                                         } catch (err) {
                                                           toast.error(getErrorMessage(err));
@@ -747,7 +747,7 @@ export default function UserMissions() {
                                                 `/discussions?missionId=${selectedMission?.missionId}&limit=100`
                                               );
                                               if (listRes.success && listRes.data && Array.isArray(listRes.data)) {
-                                                setTabData((prev) => ({ ...prev, discussions: listRes.data }));
+                                                setTabData((prev) => ({ ...prev, discussions: listRes.data as any[] }));
                                               }
                                             } catch (err) {
                                               toast.error(getErrorMessage(err));

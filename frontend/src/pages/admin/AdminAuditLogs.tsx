@@ -102,7 +102,6 @@ export default function AdminAuditLogs() {
 
   const getEntityDisplayName = (log: AuditLog): string => {
     const { action, entity, entityId, changes } = log;
-    const emptyId = !entityId || entityId === '—' || entityId === '\u2014';
     const fromChanges = getNameFromChanges(changes);
 
     if (action === 'USER_LOGIN' || action === 'USER_LOGOUT') return 'System';
