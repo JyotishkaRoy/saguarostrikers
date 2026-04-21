@@ -19,13 +19,43 @@ export class EmailService {
   private initializeTransporter(): void {
     if (process.env.EMAIL_USER && process.env.EMAIL_PASSWORD) {
       try {
-        this.transporter = nodemailer.createTransport({
-          service: process.env.EMAIL_SERVICE || 'gmail',
-          auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASSWORD,
-          },
-        });
+        const emailService = (process.env.EMAIL_SERVICE || 'gmail').toLowerCase();
+        const smtpHost = process.env.EMAIL_SMTP_HOST;
+        const smtpPort = process.env.EMAIL_SMTP_PORT ? Number(process.env.EMAIL_SMTP_PORT) : undefined;
+        const smtpSecure = process.env.EMAIL_SMTP_SECURE === 'true';
+
+        // Prefer explicit SMTP config when provided.
+        if (smtpHost) {
+          this.transporter = nodemailer.createTransport({
+            host: smtpHost,
+            port: smtpPort || (smtpSecure ? 465 : 587),
+            secure: smtpSecure,
+            auth: {
+              user: process.env.EMAIL_USER,
+              pass: process.env.EMAIL_PASSWORD,
+            },
+          });
+        } else if (emailService === 'ses') {
+          // SES via SMTP defaults (override with EMAIL_SMTP_HOST/PORT/SECURE as needed).
+          const region = process.env.AWS_REGION || process.env.SES_REGION || 'us-east-1';
+          this.transporter = nodemailer.createTransport({
+            host: `email-smtp.${region}.amazonaws.com`,
+            port: 587,
+            secure: false,
+            auth: {
+              user: process.env.EMAIL_USER,
+              pass: process.env.EMAIL_PASSWORD,
+            },
+          });
+        } else {
+          this.transporter = nodemailer.createTransport({
+            service: emailService,
+            auth: {
+              user: process.env.EMAIL_USER,
+              pass: process.env.EMAIL_PASSWORD,
+            },
+          });
+        }
         console.log('Email service initialized successfully');
       } catch (error) {
         console.warn('Error initializing email service:', error);
