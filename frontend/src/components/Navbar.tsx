@@ -55,7 +55,7 @@ export default function Navbar() {
         {/* Navigation Section with Blue Background */}
         <div className="flex-1 bg-gradient-to-r from-primary-900 to-primary-800 border-b border-primary-200">
           <div className="container mx-auto px-4 pl-8">
-            <div className="flex h-16 items-center justify-between">
+            <div className="relative flex h-16 items-center justify-end lg:justify-between">
               {/* Desktop Navigation */}
               <div className="hidden lg:flex lg:items-center lg:gap-1 text-base flex-1 justify-end">
             <Link 
@@ -222,15 +222,21 @@ export default function Navbar() {
               {/* Mobile menu button */}
               <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="lg:hidden rounded-lg p-2 hover:bg-primary-700 text-white"
+                className="lg:hidden ml-auto rounded-lg p-2 hover:bg-primary-700 text-white"
+                aria-label="Toggle navigation menu"
               >
                 {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
               </button>
             </div>
 
-            {/* Mobile Navigation */}
-            <div className={cn('lg:hidden overflow-hidden transition-all', isOpen ? 'max-h-screen pb-4' : 'max-h-0')}>
-              <div className="space-y-2 pt-2">
+            {/* Mobile Navigation: right-aligned panel to avoid breaking top bar layout */}
+            <div
+              className={cn(
+                'lg:hidden absolute right-0 top-full mt-2 w-[min(22rem,calc(100vw-1rem))] rounded-xl bg-primary-900/95 p-3 shadow-2xl ring-1 ring-white/10 backdrop-blur-sm transition-all duration-200 z-50',
+                isOpen ? 'opacity-100 translate-y-0 pointer-events-auto' : 'opacity-0 -translate-y-2 pointer-events-none'
+              )}
+            >
+              <div className="max-h-[70vh] space-y-2 overflow-y-auto">
             <Link to="/" className={cn("block rounded-lg px-3 py-2 text-white hover:bg-primary-700", isActive('/') && "bg-primary-700")}>
               Home
             </Link>
