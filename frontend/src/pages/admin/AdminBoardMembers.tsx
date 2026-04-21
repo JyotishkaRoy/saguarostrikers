@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Plus, Edit, Trash2, Save, X as XIcon, Upload, Image as ImageIcon, Mail, UserPlus, User as UserIcon } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+import { getApiBaseUrl } from '@/lib/apiConfig';
 import toast from 'react-hot-toast';
 import Modal from '@/components/Modal';
 import type { BoardMember, User } from '@/types';
@@ -198,11 +199,10 @@ export default function AdminBoardMembers() {
       const formDataUpload = new FormData();
       formDataUpload.append('image', file);
 
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
       const token = sessionStorage.getItem('token');
 
       const response = await axios.post(
-        `${API_URL}/admin/board-members/upload-leader-image`,
+        `${getApiBaseUrl()}/admin/board-members/upload-leader-image`,
         formDataUpload,
         {
           headers: {

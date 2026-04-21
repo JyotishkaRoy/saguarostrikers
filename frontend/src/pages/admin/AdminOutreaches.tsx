@@ -2,10 +2,11 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Trophy, Plus, Edit, Trash2, Eye, EyeOff, Calendar, MapPin, Search, UserRound, Package, Image, ChevronDown, ChevronUp, UserPlus, Download } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+import { getApiBaseUrl, getBackendOrigin } from '@/lib/apiConfig';
 import toast from 'react-hot-toast';
 import { formatUtcToLocalDate, localDateToUtcIso, utcIsoToLocalDateInput } from '@/lib/dateUtils';
 
-const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5001').replace(/\/api\/?$/, '');
+const API_BASE = getBackendOrigin();
 
 interface Outreach {
   outreachId: string;
@@ -220,7 +221,7 @@ export default function AdminOutreaches() {
     formData.append('file', artifactFile);
     try {
       setArtifactUploading(true);
-      const response = await fetch(`${API_BASE}/api/admin/outreach-artifacts`, {
+      const response = await fetch(`${getApiBaseUrl()}/admin/outreach-artifacts`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` },
         body: formData,
@@ -281,7 +282,7 @@ export default function AdminOutreaches() {
       formData.append('status', galleryStatus);
       formData.append('file', file);
       try {
-        const response = await fetch(`${API_BASE}/api/admin/gallery`, {
+        const response = await fetch(`${getApiBaseUrl()}/admin/gallery`, {
           method: 'POST',
           headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` },
           body: formData,

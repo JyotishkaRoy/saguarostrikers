@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Image as ImageIcon, Plus, Trash2, ArrowLeft, Eye, EyeOff } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+import { getApiBaseUrl, getBackendOrigin } from '@/lib/apiConfig';
 import toast from 'react-hot-toast';
 
 interface GalleryImage {
@@ -21,7 +22,7 @@ interface Outreach {
   title: string;
 }
 
-const API_BASE = (import.meta.env.VITE_API_URL || 'http://localhost:5001').replace(/\/api\/?$/, '');
+const API_BASE = getBackendOrigin();
 
 export default function AdminOutreachGalleries() {
   const [searchParams] = useSearchParams();
@@ -84,7 +85,7 @@ export default function AdminOutreachGalleries() {
       formData.append('status', status);
       formData.append('file', file);
       try {
-        const response = await fetch(`${API_BASE}/api/admin/gallery`, {
+        const response = await fetch(`${getApiBaseUrl()}/admin/gallery`, {
           method: 'POST',
           headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` },
           body: formData,

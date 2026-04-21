@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { api, getErrorMessage } from '@/lib/api';
+import { getApiBaseUrl } from '@/lib/apiConfig';
 import { User } from '@/types';
 import toast from 'react-hot-toast';
 import Modal from '@/components/Modal';
@@ -137,7 +138,7 @@ export default function AdminUsers() {
               imageFormData.append('file', profileImage);
               
               const token = sessionStorage.getItem('token');
-              const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5001/api'}/admin/users/${userId}/upload-profile-image`, {
+              const response = await fetch(`${getApiBaseUrl()}/admin/users/${userId}/upload-profile-image`, {
                 method: 'POST',
                 headers: {
                   'Authorization': `Bearer ${token}`,
@@ -177,7 +178,7 @@ export default function AdminUsers() {
               imageFormData.append('file', profileImage);
               
               const token = sessionStorage.getItem('token');
-              const uploadResponse = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5001/api'}/admin/users/${userId}/upload-profile-image`, {
+              const uploadResponse = await fetch(`${getApiBaseUrl()}/admin/users/${userId}/upload-profile-image`, {
                 method: 'POST',
                 headers: {
                   'Authorization': `Bearer ${token}`,

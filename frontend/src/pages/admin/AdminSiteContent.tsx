@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { Save, Eye, Edit, Globe, Plus, X as XIcon, Image as ImageIcon } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+import { getApiBaseUrl } from '@/lib/apiConfig';
 const FEATURED_VIDEO_UPLOAD_PREFIX = '/uploads/featured-videos/';
 import { toYouTubeEmbedUrl, isEmbedVideoUrl } from '@/lib/utils';
 import toast from 'react-hot-toast';
@@ -433,12 +434,11 @@ function HeroEditor({ content, onChange, onSave, onCancel }: HeroEditorProps) {
       const formData = new FormData();
       formData.append('banner', file);
 
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
       const token = sessionStorage.getItem('token');
 
       // Use axios directly to properly handle FormData
       const response = await axios.post(
-        `${API_URL}/admin/site-content/upload-banner`,
+        `${getApiBaseUrl()}/admin/site-content/upload-banner`,
         formData,
         {
           headers: {
@@ -783,11 +783,10 @@ function MissionCommanderEditor({ content, onChange, onSave, onCancel }: Mission
       const formData = new FormData();
       formData.append('missionDirector', file);
 
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
       const token = sessionStorage.getItem('token');
 
       const response = await axios.post(
-        `${API_URL}/admin/site-content/upload-mission-director`,
+        `${getApiBaseUrl()}/admin/site-content/upload-mission-director`,
         formData,
         {
           headers: {
@@ -1094,7 +1093,6 @@ function FeaturedVideosEditor({ content, onChange, onSave, onCancel }: FeaturedV
 
   const handleSave = async () => {
     const indicesToUpload = Object.keys(pendingFiles).map(Number).sort((a, b) => a - b);
-    const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
     const token = sessionStorage.getItem('token');
     setSaving(true);
     try {
@@ -1105,7 +1103,7 @@ function FeaturedVideosEditor({ content, onChange, onSave, onCancel }: FeaturedV
         const formData = new FormData();
         formData.append('video', file);
         const response = await axios.post(
-          `${API_URL}/admin/site-content/upload-featured-video`,
+          `${getApiBaseUrl()}/admin/site-content/upload-featured-video`,
           formData,
           { headers: { Authorization: `Bearer ${token}` } }
         );

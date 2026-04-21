@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Plus, Edit, Trash2, ChevronDown, ChevronUp, Download, Eye, EyeOff, Package, Search, Trophy } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+import { getApiBaseUrl } from '@/lib/apiConfig';
 import toast from 'react-hot-toast';
 import Modal from '@/components/Modal';
 
@@ -215,7 +216,7 @@ export default function AdminArtifacts() {
       formDataToSend.append('file', formData.file);
 
       try {
-        const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/admin/artifacts`, {
+        const response = await fetch(`${getApiBaseUrl()}/admin/artifacts`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${sessionStorage.getItem('token')}`,

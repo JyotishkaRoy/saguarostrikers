@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Image, Plus, Edit, Trash2, ChevronDown, ChevronUp, Eye, EyeOff, Package, Search } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+import { getApiBaseUrl } from '@/lib/apiConfig';
 import toast from 'react-hot-toast';
 import Modal from '@/components/Modal';
 
@@ -238,7 +239,7 @@ export default function AdminGallery() {
         formDataToSend.append('file', file);
 
         try {
-          const response = await fetch(`${import.meta.env.VITE_API_URL || 'http://localhost:5001'}/api/admin/gallery`, {
+          const response = await fetch(`${getApiBaseUrl()}/admin/gallery`, {
             method: 'POST',
             headers: {
               'Authorization': `Bearer ${sessionStorage.getItem('token')}`,

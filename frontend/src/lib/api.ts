@@ -1,7 +1,8 @@
 import axios, { AxiosInstance, AxiosError } from 'axios';
 import type { ApiResponse } from '@/types';
+import { getApiBaseUrl } from '@/lib/apiConfig';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001/api';
+const API_URL = getApiBaseUrl();
 
 class ApiClient {
   private client: AxiosInstance;

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { Package, Plus, Trash2, ArrowLeft, Download, Eye, EyeOff } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+import { getApiBaseUrl } from '@/lib/apiConfig';
 import toast from 'react-hot-toast';
 
 interface OutreachArtifact {
@@ -78,8 +79,7 @@ export default function AdminOutreachArtifacts() {
     formData.append('file', file);
     try {
       setUploading(true);
-      const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:5001';
-      const response = await fetch(`${baseUrl}/api/admin/outreach-artifacts`, {
+      const response = await fetch(`${getApiBaseUrl()}/admin/outreach-artifacts`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${sessionStorage.getItem('token')}` },
         body: formData,
