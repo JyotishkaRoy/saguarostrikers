@@ -1,16 +1,4 @@
-[
-  {
-    "boardMemberId": "25JwF2msafjm",
-    "name": "Sarah Johnson",
-    "position": "President & Founder",
-    "bio": "Dr. Johnson is an aerospace engineer with over 15 years of experience in rocket propulsion systems. She founded Saguaro Strikers to inspire the next generation of aerospace professionals.",
-    "email": "admin@rocketry.org",
-    "imageUrl": "/uploads/mission-leaders/Se086rrUAFZ5.jpg",
-    "order": 1,
-    "status": "active",
-    "createdAt": "2025-01-15T10:00:00.000Z",
-    "updatedAt": "2026-04-21T07:12:51.891Z"
-  },
+﻿[
   {
     "boardMemberId": "4Pb3QbW9f90a",
     "name": "Jyotishka Roy",
@@ -22,5 +10,29 @@
     "status": "active",
     "createdAt": "2026-04-15T00:42:57.817Z",
     "updatedAt": "2026-04-15T01:02:05.768Z"
+  },
+  {
+    "boardMemberId": "TloMB8SIw6jn",
+    "name": "Isabelo (Joe) Sibolboro",
+    "position": "Mentor",
+    "bio": "An alumnus of Embry-Riddle Aeronautical University in Daytona Beach, Florida, and a dedicated high-power rocketry enthusiast, holding a Level 2 Certification through the National Association of Rocketry. Currently serve as an Engineer for the Northrop-Grumman Corporation. A great mentor helping students in all aspects of Aerospace Engineering.",
+    "email": "isabelojr@aol.com",
+    "imageUrl": "/uploads/users/0TcWsDVN1CoG/profile.jpg",
+    "order": 3,
+    "status": "active",
+    "createdAt": "2026-04-21T06:31:46.723Z",
+    "updatedAt": "2026-04-21T06:31:46.723Z"
+  },
+  {
+    "boardMemberId": "fVGYCOxLpMdj",
+    "name": "Steve Lubliner",
+    "position": "Mentor",
+    "bio": "An active hobby rocketeer for over 50 years.  Level 3 certified (able to fly M, N, and O motors) National Association of Rocketry (NAR) member.  NAR's Safety Committee Chairman.  Mentor ARC teams and collegiate rocketry teams (Intercollegiate Rocketry Engineering Challenge, IREC).",
+    "email": "stephenlubliner@compuserve.com",
+    "imageUrl": "/uploads/users/KiM0QYp8r5zm/profile.jpg",
+    "order": 4,
+    "status": "active",
+    "createdAt": "2026-04-21T07:01:06.277Z",
+    "updatedAt": "2026-04-21T07:01:06.277Z"
   }
 ]
