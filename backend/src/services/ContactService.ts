@@ -85,13 +85,20 @@ export class ContactService {
 
     // Send email response
     try {
-      await this.emailService.sendEmail({
+      const emailSent = await this.emailService.sendEmail({
         to: message.email,
         subject: `Re: ${message.subject}`,
         text: response,
         html: `<p>${response.replace(/\n/g, '<br>')}</p>`
       });
+
+      if (!emailSent) {
+        throw createError.internal('Failed to send email response');
+      }
     } catch (error) {
+      if (error instanceof Error && 'statusCode' in error) {
+        throw error;
+      }
       throw createError.internal('Failed to send email response');
     }
 
