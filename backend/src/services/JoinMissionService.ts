@@ -67,9 +67,10 @@ export class JoinMissionService {
     const application = await this.dataHelper.createApplication(data);
 
     // Generate and save PDF
+    let applicationPdfPath: string | undefined;
     try {
       const agreements = await this.siteContentService.getJoinMissionAgreements();
-      await PDFGenerator.generateApplicationPDF(application, mission.title, agreements);
+      applicationPdfPath = await PDFGenerator.generateApplicationPDF(application, mission.title, agreements);
       console.log(`✅ PDF generated for application ${application.applicationId}`);
     } catch (pdfError) {
       console.error('Error generating PDF:', pdfError);
@@ -83,7 +84,8 @@ export class JoinMissionService {
         data.studentEmail,
         data.studentFirstName,
         data.parentEmail,
-        mission.title
+        mission.title,
+        applicationPdfPath
       );
 
       // Send to admin
