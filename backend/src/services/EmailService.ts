@@ -388,7 +388,7 @@ Saguaro Strikers`;
               <li>Visit the <a href="${missionUrl}">mission</a> on the portal</li>
               <li>You'll receive subsequent communication with detailed information</li>
               <li>Review the mission schedule and requirements</li>
-              <li>Attend the orientation session (is applicable and available on Calendar)</li>
+              <li>Attend the orientation session (is applicable and available on <a href="https://www.saguarostrikers.org/calendar">Calendar</a>)</li>
               <li>Complete any required forms or waivers</li>
             </ol>
             <p>We're looking forward to having you on the team!</p>
