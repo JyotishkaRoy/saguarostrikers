@@ -39,6 +39,12 @@ if [[ -d "data" ]]; then
   cp -a data "${TMP_DIR}/data-backup"
 fi
 
+# Ensure runtime data files are never updated by git operations.
+if git ls-files --error-unmatch data >/dev/null 2>&1 || git ls-files "data/*" >/dev/null 2>&1; then
+  echo "Marking tracked data files as skip-worktree"
+  git ls-files "data/*" | xargs -r git update-index --skip-worktree
+fi
+
 echo "Fetching latest ${BRANCH}"
 git fetch origin "${BRANCH}"
 
@@ -46,6 +52,12 @@ echo "Updating tracked files from origin/${BRANCH}, excluding data/"
 git restore --source="origin/${BRANCH}" --staged --worktree . ':(exclude)data/**'
 
 if [[ -d "${TMP_DIR}/data-backup" ]]; then
+  if ! diff -qr data "${TMP_DIR}/data-backup" >/dev/null 2>&1; then
+    echo "WARNING: data directory changed during deploy; restoring backup"
+    rm -rf data
+    cp -a "${TMP_DIR}/data-backup" data
+  fi
+
   echo "Restoring runtime data directory backup"
   rm -rf data
   cp -a "${TMP_DIR}/data-backup" data
