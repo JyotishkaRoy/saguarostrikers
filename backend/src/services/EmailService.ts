@@ -332,7 +332,7 @@ Saguaro Strikers`;
         content: `We're excited to inform you that your application for <strong>${missionTitle}</strong> has been approved!`,
       },
       rejected: {
-        title: 'Application Update',
+        title: 'Application Rejected',
         heading: 'Application Status Update',
         content: `Thank you for your interest in <strong>${missionTitle}</strong>. After careful consideration, we're unable to approve your application at this time.`,
       },
