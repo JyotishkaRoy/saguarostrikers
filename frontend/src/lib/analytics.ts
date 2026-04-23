@@ -8,33 +8,52 @@ declare global {
     dataLayer: unknown[];
     gtag: (...args: unknown[]) => void;
     __ga4Initialized?: boolean;
+    __ga4Configured?: boolean;
   }
 }
 
-function ensureGtagScriptLoaded(measurementId: string) {
+function ensureGtagScriptLoaded(measurementId: string, onLoad?: () => void) {
   const existingScript = document.querySelector<HTMLScriptElement>(
     `script[src="https://www.googletagmanager.com/gtag/js?id=${measurementId}"]`
   );
 
-  if (existingScript) return;
+  if (existingScript) {
+    if (onLoad) onLoad();
+    return;
+  }
 
   const script = document.createElement('script');
   script.async = true;
   script.src = `https://www.googletagmanager.com/gtag/js?id=${measurementId}`;
+  if (onLoad) {
+    script.addEventListener('load', onLoad, { once: true });
+  }
   document.head.appendChild(script);
 }
 
 export function initAnalytics() {
   if (!isAnalyticsConfigured || window.__ga4Initialized) return;
 
-  ensureGtagScriptLoaded(GA_MEASUREMENT_ID);
   window.dataLayer = window.dataLayer || [];
-  window.gtag = function gtag(...args: unknown[]) {
-    window.dataLayer.push(args);
+
+  // Keep the standard Google queue format to avoid deferred-hit edge cases.
+  if (typeof window.gtag !== 'function') {
+    window.gtag = function gtag() {
+      window.dataLayer.push(arguments as unknown as unknown[]);
+    };
+  }
+
+  const applyConfig = () => {
+    if (window.__ga4Configured || typeof window.gtag !== 'function') return;
+    window.gtag('js', new Date());
+    // Disable auto page_view to prevent duplicates in SPA navigation.
+    window.gtag('config', GA_MEASUREMENT_ID, { send_page_view: false });
+    window.__ga4Configured = true;
   };
-  window.gtag('js', new Date());
-  // Disable auto page_view to prevent duplicates in SPA navigation.
-  window.gtag('config', GA_MEASUREMENT_ID, { send_page_view: false });
+
+  ensureGtagScriptLoaded(GA_MEASUREMENT_ID, applyConfig);
+  // Also attempt immediately in case script is already ready/cached.
+  applyConfig();
   window.__ga4Initialized = true;
 }
 
