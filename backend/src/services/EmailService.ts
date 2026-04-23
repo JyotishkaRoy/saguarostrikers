@@ -323,7 +323,8 @@ Saguaro Strikers`;
     studentName: string,
     missionTitle: string,
     status: 'approved' | 'rejected' | 'waitlisted',
-    message?: string
+    message?: string,
+    missionSlug?: string
   ): Promise<boolean> {
     const statusMessages = {
       approved: {
@@ -345,6 +346,10 @@ Saguaro Strikers`;
 
     const statusInfo = statusMessages[status];
     const subject = `${statusInfo.title} - ${missionTitle}`;
+    const frontendBaseUrl = (process.env.FRONTEND_URL || 'http://localhost:3000').replace(/\/+$/, '');
+    const missionUrl = missionSlug
+      ? `${frontendBaseUrl}/missions/${missionSlug}`
+      : `${frontendBaseUrl}/missions`;
     
     const html = `
       <!DOCTYPE html>
@@ -380,7 +385,7 @@ Saguaro Strikers`;
             ${status === 'approved' ? `
             <h3>Next Steps:</h3>
             <ol>
-              <li>Visit the mission on the portal</li>
+              <li>Visit the <a href="${missionUrl}">mission</a> on the portal</li>
               <li>You'll receive subsequent communication with detailed information</li>
               <li>Review the mission schedule and requirements</li>
               <li>Attend the orientation session (is applicable and available on Calendar)</li>
