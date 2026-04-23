@@ -39,7 +39,7 @@ export default function Footer() {
             <span className="text-sm text-gray-700 font-medium">Follow us on:</span>
             <div className="flex gap-2">
               <a
-                href="https://facebook.com"
+                href="https://www.facebook.com/profile.php?id=61563690485585"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="bg-black hover:bg-gray-800 text-white rounded-full p-2 transition-colors"
