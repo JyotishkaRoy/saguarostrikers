@@ -89,7 +89,7 @@ export class JoinMissionService {
       );
 
       // Send to admin
-      const adminEmail = process.env.ADMIN_EMAIL || 'admin@saguarostrikers.org';
+      const adminEmail = process.env.ADMIN_EMAIL || 'info@saguarostrikers.org';
       await this.emailService.sendJoinMissionAdminNotification(adminEmail, {
         studentName: `${data.studentFirstName} ${data.studentLastName}`,
         parentName: `${data.parentFirstName} ${data.parentLastName}`,

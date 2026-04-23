@@ -4,7 +4,7 @@
 
 ### Basic Details
 - **Domain**: www.saguarostrikers.org
-- **Email**: president@saguarostrikers.org, admin@saguarostrikers.org
+- **Email**: info@saguarostrikers.org
 - **Security**: SSL certificate
 - **Analytics**: Google Analytics 4 integration
 - **Text Areas**: Rich Text Editor (RTE) support
@@ -52,7 +52,7 @@
 
 #### 7. **Reach Mission Control**
 - Contact form (like Sanhoti)
-- Email to admin@saguarostrikers.org
+- Email to info@saguarostrikers.org
 
 #### 8. **Discussion Board** (Optional)
 - Thread listing

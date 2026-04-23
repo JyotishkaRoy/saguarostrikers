@@ -144,7 +144,7 @@ EMAIL_SERVICE=gmail
 EMAIL_USER=your-email@gmail.com
 EMAIL_PASSWORD=your-app-password
 EMAIL_FROM=Saguaro Strikers <noreply@saguarostrikers.org>
-ADMIN_EMAIL=admin@saguarostrikers.org
+ADMIN_EMAIL=info@saguarostrikers.org
 
 # URLs
 FRONTEND_URL=https://your-domain.com

@@ -304,7 +304,7 @@ EMAIL_SERVICE=gmail
 EMAIL_USER=your-email@gmail.com
 EMAIL_PASSWORD=your-app-password
 EMAIL_FROM=Saguaro Strikers <noreply@saguarostrikers.org>
-ADMIN_EMAIL=admin@saguarostrikers.org
+ADMIN_EMAIL=info@saguarostrikers.org
 
 # Frontend URL (for email links)
 FRONTEND_URL=http://localhost:3000
