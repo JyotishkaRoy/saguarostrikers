@@ -414,9 +414,8 @@ Saguaro Strikers`;
       </html>
     `;
 
-    // Send to both student and parent
-    await this.sendEmail({ to: studentEmail, subject, html });
-    await this.sendEmail({ to: parentEmail, subject, html });
+    // Send status email to student and CC parent.
+    await this.sendEmail({ to: studentEmail, cc: parentEmail, subject, html });
 
     return true;
   }
