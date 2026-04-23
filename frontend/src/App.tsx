@@ -11,6 +11,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import PrivateRoute from './components/PrivateRoute';
 import AdminRoute from './components/AdminRoute';
+import SeoManager from './components/SeoManager';
 
 // Public Pages
 import HomePage from './pages/public/HomePage';
@@ -129,6 +130,7 @@ function App() {
 
   return (
     <div className="flex min-h-screen flex-col">
+      <SeoManager />
       <Navbar />
       <main className="flex-1">
         <Routes>
