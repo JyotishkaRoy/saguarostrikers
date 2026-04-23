@@ -196,7 +196,8 @@ export class JoinMissionService {
             `${application.studentFirstName} ${application.studentLastName}`,
             mission.title,
             data.status,
-            data.reviewNotes
+            data.reviewNotes,
+            mission.slug
           );
         }
       } catch (emailError) {
