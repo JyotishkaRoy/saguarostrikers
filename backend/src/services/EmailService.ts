@@ -1,12 +1,18 @@
 import nodemailer from 'nodemailer';
 import type { Transporter } from 'nodemailer';
 
+export interface EmailAttachment {
+  filename: string;
+  path: string;
+}
+
 export interface EmailOptions {
   to: string | string[];
   cc?: string | string[];
   subject: string;
   html: string;
   text?: string;
+  attachments?: EmailAttachment[];
 }
 
 export class EmailService {
@@ -80,6 +86,7 @@ export class EmailService {
         subject: options.subject,
         html: options.html,
         text: options.text,
+        attachments: options.attachments,
       };
 
       await this.transporter.sendMail(mailOptions);
@@ -96,9 +103,17 @@ export class EmailService {
     studentEmail: string,
     studentFirstName: string,
     parentEmail: string,
-    missionTitle: string
+    missionTitle: string,
+    applicationPdfPath?: string
   ): Promise<boolean> {
     const subject = `Application Received - ${missionTitle}`;
+    const plainText = `Hi ${studentFirstName},
+
+Thank you for showing your interest in joining ${missionTitle}. You application is currently under review by mission director and/or admin. Once decision is made, you will be notified regarding the same.
+
+Thanks,
+Saguaro Strikers`;
+
     const html = `
       <!DOCTYPE html>
       <html>
@@ -112,12 +127,30 @@ export class EmailService {
       </html>
     `;
 
-    return await this.sendEmail({
+    const attachments = applicationPdfPath
+      ? [{ filename: 'Join-Mission-Application.pdf', path: applicationPdfPath }]
+      : undefined;
+
+    // Primary recipient: student, with parent in CC
+    const studentSent = await this.sendEmail({
       to: studentEmail,
       cc: parentEmail,
       subject,
       html,
+      text: plainText,
+      attachments,
     });
+
+    // Also send a direct copy to parent to avoid relying on CC delivery behavior.
+    const parentSent = await this.sendEmail({
+      to: parentEmail,
+      subject: `[Parent Copy] ${subject}`,
+      html,
+      text: plainText,
+      attachments,
+    });
+
+    return studentSent && parentSent;
   }
 
   // Template for Join Mission - Parent Confirmation
