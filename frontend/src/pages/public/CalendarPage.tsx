@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, X, Calendar as CalendarIcon } from 'lucide-react';
 import { api } from '@/lib/api';
+import { trackEvent } from '@/lib/analytics';
 import { cn } from '@/lib/utils';
 import type { CalendarEvent, Mission } from '@/types';
 import { formatUtcToLocalDate } from '@/lib/dateUtils';
@@ -184,6 +185,33 @@ export default function CalendarPage() {
 
   const itemTitle = (item: CalendarItem) => item.data.title;
 
+  const openCalendarItem = (item: CalendarItem) => {
+    if (item.kind === 'event') {
+      trackEvent('calendar_event_click', {
+        item_kind: 'event',
+        item_title: item.data.title,
+        event_id: item.data.eventId,
+        event_type: item.data.type,
+        linked_mission_id: item.data.missionId ?? '',
+      });
+    } else if (item.kind === 'mission') {
+      trackEvent('calendar_event_click', {
+        item_kind: 'mission',
+        item_title: item.data.title,
+        mission_id: item.data.missionId,
+        mission_slug: item.data.slug,
+      });
+    } else {
+      trackEvent('calendar_event_click', {
+        item_kind: 'outreach',
+        item_title: item.data.title,
+        outreach_id: item.data.outreachId,
+        outreach_slug: item.data.slug,
+      });
+    }
+    setSelectedItem(item);
+  };
+
   return (
     <div className="min-h-screen py-12">
       <div className="container mx-auto px-4">
@@ -333,7 +361,7 @@ export default function CalendarPage() {
                       {getItemsForDate(day).map((item) => (
                         <button
                           key={item.kind === 'event' ? item.data.eventId : item.kind === 'mission' ? item.data.missionId : item.data.outreachId}
-                          onClick={() => setSelectedItem(item)}
+                          onClick={() => openCalendarItem(item)}
                           className={cn(
                             'w-full text-left text-xs px-2 py-1 rounded border hover:shadow-sm transition-shadow',
                             itemColor(item)

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { FileText, Download, ArrowLeft, Rocket } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+import { trackEvent } from '@/lib/analytics';
 import toast from 'react-hot-toast';
 
 interface Artifact {
@@ -130,6 +131,14 @@ export default function MissionArtifacts() {
                       <a
                         href={`/uploads/${artifact.filePath}`}
                         download
+                        onClick={() =>
+                          trackEvent('file_download', {
+                            file_context: 'mission_artifact',
+                            artifact_id: artifact.artifactId,
+                            file_name: artifact.originalFileName,
+                            mission_slug: mission.slug,
+                          })
+                        }
                         className="text-primary-600 hover:text-primary-700 hover:underline flex items-center gap-2"
                       >
                         <Download className="h-4 w-4" />

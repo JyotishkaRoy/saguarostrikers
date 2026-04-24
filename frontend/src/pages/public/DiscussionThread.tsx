@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, MessageCircle, User, Clock, Send, Pencil, X, Trash2 } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
+import { trackEvent } from '@/lib/analytics';
 import toast from 'react-hot-toast';
 import { useAuthStore } from '@/store/authStore';
 
@@ -68,6 +69,9 @@ export default function DiscussionThread() {
     try {
       setIsSubmitting(true);
       await api.post(`/discussions/${id}/replies`, { content: replyContent });
+      trackEvent('discussion_reply_submit', {
+        thread_id: id ?? '',
+      });
       toast.success('Reply posted successfully!');
       setReplyContent('');
       fetchThread();
