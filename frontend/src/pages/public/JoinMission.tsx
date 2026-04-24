@@ -123,8 +123,13 @@ export default function JoinMission() {
       const response = await api.post('/public/join-mission', data);
       
       if (response.success) {
-        trackEvent('join_mission_submit_success', {
-          selected_mission_id: data.missionId || 'none',
+        const app = response.data as { applicationId?: string } | undefined;
+        const selectedMission = missions.find((m) => m.missionId === data.missionId);
+        trackEvent('join_mission_submit', {
+          application_id: app?.applicationId ?? '',
+          mission_id: data.missionId || '',
+          mission_title: selectedMission?.title ?? '',
+          has_preselected_mission: Boolean(preselectedMissionId),
         });
         toast.success('Application submitted successfully! Check your email for confirmation.');
         setIsSuccess(true);

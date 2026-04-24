@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { ArrowLeft, Calendar, MapPin, Users, Package, Image as ImageIcon, Rocket, Download } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import { formatUtcToLocalDate } from '@/lib/dateUtils';
+import { trackEvent } from '@/lib/analytics';
 import toast from 'react-hot-toast';
 
 interface Outreach {
@@ -70,6 +71,15 @@ export default function OutreachDetailPage() {
       fetchOutreachDetail();
     }
   }, [slug]);
+
+  useEffect(() => {
+    if (!slug || !data?.outreach) return;
+    if (data.outreach.slug !== slug) return;
+    trackEvent('outreach_view', {
+      outreach_slug: data.outreach.slug,
+      outreach_id: data.outreach.outreachId,
+    });
+  }, [slug, data?.outreach]);
 
   const fetchOutreachDetail = async () => {
     try {
@@ -268,6 +278,14 @@ export default function OutreachDetailPage() {
                             <a
                               href={a.filePath.startsWith('http') ? a.filePath : `/uploads/${a.filePath}`}
                               download
+                              onClick={() =>
+                                trackEvent('file_download', {
+                                  file_context: 'outreach_artifact',
+                                  artifact_id: a.artifactId,
+                                  file_name: a.originalFileName,
+                                  outreach_slug: outreach.slug,
+                                })
+                              }
                               className="text-primary-600 hover:text-primary-700 hover:underline flex items-center gap-2"
                             >
                               <Download className="h-4 w-4" />

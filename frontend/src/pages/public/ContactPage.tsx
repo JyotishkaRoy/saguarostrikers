@@ -40,8 +40,12 @@ export default function ContactPage() {
     try {
       const response = await api.post('/public/contact', formData);
       if (response.success) {
+        const subjectType = isOutreachQuery ? 'outreach' : 'general';
         trackEvent('contact_submit_success', {
-          subject_type: isOutreachQuery ? 'outreach' : 'general',
+          subject_type: subjectType,
+        });
+        trackEvent('contact_submit', {
+          subject_type: subjectType,
         });
         toast.success('Message sent successfully! We will get back to you soon.');
         setIsSubmitted(true);

@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { Trophy, Calendar, MapPin, ArrowLeft, Users, Package, Image } from 'lucide-react';
 import { api, getErrorMessage } from '@/lib/api';
 import { formatUtcToLocalDate } from '@/lib/dateUtils';
+import { trackEvent } from '@/lib/analytics';
 import toast from 'react-hot-toast';
 
 interface Mission {
@@ -28,6 +29,16 @@ export default function MissionDetailPage() {
       fetchMission();
     }
   }, [slug]);
+
+  useEffect(() => {
+    if (!mission || !slug) return;
+    if (mission.slug !== slug) return;
+    trackEvent('mission_view', {
+      mission_slug: mission.slug,
+      mission_id: mission.missionId,
+      mission_status: mission.status,
+    });
+  }, [slug, mission]);
 
   const fetchMission = async () => {
     try {
