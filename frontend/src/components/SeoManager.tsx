@@ -62,7 +62,7 @@ function buildSeo(pathname: string): SeoConfig {
   const normalized = pathname.toLowerCase();
 
   const baseConfig: SeoConfig = {
-    title: `${SITE_NAME} - Rocketry & Robotics Club in Arizona`,
+    title: `${SITE_NAME} - A Rocketry & Robotics Club`,
     description:
       'Saguaro Strikers is a student-focused rocketry and robotics club in Arizona with missions, STEM events, and American Rocketry Challenge participation.',
     keywords: PRIMARY_KEYWORDS,
@@ -155,7 +155,7 @@ function buildSeo(pathname: string): SeoConfig {
 
   return {
     ...baseConfig,
-    title: `${SITE_NAME} - Rocketry & Robotics`,
+    title: `${SITE_NAME} - A Rocketry & Robotics Club`,
     canonicalPath: pathname,
   };
 }
