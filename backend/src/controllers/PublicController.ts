@@ -125,10 +125,14 @@ export class PublicController {
    */
   async getPublicStats(_req: Request, res: Response): Promise<void> {
     try {
-      const [missions, upcomingEvents, boardMembers] = await Promise.all([
+      const { UserService } = await import('../services/UserService.js');
+      const userService = new UserService();
+
+      const [missions, upcomingEvents, users, boardMembers] = await Promise.all([
         this.missionService.getPublishedMissions(),
         this.calendarEventService.getUpcomingEvents(500),
-        this.siteContentService.getAllBoardMembers()
+        userService.getAllUsers(),
+        this.siteContentService.getAllBoardMembers(true)
       ]);
 
       const activeMissions = missions.filter(
@@ -140,7 +144,8 @@ export class PublicController {
         success: true,
         data: {
           activeMissions,
-          teamMembers: boardMembers.length,
+          users: users.length,
+          boardMembers: boardMembers.length,
           upcomingEvents: upcomingEvents.length,
           completedMissions
         }

@@ -8,15 +8,15 @@ import { Link } from 'react-router-dom';
 
 interface Stats {
   totalMissions: number;
-  totalTeamMembers: number;
-  totalEvents: number;
+  totalUsers: number;
+  totalBoardMembers: number;
   completedMissions: number;
 }
 
 export default function HomePage() {
   const [content, setContent] = useState<HomepageContent | null>(null);
   const [upcomingMissions, setUpcomingMissions] = useState<Mission[]>([]);
-  const [stats, setStats] = useState<Stats>({ totalMissions: 0, totalTeamMembers: 0, totalEvents: 0, completedMissions: 0 });
+  const [stats, setStats] = useState<Stats>({ totalMissions: 0, totalUsers: 0, totalBoardMembers: 0, completedMissions: 0 });
   const [isLoading, setIsLoading] = useState(true);
   const [isLoadingMissions, setIsLoadingMissions] = useState(true);
   const [isAboutExpanded, setIsAboutExpanded] = useState(false);
@@ -68,15 +68,15 @@ export default function HomePage() {
     try {
       const response = await api.get<{
         activeMissions: number;
-        teamMembers: number;
-        upcomingEvents: number;
+        users: number;
+        boardMembers: number;
         completedMissions: number;
       }>('/public/stats');
       if (response.success && response.data) {
         setStats({
           totalMissions: response.data.activeMissions,
-          totalTeamMembers: response.data.teamMembers,
-          totalEvents: response.data.upcomingEvents,
+          totalUsers: response.data.users,
+          totalBoardMembers: response.data.boardMembers,
           completedMissions: response.data.completedMissions
         });
       }
@@ -84,8 +84,8 @@ export default function HomePage() {
       console.error('Failed to fetch stats:', error);
       setStats({
         totalMissions: 0,
-        totalTeamMembers: 0,
-        totalEvents: 0,
+        totalUsers: 0,
+        totalBoardMembers: 0,
         completedMissions: 0
       });
     }
@@ -206,16 +206,16 @@ export default function HomePage() {
             <div className="sticky top-24">
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-primary-50 rounded-lg p-4 text-center">
+                  <div className="text-3xl font-bold text-primary-600">{stats.totalBoardMembers}</div>
+                  <div className="text-sm text-gray-600 mt-1">Club Board Members</div>
+                </div>
+                <div className="bg-primary-50 rounded-lg p-4 text-center">
+                  <div className="text-3xl font-bold text-primary-600">{stats.totalUsers}</div>
+                  <div className="text-sm text-gray-600 mt-1">Scientists till now</div>
+                </div>
+                <div className="bg-primary-50 rounded-lg p-4 text-center">
                   <div className="text-3xl font-bold text-primary-600">{stats.totalMissions}</div>
                   <div className="text-sm text-gray-600 mt-1">Active Missions</div>
-                </div>
-                <div className="bg-primary-50 rounded-lg p-4 text-center">
-                  <div className="text-3xl font-bold text-primary-600">{stats.totalTeamMembers}</div>
-                  <div className="text-sm text-gray-600 mt-1">Team Members</div>
-                </div>
-                <div className="bg-primary-50 rounded-lg p-4 text-center">
-                  <div className="text-3xl font-bold text-primary-600">{stats.totalEvents}+</div>
-                  <div className="text-sm text-gray-600 mt-1">Events</div>
                 </div>
                 <div className="bg-primary-50 rounded-lg p-4 text-center">
                   <div className="text-3xl font-bold text-primary-600">{stats.completedMissions}</div>
