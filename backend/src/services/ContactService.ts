@@ -21,6 +21,11 @@ export class ContactService {
     email: string;
     subject: string;
     message: string;
+    status?: ContactMessage['status'];
+    outreachEventId?: string;
+    outreachEventName?: string;
+    mappedMissionId?: string;
+    applicationPdfPath?: string;
   }): Promise<ContactMessage> {
     const contactMessage: ContactMessage = {
       messageId: generateId(),
@@ -28,7 +33,11 @@ export class ContactService {
       email: data.email,
       subject: data.subject,
       message: data.message,
-      status: 'new',
+      status: data.status || 'new',
+      outreachEventId: data.outreachEventId,
+      outreachEventName: data.outreachEventName,
+      mappedMissionId: data.mappedMissionId,
+      applicationPdfPath: data.applicationPdfPath,
       createdAt: new Date().toISOString()
     };
 
@@ -150,6 +159,21 @@ export class ContactService {
     if (!deleted) {
       throw createError.internal('Failed to delete message');
     }
+  }
+
+  async updateMessage(
+    messageId: string,
+    updates: Partial<ContactMessage>
+  ): Promise<ContactMessage> {
+    const message = this.contactDataHelper.getMessageById(messageId);
+    if (!message) {
+      throw createError.notFound('Message not found');
+    }
+    const updated = this.contactDataHelper.updateMessage(messageId, updates);
+    if (!updated) {
+      throw createError.internal('Failed to update message');
+    }
+    return updated;
   }
 
   /**

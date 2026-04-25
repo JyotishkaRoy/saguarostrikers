@@ -11,6 +11,8 @@ import { ArtifactService } from '../services/ArtifactService.js';
 import { OutreachService } from '../services/OutreachService.js';
 import { OutreachParticipantService } from '../services/OutreachParticipantService.js';
 import { OutreachArtifactService } from '../services/OutreachArtifactService.js';
+import { PDFGenerator } from '../utils/pdfGenerator.js';
+import { CreateJoinMissionData } from '../models/types.js';
 
 export class PublicController {
   private missionService: MissionService;
@@ -340,6 +342,75 @@ export class PublicController {
       res.status(400).json({
         success: false,
         message: error.message || 'Failed to submit application'
+      });
+    }
+  }
+
+  async submitOutreachApplication(req: Request, res: Response): Promise<void> {
+    try {
+      const payload = req.body as CreateJoinMissionData & {
+        outreachId: string;
+        outreachEventName: string;
+      };
+
+      const outreachSummary = [
+        `Outreach Event ID: ${payload.outreachId}`,
+        `Outreach Event Name: ${payload.outreachEventName}`,
+        `Mapped Mission ID: ${payload.missionId || 'none'}`,
+        '',
+        'Student Details',
+        `Name: ${payload.studentFirstName} ${payload.studentMiddleName || ''} ${payload.studentLastName}`.replace(/\s+/g, ' ').trim(),
+        `DOB: ${payload.studentDob}`,
+        `School: ${payload.schoolName}`,
+        `Grade: ${payload.grade}`,
+        `Student Email: ${payload.studentEmail}`,
+        `Student Phone: ${payload.studentPhone || ''}`,
+        '',
+        'Parent/Guardian Details',
+        `Name: ${payload.parentFirstName} ${payload.parentMiddleName || ''} ${payload.parentLastName}`.replace(/\s+/g, ' ').trim(),
+        `Parent Email: ${payload.parentEmail}`,
+        `Parent Phone: ${payload.parentPhone}`,
+        '',
+        'Why fit for this event/mission:',
+        payload.fitReason,
+      ].join('\n');
+
+      const created = await this.contactService.submitMessage({
+        name: `${payload.parentFirstName} ${payload.parentLastName}`.trim(),
+        email: payload.parentEmail,
+        subject: 'Outreach Queries',
+        message: outreachSummary,
+        status: 'pending',
+        outreachEventId: payload.outreachId,
+        outreachEventName: payload.outreachEventName,
+        mappedMissionId: payload.missionId || undefined,
+      });
+
+      try {
+        const agreements = await this.siteContentService.getJoinMissionAgreements();
+        const pdfPath = await PDFGenerator.generateOutreachApplicationPDF(
+          created.messageId,
+          payload.outreachEventName,
+          payload,
+          agreements,
+          created.createdAt
+        );
+        await this.contactService.updateMessage(created.messageId, {
+          applicationPdfPath: pdfPath,
+        });
+      } catch (pdfError) {
+        console.error('Error generating outreach application PDF:', pdfError);
+      }
+
+      res.status(201).json({
+        success: true,
+        message: 'Outreach application submitted successfully.',
+        data: created,
+      });
+    } catch (error: any) {
+      res.status(400).json({
+        success: false,
+        message: error.message || 'Failed to submit outreach application',
       });
     }
   }

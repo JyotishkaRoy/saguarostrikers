@@ -5,6 +5,7 @@ import { api, getErrorMessage } from '@/lib/api';
 import { formatUtcToLocalDate } from '@/lib/dateUtils';
 import { trackEvent } from '@/lib/analytics';
 import toast from 'react-hot-toast';
+import type { Mission } from '@/types';
 
 interface Outreach {
   outreachId: string;
@@ -65,6 +66,7 @@ export default function OutreachDetailPage() {
   const { slug } = useParams<{ slug: string }>();
   const [data, setData] = useState<OutreachDetailData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [joinMissionId, setJoinMissionId] = useState('');
 
   useEffect(() => {
     if (slug) {
@@ -80,6 +82,35 @@ export default function OutreachDetailPage() {
       outreach_id: data.outreach.outreachId,
     });
   }, [slug, data?.outreach]);
+
+  useEffect(() => {
+    const outreachTitle = data?.outreach?.title?.trim();
+    if (!outreachTitle) return;
+
+    const resolveJoinMissionId = async () => {
+      try {
+        const response = await api.get<Mission[]>('/public/missions');
+        if (!response.success || !response.data) {
+          setJoinMissionId('');
+          return;
+        }
+
+        const publishedMissions = response.data.filter((m) => m.status === 'published');
+        const normalizedOutreachTitle = outreachTitle.toLowerCase();
+
+        const bestMatch = publishedMissions.find((m) => m.title.trim().toLowerCase() === normalizedOutreachTitle)
+          ?? publishedMissions.find((m) => m.title.trim().toLowerCase().includes(normalizedOutreachTitle))
+          ?? publishedMissions.find((m) => normalizedOutreachTitle.includes(m.title.trim().toLowerCase()));
+
+        // Fallback to any open mission so Join Mission form can submit.
+        setJoinMissionId(bestMatch?.missionId ?? publishedMissions[0]?.missionId ?? '');
+      } catch {
+        setJoinMissionId('');
+      }
+    };
+
+    resolveJoinMissionId();
+  }, [data?.outreach?.title]);
 
   const fetchOutreachDetail = async () => {
     try {
@@ -173,7 +204,15 @@ export default function OutreachDetailPage() {
           )}
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
           <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
-            <h1 className="text-4xl md:text-5xl font-bold drop-shadow-lg">{outreach.title}</h1>
+            <div className="flex items-end justify-between gap-4">
+              <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg">{outreach.title}</h1>
+              <Link
+                to={`/join-mission?outreachId=${encodeURIComponent(outreach.outreachId)}&missionName=${encodeURIComponent(outreach.title)}${joinMissionId ? `&missionId=${encodeURIComponent(joinMissionId)}` : ''}`}
+                className="btn-primary whitespace-nowrap"
+              >
+                Join the event
+              </Link>
+            </div>
           </div>
         </div>
 

@@ -270,13 +270,28 @@ export interface ContactMessage {
   subject: string;
   message: string;
   status: MessageStatus;
+  outreachEventId?: string;
+  outreachEventName?: string;
+  mappedMissionId?: string;
+  applicationPdfPath?: string;
+  reviewNotes?: string;
+  reviewedBy?: string;
+  reviewedAt?: string;
   respondedBy?: string; // userId
   respondedAt?: string;
   response?: string;
   createdAt: string;
 }
 
-export type MessageStatus = 'new' | 'responded' | 'archived';
+export type MessageStatus =
+  | 'new'
+  | 'responded'
+  | 'archived'
+  | 'pending'
+  | 'under_review'
+  | 'approved'
+  | 'rejected'
+  | 'waitlisted';
 
 // ============================================
 // File & Gallery Types

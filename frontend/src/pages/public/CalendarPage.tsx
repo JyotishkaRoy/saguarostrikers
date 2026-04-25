@@ -412,20 +412,21 @@ export default function CalendarPage() {
       {/* Detail Modal: Event, Mission, or Outreach */}
       {selectedItem && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg shadow-xl max-w-lg w-full">
-            <div className="flex items-center justify-between p-6 border-b border-gray-200">
-              <h3 className="text-2xl font-bold text-gray-900">
+          <div className="bg-white rounded-lg shadow-xl max-w-lg w-full max-h-[80vh] flex flex-col overflow-hidden">
+            <div className="flex items-center justify-between gap-3 p-6 border-b border-gray-200 shrink-0">
+              <h3 className="text-2xl font-bold text-gray-900 min-w-0 break-words">
                 {selectedItem.data.title}
               </h3>
               <button
                 onClick={() => setSelectedItem(null)}
-                className="p-2 hover:bg-gray-100 rounded-lg transition-colors"
+                className="p-2 hover:bg-gray-100 rounded-lg transition-colors shrink-0"
+                aria-label="Close popup"
               >
                 <X className="h-5 w-5" />
               </button>
             </div>
             
-            <div className="p-6">
+            <div className="p-6 overflow-y-auto">
               {selectedItem.kind === 'event' && (
                 <>
                   <div className="mb-4">
@@ -519,7 +520,7 @@ export default function CalendarPage() {
               )}
             </div>
             
-            <div className="p-6 bg-gray-50 rounded-b-lg flex gap-2">
+            <div className="p-6 bg-gray-50 rounded-b-lg flex gap-2 shrink-0">
               {selectedItem.kind === 'mission' && (
                 <Link
                   to={`/missions/${(selectedItem.data as Mission).slug}`}

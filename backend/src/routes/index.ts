@@ -75,6 +75,7 @@ router.get('/public/calendar-events/:eventId', publicController.getEventById.bin
 
 // Join Mission Application
 router.post('/public/join-mission', publicController.submitJoinMissionApplication.bind(publicController));
+router.post('/public/outreach-application', publicController.submitOutreachApplication.bind(publicController));
 router.get('/public/join-mission/mission/:missionId', publicController.getApprovedScientistsByMission.bind(publicController));
 
 // Public User Profiles (limited data)
