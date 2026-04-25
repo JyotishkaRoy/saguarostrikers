@@ -62,7 +62,10 @@ interface JoinMissionAgreements {
 export default function JoinMission() {
   const [searchParams] = useSearchParams();
   const preselectedMissionId = searchParams.get('missionId');
+  const preselectedMissionName = searchParams.get('missionName');
+  const preselectedOutreachId = searchParams.get('outreachId');
   const [missions, setMissions] = useState<Mission[]>([]);
+  const [missionsLoaded, setMissionsLoaded] = useState(false);
   const [agreements, setAgreements] = useState<JoinMissionAgreements>({
     agreementFinancial: DEFAULT_AGREEMENT_FINANCIAL,
     agreementPhotograph: DEFAULT_AGREEMENT_PHOTOGRAPH,
@@ -70,18 +73,32 @@ export default function JoinMission() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm<JoinMissionFormData>();
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm<JoinMissionFormData>();
 
   useEffect(() => {
     fetchActiveMissions();
     fetchAgreements();
   }, []);
 
+  const isMissionLocked = Boolean(preselectedMissionId || preselectedMissionName);
+  const isOutreachJoinFlow = Boolean(preselectedOutreachId);
+
+  const lockedMissionId = useMemo(() => {
+    if (preselectedMissionId) return preselectedMissionId;
+    if (!preselectedMissionName) return '';
+    const normalizedName = preselectedMissionName.trim().toLowerCase();
+    const mission = missions.find((x) => x.title.trim().toLowerCase() === normalizedName)
+      ?? missions.find((x) => x.title.trim().toLowerCase().includes(normalizedName))
+      ?? missions.find((x) => normalizedName.includes(x.title.trim().toLowerCase()));
+    return mission?.missionId ?? '';
+  }, [preselectedMissionId, preselectedMissionName, missions]);
+
   const lockedMissionTitle = useMemo(() => {
+    if (preselectedMissionName) return preselectedMissionName;
     if (!preselectedMissionId) return '';
     const m = missions.find((x) => x.missionId === preselectedMissionId);
     return m?.title ?? '';
-  }, [preselectedMissionId, missions]);
+  }, [preselectedMissionName, preselectedMissionId, missions]);
 
   const fetchAgreements = async () => {
     try {
@@ -106,13 +123,20 @@ export default function JoinMission() {
       }
     } catch (error) {
       console.error('Failed to fetch missions:', error);
+    } finally {
+      setMissionsLoaded(true);
     }
   };
+
+  useEffect(() => {
+    if (!isMissionLocked) return;
+    setValue('missionId', lockedMissionId || '');
+  }, [isMissionLocked, lockedMissionId, setValue]);
 
   const onSubmit = async (data: JoinMissionFormData) => {
     setIsSubmitting(true);
     trackEvent('join_mission_submit_attempt', {
-      has_preselected_mission: Boolean(preselectedMissionId),
+      has_preselected_mission: isMissionLocked,
       selected_mission_id: data.missionId || 'none',
     });
     try {
@@ -120,19 +144,39 @@ export default function JoinMission() {
       data.studentSignatureDate = new Date().toISOString();
       data.parentSignatureDate = new Date().toISOString();
 
-      const response = await api.post('/public/join-mission', data);
-      
-      if (response.success) {
-        const app = response.data as { applicationId?: string } | undefined;
-        const selectedMission = missions.find((m) => m.missionId === data.missionId);
-        trackEvent('join_mission_submit', {
-          application_id: app?.applicationId ?? '',
-          mission_id: data.missionId || '',
-          mission_title: selectedMission?.title ?? '',
-          has_preselected_mission: Boolean(preselectedMissionId),
+      if (isOutreachJoinFlow) {
+        const outreachResponse = await api.post('/public/outreach-application', {
+          ...data,
+          outreachId: preselectedOutreachId,
+          outreachEventName: lockedMissionTitle || preselectedMissionName || '',
         });
-        toast.success('Application submitted successfully! Check your email for confirmation.');
-        setIsSuccess(true);
+
+        if (outreachResponse.success) {
+          trackEvent('outreach_join_submit', {
+            outreach_id: preselectedOutreachId ?? '',
+            outreach_title: lockedMissionTitle || preselectedMissionName || '',
+            mission_id: data.missionId || '',
+          });
+          toast.success('Application submitted successfully! Our outreach team will review it and get back to you soon.');
+          setIsSuccess(true);
+        } else {
+          toast.error(outreachResponse.message || 'Failed to submit outreach application.');
+        }
+      } else {
+        const response = await api.post('/public/join-mission', data);
+        
+        if (response.success) {
+          const app = response.data as { applicationId?: string } | undefined;
+          const selectedMission = missions.find((m) => m.missionId === data.missionId);
+          trackEvent('join_mission_submit', {
+            application_id: app?.applicationId ?? '',
+            mission_id: data.missionId || '',
+            mission_title: selectedMission?.title ?? '',
+            has_preselected_mission: isMissionLocked,
+          });
+          toast.success('Application submitted successfully! Check your email for confirmation.');
+          setIsSuccess(true);
+        }
       }
     } catch (error) {
       trackEvent('join_mission_submit_failed', {
@@ -384,14 +428,14 @@ export default function JoinMission() {
               <label className="block text-sm font-medium text-gray-700 mb-2">
                 Mission Interested In <span className="text-red-500">*</span>
               </label>
-              {preselectedMissionId ? (
+              {isMissionLocked ? (
                 <>
                   {/* Hidden: disabled selects are not submitted; keep missionId in form data */}
                   <input
                     type="hidden"
-                    key={preselectedMissionId}
-                    {...register('missionId', { required: 'Mission is required' })}
-                    defaultValue={preselectedMissionId}
+                    key={lockedMissionId || lockedMissionTitle}
+                    {...register('missionId', { required: isOutreachJoinFlow ? false : 'Mission is required' })}
+                    defaultValue={lockedMissionId}
                   />
                   <div
                     className="input bg-gray-100 text-gray-900 border-gray-200 cursor-default select-none"
@@ -400,21 +444,21 @@ export default function JoinMission() {
                     {lockedMissionTitle || 'Loading mission…'}
                   </div>
                   <p className="text-sm text-gray-600 mt-1">
-                    This mission was selected from the mission page and cannot be changed here.
+                    This selection was pre-filled and cannot be changed here.
                   </p>
-                  {missions.length > 0 && !lockedMissionTitle && (
+                  {missionsLoaded && !lockedMissionId && (
                     <p className="text-sm text-amber-700 mt-1">
-                      This mission may no longer be open for applications. You can still submit or choose another mission from{' '}
+                      No open mission currently matches this event title. Please go to{' '}
                       <a href="/join-mission" className="underline font-medium">
                         Join a Mission
                       </a>
-                      {' '}without a pre-selected mission.
+                      {' '}to choose a mission manually.
                     </p>
                   )}
                 </>
               ) : (
                 <select
-                  {...register('missionId', { required: 'Please select a mission' })}
+                  {...register('missionId', { required: isOutreachJoinFlow ? false : 'Please select a mission' })}
                   className="input"
                 >
                   <option value="">Select a Mission</option>

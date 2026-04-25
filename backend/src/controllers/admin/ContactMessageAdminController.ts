@@ -57,16 +57,24 @@ export class ContactMessageAdminController {
   /**
    * Update message status
    */
-  async updateMessageStatus(req: Request, res: Response): Promise<void> {
+  async updateMessageStatus(req: AuthRequest, res: Response): Promise<void> {
     try {
       const { messageId } = req.params;
-      const { status } = req.body;
+      const { status, reviewNotes } = req.body as { status: string; reviewNotes?: string };
 
       // Handle status update based on requested status
       // Frontend uses 'read'/'unread', backend uses 'new'/'responded'/'archived'
       let updatedMessage;
       if (status === 'read' || status === 'responded') {
         updatedMessage = await this.contactService.archiveMessage(messageId);
+      } else if (['pending', 'under_review', 'approved', 'rejected', 'waitlisted'].includes(status)) {
+        const helper = this.contactService['contactDataHelper'];
+        updatedMessage = helper.updateMessage(messageId, {
+          status: status as any,
+          reviewNotes,
+          reviewedBy: req.user?.userId,
+          reviewedAt: new Date().toISOString(),
+        });
       } else if (status === 'unread') {
         // Mark as new by updating directly through data helper
         const helper = this.contactService['contactDataHelper'];
@@ -74,7 +82,7 @@ export class ContactMessageAdminController {
       } else {
         // Use the provided status
         const helper = this.contactService['contactDataHelper'];
-        updatedMessage = helper.updateMessage(messageId, { status });
+        updatedMessage = helper.updateMessage(messageId, { status: status as any });
       }
 
       res.status(200).json({
