@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { ContactService } from '../../services/ContactService.js';
-import { AuthRequest } from '../../models/types.js';
+import { AuthRequest, ContactMessage } from '../../models/types.js';
 import { ApiError } from '../../middleware/errorHandler.js';
 
 export class ContactMessageAdminController {
@@ -75,6 +75,19 @@ export class ContactMessageAdminController {
           reviewedBy: req.user?.userId,
           reviewedAt: new Date().toISOString(),
         });
+
+        const outreachMessage = updatedMessage as ContactMessage | null;
+        if (
+          outreachMessage &&
+          outreachMessage.subject === 'Outreach Queries' &&
+          ['approved', 'rejected', 'waitlisted'].includes(status)
+        ) {
+          await this.contactService.sendOutreachStatusEmail(
+            outreachMessage,
+            status as 'approved' | 'rejected' | 'waitlisted',
+            reviewNotes
+          );
+        }
       } else if (status === 'unread') {
         // Mark as new by updating directly through data helper
         const helper = this.contactService['contactDataHelper'];

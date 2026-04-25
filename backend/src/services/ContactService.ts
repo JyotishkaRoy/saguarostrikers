@@ -3,14 +3,18 @@ import { ContactDataHelper } from '../data/ContactDataHelper.js';
 import { ContactMessage } from '../models/types.js';
 import { createError } from '../middleware/errorHandler.js';
 import { EmailService } from './EmailService.js';
+import { MissionService } from './MissionService.js';
+import { CreateJoinMissionData } from '../models/types.js';
 
 export class ContactService {
   private contactDataHelper: ContactDataHelper;
   private emailService: EmailService;
+  private missionService: MissionService;
 
   constructor() {
     this.contactDataHelper = new ContactDataHelper();
     this.emailService = new EmailService();
+    this.missionService = new MissionService();
   }
 
   /**
@@ -193,5 +197,79 @@ export class ContactService {
       responded: responded.length,
       total: all.length
     };
+  }
+
+  async sendOutreachSubmissionEmails(
+    application: ContactMessage,
+    payload: CreateJoinMissionData & { outreachEventName: string },
+    applicationPdfPath?: string
+  ): Promise<void> {
+    try {
+      await this.emailService.sendJoinMissionStudentConfirmation(
+        payload.studentEmail,
+        payload.studentFirstName,
+        payload.parentEmail,
+        payload.outreachEventName,
+        applicationPdfPath
+      );
+
+      const adminEmail = process.env.ADMIN_EMAIL || 'info@saguarostrikers.org';
+      await this.emailService.sendJoinMissionAdminNotification(adminEmail, {
+        studentName: `${payload.studentFirstName} ${payload.studentLastName}`.trim(),
+        parentName: `${payload.parentFirstName} ${payload.parentLastName}`.trim(),
+        missionTitle: payload.outreachEventName,
+        grade: payload.grade,
+        school: payload.schoolName,
+        applicationId: application.messageId,
+      });
+    } catch (error) {
+      console.error('Error sending outreach submission emails:', error);
+    }
+  }
+
+  async sendOutreachStatusEmail(
+    message: ContactMessage,
+    status: 'approved' | 'rejected' | 'waitlisted',
+    reviewNotes?: string
+  ): Promise<void> {
+    try {
+      const studentEmail = this.extractStudentEmailFromSummary(message.message);
+      if (!studentEmail) {
+        console.warn(`Skipping outreach status email: student email missing for message ${message.messageId}`);
+        return;
+      }
+
+      const studentName = this.extractStudentNameFromSummary(message.message) || message.name || 'Applicant';
+      const eventTitle = message.outreachEventName || 'Outreach Event';
+
+      let missionSlug: string | undefined;
+      if (message.mappedMissionId) {
+        const mission = await this.missionService.getMissionById(message.mappedMissionId);
+        missionSlug = mission?.slug;
+      }
+
+      await this.emailService.sendApplicationStatusUpdate(
+        studentEmail,
+        message.email,
+        studentName,
+        eventTitle,
+        status,
+        reviewNotes,
+        missionSlug
+      );
+    } catch (error) {
+      console.error('Error sending outreach status email:', error);
+    }
+  }
+
+  private extractStudentEmailFromSummary(summary: string): string | null {
+    const match = summary.match(/Student Email:\s*([^\s]+@[^\s]+)/i);
+    return match?.[1]?.trim() || null;
+  }
+
+  private extractStudentNameFromSummary(summary: string): string | null {
+    const detailsMatch = summary.match(/Student Details[\s\S]*?Name:\s*(.+)/i);
+    const name = detailsMatch?.[1]?.split('\n')[0]?.trim();
+    return name || null;
   }
 }

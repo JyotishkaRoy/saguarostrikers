@@ -398,9 +398,12 @@ export class PublicController {
         await this.contactService.updateMessage(created.messageId, {
           applicationPdfPath: pdfPath,
         });
+        created.applicationPdfPath = pdfPath;
       } catch (pdfError) {
         console.error('Error generating outreach application PDF:', pdfError);
       }
+
+      await this.contactService.sendOutreachSubmissionEmails(created, payload, created.applicationPdfPath);
 
       res.status(201).json({
         success: true,
